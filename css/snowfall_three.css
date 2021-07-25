@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+body {
+  background: #000011;
+  color: #fff;
+}
+
+/*jsで表示する部分*/
+#snow_canvas {
+  left: 0;
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+  pointer-events: none;
+}

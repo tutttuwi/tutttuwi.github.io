@@ -1,8 +1,771 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv=refresh content=0;URL=http://tutttuwi.me />
-    <title>index page</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T54EN7ND7V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-T54EN7ND7V");
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="tomoakitsutsui's portfolio page" />
+    <meta name="author" content="tomoakitsutsui" />
+
+    <title>Portfolio Site - tutttuwi</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./img/brand128.ico" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" />
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/resume.min.css" rel="stylesheet" />
+    <link href="./css/snowfall_three.css" rel="stylesheet" />
+
+    <!-- Custom script for this template -->
+    <script src="./js/app.js"></script>
+    <script src="./js/canvas.js"></script>
+    <script src="./js/snow.min.js"></script>
+    <script src="./js/snowfall_three.min.js"></script>
   </head>
+
+  <body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Tomoaki Tsutsui</span>
+        <span class="d-none d-lg-block">
+          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="" />
+        </span>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">ABOUT ME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#works">WORKS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#skills">SKILLS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#certified">CERTIFIED</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact">CONTACT</a>
+          </li>
+          <li class="nav-item">
+            <span class="nav-link cursor-pointer" data-toggle="modal" data-target="#optionModal">OPTION</span>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">PARTICLE SETTING</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <button class="btn btn-primary" onclick="changeParticle('spring')">SPRING</button>
+            <button class="btn btn-primary" onclick="changeParticle('summer')">SUMMER</button>
+            <button class="btn btn-primary" onclick="changeParticle('fall')">FALL</button>
+            <button class="btn btn-primary" onclick="changeParticle('winter')">WINTER</button>
+            <button class="btn btn-secondary" onclick="removeParticle()">NONE</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid p-0">
+      <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+        <div class="w-100">
+          <h1 class="mb-0">
+            TOMOAKI
+            <span class="text-accent">TSUTSUI</span>
+          </h1>
+          <div class="subheading mb-5">システムエンジニア - Tokyo</div>
+          <div class="lead mb-5">
+            <p>--- About ---</p>
+            <p>バックエンドからフロントエンドまで幅広く経験。</p>
+            <p>これからは専門領域を持っていきたい。</p>
+            <p>--- Mind ---</p>
+            <p>作業効率化/楽になる方法を探る時間や、自分にとって新しい技術に触れる時間、調査する時間に幸せを感じる。</p>
+            <p>ベストプラクティス/保守性/可読性を重んじ、出来るだけ再利用できるものを作りたい。</p>
+            <p>上流から下流まで一通り経験したが、やはり設計から開発工程が好きです。</p>
+            <p>--- Favorite ---</p>
+            <p>
+              ものづくりが好きで、休日はプログラミングや興味のある技術を触ったりしています。世の中にある、部品と部品を引っ付ける事も好きです。気分転換に、カメラ、音楽、テレビ、食べ歩きなどなどで余暇を過ごしています。
+            </p>
+          </div>
+          <div class="social-icons">
+            <a href="https://qiita.com/tutttuwi" target="_blank" rel="noopener">
+              <i class="fas fa-search"></i>
+            </a>
+            <a href="https://github.com/tutttuwi" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/tutttwien" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/tutttwi" target="_blank" rel="noopener">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://blog.tutttuwi.me" target="_blank" rel="noopener">
+              <i class="fas fa-blog"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <hr class="m-0" />
+
+      <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="works">
+        <div class="w-100">
+          <h2 class="mb-5">WORKS</h2>
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
+                <div class="card bg-dark">
+                  <div class="card-header bg-primary">
+                    <h4 class="card-title text-white text-center align-middle mb-0">Management App Template</h4>
+                  </div>
+                  <div class="text-center m-1">
+                    <img
+                      class="card-img-top"
+                      src="./img/springboot-startar-template.PNG"
+                      alt=""
+                      style="max-height: 197.5px; max-width: 412px"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">SpringBoot+AdminLTE+Doma2で<br />作成した管理画面スターターテンプレート</p>
+                    <ul>
+                      <li>言語：java,HTML5,CSS3,javascript</li>
+                      <li>ＦＷ：Spring,AdminLTE,doma2</li>
+                      <li>環境：tomcat,AnyRDBMS(default H2)</li>
+                    </ul>
+                    <a href="https://github.com/tutttuwi/springboot-management-starter" target="_blank" rel="noopener" class="btn btn-info"
+                      ><i class="fab fa-github"></i
+                    ></a>
+                    <a href="https://tutttuwi.me/springboot-admin-management/login" target="_blank" rel="noopener" class="btn btn-info"
+                      ><i
+                        class="fas fa-star"
+                        rel="popover"
+                        data-trigger="hover"
+                        data-html="true"
+                        data-content="※ログイン画面へ遷移します。<br/>【テストユーザ情報】<br/>ID: user<br/>PW: password"
+                        data-placement="top"
+                      ></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
+                <div class="card bg-dark">
+                  <div class="card-header bg-primary">
+                    <h4 class="card-title text-white text-center align-middle mb-0">DB DUMP</h4>
+                  </div>
+                  <div class="text-center m-1">
+                    <img class="card-img-top" src="./img/dbdump.png" alt="" style="height: auto; width: 50%" />
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">任意のRDBMSからエビデンスを取得するツール<br />日々のエビデンス取得に苦労しないために！</p>
+                    <ul>
+                      <li>言語：java,bat</li>
+                      <li>ＦＷ：Spring Batch,JDBC,Gradle</li>
+                      <li>環境：Jar実行</li>
+                    </ul>
+                    <a href="https://github.com/tutttuwi/dbdump" target="_blank" rel="noopener" class="btn btn-info"
+                      ><i class="fab fa-github"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
+                <div class="card bg-dark">
+                  <div class="card-header bg-primary">
+                    <h4 class="card-title text-white text-center align-middle mb-0">SUUMO物件比較</h4>
+                  </div>
+                  <div class="text-center m-1">
+                    <img class="card-img-top" src="./img/suumo.png" alt="" style="max-height: 197.5px; max-width: 412px" />
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">
+                      SUUMOより物件情報を検索し、比較することができるアプリ<br />
+                      物件のURLによってはうまく処理できないことがあります。
+                    </p>
+                    <ul>
+                      <li>言語：Node.js</li>
+                      <li>ＦＷ：Angular</li>
+                      <li>環境：S3,APIGateway,Lambda</li>
+                    </ul>
+                    <a href="https://github.com/tutttuwi/ang-fnt-suumo" target="_blank" rel="noopener" class="btn btn-info"
+                      ><i class="fab fa-github"></i
+                    ></a>
+                    <a
+                      href="http://contents.ang-fnt-suumo.t-tsutsui.s3-website-ap-northeast-1.amazonaws.com"
+                      target="_blank"
+                      rel="noopener"
+                      class="btn btn-info"
+                      ><i class="fas fa-star"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
+                <div class="card bg-dark">
+                  <div class="card-header bg-primary">
+                    <h4 class="card-title text-white text-center align-middle mb-0">アーティスト歌詞/単語分析</h4>
+                  </div>
+                  <div class="text-center m-1">
+                    <img class="card-img-top" src="./img/awol.png" alt="" style="max-height: 197.5px; max-width: 435px" />
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">特定のアーティストの歌詞に含まれる単語を分析し、頻出順に並べ替えグラフ化するツール。</p>
+                    <ul>
+                      <li>言語：VBA</li>
+                      <li>ＦＷ：InternetExplore,Word.Application</li>
+                      <li>環境：Excel</li>
+                    </ul>
+                    <a href="https://github.com/tutttuwi/aggregateWordsOfLyric" target="_blank" rel="noopener" class="btn btn-info"
+                      ><i class="fab fa-github"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
+                <div class="card bg-dark">
+                  <div class="card-header bg-primary">
+                    <h4 class="card-title text-white text-center align-middle mb-0">LifeLog Converter</h4>
+                  </div>
+                  <div class="text-center m-1">
+                    <img class="card-img-top" src="./img/aTimeLoggerLogo.jpg" alt="" style="max-height: 197.5px; max-width: 197.5px" />
+                    <img class="card-img-top" src="./img/googleCalendarLogo.jpg" alt="" style="max-height: 197.5px; max-width: 197.5px" />
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">
+                      ライフログアプリaTimeLogger2で出力したデータをグーグルカレンダーでインポートできる形式にコンバートするツール。
+                    </p>
+                    <ul>
+                      <li>言語：java</li>
+                      <li>ＦＷ：OpenCSV</li>
+                      <li>環境：Jar実行</li>
+                    </ul>
+                    <a href="https://github.com/tutttuwi/aTimeLogger2Tool" target="_blank" rel="noopener" class="btn btn-info"
+                      ><i class="fab fa-github"></i
+                    ></a>
+                    <a target="_blank" rel="noopener" class="btn btn-dark"><i class="fas fa-star"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
+                <div class="card bg-dark">
+                  <div class="card-header bg-primary">
+                    <h4 class="card-title text-white text-center align-middle mb-0">my static site on s3</h4>
+                  </div>
+                  <div class="text-center m-1">
+                    <img class="card-img-top" src="./img/output-over-there.png" alt="" style="max-height: 197.5px; max-width: 305px" />
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">AWS S3 上に静的サイト構築。主に読書履歴を管理するために使用。</p>
+                    <ul>
+                      <li>言語：Markdown(generate page),HTML5,CSS3</li>
+                      <li>ＦＷ：Hexo (indigo)</li>
+                      <li>環境：AWS S3 / Code Commit,Build,Pipeline / IAM</li>
+                    </ul>
+                    <a
+                      href="http://books.tutttuwi.me.s3-website-ap-northeast-1.amazonaws.com/"
+                      target="_blank"
+                      rel="noopener"
+                      class="btn btn-info"
+                      ><i class="fab fa-aws"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
+                <div class="card bg-dark">
+                  <div class="card-header bg-primary">
+                    <h4 class="card-title text-white text-center align-middle mb-0">KPT Board</h4>
+                  </div>
+                  <div class="text-center m-1">
+                    <img class="card-img-top" src="./img/kpt.png" alt="" style="max-height: 197.5px; max-width: 305px" />
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">
+                      KPT管理ツールのデモ版。<br />
+                      （開発中）
+                    </p>
+                    <ul>
+                      <li>言語：HTML5,CSS3,javascript</li>
+                      <li>ＦＷ：Bootstrap4,SortableJS</li>
+                      <li>環境：Nodejs</li>
+                    </ul>
+                    <a href="https://github.com/tutttuwi/kpt/" target="_blank" rel="noopener" class="btn btn-info"
+                      ><i class="fab fa-github"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
+                <div class="card bg-dark">
+                  <div class="card-header bg-primary">
+                    <h4 class="card-title text-white text-center align-middle mb-0">アレクサスキル開発</h4>
+                  </div>
+                  <div class="text-center m-1">
+                    <img class="card-img-top" src="./img/pokemon.PNG" alt="" style="max-height: 197.5px; max-width: 180px" />
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">
+                      Alexa Skill Kit で作成したポケモン図鑑スキル。（※あくまで個人の学習用に開発した資産の為、ストア公開致しません。）
+                    </p>
+                    <ul>
+                      <li>言語：javascript</li>
+                      <li>ＦＷ：ASK</li>
+                      <li>環境：AWS Lambda</li>
+                    </ul>
+                    <a target="_blank" rel="noopener" class="btn btn-dark"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="m-0" />
+
+      <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
+        <div class="w-100">
+          <h2 class="mb-5">Skills</h2>
+          <div class="subheading mb-3">Program</div>
+          <div class="lead mb-2">使用経験のある開発言語について</div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped mb-5">
+              <thead class="bg-primary text-white">
+                <td><strong>Skill</strong></td>
+                <td><strong>Experienced</strong></td>
+                <td><strong>Level</strong></td>
+              </thead>
+              <tr>
+                <td><i class="fab fa-html5"></i> HTML5</td>
+                <td>2年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-css3-alt"></i> CSS3</td>
+                <td>2年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-js-square"></i> Javascript</td>
+                <td>2年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-java"></i> Java</td>
+                <td>4年</td>
+                <td>★★★★★</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code"></i> Cobol</td>
+                <td>1年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code"></i> Shell</td>
+                <td>3年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code"></i> VBA</td>
+                <td>3年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code"></i> Scala</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code"></i> Python</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code"></i> R</td>
+                <td>0.2年</td>
+                <td>★☆☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code"></i> Windows Batch</td>
+                <td>3年</td>
+                <td>★★★★☆</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- サーバー・インフラ・データベース -->
+          <div class="subheading mb-3">Server / Infra / DB</div>
+          <div class="lead mb-2">使用経験のあるOS・インフラ、DB環境について</div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped mb-5">
+              <thead class="bg-primary text-white">
+                <td><strong>Skill</strong></td>
+                <td><strong>Experienced</strong></td>
+                <td><strong>Level</strong></td>
+              </thead>
+              <tr>
+                <td><i class="fa fa-cloud"></i> AWS</td>
+                <td>1年</td>
+                <td>★★★☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-cloud"></i> Azure</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-server"></i> Windows</td>
+                <td>5年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-server"></i> Linux</td>
+                <td>4年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-server"></i> Unix(AIX)</td>
+                <td>4年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-server"></i> DB2</td>
+                <td>3年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-server"></i> Symfoware</td>
+                <td>2年</td>
+                <td>★★★☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-server"></i> OracleDB</td>
+                <td>1年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-server"></i> MongoDB</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-server"></i> PostgreSQL</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- TOOL -->
+          <div class="subheading mb-3">Tools</div>
+          <div class="lead mb-2">使用経験のある開発ツールについて</div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped mb-5">
+              <thead class="bg-primary text-white">
+                <td><strong>Skill</strong></td>
+                <td><strong>Experienced</strong></td>
+                <td><strong>Level</strong></td>
+              </thead>
+              <tr>
+                <td><i class="fab fa-git"></i> Git/Gitlab</td>
+                <td>2年</td>
+                <td>★★★☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code-branch"></i> SVN</td>
+                <td>4年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-java"></i> Struts2</td>
+                <td>4年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-node-js"></i> Nodejs</td>
+                <td>1年</td>
+                <td>★★★☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-css3"></i> Bootstrap</td>
+                <td>1年</td>
+                <td>★★★☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-tools"></i> Eclipse</td>
+                <td>4年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-tools"></i> Visual Studio Code</td>
+                <td>1年</td>
+                <td>★★★☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-tools"></i> InteliJ</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-jenkins"></i> Jenkins</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-java"></i> dJunit</td>
+                <td>1年</td>
+                <td>★★★☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-js-square"></i> Gulp</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-js-square"></i> Mocha / Chai / Istanbul</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-server"></i> Tomcat / Glassfish</td>
+                <td>4年</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-tools"></i> Maven</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-tools"></i> ApacheSpark</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-tools"></i> Adobe Photoshop</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-tools"></i> Adobe Illustrator</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-tools"></i> Gimp</td>
+                <td>0.5年</td>
+                <td>★★☆☆☆</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <hr class="m-0" />
+
+      <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="certified">
+        <div class="w-100">
+          <h2 class="mb-5">certified</h2>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/Japan_Gold_Java_SE_7_Programmer_Badge__1_.png"></image>
+            </div>
+            <div class="resume-content text-left">
+              <h3 class="mb-0">Java</h3>
+              <div class="subheading mb-3">Oracle Certified</div>
+              <div>Java Programmer Gold SE7</div>
+              <span class="text-accent">September 2015</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/vbaexpart_chrown.png"></image>
+            </div>
+            <div class="resume-content">
+              <h3 class="mb-0">VBA</h3>
+              <div class="subheading mb-3">VBA Expert</div>
+              <div>Standard Chrown</div>
+              <span class="text-accent">March 2016</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/Japan_Master_Bronze_Oracle_Database_12c_Badge__1_.png"></image>
+            </div>
+            <div class="resume-content">
+              <h3 class="mb-0">Oracle DB</h3>
+              <div class="subheading mb-3">Oracle certified</div>
+              <div>Oracle Master Bronze</div>
+              <span class="text-accent">December 2016</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/ipa.png"></image>
+            </div>
+            <div class="resume-content">
+              <h3 class="mb-0">national certification</h3>
+              <div class="subheading mb-3">IPA 独立行政法人 情報処理推進機構</div>
+              <div>応用情報技術者</div>
+              <span class="text-accent">October 2017</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/lpic_level1.png"></image>
+            </div>
+            <div class="resume-content">
+              <h3 class="mb-0">LINUX</h3>
+              <div class="subheading mb-3">Linux Professional Institute</div>
+              <div>LPIC Level 1</div>
+              <span class="text-accent">June 2018</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/html5_level1.jpg"></image>
+            </div>
+            <div class="resume-content">
+              <h3 class="mb-0">HTML5 / CSS3</h3>
+              <div class="subheading mb-3">LPI-Japan</div>
+              <div>HTML5 認定試験 Level.1</div>
+              <span class="text-accent">August 2018</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/AWS-SolArchitect-Associate-2020.png"></image>
+            </div>
+            <div class="resume-content">
+              <h3 class="mb-0">Cloud</h3>
+              <div class="subheading mb-3">Amazon Web Service</div>
+              <div>AWS Certified Solutions Architect – Associate</div>
+              <span class="text-accent">March 2019</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/toeic.png"></image>
+            </div>
+            <div class="resume-content">
+              <h3 class="mb-0">English</h3>
+              <div class="subheading mb-3">Toeic</div>
+              <div>Score: 680</div>
+              <span class="text-accent">June 2019</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/AWS-SysOpAdmin-Associate-2020.png"></image>
+            </div>
+            <div class="resume-content">
+              <h3 class="mb-0">Cloud</h3>
+              <div class="subheading mb-3">Amazon Web Service</div>
+              <div>AWS Certified SysOps Administrator – Associate</div>
+              <span class="text-accent">August 2020</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-3">
+              <image style="width: 100px" src="./img/AWS-Developer-Associate-2020.png"></image>
+            </div>
+            <div class="resume-content">
+              <h3 class="mb-0">Cloud</h3>
+              <div class="subheading mb-3">Amazon Web Service</div>
+              <div>AWS Certified Developer – Associate</div>
+              <span class="text-accent">Februaly 2021</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="m-0" />
+
+      <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="contact">
+        <div class="w-100">
+          <h2 class="mb-5">Contact</h2>
+          <p>
+            最後まで読んでいただきありがとうございます。<br />
+            こちらのページで、私のことを少しでも知っていただけたら幸いです。<br />
+            もし、なにかコメントが御座いましたら、メールにてご連絡をお願い致します。
+          </p>
+          <div class="social-icons">
+            <a href="mailto:t.tsutsui9117@gmail.com"><i class="far fa-envelope"></i></a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/resume.min.js"></script>
+    <script>
+      $(function () {
+        $("[rel=popover]").popover();
+      });
+    </script>
+  </body>
 </html>
