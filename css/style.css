@@ -1,6 +1,20 @@
 .text-accent {
   color: dodgerblue;
 }
+
 .cursor-pointer {
   cursor: pointer;
+}
+
+.works-card {
+  height: 550px;
+}
+
+.works-card-body {
+  height: 100%;
+}
+
+.works-card-img {
+  height: 200px;
+  width: auto;
 }
