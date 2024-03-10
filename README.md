@@ -29,3 +29,8 @@ You must have npm installed globally in order to use this build environment.
 
 - using the following templete powered by bootstrap
   - [bootstrap theme resume](https://startbootstrap.com/themes/resume/)
+
+## MEMO
+
+- Skill Info Sheet (Private)
+<https://docs.google.com/spreadsheets/d/1-LRn7Gpyur3LkdL6fuMAGGZmt5NM8mLBDyspgR0g9Yk/edit#gid=235448518>
