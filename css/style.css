@@ -18,3 +18,7 @@
   height: 200px;
   width: auto;
 }
+
+table tr td i {
+  margin-right: 10px;
+}
