@@ -158,6 +158,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Particle system enhancement
+  console.log("Setting up particle system enhancement");
+
+  // Ensure modernParticles is available
+  if (!window.modernParticles || !window.modernParticles.isInitialized) {
+    console.log("Creating modernParticles instance");
+    try {
+      window.modernParticles = new ModernParticles();
+    } catch (error) {
+      console.error("Error creating modernParticles:", error);
+    }
+  }
+
   if (typeof changeParticle === "function") {
     // Enhanced particle effects
     const particleThemes = {
@@ -189,7 +201,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (config) {
         // Apply enhanced particle configuration
         console.log(`Changing particles to ${theme} theme`);
-        // You can add more sophisticated particle effects here
+        if (window.modernParticles) {
+          window.modernParticles.changeTheme(theme);
+        }
       }
     };
   }
@@ -248,6 +262,7 @@ document.addEventListener("DOMContentLoaded", function () {
       particleBtns.forEach((btn) => {
         btn.addEventListener("click", function () {
           const theme = this.getAttribute("data-theme");
+          console.log("Particle button clicked:", theme);
 
           // Remove active class from all buttons
           particleBtns.forEach((b) => b.classList.remove("active"));
@@ -258,11 +273,33 @@ document.addEventListener("DOMContentLoaded", function () {
           // Change particle theme
           if (theme === "none") {
             if (window.modernParticles) {
+              console.log("Destroying particles");
               window.modernParticles.destroy();
+              window.modernParticles = null;
             }
           } else {
-            if (window.modernParticles) {
+            if (
+              window.modernParticles &&
+              window.modernParticles.isInitialized
+            ) {
+              console.log("Changing theme to:", theme);
               window.modernParticles.changeTheme(theme);
+            } else {
+              console.log("Creating new particles with theme:", theme);
+              try {
+                window.modernParticles = new ModernParticles();
+                // Wait for initialization to complete
+                setTimeout(() => {
+                  if (
+                    window.modernParticles &&
+                    window.modernParticles.isInitialized
+                  ) {
+                    window.modernParticles.changeTheme(theme);
+                  }
+                }, 200);
+              } catch (error) {
+                console.error("Error creating particles:", error);
+              }
             }
           }
 
@@ -413,6 +450,30 @@ document.addEventListener("DOMContentLoaded", function () {
   const activeStyleSheet = document.createElement("style");
   activeStyleSheet.textContent = activeStyles;
   document.head.appendChild(activeStyleSheet);
+
+  // Global particle control functions
+  window.changeParticleTheme = function (theme) {
+    console.log("Global changeParticleTheme called with:", theme);
+    if (window.modernParticles && window.modernParticles.isInitialized) {
+      window.modernParticles.changeTheme(theme);
+    } else {
+      console.log("Creating new particles for theme:", theme);
+      window.modernParticles = new ModernParticles();
+      setTimeout(() => {
+        if (window.modernParticles && window.modernParticles.isInitialized) {
+          window.modernParticles.changeTheme(theme);
+        }
+      }, 200);
+    }
+  };
+
+  window.destroyParticles = function () {
+    console.log("Global destroyParticles called");
+    if (window.modernParticles) {
+      window.modernParticles.destroy();
+      window.modernParticles = null;
+    }
+  };
 
   console.log("Modern portfolio enhancements loaded successfully!");
 });
