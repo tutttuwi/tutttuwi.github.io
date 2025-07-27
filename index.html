@@ -27,21 +27,23 @@
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- Custom fonts for this template -->
-  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" />
+  <!-- Modern Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
   <link href="./css/style.css" rel="stylesheet" />
   <link href="./css/resume.min.css" rel="stylesheet" />
   <link href="./css/snowfall_three.css" rel="stylesheet" />
+  <link href="./css/modern-style.css" rel="stylesheet" />
 
   <!-- Custom script for this template -->
   <script src="./js/app.js"></script>
   <script src="./js/canvas.js"></script>
   <script src="./js/snow.min.js"></script>
   <script src="./js/snowfall_three.min.js"></script>
+  <script src="./js/modern-app.js"></script>
+  <script src="./js/modern-particles.js"></script>
 </head>
 
 <body id="page-top">
@@ -74,39 +76,55 @@
           <a class="nav-link js-scroll-trigger" href="#contact">CONTACT</a>
         </li>
         <li class="nav-item">
-          <span class="nav-link cursor-pointer" data-toggle="modal" data-target="#optionModal">OPTION</span>
+          <span class="nav-link cursor-pointer option-link">OPTION</span>
         </li>
       </ul>
     </div>
   </nav>
 
-  <!-- Modal -->
-  <div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">PARTICLE SETTING</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+  <!-- Modern Modal -->
+  <div class="modern-modal" id="optionModal">
+    <div class="modal-overlay"></div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">パーティクル設定</h3>
+        <button type="button" class="modal-close" data-dismiss="modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="particle-options">
+          <button class="particle-btn active" data-theme="default">
+            <span class="particle-icon">✨</span>
+            <span class="particle-label">デフォルト</span>
           </button>
-        </div>
-        <div class="modal-body">
-          <button class="btn btn-primary" onclick="changeParticle('spring')">SPRING</button>
-          <button class="btn btn-primary" onclick="changeParticle('summer')">SUMMER</button>
-          <button class="btn btn-primary" onclick="changeParticle('fall')">FALL</button>
-          <button class="btn btn-primary" onclick="changeParticle('winter')">WINTER</button>
-          <button class="btn btn-secondary" onclick="removeParticle()">NONE</button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button class="particle-btn" data-theme="spring">
+            <span class="particle-icon">🌸</span>
+            <span class="particle-label">春</span>
+          </button>
+          <button class="particle-btn" data-theme="summer">
+            <span class="particle-icon">☀️</span>
+            <span class="particle-label">夏</span>
+          </button>
+          <button class="particle-btn" data-theme="fall">
+            <span class="particle-icon">🍁</span>
+            <span class="particle-label">秋</span>
+          </button>
+          <button class="particle-btn" data-theme="winter">
+            <span class="particle-icon">❄️</span>
+            <span class="particle-label">冬</span>
+          </button>
+          <button class="particle-btn none-btn" data-theme="none">
+            <span class="particle-icon">🚫</span>
+            <span class="particle-label">なし</span>
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container-fluid p-0">
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+  <div class="">
+    <section class="resume-section" id="about">
       <div class="w-100">
         <h1 class="mb-0">
           TOMOAKI
@@ -148,70 +166,72 @@
 
     <hr class="m-0" />
 
-    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="works">
+    <section class="resume-section" id="works">
       <div class="w-100">
         <h2 class="mb-5">WORKS</h2>
 
-        <div class="container-fluid">
+        <div>
           <div class="row">
 
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">Tab Group Keeper</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">Tab Group Keeper</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/taggroupkeeper.png" alt="" style="" />
+                  <img class="works-card-img" src="./img/taggroupkeeper.png" alt="Tab Group Keeper" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">
                     Chromeブラウザのタブ/タブグループを自動保存して管理できる拡張機能です。データは拡張機能内のローカルストレージに保存されます。
                   </p>
-                  <ul>
-                    <li>言語：typescript</li>
-                    <li>ＦＷ：webext-vitesse</li>
-                    <li>環境：Chromeブラウザ</li>
-                  </ul>
-                  <a target="_blank" rel="noopener" class="btn btn-dark"><i class="fab fa-github"></i></a>
-                  <a href="https://chromewebstore.google.com/detail/tab-group-keeper/gfjhodpdmkiofmolchbmjlhinlileemd" target="_blank" rel="noopener" class="btn btn-info"><i
-                      class="fas fa-star" rel="popover" data-trigger="hover" data-html="true" data-content="ChromeWebストアよりお使いいただけます"
-                      data-placement="top"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">WebExt-Vitesse</span>
+                    <span class="tech-tag">Chrome Extension</span>
+                  </div>
+                  <div class="card-actions">
+                    <a target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://chromewebstore.google.com/detail/tab-group-keeper/gfjhodpdmkiofmolchbmjlhinlileemd" target="_blank" rel="noopener" class="btn btn-secondary"><i
+                        class="fas fa-star"></i> Chrome Store</a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">Fast Memo</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">Fast Memo</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/fast-memo.png" alt="" style="" />
+                  <img class="works-card-img" src="./img/fast-memo.png" alt="Fast Memo" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">
                     Chromeブラウザのポップアップ画面でメモができる拡張機能です。データは拡張機能内のローカルストレージに保存されます。
                   </p>
-                  <ul>
-                    <li>言語：typescript</li>
-                    <li>ＦＷ：webext-vitesse</li>
-                    <li>環境：Chromeブラウザ</li>
-                  </ul>
-                  <a target="_blank" href="https://github.com/tutttuwi/fast-memo" rel="noopener" class="btn btn-info"><i class="fab fa-github"></i></a>
-                  <a href="https://chromewebstore.google.com/detail/fastmemo/ikggcjldloflbjfafhhjpnbbjkpnphna?hl=ja&authuser=1" target="_blank" rel="noopener" class="btn btn-info"><i
-                      class="fas fa-star" rel="popover" data-trigger="hover" data-html="true" data-content="ChromeWebストアよりお使いいただけます"
-                      data-placement="top"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">WebExt-Vitesse</span>
+                    <span class="tech-tag">Chrome Extension</span>
+                  </div>
+                  <div class="card-actions">
+                    <a target="_blank" href="https://github.com/tutttuwi/fast-memo" rel="noopener" class="btn btn-primary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://chromewebstore.google.com/detail/fastmemo/ikggcjldloflbjfafhhjpnbbjkpnphna?hl=ja&authuser=1" target="_blank" rel="noopener" class="btn btn-secondary"><i
+                        class="fas fa-star"></i> Chrome Store</a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">Quick Framer</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">Quick Framer</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/quick-framer.png" alt="" style="" />
+                  <img class="works-card-img" src="./img/quick-framer.png" alt="Quick Framer" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">
@@ -219,202 +239,214 @@
                     ポップアップ画面から別のページを素早く参照、現在のページから別のページをiframeで見ながら作業することができます。
                     データは拡張機能内のローカルストレージに保存されます。
                   </p>
-                  <ul>
-                    <li>言語：typescript</li>
-                    <li>ＦＷ：webext-vitesse</li>
-                    <li>環境：Chromeブラウザ</li>
-                  </ul>
-                  <a target="_blank" href="https://github.com/tutttuwi/quick-window" rel="noopener" class="btn btn-info"><i class="fab fa-github"></i></a>
-                  <a href="https://chromewebstore.google.com/detail/quickframer/emfekienjacgppfhiojogchdeoonhdlg?hl=ja&authuser=1" target="_blank" rel="noopener" class="btn btn-info"><i
-                      class="fas fa-star" rel="popover" data-trigger="hover" data-html="true" data-content="ChromeWebストアよりお使いいただけます"
-                      data-placement="top"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">WebExt-Vitesse</span>
+                    <span class="tech-tag">Chrome Extension</span>
+                  </div>
+                  <div class="card-actions">
+                    <a target="_blank" href="https://github.com/tutttuwi/quick-window" rel="noopener" class="btn btn-primary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://chromewebstore.google.com/detail/quickframer/emfekienjacgppfhiojogchdeoonhdlg?hl=ja&authuser=1" target="_blank" rel="noopener" class="btn btn-secondary"><i
+                        class="fas fa-star"></i> Chrome Store</a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">Management App Template</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">Management App Template</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/springboot-startar-template.png" alt=""
-                    style="" />
+                  <img class="works-card-img" src="./img/springboot-startar-template.png" alt="Management App Template" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">SpringBoot+AdminLTE+Doma2で<br />作成した管理画面スターターテンプレート</p>
-                  <ul>
-                    <li>言語：java,HTML5,CSS3,javascript</li>
-                    <li>ＦＷ：Spring,AdminLTE,doma2</li>
-                    <li>環境：tomcat,AnyRDBMS(default H2)</li>
-                  </ul>
-                  <a href="https://github.com/tutttuwi/springboot-management-starter" target="_blank" rel="noopener"
-                    class="btn btn-info"><i class="fab fa-github"></i></a>
-                  <!-- <a href="https://tutttuwi.me/springboot-admin-management/login" target="_blank" rel="noopener" class="btn btn-info"
-                      ><i
-                        class="fas fa-star"
-                        rel="popover"
-                        data-trigger="hover"
-                        data-html="true"
-                        data-content="※ログイン画面へ遷移します。<br/>【テストユーザ情報】<br/>ID: user<br/>PW: password"
-                        data-placement="top"></i
-                    ></a> -->
-                  <a target="_blank" rel="noopener" class="btn btn-dark"><i class="fas fa-star"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Spring Boot</span>
+                    <span class="tech-tag">AdminLTE</span>
+                    <span class="tech-tag">Doma2</span>
+                  </div>
+                  <div class="card-actions">
+                    <a href="https://github.com/tutttuwi/springboot-management-starter" target="_blank" rel="noopener"
+                      class="btn btn-primary"><i class="fab fa-github"></i> GitHub</a>
+                    <a target="_blank" rel="noopener" class="btn btn-secondary"><i class="fas fa-star"></i> Demo</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">DB DUMP</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">DB DUMP</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/dbdump.png" alt="" style="" />
+                  <img class="works-card-img" src="./img/dbdump.png" alt="DB DUMP" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">任意のRDBMSからエビデンスを取得するツール<br />日々のエビデンス取得に苦労しないために！</p>
-                  <ul>
-                    <li>言語：java,bat</li>
-                    <li>ＦＷ：Spring Batch,JDBC,Gradle</li>
-                    <li>環境：Jar実行</li>
-                  </ul>
-                  <a href="https://github.com/tutttuwi/dbdump" target="_blank" rel="noopener" class="btn btn-info"><i
-                      class="fab fa-github"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Spring Batch</span>
+                    <span class="tech-tag">JDBC</span>
+                    <span class="tech-tag">Gradle</span>
+                  </div>
+                  <div class="card-actions">
+                    <a href="https://github.com/tutttuwi/dbdump" target="_blank" rel="noopener" class="btn btn-primary"><i
+                        class="fab fa-github"></i> GitHub</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">SUUMO物件比較</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">SUUMO物件比較</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/suumo.png" alt="" style="" />
+                  <img class="works-card-img" src="./img/suumo.png" alt="SUUMO物件比較" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">
                     SUUMOより物件情報を検索し、比較することができるアプリ<br />
                     物件のURLによってはうまく処理できないことがあります。
                   </p>
-                  <ul>
-                    <li>言語：Node.js</li>
-                    <li>ＦＷ：Angular</li>
-                    <li>環境：S3,APIGateway,Lambda</li>
-                  </ul>
-                  <a href="https://github.com/tutttuwi/ang-fnt-suumo" target="_blank" rel="noopener"
-                    class="btn btn-info"><i class="fab fa-github"></i></a>
-                  <a href="http://contents.ang-fnt-suumo.t-tsutsui.s3-website-ap-northeast-1.amazonaws.com"
-                    target="_blank" rel="noopener" class="btn btn-info"><i class="fas fa-star"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Angular</span>
+                    <span class="tech-tag">AWS S3</span>
+                    <span class="tech-tag">Lambda</span>
+                  </div>
+                  <div class="card-actions">
+                    <a href="https://github.com/tutttuwi/ang-fnt-suumo" target="_blank" rel="noopener"
+                      class="btn btn-primary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="http://contents.ang-fnt-suumo.t-tsutsui.s3-website-ap-northeast-1.amazonaws.com"
+                      target="_blank" rel="noopener" class="btn btn-secondary"><i class="fas fa-star"></i> Demo</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">アーティスト歌詞/単語分析</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">アーティスト歌詞/単語分析</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/awol.png" alt="" style="" />
+                  <img class="works-card-img" src="./img/awol.png" alt="アーティスト歌詞/単語分析" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">特定のアーティストの歌詞に含まれる単語を分析し、頻出順に並べ替えグラフ化するツール。</p>
-                  <ul>
-                    <li>言語：VBA</li>
-                    <li>ＦＷ：InternetExplore,Word.Application</li>
-                    <li>環境：Excel</li>
-                  </ul>
-                  <a href="https://github.com/tutttuwi/aggregateWordsOfLyric" target="_blank" rel="noopener"
-                    class="btn btn-info"><i class="fab fa-github"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">VBA</span>
+                    <span class="tech-tag">Excel</span>
+                    <span class="tech-tag">Word.Application</span>
+                  </div>
+                  <div class="card-actions">
+                    <a href="https://github.com/tutttuwi/aggregateWordsOfLyric" target="_blank" rel="noopener"
+                      class="btn btn-primary"><i class="fab fa-github"></i> GitHub</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">LifeLog Converter</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">LifeLog Converter</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/aTimeLoggerLogo.jpg" alt="" style="" />
-                  <img class="card-img-top works-card-img" src="./img/googleCalendarLogo.jpg" alt="" style="" />
+                  <img class="works-card-img" src="./img/aTimeLoggerLogo.jpg" alt="aTimeLogger" />
+                  <img class="works-card-img" src="./img/googleCalendarLogo.jpg" alt="Google Calendar" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">
                     ライフログアプリaTimeLogger2で出力したデータをグーグルカレンダーでインポートできる形式にコンバートするツール。
                   </p>
-                  <ul>
-                    <li>言語：java</li>
-                    <li>ＦＷ：OpenCSV</li>
-                    <li>環境：Jar実行</li>
-                  </ul>
-                  <a href="https://github.com/tutttuwi/aTimeLogger2Tool" target="_blank" rel="noopener"
-                    class="btn btn-info"><i class="fab fa-github"></i></a>
-                  <a target="_blank" rel="noopener" class="btn btn-dark"><i class="fas fa-star"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">OpenCSV</span>
+                    <span class="tech-tag">JAR</span>
+                  </div>
+                  <div class="card-actions">
+                    <a href="https://github.com/tutttuwi/aTimeLogger2Tool" target="_blank" rel="noopener"
+                      class="btn btn-primary"><i class="fab fa-github"></i> GitHub</a>
+                    <a target="_blank" rel="noopener" class="btn btn-secondary"><i class="fas fa-star"></i> Demo</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">my static site on s3</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">my static site on s3</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/output-over-there.png" alt="" style="" />
+                  <img class="works-card-img" src="./img/output-over-there.png" alt="Static Site on S3" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">AWS S3 上に静的サイト構築。主に読書履歴を管理するために使用。</p>
-                  <ul>
-                    <li>言語：Markdown(generate page),HTML5,CSS3</li>
-                    <li>ＦＷ：Hexo (indigo)</li>
-                    <li>環境：AWS S3 / Code Commit,Build,Pipeline / IAM</li>
-                  </ul>
-                  <a href="http://books.tutttuwi.me.s3-website-ap-northeast-1.amazonaws.com/" target="_blank"
-                    rel="noopener" class="btn btn-info"><i class="fab fa-aws"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Markdown</span>
+                    <span class="tech-tag">Hexo</span>
+                    <span class="tech-tag">AWS S3</span>
+                    <span class="tech-tag">CodePipeline</span>
+                  </div>
+                  <div class="card-actions">
+                    <a href="http://books.tutttuwi.me.s3-website-ap-northeast-1.amazonaws.com/" target="_blank"
+                      rel="noopener" class="btn btn-primary"><i class="fab fa-aws"></i> Live Site</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">KPT Board</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">KPT Board</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/kpt.png" alt="" style="" />
+                  <img class="works-card-img" src="./img/kpt.png" alt="KPT Board" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">
                     KPT管理ツールのデモ版。<br />
                   </p>
-                  <ul>
-                    <li>言語：HTML5,CSS3,javascript</li>
-                    <li>ＦＷ：Bootstrap4,SortableJS</li>
-                    <li>環境：Nodejs</li>
-                  </ul>
-                  <a href="https://github.com/tutttuwi/kpt/" target="_blank" rel="noopener" class="btn btn-info"><i
-                      class="fab fa-github"></i></a>
-                  <a href="https://tutttuwi.github.io/kpt/" target="_blank" rel="noopener" class="btn btn-info"><i
-                      class="fas fa-star" rel="popover" data-trigger="hover" data-html="true" data-content="開発途中.."
-                      data-placement="top"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Bootstrap4</span>
+                  </div>
+                  <div class="card-actions">
+                    <a href="https://github.com/tutttuwi/kpt/" target="_blank" rel="noopener" class="btn btn-primary"><i
+                        class="fab fa-github"></i> GitHub</a>
+                    <a href="https://tutttuwi.github.io/kpt/" target="_blank" rel="noopener" class="btn btn-secondary"><i
+                        class="fas fa-star"></i> Demo</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-ms-12 col-xs-12 mb-2">
-              <div class="card bg-dark h-100">
-                <div class="card-header bg-primary">
-                  <h4 class="card-title text-white text-center align-middle mb-0">アレクサスキル開発</h4>
+            <div class="col-md-6 col-ms-12 col-xs-12 mb-4">
+              <div class="works-card">
+                <div class="card-header">
+                  <h4 class="card-title">アレクサスキル開発</h4>
                 </div>
                 <div class="text-center m-1">
-                  <img class="card-img-top works-card-img" src="./img/pokemon.PNG" alt="" style="" />
+                  <img class="works-card-img" src="./img/pokemon.PNG" alt="Alexa Skill Development" />
                 </div>
                 <div class="card-body">
                   <p class="card-text">
                     Alexa Skill Kit で作成したポケモン図鑑スキル。（※個人の学習用に開発した資産の為、ストア公開しておりません。）
                   </p>
-                  <ul>
-                    <li>言語：javascript/typescript</li>
-                    <li>ＦＷ：ASK</li>
-                    <li>環境：AWS Lambda</li>
-                  </ul>
-                  <a target="_blank" rel="noopener" class="btn btn-dark"><i class="fab fa-github"></i></a>
+                  <div class="tech-stack">
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">Alexa Skill Kit</span>
+                    <span class="tech-tag">AWS Lambda</span>
+                  </div>
+                  <div class="card-actions">
+                    <a target="_blank" rel="noopener" class="btn btn-secondary"><i class="fab fa-github"></i> Private</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -426,19 +458,21 @@
 
     <hr class="m-0" />
 
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
+    <section class="resume-section" id="skills">
       <div class="w-100">
         <h2 class="mb-5">Skills</h2>
         <div class="subheading mb-3">Program</div>
         <div class="lead mb-2">使用経験のある開発言語について</div>
-        <div class="table-responsive">
+        <div class="table-responsive skills-table">
 
           <!-- 貼り付け領域 [START] @prettier-ignore:on-->
-          <table class="table table-hover table-striped mb-5">
-            <thead class="bg-primary text-white">
-              <td><strong>Skill</strong></td>
-              <td><strong>Experienced</strong></td>
-              <td><strong>Level</strong></td>
+          <table class="table table-hover mb-5">
+            <thead>
+              <tr>
+                <th><strong>Skill</strong></th>
+                <th><strong>Experienced</strong></th>
+                <th><strong>Level</strong></th>
+              </tr>
             </thead>
             <tr>
               <td><i class="fab fa-html5"></i>HTML5</td>
@@ -513,14 +547,16 @@
         <!-- サーバー・インフラ・データベース -->
         <div class="subheading mb-3">Server / Infra / DB</div>
         <div class="lead mb-2">使用経験のあるOS・インフラ、DB環境について</div>
-        <div class="table-responsive">
+        <div class="table-responsive skills-table">
 
           <!-- 貼り付け領域 [START] -->
-          <table class="table table-hover table-striped mb-5">
-            <thead class="bg-primary text-white">
-              <td><strong>Skill</strong></td>
-              <td><strong>Experienced</strong></td>
-              <td><strong>Level</strong></td>
+          <table class="table table-hover mb-5">
+            <thead>
+              <tr>
+                <th><strong>Skill</strong></th>
+                <th><strong>Experienced</strong></th>
+                <th><strong>Level</strong></th>
+              </tr>
             </thead>
             <tr>
               <td><i class="fa fa-cloud"></i>AWS</td>
@@ -590,15 +626,17 @@
         <!-- TOOL -->
         <div class="subheading mb-3">Tools</div>
         <div class="lead mb-2">使用経験のある開発ツールについて</div>
-        <div class="table-responsive">
+        <div class="table-responsive skills-table">
 
           <!-- 貼り付け領域 [START] -->
 
-          <table class="table table-hover table-striped mb-5">
-            <thead class="bg-primary text-white">
-              <td><strong>Skill</strong></td>
-              <td><strong>Experienced</strong></td>
-              <td><strong>Level</strong></td>
+          <table class="table table-hover mb-5">
+            <thead>
+              <tr>
+                <th><strong>Skill</strong></th>
+                <th><strong>Experienced</strong></th>
+                <th><strong>Level</strong></th>
+              </tr>
             </thead>
             <tr>
               <td><i class="fab fa-git"></i>Git/Gitlab</td>
@@ -700,13 +738,13 @@
 
     <hr class="m-0" />
 
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="certified">
+    <section class="resume-section" id="certified">
       <div class="w-100">
         <h2 class="mb-5">certified</h2>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/Japan_Gold_Java_SE_7_Programmer_Badge__1_.png"></image>
+            <image style="width: 100px" src="./img/Japan_Gold_Java_SE_7_Programmer_Badge__1_.png" alt="Java Gold Badge"></image>
           </div>
           <div class="resume-content text-left">
             <h3 class="mb-0">Java</h3>
@@ -716,9 +754,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/vbaexpart_chrown.png"></image>
+            <image style="width: 100px" src="./img/vbaexpart_chrown.png" alt="VBA Expert Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">VBA</h3>
@@ -728,9 +766,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/Japan_Master_Bronze_Oracle_Database_12c_Badge__1_.png"></image>
+            <image style="width: 100px" src="./img/Japan_Master_Bronze_Oracle_Database_12c_Badge__1_.png" alt="Oracle Master Bronze Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">Oracle DB</h3>
@@ -740,9 +778,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/ipa.png"></image>
+            <image style="width: 100px" src="./img/ipa.png" alt="IPA Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">national certification</h3>
@@ -752,9 +790,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/linuc-1.png"></image>
+            <image style="width: 100px" src="./img/linuc-1.png" alt="LPIC Level 1 Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">LINUX</h3>
@@ -764,9 +802,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/html5_level1.jpg"></image>
+            <image style="width: 100px" src="./img/html5_level1.jpg" alt="HTML5 Level 1 Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">HTML5 / CSS3</h3>
@@ -776,9 +814,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/AWS-SolArchitect-Associate-2020.png"></image>
+            <image style="width: 100px" src="./img/AWS-SolArchitect-Associate-2020.png" alt="AWS Solutions Architect Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">Cloud</h3>
@@ -788,9 +826,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/toeic.png"></image>
+            <image style="width: 100px" src="./img/toeic.png" alt="TOEIC Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">English</h3>
@@ -800,9 +838,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/AWS-SysOpAdmin-Associate-2020.png"></image>
+            <image style="width: 100px" src="./img/AWS-SysOpAdmin-Associate-2020.png" alt="AWS SysOps Administrator Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">Cloud</h3>
@@ -812,9 +850,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/AWS-Developer-Associate-2020.png"></image>
+            <image style="width: 100px" src="./img/AWS-Developer-Associate-2020.png" alt="AWS Developer Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">Cloud</h3>
@@ -824,9 +862,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/linuc-2.png"></image>
+            <image style="width: 100px" src="./img/linuc-2.png" alt="LPIC Level 2 Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">LINUX</h3>
@@ -835,9 +873,9 @@
             <span class="text-accent">March 2022</span>
           </div>
         </div>
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/linuc-3-304.png"></image>
+            <image style="width: 100px" src="./img/linuc-3-304.png" alt="LPIC Level 3 Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">LINUX</h3>
@@ -847,9 +885,9 @@
           </div>
         </div>
 
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="certification-item d-flex flex-column flex-md-row">
           <div class="resume-content mr-3">
-            <image style="width: 100px" src="./img/toeic.png"></image>
+            <image style="width: 100px" src="./img/toeic.png" alt="TOEIC Badge"></image>
           </div>
           <div class="resume-content">
             <h3 class="mb-0">English</h3>
@@ -863,7 +901,7 @@
 
     <hr class="m-0" />
 
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="contact">
+    <section class="resume-section" id="contact">
       <div class="w-100">
         <h2 class="mb-5">Contact</h2>
         <p>
