@@ -236,7 +236,7 @@ h2::after {
   /* Ensure full width on desktop */
   .resume-section {
     width: calc(100% - 17rem) !important;
-    margin-left: 17rem !important;
+    margin-left: 0rem !important;
     max-width: calc(100% - 17rem) !important;
   }
   
