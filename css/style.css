@@ -8,6 +8,12 @@
 
 .works-card {
   height: 550px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.works-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .works-card-body {
@@ -17,6 +23,61 @@
 .works-card-img {
   height: 200px;
   width: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* スマホ版でのWORKSカード表示改善 */
+@media (max-width: 768px) {
+  #works .row {
+    margin: 0;
+  }
+  
+  #works .col-12 {
+    padding: 0 0.5rem;
+  }
+  
+  .works-card {
+    height: auto;
+    min-height: 400px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .works-card-img {
+    height: 150px;
+    width: 100%;
+    object-fit: contain;
+  }
+  
+  .works-card .card-body {
+    padding: 1rem;
+  }
+  
+  .works-card .card-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .works-card .tech-stack {
+    margin-bottom: 1rem;
+  }
+  
+  .works-card .tech-tag {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    margin: 0.25rem;
+  }
+  
+  .works-card .card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .works-card .card-actions .btn {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 table tr td i {
