@@ -1,0 +1,46 @@
+---
+alwaysApply: true
+---
+
+# 技術スタック
+
+## コア技術
+
+- **Next.js**: 最新安定版を使用
+- **Nextra**: 3 系（nextra-theme-blog）を使用
+- **TypeScript**: strict モード必須
+- **React**: 関数コンポーネントのみ使用
+
+## スタイリング
+
+- **Tailwind CSS**: メインのスタイリングツール
+  - カスタムクラスは `@apply` ディレクティブで Tailwind ユーティリティを組み合わせ
+  - コンポーネント内でインラインスタイルは最小限に
+
+- **Nextra テーマ**: `nextra-theme-blog` を使用
+  - テーマのカスタマイズは `next.config.js` または `_app.tsx` で行う
+  - デフォルトのスタイルを尊重し、必要最小限のカスタマイズに留める
+
+## コード品質ツール
+
+- **ESLint**: コード品質チェック
+  - Next.js と TypeScript 用の推奨設定を使用
+  - ルール違反は修正してからコミット
+
+- **Prettier**: 自動フォーマット
+  - 保存時またはコミット前に自動フォーマットを実行
+  - `.prettierrc` または `package.json` で設定を管理
+
+- **インポート順序**: `eslint-plugin-import` を使用して自動ソート
+  - 順序: 外部ライブラリ → 内部モジュール → 相対パス → 型定義
+  - グループ間は空行で区切る
+
+## 外部サービス
+
+- **Giscus**: コメントシステム（GitHub Discussions ベース）
+  - 設定は `giscus.app` のウィザードで取得
+  - コンポーネントは `components/Comments.tsx` に実装
+
+- **Analytics**（オプション）: プライバシー配慮型を推奨
+  - Plausible, Simple Analytics, Fathom など
+  - Google Analytics を使用する場合は適切な設定とプライバシーポリシーの掲載

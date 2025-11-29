@@ -1,0 +1,60 @@
+---
+alwaysApply: true
+---
+
+# MDX ファイルルール
+
+## Frontmatter
+
+MDX ファイルには YAML frontmatter でメタ情報を記述します。
+
+### 必須フィールド
+- `title`: 記事のタイトル
+- `date`: 公開日（YYYY-MM-DD 形式）
+
+### オプションフィールド
+- `tags`: タグの配列（例: `[nextjs, react, typescript]`）
+- `description`: 記事の説明（SEO、OGP 用）
+- `image`: サムネイル画像のパス
+
+## ブログ記事の例
+
+```mdx
+---
+title: "Next.js でブログを作る"
+date: "2025-11-29"
+tags: [nextjs, react, typescript]
+description: "Next.js と Nextra を使用して技術ブログを構築する方法を解説します。"
+image: "/assets/nextjs-blog.png"
+---
+
+本文（Markdown / MDX）...
+```
+
+## ポートフォリオの例
+
+```mdx
+---
+title: "Awesome App"
+role: "Sole developer"
+tech: [React, Flutter]
+date: 2024-12-01
+thumbnail: "/assets/awesome.png"
+repo: "https://github.com/username/awesome"
+live: "https://awesome.example.com"
+---
+
+プロジェクト説明...
+```
+
+## ファイル配置
+
+- **ブログ記事**: `blog/` ディレクトリに配置（例: `blog/2025-11-29-my-post.mdx`）
+- **ポートフォリオ**: `portfolio/` ディレクトリに配置（例: `portfolio/project-xyz.mdx`）
+- **プロフィール**: `about.mdx` をルートに配置
+
+## 画像の取り扱い
+
+- `public/assets/` に画像を置く運用がシンプル
+- 大きな画像ファイルや最適化が必要な場合は、CDN（Imgix, Cloudinary）を検討
+- GitHub Pages で運用する際は外部CDNが安定

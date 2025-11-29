@@ -1,0 +1,48 @@
+---
+alwaysApply: true
+---
+
+# コーディング規約
+
+## React コンポーネント
+
+- **関数コンポーネントのみ**を使用（クラスコンポーネントは使用禁止）
+- React Hooks（`useState`, `useEffect`, `useCallback`, `useMemo` など）を適切に使用
+- コンポーネント名は PascalCase（例: `UserProfile.tsx`, `ProjectCard.tsx`）
+- コンポーネントファイルは単一責任の原則に従い、再利用可能な設計を心がける
+- Props の型定義は `interface` または `type` で明示的に定義
+
+## 命名規則
+
+- **コンポーネント・型・インターフェース**: PascalCase（例: `UserProfile`, `BlogPost`)
+- **変数・関数**: camelCase（例: `userName`, `getUserData`)
+- **定数**: UPPER_SNAKE_CASE（例: `MAX_RETRY_COUNT`, `API_BASE_URL`)
+- **ファイル名**: PascalCase（コンポーネント）、kebab-case（ユーティリティ、設定ファイル）
+- **フォルダ名**: kebab-case（例: `user-profile`, `blog-posts`)
+
+## インポート順序
+
+- ESLint の `eslint-plugin-import` を使用して自動ソート
+- 順序: 外部ライブラリ → 内部モジュール → 相対パス → 型定義
+- グループ間は空行で区切る
+
+## コメント
+
+- **日本語**でコメントを記述
+- 複雑なロジックやビジネスロジックには説明を追加
+- JSDoc 形式で関数・コンポーネントの説明を記述
+
+## パフォーマンス最適化
+
+### 画像最適化
+- Next.js の `Image` コンポーネントを使用（静的エクスポート時は制限あり）
+- 大きな画像は適切に圧縮（WebP 形式を検討）
+- `public/assets/` に配置した画像は適切なサイズにリサイズ
+
+### コード分割
+- 動的インポート（`next/dynamic`）を活用してコンポーネントを遅延読み込み
+- 大きなライブラリは必要に応じて動的インポート
+
+### バンドルサイズ
+- 使用していない依存関係を削除
+- `bundle-analyzer` で定期的にバンドルサイズを確認

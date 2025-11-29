@@ -1,0 +1,62 @@
+---
+alwaysApply: true
+---
+
+# プロジェクト概要
+
+このプロジェクトは、Next.js + Nextra（Blog テーマ）を使用した技術ブログサイトです。
+
+## 基本情報
+
+- **フレームワーク**: Next.js（最新安定版）
+- **テーマ**: Nextra 3 系（nextra-theme-blog）
+- **言語**: TypeScript（strict モード必須）
+- **デプロイ**: GitHub Pages（静的エクスポート）
+- **スタイリング**: Tailwind CSS
+
+## プロジェクトの目的
+
+1. 技術ブログの運営
+2. スッキリしたデザイン
+3. 検索・コメント機能
+4. ポートフォリオ／プロフィールページの併設
+
+## ファイル構成
+
+```
+/
+├── pages/              # Next.js ページ（または app/ ディレクトリ）
+├── blog/              # MDX ブログ記事
+├── portfolio/         # ポートフォリオ個別ページ（MDX）
+├── about.mdx          # プロフィールページ
+├── components/        # React コンポーネント
+│   ├── ui/           # UI コンポーネント
+│   └── layout/       # レイアウトコンポーネント
+├── public/
+│   └── assets/       # 静的アセット（画像など）
+├── styles/
+│   └── globals.css   # グローバルスタイル
+└── .github/workflows/ # GitHub Actions ワークフロー
+```
+
+## ファイル命名規則
+
+- **コンポーネント**: `PascalCase.tsx`（例: `UserProfile.tsx`）
+- **ユーティリティ**: `camelCase.ts`（例: `formatDate.ts`）
+- **設定ファイル**: `kebab-case`（例: `next.config.js`, `tsconfig.json`）
+- **フォルダ名**: `kebab-case`（例: `user-profile`, `blog-posts`）
+
+## コメント言語
+
+- **日本語**でコメントを記述
+- 複雑なロジックやビジネスロジックには説明を追加
+- JSDoc 形式で関数・コンポーネントの説明を記述
+
+## 静的エクスポートの制限
+
+Next.js の `output: 'export'` を使用するため、以下の機能は使用不可:
+- SSR（Server-Side Rendering）
+- API Routes
+- 画像最適化の一部機能
+
+ブログ用途では問題ないことが多いが、必要な機能がある場合は Vercel などのホスティングを検討。

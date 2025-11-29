@@ -1,0 +1,60 @@
+---
+alwaysApply: true
+---
+
+# Next.js 固有ルール
+
+## 設定
+
+### next.config.js（静的エクスポート向け）
+
+静的サイトとして GitHub Pages にホストするため、Next.js の出力モードを `export` に設定:
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  reactStrictMode: true,
+  // example: if repo is username/reponame and you host at https://username.github.io/reponame
+  // basePath: '/reponame',
+  // assetPrefix: '/reponame/',
+}
+export default nextConfig
+```
+
+## Nextra の設定
+
+- `theme: 'nextra-theme-blog'` を使い、`_meta` や frontmatter でメタ情報を管理
+- ページごとに frontmatter で `title`, `date`, `tags`, `description`, `image` を指定
+
+## 検索実装
+
+選択肢:
+1. **Nextra のビルトイン検索（簡易）** — すぐ使える。軽量で技術ブログには十分。
+2. **Algolia（DocSearch）** — 高度な検索体験が欲しい場合。無料枠ありだが設定が必要。
+3. **クライアントサイド検索（Lunr.js, FlexSearch）** — プライバシー優先で外部サービスを使いたくない場合。
+
+まずは Nextra 標準検索で開始し、必要なら Algolia に移行する運用が現実的。
+
+## SEO 対策
+
+### メタタグ
+- 各ページに適切な `title`, `description` を設定
+- Open Graph（OGP）タグを設定（`og:title`, `og:description`, `og:image`）
+- Twitter Card を設定（`twitter:card`, `twitter:title` など）
+- Nextra の `_meta` や `_app` レベルでデフォルト値を設定
+
+### 構造化データ
+- JSON-LD 形式で構造化データを追加（記事、プロフィールなど）
+
+### Sitemap / RSS
+- `public/sitemap.xml` を自動生成
+- `public/rss.xml` を自動生成（RSS フィード）
+
+## セキュリティ
+
+### ベストプラクティス
+- 外部スクリプトを読み込む場合は CSP（Content Security Policy）を検討
+- ユーザー入力は適切にサニタイズ（XSS 対策）
+- 環境変数は `.env.local` で管理し、Git にコミットしない
+- Giscus などの外部サービスを使用する場合は適切な権限設定

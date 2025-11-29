@@ -1,0 +1,46 @@
+---
+alwaysApply: true
+---
+
+# TypeScript ルール
+
+## 基本方針
+
+- **TypeScript を必須**として使用し、`tsconfig.json` で `strict: true` を設定
+- 型推論を活用し、明示的な型注釈は必要な場合のみ記述
+- `any` 型の使用は避け、`unknown` や適切な型定義を使用
+
+## 型定義
+
+- **インターフェースと型エイリアス**: PascalCase（例: `UserProfile`, `BlogPost`）
+- Props の型定義は `interface` または `type` で明示的に定義
+
+## エラーハンドリング
+
+### TypeScript Strict モード
+- `tsconfig.json` で `strict: true` を設定
+- 未定義の可能性がある値は適切にチェック
+  - オプショナルチェーン `?.` を活用
+  - Nullish合体演算子 `??` を活用
+
+### React Error Boundary
+- アプリケーション全体を `ErrorBoundary` コンポーネントでラップ
+- 重要なセクションごとに Error Boundary を配置
+- エラー発生時はユーザーフレンドリーなエラーメッセージを表示
+
+### エラーロギング
+- 本番環境では適切なエラーロギングサービス（Sentry など）を検討
+- 開発環境では `console.error` で詳細なエラー情報を出力
+
+## 型定義の例
+
+```typescript
+/**
+ * ブログ記事のメタデータを取得する
+ * @param slug - 記事のスラッグ
+ * @returns 記事のメタデータ（タイトル、日付、タグなど）
+ */
+async function getBlogPostMeta(slug: string): Promise<BlogPostMeta> {
+  // ...
+}
+```
