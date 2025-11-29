@@ -1,0 +1,17 @@
+---
+title: 'ポートフォリオ'
+date: '2025-01-01'
+type: 'page'
+---
+
+import { PortfolioCard } from '@/components/PortfolioCard'
+import { portfolioData } from '@/data/portfolio'
+
+# ポートフォリオ
+
+<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+  {portfolioData.map((portfolio) => (
+    <PortfolioCard key={portfolio.slug} portfolio={portfolio} />
+  ))}
+</div>
+

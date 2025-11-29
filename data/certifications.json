@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Java Programmer Gold SE7",
+    "organization": "Oracle Certified",
+    "badge": "/assets/Japan_Gold_Java_SE_7_Programmer_Badge__1_.png",
+    "date": "2015-09",
+    "description": "Java Programmer Gold SE7"
+  },
+  {
+    "name": "VBA Expert",
+    "organization": "VBA Expert",
+    "badge": "/assets/vbaexpart_chrown.png",
+    "date": "2016-03",
+    "description": "Standard Chrown"
+  },
+  {
+    "name": "Oracle Master Bronze",
+    "organization": "Oracle certified",
+    "badge": "/assets/Japan_Master_Bronze_Oracle_Database_12c_Badge__1_.png",
+    "date": "2016-12",
+    "description": "Oracle Master Bronze"
+  },
+  {
+    "name": "応用情報技術者",
+    "organization": "IPA 独立行政法人 情報処理推進機構",
+    "badge": "/assets/ipa.png",
+    "date": "2017-10",
+    "description": "応用情報技術者"
+  },
+  {
+    "name": "LPIC Level 1",
+    "organization": "Linux Professional Institute",
+    "badge": "/assets/linuc-1.png",
+    "date": "2018-06",
+    "description": "LPIC Level 1"
+  },
+  {
+    "name": "HTML5 認定試験 Level.1",
+    "organization": "LPI-Japan",
+    "badge": "/assets/html5_level1.jpg",
+    "date": "2018-08",
+    "description": "HTML5 認定試験 Level.1"
+  },
+  {
+    "name": "AWS Certified Solutions Architect – Associate",
+    "organization": "Amazon Web Service",
+    "badge": "/assets/AWS-SolArchitect-Associate-2020.png",
+    "date": "2019-03",
+    "description": "AWS Certified Solutions Architect – Associate"
+  },
+  {
+    "name": "TOEIC",
+    "organization": "Toeic",
+    "badge": "/assets/toeic.png",
+    "date": "2019-06",
+    "description": "Score: 680"
+  },
+  {
+    "name": "AWS Certified SysOps Administrator – Associate",
+    "organization": "Amazon Web Service",
+    "badge": "/assets/AWS-SysOpAdmin-Associate-2020.png",
+    "date": "2020-08",
+    "description": "AWS Certified SysOps Administrator – Associate"
+  },
+  {
+    "name": "AWS Certified Developer – Associate",
+    "organization": "Amazon Web Service",
+    "badge": "/assets/AWS-Developer-Associate-2020.png",
+    "date": "2021-02",
+    "description": "AWS Certified Developer – Associate"
+  },
+  {
+    "name": "LPIC Level 2",
+    "organization": "LPI-Japan",
+    "badge": "/assets/linuc-2.png",
+    "date": "2022-03",
+    "description": "LPIC Level 2"
+  },
+  {
+    "name": "LPIC Level 3 304",
+    "organization": "LPI-Japan",
+    "badge": "/assets/linuc-3-304.png",
+    "date": "2022-07",
+    "description": "LPIC Level 3 304"
+  },
+  {
+    "name": "TOEIC",
+    "organization": "Toeic",
+    "badge": "/assets/toeic.png",
+    "date": "2022-11",
+    "description": "Score: 745"
+  }
+]
+

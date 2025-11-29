@@ -1,0 +1,45 @@
+---
+title: 'プロフィール'
+date: '2025-01-01'
+type: 'page'
+---
+
+import { Profile } from '@/components/Profile'
+import { SkillsTags } from '@/components/SkillsTags'
+import { CertificationTimeline } from '@/components/CertificationTimeline'
+import { skillsData } from '@/data/skills'
+import { certificationsData } from '@/data/certifications'
+
+<Profile
+  name="TOMOAKI TSUTSUI"
+  title="システムエンジニア"
+  location="Tokyo"
+  about={[
+    'バックエンドからフロントエンドまで幅広く経験。',
+    'これからは専門領域を持っていきたい。',
+  ]}
+  mind={[
+    '作業効率化/楽になる方法を探る時間や、自分にとって新しい技術に触れる時間、調査する時間に幸せを感じる。',
+    'ベストプラクティス/保守性/可読性を重んじ、出来るだけ再利用できるものを作りたい。',
+    '上流から下流まで一通り経験したが、やはり設計から開発工程が好きです。',
+  ]}
+  favorite={[
+    'ものづくりが好きで、休日はプログラミングや興味のある技術を触ったりしています。世の中にある、部品と部品を引っ付ける事も好きです。気分転換に、カメラ、音楽、テレビ、食べ歩きなどなどで余暇を過ごしています。',
+  ]}
+  email="t.tsutsui9117@gmail.com"
+  profileImage="/assets/profile.jpg"
+/>
+
+## Skills
+
+<SkillsTags skills={skillsData.program} category="Program" />
+
+<SkillsTags skills={skillsData.serverInfraDb} category="Server / Infra / DB" />
+
+<SkillsTags skills={skillsData.tools} category="Tools" />
+
+## Certifications
+
+<CertificationTimeline certifications={certificationsData} />
+
+

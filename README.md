@@ -1,36 +1,55 @@
-# Portfolio page on tomoaki tsutsui
+# Portfolio & Blog Site
 
-## Description
+Next.js + Nextra を使用したポートフォリオ兼技術ブログサイトです。
 
-This site is portfolio page on tomoaki tsutsui, system engineer.
-This site introduce me simply, and I'm glad if you get to know me.
+## 技術スタック
 
-## Usage
+- **Next.js**: 最新安定版
+- **Nextra**: 3 系（nextra-theme-blog）
+- **TypeScript**: strict モード
+- **Tailwind CSS**: スタイリング
+- **GitHub Pages**: ホスティング
 
-### Basic Usage
+## セットアップ
 
-After downloading, simply edit the HTML and CSS files included with the template in your favorite text editor to make changes. These are the only files you need to worry about, you can ignore everything else! To preview the changes you make to the code, you can open the `index.html` file in your web browser.
+```bash
+# 依存関係のインストール
+npm install
 
-### Advanced Usage
+# 開発サーバーの起動
+npm run dev
 
-After installation, run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
+# ビルド
+npm run build
 
-#### Gulp Tasks
+# 静的エクスポート（GitHub Pages 用）
+npm run export
+```
 
-- `gulp` the default task that builds everything
-- `gulp watch` browserSync opens the project in your default browser and live reloads when changes are made
-- `gulp css` compiles SCSS files into CSS and minifies the compiled CSS
-- `gulp js` minifies the themes JS file
-- `gulp vendor` copies dependencies from node_modules to the vendor directory
+## プロジェクト構成
 
-You must have npm installed globally in order to use this build environment.
+```
+/
+├── components/        # React コンポーネント
+├── data/             # データファイル（ポートフォリオ、スキル、資格）
+├── pages/            # Next.js ページ
+│   ├── blog/        # ブログ記事
+│   └── portfolio/   # ポートフォリオ
+├── public/          # 静的アセット
+│   └── assets/     # 画像ファイル
+└── styles/          # グローバルスタイル
+```
 
-## templete
+## データ管理
 
-- using the following templete powered by bootstrap
-  - [bootstrap theme resume](https://startbootstrap.com/themes/resume/)
+- **ポートフォリオ**: `data/portfolio.ts` を編集
+- **スキル**: `data/skills.ts` を編集
+- **資格**: `data/certifications.ts` を編集
 
-## MEMO
+## デプロイ
 
-- Skill Info Sheet (Private)
-<https://docs.google.com/spreadsheets/d/1-LRn7Gpyur3LkdL6fuMAGGZmt5NM8mLBDyspgR0g9Yk/edit#gid=235448518>
+GitHub Actions により、`main` ブランチへの push で自動的に GitHub Pages にデプロイされます。
+
+## ライセンス
+
+MIT
