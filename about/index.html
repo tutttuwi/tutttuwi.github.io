@@ -123,30 +123,76 @@ if (document.readyState === 'loading') {
                     bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
                     flex items-center justify-center"> 1 </div> </div> </button> </a> </div>  </widget-layout>  <script type="module">class d extends HTMLElement{constructor(){if(super(),this.dataset.isCollapsed!=="true")return;const e=this.dataset.id,t=this.querySelector(".expand-btn"),s=this.querySelector(`#${e}`);t.addEventListener("click",()=>{s.classList.remove("collapsed"),t.classList.add("hidden")})}}customElements.get("widget-layout")||customElements.define("widget-layout",d);</script> <widget-layout data-id="tags" data-is-collapsed="false" class="pb-4 card-base onload-animation" style="animation-delay: 200ms; --collapsedHeight: 7.5rem;" data-astro-cid-ucso7hve="true"> <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
         before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
-        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">Tags</div> <div id="tags" class="collapse-wrapper px-4 overflow-hidden" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">  <div class="flex gap-2 flex-wrap"> <a href="/archive/?tag=Blogging" aria-label="View all posts with the Blogging tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Blogging </a><a href="/archive/?tag=Customization" aria-label="View all posts with the Customization tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Customization </a><a href="/archive/?tag=Demo" aria-label="View all posts with the Demo tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Demo </a><a href="/archive/?tag=Example" aria-label="View all posts with the Example tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Example </a><a href="/archive/?tag=Fuwari" aria-label="View all posts with the Fuwari tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Fuwari </a><a href="/archive/?tag=Markdown" aria-label="View all posts with the Markdown tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Markdown </a><a href="/archive/?tag=Video" aria-label="View all posts with the Video tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Video </a> </div>  </div>  </widget-layout>   </div> </div> <main id="swup-container" class="transition-swup-fade col-span-2 lg:col-span-1 overflow-hidden"> <div id="content-wrapper" class="onload-animation"> <!-- the overflow-hidden here prevent long text break the layout--> <!-- make id different from windows.swup global property -->  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"> <div class="card-base z-10 px-9 py-6 relative w-full "> <div data-pagefind-body class="prose dark:prose-invert prose-base !max-w-none custom-md mt-2"> <!--<div class="prose dark:prose-invert max-w-none custom-md">--> <!--<div class="max-w-none custom-md">-->  <section><h1 id="about">About<a class="anchor" href="#about"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h1><p>This is the demo site for <a href="https://github.com/saicaca/fuwari">Fuwari</a>.</p><a id="GCcoi2kb-card" class="card-github fetch-waiting no-styling" href="https://github.com/saicaca/fuwari" target="_blank" repo="saicaca/fuwari"><div class="gc-titlebar"><div class="gc-titlebar-left"><div class="gc-owner"><div id="GCcoi2kb-avatar" class="gc-avatar"></div><div class="gc-user">saicaca</div></div><div class="gc-divider">/</div><div class="gc-repo">fuwari</div></div><div class="github-logo"></div></div><div id="GCcoi2kb-description" class="gc-description">Waiting for api.github.com...</div><div class="gc-infobar"><div id="GCcoi2kb-stars" class="gc-stars">00K</div><div id="GCcoi2kb-forks" class="gc-forks">0K</div><div id="GCcoi2kb-license" class="gc-license">0K</div><span id="GCcoi2kb-language" class="gc-language">Waiting...</span></div><script id="GCcoi2kb-script" type="text/javascript" defer>
-      fetch('https://api.github.com/repos/saicaca/fuwari', { referrerPolicy: "no-referrer" }).then(response => response.json()).then(data => {
-        document.getElementById('GCcoi2kb-description').innerText = data.description?.replace(/:[a-zA-Z0-9_]+:/g, '') || "Description not set";
-        document.getElementById('GCcoi2kb-language').innerText = data.language;
-        document.getElementById('GCcoi2kb-forks').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.forks).replaceAll(" ", '');
-        document.getElementById('GCcoi2kb-stars').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.stargazers_count).replaceAll(" ", '');
-        const avatarEl = document.getElementById('GCcoi2kb-avatar');
-        avatarEl.style.backgroundImage = 'url(' + data.owner.avatar_url + ')';
-        avatarEl.style.backgroundColor = 'transparent';
-        document.getElementById('GCcoi2kb-license').innerText = data.license?.spdx_id || "no-license";
-        document.getElementById('GCcoi2kb-card').classList.remove("fetch-waiting");
-        console.log("[GITHUB-CARD] Loaded card for saicaca/fuwari | GCcoi2kb.")
-      }).catch(err => {
-        const c = document.getElementById('GCcoi2kb-card');
-        c?.classList.add("fetch-error");
-        console.warn("[GITHUB-CARD] (Error) Loading card for saicaca/fuwari | GCcoi2kb.")
-      })
-    </script></a><blockquote>
-<section><h3 id="sources-of-images-used-in-this-site">Sources of images used in this site<a class="anchor" href="#sources-of-images-used-in-this-site"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
-<li><a href="https://unsplash.com/">Unsplash</a></li>
-<li><a href="https://www.pixiv.net/artworks/108916539">星と少女</a> by <a href="https://www.pixiv.net/users/93273965">Stella</a></li>
-<li><a href="https://civitai.com/posts/586908">Rabbit - v1.4 Showcase</a> by <a href="https://civitai.com/user/Rabbit_YourMajesty">Rabbit_YourMajesty</a></li>
-</ul></section>
-</blockquote></section>  </div> <script type="module">document.addEventListener("click",function(s){const t=s.target;if(t&&t.classList.contains("copy-btn")){const c=t.closest("pre")?.querySelector("code"),i=Array.from(c?.querySelectorAll(".code:not(summary *)")??[]).map(e=>e.textContent).map(e=>e===`
+        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">Tags</div> <div id="tags" class="collapse-wrapper px-4 overflow-hidden" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">  <div class="flex gap-2 flex-wrap"> <a href="/archive/?tag=Blogging" aria-label="View all posts with the Blogging tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Blogging </a><a href="/archive/?tag=Customization" aria-label="View all posts with the Customization tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Customization </a><a href="/archive/?tag=Demo" aria-label="View all posts with the Demo tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Demo </a><a href="/archive/?tag=Example" aria-label="View all posts with the Example tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Example </a><a href="/archive/?tag=Fuwari" aria-label="View all posts with the Fuwari tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Fuwari </a><a href="/archive/?tag=Markdown" aria-label="View all posts with the Markdown tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Markdown </a><a href="/archive/?tag=Video" aria-label="View all posts with the Video tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Video </a> </div>  </div>  </widget-layout>   </div> </div> <main id="swup-container" class="transition-swup-fade col-span-2 lg:col-span-1 overflow-hidden"> <div id="content-wrapper" class="onload-animation"> <!-- the overflow-hidden here prevent long text break the layout--> <!-- make id different from windows.swup global property -->  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"> <div class="card-base z-10 px-9 py-6 relative w-full "> <div data-pagefind-body class="prose dark:prose-invert prose-base !max-w-none custom-md mt-2"> <!--<div class="prose dark:prose-invert max-w-none custom-md">--> <!--<div class="max-w-none custom-md">-->  <h1 align="center">Hi, I'm Tomoaki Tsutsui <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28"></h1>
+<p align="center">
+  <a href="https://github.com/DenverCoder1/readme-typing-svg"><img src="https://readme-typing-svg.herokuapp.com?lines=Software+Developer;Flutter Engineer;MobileApp%20|%20DDD%20|%20OOP%20;Always%20learning%20new%20things&#x26;center=true&#x26;width=500&#x26;height=50"></a>
+</p>
+<div>
+    <img src="https://komarev.com/ghpvc/?username=tutttuwi">
+</div>
+<!--
+**tutttuwi/tutttuwi** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+
+Here are some ideas to get you started:
+
+- 🔭 I’m currently working on ...
+- 🌱 I’m currently learning ...
+- 👯 I’m looking to collaborate on ...
+- 🤔 I’m looking for help with ...
+- 💬 Ask me about ...
+- 📫 How to reach me: ...
+- 😄 Pronouns: ...
+- ⚡ Fun fact: ...
+-->
+<section><h3 id="-tech-stack">🛠  Tech Stack<a class="anchor" href="#-tech-stack"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="frontend">Frontend<a class="anchor" href="#frontend"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p><img src="https://img.shields.io/badge/-HTML5-05122A?style=flat&#x26;logo=html5" alt="HTML5">
+<img src="https://img.shields.io/badge/-CSS3-05122A?style=flat&#x26;logo=css3" alt="CSS3">
+<img src="https://img.shields.io/badge/-JavaScript-05122A?style=flat&#x26;logo=javascript" alt="JavaScript">
+<img src="https://img.shields.io/badge/-TypeScript-05122A?style=flat&#x26;logo=typescript" alt="TypeScript">
+<img src="https://img.shields.io/badge/-Vue.js-05122A?style=flat&#x26;logo=vuedotjs" alt="Vue.js">
+<img src="https://img.shields.io/badge/-Bootstrap-05122A?style=flat&#x26;logo=bootstrap" alt="Bootstrap">
+<img src="https://img.shields.io/badge/-Angular-05122A?style=flat&#x26;logo=angular" alt="Angular">
+<img src="https://img.shields.io/badge/-Next.js-000000?style=flat&#x26;logo=nextdotjs" alt="Next.js"></p></section><section><h4 id="backend">Backend<a class="anchor" href="#backend"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p><img src="https://img.shields.io/badge/-Java-05122A?style=flat&#x26;logo=java" alt="Java">
+<img src="https://img.shields.io/badge/-Spring_Boot-05122A?style=flat&#x26;logo=springboot" alt="Spring Boot">
+<img src="https://img.shields.io/badge/-Spring_Batch-05122A?style=flat&#x26;logo=springboot" alt="Spring Batch">
+<img src="https://img.shields.io/badge/-MyBatis-05122A?style=flat" alt="MyBatis">
+<img src="https://img.shields.io/badge/-Doma2-05122A?style=flat" alt="Doma2">
+<img src="https://img.shields.io/badge/-JPA-05122A?style=flat" alt="JPA">
+<img src="https://img.shields.io/badge/-Node.js-05122A?style=flat&#x26;logo=node.js" alt="Node.js">
+<img src="https://img.shields.io/badge/-Python-05122A?style=flat&#x26;logo=python" alt="Python"></p></section><section><h4 id="️-cloud--database">☁️ Cloud &#x26; Database<a class="anchor" href="#️-cloud--database"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p><img src="https://img.shields.io/badge/-AWS-05122A?style=flat&#x26;logo=amazonaws" alt="AWS">
+<img src="https://img.shields.io/badge/-GCP-4285F4?style=flat&#x26;logo=googlecloud" alt="GCP">
+<img src="https://img.shields.io/badge/-OracleDB-05122A?style=flat&#x26;logo=oracle" alt="OracleDB">
+<img src="https://img.shields.io/badge/-PostgreSQL-05122A?style=flat&#x26;logo=postgresql" alt="PostgreSQL">
+<img src="https://img.shields.io/badge/-DB2-05122A?style=flat" alt="DB2">
+<img src="https://img.shields.io/badge/-Kubernetes-326CE5?style=flat&#x26;logo=kubernetes" alt="Kubernetes"></p></section><section><h4 id="tools--environments">Tools &#x26; Environments<a class="anchor" href="#tools--environments"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p><img src="https://img.shields.io/badge/-Git-05122A?style=flat&#x26;logo=git" alt="Git">
+<img src="https://img.shields.io/badge/-GitLab-05122A?style=flat&#x26;logo=gitlab" alt="GitLab">
+<img src="https://img.shields.io/badge/-Linux-05122A?style=flat&#x26;logo=linux" alt="Linux"></p></section><section><h4 id="misc">Misc<a class="anchor" href="#misc"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p><img src="https://img.shields.io/badge/-VBA-05122A?style=flat&#x26;logo=microsoftexcel" alt="VBA"></p></section></section>
+<section><h3 id="-github-profile-summary-card">💳 Github Profile Summary Card<a class="anchor" href="#-github-profile-summary-card"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><div>
+    <img height="180em" src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=tutttuwi&#x26;theme=github_dark">
+</div></section>
+<section><h3 id="️-github-stats">⚙️  GitHub Stats<a class="anchor" href="#️-github-stats"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>
+<a href="https://github.com/tutttuwi">
+  <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api?username=tutttuwi&#x26;show_icons=true&#x26;theme=algolia&#x26;include_all_commits=true&#x26;count_private=true">
+  <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=tutttuwi&#x26;layout=compact&#x26;langs_count=8&#x26;theme=algolia&#x26;include_all_commits=true&#x26;count_private=true"></a>
+</p></section>
+<section><h3 id="️-github-activity">⭐️  GitHub Activity<a class="anchor" href="#️-github-activity"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><a href="https://github.com/tutttuwi">  <img src="https://github-readme-activity-graph.vercel.app/graph??username=tutttuwi&#x26;theme=github-compact" alt="tutttuwi&#x27;s GitHub activity graph">
+</a>  </section>
+<section><h3 id="-connect-with-me">🤝🏻  Connect with Me<a class="anchor" href="#-connect-with-me"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>
+<a href="https://www.linkedin.com/in/tutttuwi/"><img src="https://img.shields.io/badge/-tutttuwi%20LInedin-0077B5?style=flat&#x26;logo=Linkedin&#x26;logoColor=white"></a>
+<a href="mailto:t.tsutsui9117@gmail.com"><img src="https://img.shields.io/badge/-t.tsutsui9117@gmail.com-D14836?style=flat&#x26;logo=Gmail&#x26;logoColor=white"></a>
+</p><br></section>
+<section><h3 id="-applications-i-developed">🌈 Applications I developed<a class="anchor" href="#-applications-i-developed"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li><a href="https://chromewebstore.google.com/detail/gcal-mine/pjamieabipajfibinbhpmgfpbpidlchk">Chrome Extension</a> - Gcal-Mine</li>
+<li><a href="https://chromewebstore.google.com/detail/tab-group-keeper/gfjhodpdmkiofmolchbmjlhinlileemd">Chrome Extension</a> - Tab Group Keeper</li>
+<li><a href="https://chromewebstore.google.com/detail/fastmemo/ikggcjldloflbjfafhhjpnbbjkpnphna">Chrome Extension</a> - Fast Memo</li>
+<li><a href="https://chromewebstore.google.com/detail/quickframer/emfekienjacgppfhiojogchdeoonhdlg">Chrome Extension</a> - Quick Framer</li>
+<li><a href="https://github.com/tutttuwi/dbdump">Utility</a> - dbdump</li>
+<li><a href="http://contents.ang-fnt-suumo.t-tsutsui.s3-website-ap-northeast-1.amazonaws.com/property-list">Application</a> - SUUMO Bukken Hikaku</li>
+<li><a href="https://github.com/tutttuwi/aggregateWordsOfLyric">Application</a> - Analize Lyric Words App</li>
+<li><a href="https://apps.apple.com/jp/app/id6748651351">iOS App</a> - 医療情報技師対策道場</li>
+<li><a href="https://play.google.com/store/apps/details?id=com.tutttuwi.app.medinfotech">Android App</a> - 医療情報技師対策道場</li>
+<li><a href="https://apps.apple.com/jp/app/id6747262236">iOS App</a> - シンプル万歩計</li>
+<li><a href="https://play.google.com/store/apps/details?id=com.tutttuwi.app.simplepedometer">Android App</a> - シンプル万歩計</li>
+</ul></section>  </div> <script type="module">document.addEventListener("click",function(s){const t=s.target;if(t&&t.classList.contains("copy-btn")){const c=t.closest("pre")?.querySelector("code"),i=Array.from(c?.querySelectorAll(".code:not(summary *)")??[]).map(e=>e.textContent).map(e=>e===`
 `?"":e).join(`
 `);navigator.clipboard.writeText(i);const o=t.getAttribute("data-timeout-id");o&&clearTimeout(parseInt(o)),t.classList.add("success");const n=setTimeout(()=>{t.classList.remove("success")},1e3);t.setAttribute("data-timeout-id",n.toString())}});</script> </div> </div>  <div class="footer col-span-2 onload-animation hidden lg:block"> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center">
 &copy; <span id="copyright-year">2026</span> Tomoaki Tsutsui. All Rights Reserved. /
