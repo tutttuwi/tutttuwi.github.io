@@ -1,0 +1,1372 @@
+<!DOCTYPE html><html lang="en" class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]" data-overlayscrollbars-initialize data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"> <head><title>SpringBoot2徹底活用 - Home</title><meta charset="UTF-8"><meta name="description" content="SpringBoot2徹底活用 - Home"><meta name="author" content="Tomoaki Tsutsui"><meta property="og:site_name" content="Home"><meta property="og:url" content="https://tutttuwi.github.io/posts/2020-06_springboot2%E5%BE%B9%E5%BA%95%E6%B4%BB%E7%94%A8/"><meta property="og:title" content="SpringBoot2徹底活用 - Home"><meta property="og:description" content="SpringBoot2徹底活用 - Home"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://tutttuwi.github.io/posts/2020-06_springboot2%E5%BE%B9%E5%BA%95%E6%B4%BB%E7%94%A8/"><meta name="twitter:title" content="SpringBoot2徹底活用 - Home"><meta name="twitter:description" content="SpringBoot2徹底活用 - Home"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.13.10"><link rel="icon" href="/favicon/icon.png" sizes="32x32"><!-- Set the theme before the page is rendered to avoid a flash --><script>(function(){const DEFAULT_THEME = "auto";
+const LIGHT_MODE = "light";
+const DARK_MODE = "dark";
+const AUTO_MODE = "auto";
+const BANNER_HEIGHT_EXTEND = 30;
+const PAGE_WIDTH = 75;
+const configHue = 250;
+
+			// Load the theme from local storage
+			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
+			switch (theme) {
+				case LIGHT_MODE:
+					document.documentElement.classList.remove('dark');
+					break
+				case DARK_MODE:
+					document.documentElement.classList.add('dark');
+					break
+				case AUTO_MODE:
+					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.documentElement.classList.add('dark');
+					} else {
+						document.documentElement.classList.remove('dark');
+					}
+			}
+
+			// Load the hue from local storage
+			const hue = localStorage.getItem('hue') || configHue;
+			document.documentElement.style.setProperty('--hue', hue);
+
+			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
+			offset = offset - offset % 4;
+			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+		})();</script><!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"SpringBoot2徹底活用","description":"SpringBoot2徹底活用","keywords":["教科書","JAVA"],"author":{"@type":"Person","name":"Tomoaki Tsutsui","url":"https://tutttuwi.github.io/"},"datePublished":"2020-06-07","inLanguage":"en"}</script><link rel="alternate" type="application/rss+xml" title="Tomoaki Tsutsui" href="https://tutttuwi.github.io/rss.xml"><!-- MermaidJS --><script type="module">
+			import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+			mermaid.initialize({ 
+				startOnLoad: true,
+				theme: 'dark',
+				securityLevel: 'loose'
+			});
+			window.mermaid = mermaid;
+		</script><link rel="stylesheet" href="/_astro/Layout.y4KPJ9hc.css">
+<link rel="stylesheet" href="/_astro/Layout.DSulWsr7.css">
+<link rel="stylesheet" href="/_astro/_page_.CoKYm2jU.css">
+<link rel="stylesheet" href="/_astro/_page_.ZlghMKVQ.css">
+<link rel="stylesheet" href="/_astro/about.BtniRLn_.css">
+<style>input.svelte-1wah7ro:focus{outline:0}.search-panel.svelte-1wah7ro{max-height:calc(100vh - 100px);overflow-y:auto}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k){-webkit-appearance:none;height:1.5rem;background-image:var(--color-selection-bar);transition:background-image .15s ease-in-out}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb:active{background:#fff9}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;border-width:0;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb:active{background:#fff9}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb:active{background:#fff9}
+</style><script type="module" src="/_astro/page.Z8IJTFqj.js"></script></head> <body class=" min-h-screen transition " data-overlayscrollbars-initialize data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"> <div id="config-carrier" data-hue="250"></div>    <div id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto"> <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all"> <div id="navbar" class="z-50 onload-animation"> <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation --> <div class="card-base !overflow-visible max-w-[var(--page-width)] h-[4.5rem] !rounded-t-none mx-auto flex items-center justify-between px-4"> <a href="/" class="btn-plain scale-animation rounded-lg h-[3.25rem] px-5 font-bold active:scale-95"> <div class="flex flex-row text-[var(--primary)] items-center text-md"> <svg width="1em" height="1em" class="text-[1.75rem] mb-1 mr-2" data-icon="material-symbols:home-outline-rounded">   <symbol id="ai:material-symbols:home-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75"/></symbol><use href="#ai:material-symbols:home-outline-rounded"></use>  </svg> Home </div> </a> <div class="hidden md:flex"> <a aria-label="Home" href="/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> Home  </div> </a><a aria-label="Archive" href="/archive/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> Archive  </div> </a><a aria-label="About" href="/about/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> About  </div> </a> </div> <div class="flex"> <!--<SearchPanel client:load>--> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event("astro:only"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="AEJ6w" component-url="/_astro/Search.DpBcKkHr.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> <button aria-label="Display Settings" class="btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="display-settings-switch"> <svg width="1em" height="1em" class="text-[1.25rem]" data-icon="material-symbols:palette-outline">   <symbol id="ai:material-symbols:palette-outline" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22q-2.05 0-3.875-.788t-3.187-2.15t-2.15-3.187T2 12q0-2.075.813-3.9t2.2-3.175T8.25 2.788T12.2 2q2 0 3.775.688t3.113 1.9t2.125 2.875T22 11.05q0 2.875-1.75 4.413T16 17h-1.85q-.225 0-.312.125t-.088.275q0 .3.375.863t.375 1.287q0 1.25-.687 1.85T12 22m-5.5-9q.65 0 1.075-.425T8 11.5t-.425-1.075T6.5 10t-1.075.425T5 11.5t.425 1.075T6.5 13m3-4q.65 0 1.075-.425T11 7.5t-.425-1.075T9.5 6t-1.075.425T8 7.5t.425 1.075T9.5 9m5 0q.65 0 1.075-.425T16 7.5t-.425-1.075T14.5 6t-1.075.425T13 7.5t.425 1.075T14.5 9m3 4q.65 0 1.075-.425T19 11.5t-.425-1.075T17.5 10t-1.075.425T16 11.5t.425 1.075T17.5 13M12 20q.225 0 .363-.125t.137-.325q0-.35-.375-.825T11.75 17.3q0-1.05.725-1.675T14.25 15H16q1.65 0 2.825-.962T20 11.05q0-3.025-2.312-5.038T12.2 4Q8.8 4 6.4 6.325T4 12q0 3.325 2.338 5.663T12 20"/></symbol><use href="#ai:material-symbols:palette-outline"></use>  </svg> </button> <astro-island uid="rIw13" component-url="/_astro/LightDarkSwitch.Cq210o6L.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;LightDarkSwitch&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> <button aria-label="Menu" name="Nav Menu" class="btn-plain scale-animation rounded-lg w-11 h-11 active:scale-90 md:!hidden" id="nav-menu-switch"> <svg width="1em" height="1em" class="text-[1.25rem]" data-icon="material-symbols:menu-rounded">   <symbol id="ai:material-symbols:menu-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></symbol><use href="#ai:material-symbols:menu-rounded"></use>  </svg> </button> </div> <div id="nav-menu-panel" class="float-panel float-panel-closed absolute transition-all fixed right-4 px-2 py-2"> <a href="/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> Home </div> <svg width="1em" height="1em" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <symbol id="ai:material-symbols:chevron-right-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.6 4.6q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7z"/></symbol><use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a><a href="/archive/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> Archive </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a><a href="/about/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> About </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a> </div> <astro-island uid="ZsVUom" component-url="/_astro/DisplaySettings.9NB11Dvr.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;DisplaySettings&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> </div> </div> <script type="module">function c(){localStorage.theme==="dark"?(document.documentElement.classList.remove("dark"),localStorage.theme="light"):(document.documentElement.classList.add("dark"),localStorage.theme="dark")}function o(){let t=document.getElementById("scheme-switch");t&&(t.onclick=function(){c()});let n=document.getElementById("display-settings-switch");n&&(n.onclick=function(){let e=document.getElementById("display-setting");e&&e.classList.toggle("float-panel-closed")});let l=document.getElementById("nav-menu-switch");l&&(l.onclick=function(){let e=document.getElementById("nav-menu-panel");e&&e.classList.toggle("float-panel-closed")})}o();</script> <script>(function(){const scriptUrl = "/pagefind/pagefind.js";
+
+async function loadPagefind() {
+    try {
+        const response = await fetch(scriptUrl, { method: 'HEAD' });
+        if (!response.ok) {
+            throw new Error(`Pagefind script not found: ${response.status}`);
+        }
+
+        const pagefind = await import(scriptUrl);
+
+        await pagefind.options({
+            excerptLength: 20
+        });
+
+        window.pagefind = pagefind;
+
+        document.dispatchEvent(new CustomEvent('pagefindready'));
+        console.log('Pagefind loaded and initialized successfully, event dispatched.');
+    } catch (error) {
+        console.error('Failed to load Pagefind:', error);
+        window.pagefind = {
+            search: () => Promise.resolve({ results: [] }),
+            options: () => Promise.resolve(),
+        };
+        document.dispatchEvent(new CustomEvent('pagefindloaderror'));
+        console.log('Pagefind load error, event dispatched.');
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadPagefind);
+} else {
+    loadPagefind();
+}
+})();</script> </div> </div>   <div class="absolute w-full z-30 pointer-events-none" style="top: 5.5rem"> <!-- The pointer-events-none here prevent blocking the click event of the TOC --> <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto overflow-x-hidden"> <div id="main-grid" class="transition duration-700 w-full min-w-0 left-0 right-0 grid grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto lg:gap-4 px-0 md:px-4 grid-cols-1 lg:grid-cols-[auto]"> <!-- Banner image credit -->  <!-- TODO: サイドバー調整 (mt-4 lg:mt-0を無理やり調整しているがgapで調整したい) --><div id="sidebar" class="mb-4 row-start-2 row-end-3 col-span-2 lg:row-start-1 lg:row-end-2 lg:col-span-1 lg:max-w-[17.5rem] onload-animation w-full mt-4 lg:mt-0"> <div class="flex flex-col w-full gap-4 mb-4"> <div class="card-base p-3"> <a aria-label="Go to About Page" href="/about/" class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
+       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95"> <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
+        w-full h-full z-50 flex items-center justify-center"> <svg width="1.13em" height="1em" class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl" data-icon="fa6-regular:address-card">   <symbol id="ai:fa6-regular:address-card" viewBox="0 0 576 512"><path fill="currentColor" d="M512 80c8.8 0 16 7.2 16 16v320c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16zM64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64zm144 224a64 64 0 1 0 0-128a64 64 0 1 0 0 128m-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16h192c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80zm200-144c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24z"/></symbol><use href="#ai:fa6-regular:address-card"></use>  </svg> </div> <div class="mx-auto lg:w-full h-full lg:mt-0  overflow-hidden relative"> <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div> <img src="/_astro/avatar.Dt7w5_qZ_Zpns3d.webp" alt="Profile Image of the Author" style="object-position: center" loading="lazy" decoding="async" fetchpriority="auto" width="400" height="400" class="w-full h-full object-cover">  </div> </a> <div class="px-2"> <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">Tomoaki Tsutsui</div> <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div> <div class="text-center text-neutral-400 mb-2.5 transition">I&#39;m a software engineer.</div> <div class="flex flex-wrap gap-2 justify-center mb-1"> <a rel="me" aria-label="Twitter" href="https://x.com/tutttwien" target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90"> <svg width="1em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:twitter">   <symbol id="ai:fa6-brands:twitter" viewBox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645c0 138.72-105.583 298.558-298.558 298.558c-59.452 0-114.68-17.219-161.137-47.106c8.447.974 16.568 1.299 25.34 1.299c49.055 0 94.213-16.568 130.274-44.832c-46.132-.975-84.792-31.188-98.112-72.772c6.498.974 12.995 1.624 19.818 1.624c9.421 0 18.843-1.3 27.614-3.573c-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319c-28.264-18.843-46.781-51.005-46.781-87.391c0-19.492 5.197-37.36 14.294-52.954c51.655 63.675 129.3 105.258 216.365 109.807c-1.624-7.797-2.599-15.918-2.599-24.04c0-57.828 46.782-104.934 104.934-104.934c30.213 0 57.502 12.67 76.67 33.137c23.715-4.548 46.456-13.32 66.599-25.34c-7.798 24.366-24.366 44.833-46.132 57.827c21.117-2.273 41.584-8.122 60.426-16.243c-14.292 20.791-32.161 39.308-52.628 54.253"/></symbol><use href="#ai:fa6-brands:twitter"></use>  </svg> </a><a rel="me" aria-label="GitHub" href="https://github.com/tutttuwi" target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90"> <svg width="0.97em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:github">   <symbol id="ai:fa6-brands:github" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6c-3.3.3-5.6-1.3-5.6-3.6c0-2 2.3-3.6 5.2-3.6c3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9c2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9c.3 2 2.9 3.3 5.9 2.6c2.9-.7 4.9-2.6 4.6-4.6c-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2c12.8 2.3 17.3-5.6 17.3-12.1c0-6.2-.3-40.4-.3-61.4c0 0-70 15-84.7-29.8c0 0-11.4-29.1-27.8-36.6c0 0-22.9-15.7 1.6-15.4c0 0 24.9 2 38.6 25.8c21.9 38.6 58.6 27.5 72.9 20.9c2.3-16 8.8-27.1 16-33.7c-55.9-6.2-112.3-14.3-112.3-110.5c0-27.5 7.6-41.3 23.6-58.9c-2.6-6.5-11.1-33.3 2.6-67.9c20.9-6.5 69 27 69 27c20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27c13.7 34.7 5.2 61.4 2.6 67.9c16 17.7 25.8 31.5 25.8 58.9c0 96.5-58.9 104.2-114.8 110.5c9.2 7.9 17 22.9 17 46.4c0 33.7-.3 75.4-.3 83.6c0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252C496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2c1.6 1.6 3.9 2.3 5.2 1c1.3-1 1-3.3-.7-5.2c-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9c1.6 1 3.6.7 4.3-.7c.7-1.3-.3-2.9-2.3-3.9c-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2c2.3 2.3 5.2 2.6 6.5 1c1.3-1.3.7-4.3-1.3-6.2c-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2c-1.4-2.3-4-3.3-5.6-2"/></symbol><use href="#ai:fa6-brands:github"></use>  </svg> </a><a rel="me" aria-label="LinkedIn" href="https://www.linkedin.com/in/tutttuwi/" target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90"> <svg width="0.88em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:linkedin">   <symbol id="ai:fa6-brands:linkedin" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5c0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7c-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5c67.2 0 79.7 44.3 79.7 101.9z"/></symbol><use href="#ai:fa6-brands:linkedin"></use>  </svg> </a>  </div> </div> </div> </div> <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4"> <widget-layout data-id="categories" data-is-collapsed="false" class="pb-4 card-base onload-animation" style="animation-delay: 150ms; --collapsedHeight: 7.5rem;" data-astro-cid-ucso7hve="true"> <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">Categories</div> <div id="categories" class="collapse-wrapper px-4 overflow-hidden" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <a href="/archive/?category=%E6%9B%B8%E7%B1%8D" aria-label="View all posts in the 書籍 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 書籍 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 61 </div> </div> </button> </a> </div>  </widget-layout>  <script type="module">class d extends HTMLElement{constructor(){if(super(),this.dataset.isCollapsed!=="true")return;const e=this.dataset.id,t=this.querySelector(".expand-btn"),s=this.querySelector(`#${e}`);t.addEventListener("click",()=>{s.classList.remove("collapsed"),t.classList.add("hidden")})}}customElements.get("widget-layout")||customElements.define("widget-layout",d);</script> <widget-layout data-id="tags" data-is-collapsed="true" class="pb-4 card-base onload-animation" style="animation-delay: 200ms; --collapsedHeight: 7.5rem;" data-astro-cid-ucso7hve="true"> <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">Tags</div> <div id="tags" class="collapse-wrapper px-4 overflow-hidden collapsed" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">  <div class="flex gap-2 flex-wrap"> <a href="/archive/?tag=AI" aria-label="View all posts with the AI tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  AI </a><a href="/archive/?tag=AWS" aria-label="View all posts with the AWS tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  AWS </a><a href="/archive/?tag=Azure" aria-label="View all posts with the Azure tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Azure </a><a href="/archive/?tag=CSS" aria-label="View all posts with the CSS tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  CSS </a><a href="/archive/?tag=DA" aria-label="View all posts with the DA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  DA </a><a href="/archive/?tag=DB" aria-label="View all posts with the DB tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  DB </a><a href="/archive/?tag=EX" aria-label="View all posts with the EX tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  EX </a><a href="/archive/?tag=Excel" aria-label="View all posts with the Excel tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Excel </a><a href="/archive/?tag=HTML" aria-label="View all posts with the HTML tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  HTML </a><a href="/archive/?tag=IPA" aria-label="View all posts with the IPA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  IPA </a><a href="/archive/?tag=Java" aria-label="View all posts with the Java tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Java </a><a href="/archive/?tag=JAVA" aria-label="View all posts with the JAVA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  JAVA </a><a href="/archive/?tag=Javascript" aria-label="View all posts with the Javascript tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Javascript </a><a href="/archive/?tag=Linux" aria-label="View all posts with the Linux tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Linux </a><a href="/archive/?tag=LLM" aria-label="View all posts with the LLM tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  LLM </a><a href="/archive/?tag=LPIC" aria-label="View all posts with the LPIC tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  LPIC </a><a href="/archive/?tag=NW" aria-label="View all posts with the NW tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  NW </a><a href="/archive/?tag=PHP" aria-label="View all posts with the PHP tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  PHP </a><a href="/archive/?tag=Ruby" aria-label="View all posts with the Ruby tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Ruby </a><a href="/archive/?tag=Security" aria-label="View all posts with the Security tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Security </a><a href="/archive/?tag=VBA" aria-label="View all posts with the VBA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  VBA </a><a href="/archive/?tag=%E3%83%AC%E3%82%B7%E3%83%94" aria-label="View all posts with the レシピ tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  レシピ </a><a href="/archive/?tag=%E5%85%A5%E9%96%80%E6%9B%B8" aria-label="View all posts with the 入門書 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  入門書 </a><a href="/archive/?tag=%E5%86%8D%E8%AA%AD" aria-label="View all posts with the 再読 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  再読 </a><a href="/archive/?tag=%E5%8F%97%E9%A8%93%E5%AF%BE%E7%AD%96%E3%81%BE%E3%81%A8%E3%82%81" aria-label="View all posts with the 受験対策まとめ tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  受験対策まとめ </a><a href="/archive/?tag=%E5%95%8F%E9%A1%8C%E9%9B%86" aria-label="View all posts with the 問題集 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  問題集 </a><a href="/archive/?tag=%E6%8A%80%E8%A1%93%E6%9B%B8%E7%B1%8D" aria-label="View all posts with the 技術書籍 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  技術書籍 </a><a href="/archive/?tag=%E6%95%99%E7%A7%91%E6%9B%B8" aria-label="View all posts with the 教科書 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  教科書 </a><a href="/archive/?tag=%E8%AA%AD%E6%9B%B8%E4%B8%AD" aria-label="View all posts with the 読書中 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  読書中 </a> </div>  </div> <div class="expand-btn px-4 -mb-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <button class="btn-plain rounded-lg w-full h-9" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <svg width="1em" height="1em" class="text-[1.75rem]" data-astro-cid-ucso7hve="true" data-icon="material-symbols:more-horiz">   <symbol id="ai:material-symbols:more-horiz" viewBox="0 0 24 24"><path fill="currentColor" d="M6 14q-.825 0-1.412-.587T4 12t.588-1.412T6 10t1.413.588T8 12t-.587 1.413T6 14m6 0q-.825 0-1.412-.587T10 12t.588-1.412T12 10t1.413.588T14 12t-.587 1.413T12 14m6 0q-.825 0-1.412-.587T16 12t.588-1.412T18 10t1.413.588T20 12t-.587 1.413T18 14"/></symbol><use href="#ai:material-symbols:more-horiz"></use>  </svg> More </div> </button> </div> </widget-layout>   </div> </div> <main id="swup-container" class="transition-swup-fade overflow-hidden min-w-0 col-span-1"> <div id="content-wrapper" class="onload-animation"> <!-- the overflow-hidden here prevent long text break the layout--> <!-- make id different from windows.swup global property -->   <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4"> <div id="post-container" class="card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full "> <!-- word count and reading time --> <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:notes-rounded">   <symbol id="ai:material-symbols:notes-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h10q.425 0 .713.288T15 17t-.288.713T14 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></symbol><use href="#ai:material-symbols:notes-rounded"></use>  </svg> </div> <div class="text-sm">13871  words</div> </div> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:schedule-outline-rounded">   <symbol id="ai:material-symbols:schedule-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M13 11.6V8q0-.425-.288-.712T12 7t-.712.288T11 8v3.975q0 .2.075.388t.225.337l3.3 3.3q.275.275.7.275T16 16t.275-.7t-.275-.7zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.325 0 5.663-2.337T20 12t-2.337-5.663T12 4T6.337 6.338T4 12t2.338 5.663T12 20"/></symbol><use href="#ai:material-symbols:schedule-outline-rounded"></use>  </svg> </div> <div class="text-sm"> 69  minutes </div> </div> </div> <!-- title --> <div class="relative onload-animation"> <div data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title" class="transition w-full block font-bold mb-3
+                    text-3xl md:text-[2.25rem]/[2.75rem]
+                    text-black/90 dark:text-white/90
+                    md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+                    before:absolute before:top-[0.75rem] before:left-[-1.125rem]
+                "> SpringBoot2徹底活用 </div> </div> <!-- metadata --> <div class="onload-animation"> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-5"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <symbol id="ai:material-symbols:calendar-today-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V3q0-.425.288-.712T7 2t.713.288T8 3v1h8V3q0-.425.288-.712T17 2t.713.288T18 3v1h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></symbol><use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2020-06-07</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <symbol id="ai:material-symbols:book-2-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 15.325q.35-.175.725-.25T7.5 15H8V4h-.5q-.625 0-1.062.438T6 5.5zM10 15h8V4h-8zm-4 .325V4zM7.5 22q-1.45 0-2.475-1.025T4 18.5v-13q0-1.45 1.025-2.475T7.5 2H18q.825 0 1.413.587T20 4v12.525q0 .2-.162.363t-.588.362q-.35.175-.55.5t-.2.75t.2.763t.55.487t.55.413t.2.562v.25q0 .425-.288.725T19 22zm0-2h9.325q-.15-.35-.237-.712T16.5 18.5q0-.4.075-.775t.25-.725H7.5q-.65 0-1.075.438T6 18.5q0 .65.425 1.075T7.5 20"/></symbol><use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E6%9B%B8%E7%B1%8D" aria-label="View all posts in the 書籍 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 書籍 </a> </div> </div> <!-- tags --> <div class="items-center flex"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:tag-rounded">   <symbol id="ai:material-symbols:tag-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m9 16l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T6.3 18.8L7 16H4.275q-.5 0-.8-.387T3.3 14.75q.075-.35.35-.55t.625-.2H7.5l1-4H5.775q-.5 0-.8-.387T4.8 8.75q.075-.35.35-.55t.625-.2H9l.825-3.275Q9.9 4.4 10.15 4.2t.6-.2q.475 0 .775.375t.175.825L11 8h4l.825-3.275q.075-.325.325-.525t.6-.2q.475 0 .775.375t.175.825L17 8h2.725q.5 0 .8.387t.175.863q-.075.35-.35.55t-.625.2H16.5l-1 4h2.725q.5 0 .8.388t.175.862q-.075.35-.35.55t-.625.2H15l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T12.3 18.8L13 16zm.5-2h4l1-4h-4z"/></symbol><use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=%E6%95%99%E7%A7%91%E6%9B%B8" aria-label="View all posts with the 教科書 tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 教科書 </a><div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=JAVA" aria-label="View all posts with the JAVA tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> JAVA </a>  </div> </div> </div> <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div> </div> <!-- always show cover as long as it has one -->  <div data-pagefind-body class="prose dark:prose-invert prose-base !max-w-none custom-md mb-6 markdown-content onload-animation"> <!--<div class="prose dark:prose-invert max-w-none custom-md">--> <!--<div class="max-w-none custom-md">-->  <section><h1 id="現場至上主義springboot2徹底活用">現場至上主義SpringBoot2徹底活用<a class="anchor" href="#現場至上主義springboot2徹底活用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h1><section><h2 id="理解したこと">理解したこと<a class="anchor" href="#理解したこと"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><ul>
+<li>Gradleを使ったビルドができる</li>
+</ul></section><section><h2 id="書籍情報">書籍情報<a class="anchor" href="#書籍情報"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><ul>
+<li>
+<p>著者</p>
+<ul>
+<li>廣末 丈士／宮林 岳洋 著、高安 厚思 監修</li>
+</ul>
+</li>
+<li>
+<p>定価</p>
+<ul>
+<li>3,456円（本体価格　3,200円）</li>
+</ul>
+</li>
+<li>
+<p>発売日</p>
+<ul>
+<li>2018年11月30日</li>
+</ul>
+</li>
+<li>
+<p>ISBN</p>
+<ul>
+<li>978-4-8026-1185-5</li>
+</ul>
+</li>
+<li>
+<p>目次</p>
+<ul>
+<li>第1章 Spring Bootの構成</li>
+<li>第2章 Webアプリケーションにおける共通処理</li>
+<li>第3章 データアクセス</li>
+<li>第4章 セキュリティ</li>
+<li>第5章 画面開発</li>
+<li>第6章 API開発</li>
+<li>第7章 チーム開発</li>
+<li>第8章 運用</li>
+<li>第9章 （Spring Bootアプリケーションが想定している）システム構成</li>
+<li>第10章 Spring5/Spring Boot2の新機能</li>
+<li>第11章 ローカル開発環境の構築について</li>
+<li>第12章 サンプルアプリについて</li>
+</ul>
+</li>
+<li>
+<p>サンプルプログラム</p>
+<ul>
+<li><a href="https://github.com/miyabayt/spring-boot-doma2-sample">https://github.com/miyabayt/spring-boot-doma2-sample</a></li>
+</ul>
+</li>
+</ul></section><section><h2 id="第1章-spring-bootの構成">第1章 Spring Bootの構成<a class="anchor" href="#第1章-spring-bootの構成"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="11-springbootの基礎">1.1 SpringBootの基礎<a class="anchor" href="#11-springbootの基礎"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>SpringBootとは「Spring Frameworkベースのアプリケーションを手軽に作成することができるフレームワーク」</p>
+<ul>
+<li>それ自体で完結するフレームワークではない</li>
+<li>Spring MVCやSpring Batchなどの様々なフレームワークを組み合わせて素早く簡潔にアプリケーションを開発する機能を提供</li>
+<li>SpringBootの中にTomcatが同梱されており、デフォルトでjarファイルをして、<code>java -jar</code>コマンドで引数に指定すると組み込まれたtomcatが立ち上がり開発したアプリケーションを実行できる</li>
+</ul>
+</li>
+<li>
+<p>代表的な特徴</p>
+<ul>
+<li>スターター
+<ul>
+<li>依存関係をシンプルに定義するためのモジュール</li>
+</ul>
+</li>
+<li>ビルドツール
+<ul>
+<li>バージョン解決など、開発を効率化するためのプラグイン</li>
+</ul>
+</li>
+<li>コンフィグレーションクラス
+<ul>
+<li>XMLではなく、アノテーションとJavaで設定が書ける</li>
+</ul>
+</li>
+<li>オートコンフィグレーション
+<ul>
+<li>デフォルトのコンフィグレーションが適用されて、必要なところだけを設定すればよくなる</li>
+</ul>
+</li>
+<li>メインアプリケーションクラス
+<ul>
+<li>Javaコマンドで組み込みのTomcatを起動できる</li>
+</ul>
+</li>
+<li>設定ファイル
+<ul>
+<li>プロパティを外部ファイルに定義でき、動作使用を簡単に変更できる</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><section><h4 id="スターター">スターター<a class="anchor" href="#スターター"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>一連の依存関係をセットとしてそろえるためのモジュール</p>
+</li>
+<li>
+<p>必要なライブラリを準備したり、それぞれのバージョンを選定したりする煩わしい作業から解放される</p>
+</li>
+<li>
+<p>たとえば、<code>spring-boot-starter-web</code>を１つ依存関係に追加するだけで、SpringMVCやTomcatなど、Webアプリケーションに必要なライブラリがセットになって追加される</p>
+</li>
+<li>
+<p>以下はスターターの例</p>
+<ul>
+<li><code>spring-boot-starter-web</code> : SpringMVC Tomcatが依存関係に追加される</li>
+<li><code>spring-boot-starter-jdbc</code> : SpringJDBC Tomcat JDBC Pool が依存関係に追加される</li>
+</ul>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-build-systems.html#using-boot-starter">スターターリファレンスページ</a></p>
+</li>
+<li>
+<p>自分でスターターを作成する際は、<code>*-spring-boot-starter</code>という命名規則が定められていることに注意</p>
+</li>
+</ul></section><section><h4 id="ビルドツール">ビルドツール<a class="anchor" href="#ビルドツール"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>Spring Bootの推奨ビルドツール</p>
+<ul>
+<li>ApacheMaven</li>
+<li>Gradle</li>
+</ul>
+</li>
+<li>
+<p>本書では<code>Gradle</code></p>
+<ul>
+<li>メリット
+<ul>
+<li>スクリプトを記述するタイプのビルドツールのため、Antのようにタスクを自由に記述することができる</li>
+<li>マルチプロジェクト構成の場合は、サブプロジェクトに対して一括設定して、必要に応じて個別に設定することができるため、記述量がMavenよりも少なくなる</li>
+<li>Mavenの場合は、特殊な処理が必要になった時に独自プラグインを実装する必要があるのに対し、Gradleはスクリプトを書くだけで対応できる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Maven</p>
+<ul>
+<li>Mavenを利用する場合、<code>spring-boot-starter-parent</code>プロジェクトを親プロジェクトとして継承することで、プラグインのデフォルト設定、依存ライブラリのバージョンの定義、Javaコンパイラー準拠レベル、文字コードを引き継ぐことができる</li>
+</ul>
+</li>
+<li>
+<p>親プロジェクト設定</p>
+</li>
+</ul><div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.4fsv9.css"><script type="module" src="/_astro/ec.g1fg5.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="xml" class="wrap" style="--ecMaxLine:53ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#99A0A6;--1:#99A0A6">&#x3C;!-- Inherit defaults from Spring Boot --></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">&#x3C;</span><span style="--0:#85E89D;--1:#85E89D">parent</span><span style="--0:#E1E4E8;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">  </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">&#x3C;</span><span style="--0:#85E89D;--1:#85E89D">groupId</span><span style="--0:#E1E4E8;--1:#E1E4E8">>org.springframework.boot&#x3C;/</span><span style="--0:#85E89D;--1:#85E89D">groupId</span><span style="--0:#E1E4E8;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">  </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">&#x3C;</span><span style="--0:#85E89D;--1:#85E89D">artifactId</span><span style="--0:#E1E4E8;--1:#E1E4E8">>spring-boot-starter-parent&#x3C;/</span><span style="--0:#85E89D;--1:#85E89D">artifactId</span><span style="--0:#E1E4E8;--1:#E1E4E8">></span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">  </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">&#x3C;</span><span style="--0:#85E89D;--1:#85E89D">version</span><span style="--0:#E1E4E8;--1:#E1E4E8">>2.0.6.RELEASE&#x3C;/</span><span style="--0:#85E89D;--1:#85E89D">version</span><span style="--0:#E1E4E8;--1:#E1E4E8">></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">&#x3C;/</span><span style="--0:#85E89D;--1:#85E89D">parent</span><span style="--0:#E1E4E8;--1:#E1E4E8">></span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><ul>
+<li>
+<p>Gradle</p>
+<ul>
+<li>Spring Boot2.0.xはGradle4.0以降に対応している</li>
+<li>GradleはMavenと違って、設定を引き継ぐための親プロジェクトが存在しないため、単に、スターターを依存関係として追加します</li>
+<li>spring-boot-gradle-pluginというGradleプラグインが用意されており、実行可能なJarファイルを作成するためのタスクを利用できる</li>
+</ul>
+</li>
+<li>
+<p>ビルドスクリプトの処理内容</p>
+<ol>
+<li>spring-boot-gradle-plugin をビルドスクリプトの依存関係に追加する</li>
+<li>spring-boot-gradle-plugin と dependency-management プラグインを利用することを宣言</li>
+<li>Javaコンパイラー準拠レベルをデフォルトの1.8から11に変更</li>
+<li>文字コードはUTF-8であることを指定する</li>
+<li>スターターをアプリケーションの依存関係に追加する</li>
+<li>テスト用のスターターをアプリケーションの依存関係に追加する</li>
+</ol>
+</li>
+</ul></section><section><h4 id="依存関係の管理">依存関係の管理<a class="anchor" href="#依存関係の管理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>すべてのライブラリのバージョンを１つずつ指定するというような作業をする必要はない</li>
+<li>依存関係に定義されているライブラリも一緒にバージョンアップする</li>
+<li>Spring Bootのバージョンを上げる場合は、Project Wikiに載っているリリースノートを確認すること</li>
+</ul></section><section><h4 id="コンフィグレーションクラス">コンフィグレーションクラス<a class="anchor" href="#コンフィグレーションクラス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>Spring BootはJavaベースのコンフィグレーションが好まれる</p>
+</li>
+<li>
+<p>従来通りXMLファイルに記述できるが、推奨されるのは<code>@Configuration</code>アノテーションを付与したクラスによるコンフィグレーション</p>
+</li>
+<li>
+<p>MVCの設定のこと？再度確認する</p>
+</li>
+</ul></section><section><h4 id="オートコンフィグレーション">オートコンフィグレーション<a class="anchor" href="#オートコンフィグレーション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>Spring Bootは設定を変更しなければ、あらかじめ敷かれたレールに沿って動作するようになっている</li>
+</ul></section><section><h4 id="メインアプリケーションクラス">メインアプリケーションクラス<a class="anchor" href="#メインアプリケーションクラス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>SpringBootのアプリケーションを起動するメソッドを呼び出すクラス</p>
+</li>
+<li>
+<p>Javaアプリケーションのエントリポイントとなるmainメソッドの中で、SpringApplicationクラスのrunメソッドを呼び出すと、組み込みのTomcatが立ち上がり、SpringIoCコンテナの初期化が行われる</p>
+</li>
+<li>
+<p>※再読</p>
+</li>
+</ul></section><section><h4 id="設定ファイル">設定ファイル<a class="anchor" href="#設定ファイル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>アプリケーションを起動すると、次の場所にある<code>application.properties</code>設定ファイルを読み込む</p>
+<ol>
+<li>カレントディレクトリの<code>/config</code>サブディレクトリ</li>
+<li>カレントディレクトリ</li>
+<li>クラスパスの<code>/config</code>パッケージ</li>
+<li>クラスパスのルート</li>
+</ol>
+</li>
+<li>
+<p>上から順番に優先度が高くなる</p>
+</li>
+<li>
+<p>プロファイルという単位で別々の設定を持たせることも可能</p>
+</li>
+<li>
+<p>設定ファイルは<code>yml</code>形式でもOK</p>
+</li>
+<li>
+<p><code>application.yml</code>を配置することで使用可能</p>
+</li>
+<li>
+<p>設定ファイルの値を参照するのも簡単</p>
+</li>
+</ul></section><section><h4 id="colum-外部設定ファイルの種類">Colum 外部設定ファイルの種類<a class="anchor" href="#colum-外部設定ファイルの種類"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>環境変数</p>
+</li>
+<li>
+<p>システムプロパティ</p>
+</li>
+<li>
+<p>コマンドライン引数</p>
+</li>
+<li>
+<p>いろんな渡し方がある</p>
+</li>
+<li>
+<p>けど、アプリケーションプロパティしか使わないのではと思う</p>
+</li>
+</ul></section><section><h4 id="アプリケーションの起動">アプリケーションの起動<a class="anchor" href="#アプリケーションの起動"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>コマンドラインで起動 <code>gradle bootRun</code></li>
+<li>InteliJ IDEAを使って起動する</li>
+</ul></section></section><section><h3 id="12-spring-bootによるwebアプリケーション開発">1.2 Spring BootによるWebアプリケーション開発<a class="anchor" href="#12-spring-bootによるwebアプリケーション開発"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>Intelij IDEA 起動</p>
+<ul>
+<li><code>Cntl + Shift + A</code> -> <code>compiler.automake.allow.when.app.running</code> を <code>ON</code> にすることでファイル変更時に自動更新する</li>
+</ul>
+</li>
+<li>
+<p>リソースの除外</p>
+<ul>
+<li>静的リソースの変更は単に再読み込みするだけで再起動は不要</li>
+<li>デフォルト設定では、
+<ul>
+<li><code>/META-INF/maven</code></li>
+<li><code>/META-INF/resources</code></li>
+<li><code>/resources</code></li>
+<li><code>/static</code></li>
+<li><code>/public</code></li>
+<li><code>templates</code></li>
+<li>に含まれるファイルへの変更は再起動がかからないようになっている</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:51ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">// 再起動のトリガーから除外するファイルを設定する</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">spring.devtools.restart.exclude=static/**,public/**</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><ul>
+<li>LiveReload</li>
+</ul><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:40ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">// LiveReloadを無効化する</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">spring.devtools.livereload.enabled=false</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><section><h4 id="restart-vs-reload">Restart vs Reload<a class="anchor" href="#restart-vs-reload"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JVM hot-swapping をよりよいものにしたい場合</p>
+<ul>
+<li><code>JRebel</code>(有償)または、<code>Spring Loaded</code>(無償<grails2></grails2>の内部で利用されている) の利用を検討する</li>
+</ul>
+</li>
+<li>
+<p>もう一つの方法として、<code>Dynamic Code Evolution VM(DCEVM)</code> HotSwapAgentを使ったJVM hot-swapping がある</p>
+<ul>
+<li>JDKにパッチをあててクラスの再定義機能を強化してくれる</li>
+<li>Spring Loadedでは対応していないクラス追加に対してもhot-swappingが働く</li>
+</ul>
+</li>
+<li>
+<p>DCEVM + HotSwapAgentの導入方法</p>
+<ul>
+<li><code>jar</code>ファイルをインストール <a href="http://dcevm.github.io/">http://dcevm.github.io/</a></li>
+<li><code>java -jar DCEVM-*-installer.jar</code> 実行</li>
+</ul>
+</li>
+<li>
+<p>Intelij IDEA プラグイン設定</p>
+<ul>
+<li>HotSwapAgent をインストール</li>
+<li>Settingより設定する</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="13-サンプルプロジェクトの構成">1.3 サンプルプロジェクトの構成<a class="anchor" href="#13-サンプルプロジェクトの構成"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="マルチプロジェクト">マルチプロジェクト<a class="anchor" href="#マルチプロジェクト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>本書で用いるサンプルプロジェクトは複数のモジュールで構成されるマルチプロジェクト</li>
+<li>メリット
+<ul>
+<li>ビルドスクリプトを共通化することができるので記述量が減る</li>
+<li>ローカル・リモートリポジトリにアーティファクトをアップロードしなくてもソースコードの変更が反映される</li>
+<li>それぞれのプロジェクトを関連付けてタスクを実行できる</li>
+</ul>
+</li>
+</ul></section><section><h4 id="アプリケーションアーキテクチャ">アプリケーション・アーキテクチャ<a class="anchor" href="#アプリケーションアーキテクチャ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>プレゼンテーション層
+<ul>
+<li>プレゼンテーション層は、入力された値を受け取って、値をチェックしたり、値の変換を行ったりする層</li>
+<li>WebモジュールのFormクラス、FormValidatorクラスが該当</li>
+</ul>
+</li>
+<li>アプリケーション層
+<ul>
+<li>プレゼンテーション層から受け取った値をドメイン層に渡す層で、WebモジュールのControllerが該当する</li>
+<li>ビジネスロジックは含まれないが、画面遷移先を制御したり、セッションを用いて、次画面に値を渡したりといった処理を行う</li>
+</ul>
+</li>
+<li>ドメイン層
+<ul>
+<li>ドメインオブジェクトを持ち、ビジネスロジックを処理するメインの層で、ドメインモジュールのServiceクラスが該当する</li>
+<li>ドメインオブジェクトはすべての層から利用されるが、逆にドメイン層はほかの層に依存してはならない点に注意する！</li>
+</ul>
+</li>
+<li>インフラストラクチャ層
+<ul>
+<li>インフラストラクチャ層では、ドメイン層から渡されたデータを永続化する層</li>
+<li>ドメインモジュールのRepositoryクラスが該当する</li>
+<li>アプリケーション層の影響を受けないように、汎用的な部品としてつくるようにすること！</li>
+</ul>
+</li>
+</ul></section><section><h4 id="サンプルプロジェクトのビルドスクリプト">サンプルプロジェクトのビルドスクリプト<a class="anchor" href="#サンプルプロジェクトのビルドスクリプト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ol>
+<li>Spring Bootのバージョンを拡張プロパティにセット</li>
+<li>テストコードはSpockフレームワークを利用するため、Groovyを扱えるようにする</li>
+<li>すべてのサブプロジェクトにおいて spring-boot-gradle-plugin を利用できるようにする</li>
+<li>すべてのサブプロジェクトにおいて dependency-management プラグインを利用できるようにする</li>
+<li>Javaコンパイラー準拠レベルを１１に変更する</li>
+<li><code>src/main/resources</code> をクラスパスに追加して、開発中の変更がすぐに反映されるようにする</li>
+<li>リソースファイルの出力先をソースファイルの出力先に変更する</li>
+<li>コンパイルの前に、リソースファイルの出力を行うようにする</li>
+<li>Domaの依存関係にあるバージョン違いの Spring Boot を除外する</li>
+<li>Spring Session モジュールを使ってセッション情報をデータベースに格納する</li>
+<li>Gradleのプロジェクトプロパティを bootRun の引数に渡せるようにする</li>
+</ol><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:44ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">// メインアプリケーションクラスを持たないモジュールの場合（build.gradle）</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">bootJar {</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">enabled = false</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">}</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h4 id="lombokを利用する">Lombokを利用する<a class="anchor" href="#lombokを利用する"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>ボイラープレートコードの削減のため</li>
+<li>アプリケーションの実行時には不要なので、スコープはcompileOnlyに設定</li>
+<li>型<code>val</code>が使用できる
+<ul>
+<li>MEMO: これを使うと長い型を３文字でかけるよっていうことらしい</li>
+</ul>
+</li>
+</ul></section></section></section><section><h2 id="第2章-webアプリケーションにおける共通処理">第2章 Webアプリケーションにおける共通処理<a class="anchor" href="#第2章-webアプリケーションにおける共通処理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><ul>
+<li>サンプルプロジェクトにおける共通処理、その実装方法について説明</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>種別</th><th>説明</th></tr></thead><tbody><tr><td>バリデーション</td><td>単項目・相関チェックを効率よく実施する</td></tr><tr><td>オブジェクトマッピング</td><td>入力値を他のエンティティに効率よく詰め替える</td></tr><tr><td>ログ出力</td><td>共通的に処理の開始・終了をログ出力する</td></tr><tr><td>ファイルダウンロード</td><td>CSV、Excel、PDFなどのファイルをダウンロードする</td></tr><tr><td>ファイルアップロード</td><td>アップロードされたファイルを、Domaを使ってデータベースに保存する</td></tr><tr><td>メール送信</td><td>本文をテンプレート処理してメールを送信できるようにする</td></tr></tbody></table><section><h3 id="21-バリデーション">2.1 バリデーション<a class="anchor" href="#21-バリデーション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>Spring MVC では単項目チェックを行うためのBean Validatorが用意されている</li>
+<li>相関チェックのためのアノテーションはないので、効率よく相関チェックを行うために共通処理を実装する</li>
+<li>Spring Bootでは <code>spring-boot-starter-validation</code>スターターを依存関係に追加することで、Bean Validation 2.0 と Spring Validatorが利用できる</li>
+<li>バリデーションのポイント
+<ul>
+<li>メッセージの設定</li>
+<li>バリデーションの種類</li>
+<li>単項目チェック</li>
+<li>相関項目チェック</li>
+</ul>
+</li>
+</ul><section><h4 id="メッセージの設定">メッセージの設定<a class="anchor" href="#メッセージの設定"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>Bean Validator はメッセージを外部ファイルで管理するためのMessageSourceを内包している</p>
+</li>
+<li>
+<p>デフォルトでは文字コードが<code>UTF-8</code> になっていないので、エラーメッセージを表示する際に文字化けてしまう</p>
+</li>
+<li>
+<p><code>application.yml</code></p>
+</li>
+</ul><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="yml" class="wrap" style="--ecMaxLine:47ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#99A0A6;--1:#99A0A6"># 共通の設定を定義する</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#85E89D;--1:#85E89D">spring</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">  </span><span style="--0:#85E89D;--1:#85E89D">messages</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">    </span><span style="--0:#99A0A6;--1:#99A0A6"># メッセージ定義ファイルのパスを含めて設定する</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">    </span><span style="--0:#85E89D;--1:#85E89D">basename</span><span style="--0:#E1E4E8;--1:#E1E4E8">: </span><span style="--0:#9ECBFF;--1:#9ECBFF">messages,ValidationMessages</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">    </span><span style="--0:#85E89D;--1:#85E89D">cache-duration</span><span style="--0:#E1E4E8;--1:#E1E4E8">: </span><span style="--0:#79B8FF;--1:#79B8FF">-1</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent">    </span><span style="--0:#85E89D;--1:#85E89D">encoding</span><span style="--0:#E1E4E8;--1:#E1E4E8">: </span><span style="--0:#9ECBFF;--1:#9ECBFF">UTF-8</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#99A0A6;--1:#99A0A6"># P40. デフォルトのままだと文字化けするため指定</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h4 id="colum-メッセージを定義するファイルを分割する">Colum メッセージを定義するファイルを分割する<a class="anchor" href="#colum-メッセージを定義するファイルを分割する"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li><code>application.yml</code>のbasenameにカンマ区切りで複数指定可能
+<ul>
+<li><code>ValidationMessage</code>:バリデーションのエラーメッセージを定義する</li>
+<li><code>PropertyNames</code>:エラー項目の項目名を入力フォームごとに定義する</li>
+<li><code>messages</code>:バリデーションとは関係ないシステムメッセージなどを定義する</li>
+</ul>
+</li>
+</ul></section><section><h4 id="バリデーションの種類">バリデーションの種類<a class="anchor" href="#バリデーションの種類"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>バリデーションの種類</p>
+<ul>
+<li>クライアントサイド</li>
+<li>サーバーサイド</li>
+</ul>
+</li>
+<li>
+<p>本書はサーバーサイドのバリデーションについて説明</p>
+</li>
+<li>
+<p>単項目チェック：<code>Bean Validation API</code>で提供されるアノテーションを利用できる</p>
+</li>
+<li>
+<p>相関項目チェック：<code>org.springframework.validation.Validator</code>インターフェースの実装クラスを作成するか、自作のアノテーションを実装する</p>
+</li>
+</ul></section><section><h4 id="単項目チェック">単項目チェック<a class="anchor" href="#単項目チェック"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li><code>javax.validation.constraints</code>パッケージに定義されている</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>アノテーション</th><th>チェック内容</th></tr></thead><tbody><tr><td>Min,DecimalMin</td><td>数値の最小値を下回らないこと</td></tr><tr><td>Max,DecimalMax</td><td>数値の最大値を超えないこと</td></tr><tr><td>NotNull</td><td>NULL値ではないこと</td></tr><tr><td>Pattern</td><td>正規表現を満たすこと</td></tr><tr><td>NotBlank</td><td>値があること（空白を許さない）</td></tr><tr><td>NotEmpty</td><td>値があること（空白を許す）</td></tr><tr><td>Digits</td><td>数値であること</td></tr><tr><td>Past</td><td>過去であること</td></tr><tr><td>Future</td><td>未来であること</td></tr></tbody></table><ul>
+<li><code>spring-boot-starter-validation</code>スターターは <code>Bean Validation</code>の実装ライブラリーとして、<code>Hibernate Validator</code>を依存関係に追加しているので、Hibernateで定義されたアノテーションも使うことができる</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>アノテーション</th><th>チェック内容</th></tr></thead><tbody><tr><td>CreditCardNumber</td><td>正しいクレジットカード番号であること</td></tr><tr><td>Length</td><td>NULL値ではないこと</td></tr><tr><td>Range</td><td>範囲内の値であること</td></tr><tr><td>SafeHtml</td><td>妥当なHTML書式であること</td></tr><tr><td>URL</td><td>正しいURLであること</td></tr></tbody></table><ul>
+<li>
+<p>参考URL</p>
+<ul>
+<li><a href="https://beanvalidation.org/2.0/">https://beanvalidation.org/2.0/</a></li>
+</ul>
+</li>
+<li>
+<p>Formオブジェクトに<code>@NotEmpty</code>などのアノテーション付与</p>
+</li>
+<li>
+<p><code>Controller</code>の<code>@PostMapping("/new")</code>を付与したメソッドの引数に<code>@Validated</code>を付与し、Formオブジェクトを第一引数に指定</p>
+</li>
+<li>
+<p>チェック結果が、第二引数の<code>BindingResult</code>に入るので結果をチェックする</p>
+</li>
+</ul></section><section><h4 id="column-prgパターンについて">Column PRGパターンについて<a class="anchor" href="#column-prgパターンについて"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>PRGパターンでは、Post-Redirect-Getメソッドを組み合わせて、以下の流れで登録処理を行う実装パターン</li>
+</ul><ol>
+<li>保存ボタンを押したとき、POSTメソッドを使い、サーバーにリクエストする（P<post></post>）</li>
+<li>入力値をDBに保存するといった一連の処理を行い、詳細画面にリダイレクトする（R<redirect></redirect>）</li>
+<li>GETメソッドで詳細画面が表示される（G<get></get>）</li>
+</ol><ul>
+<li>サンプルプロジェクトはほぼすべての機能において、PRGパターンを適用している</li>
+<li>メリット
+<ul>
+<li>ブラウザの戻るボタンを押しても、フォーム再送信のダイアログを表示しないようにすることができる</li>
+</ul>
+</li>
+</ul></section><section><h4 id="相関項目チェック">相関項目チェック<a class="anchor" href="#相関項目チェック"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="22-オブジェクトマッピング">2.2 オブジェクトマッピング<a class="anchor" href="#22-オブジェクトマッピング"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>ModelMapperを使用した詰め替え例の紹介</p>
+</li>
+<li>
+<p>Dozerなどもあるのでお好みで使用すること</p>
+</li>
+<li>
+<p>Strictモードにしないと意図しない詰め替えが発生する可能性があるので注意</p>
+</li>
+<li>
+<p>MEMO: ここはOrikaを採用することにしたので割愛</p>
+</li>
+</ul></section><section><h3 id="23-ログ出力">2.3 ログ出力<a class="anchor" href="#23-ログ出力"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>MDCを使ってログに値を埋め込む設定</p>
+<ul>
+<li>コントローラに関数名を返却する処理を埋め込む</li>
+<li>リクエストごとに乱数を生成して埋め込む（リクエストトラッキング）</li>
+</ul>
+</li>
+<li>
+<p>ログローテーションの設定について</p>
+</li>
+</ul></section><section><h3 id="24-ファイルダウンロード">2.4 ファイルダウンロード<a class="anchor" href="#24-ファイルダウンロード"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>ファイルの出力処理を共通処理にするとソースコードの記述量を削減市、統一された方法に揃えることで微妙な動作の違いを生まない用にすることができます。</p><p>ファイルダウンロード機能は、エンタープライズのアプリケーション開発に限らず、とてもよくある機能の１つ</p><p><code>org.springframework.web.servlet.View</code>インターエースを実装することで、汎用的なロジックで様々なファイルダウンロードに対応できる用になる</p><section><h4 id="pdfファイルのダウンロード">PDFファイルのダウンロード<a class="anchor" href="#pdfファイルのダウンロード"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>帳票出力の代表的なライブラリとして、JasperReportsがある
+JasperReportsは、<code>.jrxml</code>という拡張子のXMLファイルで帳票のレイアウトをテンプレートとして定義して帳票を出する際に対象データを引数に渡すことで帳票を出力します。
+テンプレートファイルはJasperSoftStudioというEclipseベースの帳票デザインツールを使って作成</p><p>SpringMVCには、JasperReportsをサポートするViewクラスが提供されていたが、SpringFramework5から機能が除外されている</p><p>そのため、JasperReportsライブラリを直接使ってPDF出力するPDFViewクラスを実装して、引数にデータを渡すだけでPDF出力ができるようにします。</p></section><section><h4 id="csvファイルのダウンロード">CSVファイルのダウンロード<a class="anchor" href="#csvファイルのダウンロード"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>CSVファイルのダウンロードは、<code>jackson-dataformat-csv</code>を利用するとシンプルに実装することができる</p><ul>
+<li>CsvViewクラス</li>
+<li>Entityクラス</li>
+<li>Controllerクラス</li>
+</ul></section><section><h4 id="excelファイルのダウンロード">Excelファイルのダウンロード<a class="anchor" href="#excelファイルのダウンロード"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>Excelファイルのダウンロードの場合は、<code>org.springframework.web.servlet.view.document.AbstractXlsxView</code>を利用
+AbstractXlsxViewはApachePOIに依存しているのでバージョンまで指定して依存関係を記述します
+PDFファイルの場合と同様で、ファイル名に日本語文字が含まれると文字化けが生じてしまうので、子クラスを作成して対応</p></section></section><section><h3 id="25-ファイルアップロード">2.5 ファイルアップロード<a class="anchor" href="#25-ファイルアップロード"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>ファイルダウンロードと同様によく実装する機能の１つ</p><p>SpringBootでは、アップロードファイルのサイズ上限などの設定を適切に行わないと、オートコンフィグレーションによるデフォルトの動作仕様では要件を満たせないこともありえるので注意が必要
+SpringBootでは、ServletAPI3.0で利用できる<code>javax.servlet.http.Part</code>を内包するMultipartResolverがオートコンフィグレーションされるので、なにもしなくてもMultipartFileインターフェースを使ってファイルを受け取ることができる</p><section><h4 id="ファイルサイズの設定">ファイルサイズの設定<a class="anchor" href="#ファイルサイズの設定"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>１ファイルのサイズ上限は１MBで、１リクエストで受け付ける上限は１０MBになっている</li>
+</ul><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="yml" class="wrap" style="--ecMaxLine:43ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#85E89D;--1:#85E89D">spring</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#85E89D;--1:#85E89D">servlet</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">    </span><span style="--0:#85E89D;--1:#85E89D">multipart</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">      </span><span style="--0:#85E89D;--1:#85E89D">max-file-size</span><span style="--0:#E1E4E8;--1:#E1E4E8">: </span><span style="--0:#79B8FF;--1:#79B8FF">-1</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#99A0A6;--1:#99A0A6"># デフォルトは1MB　-1だと無制限</span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">      </span><span style="--0:#85E89D;--1:#85E89D">max-request-size</span><span style="--0:#E1E4E8;--1:#E1E4E8">: </span><span style="--0:#9ECBFF;--1:#9ECBFF">20MB</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#99A0A6;--1:#99A0A6"># デフォルトは10MB</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h4 id="ファイルの取扱">ファイルの取扱<a class="anchor" href="#ファイルの取扱"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="ファイルのデータベースへの格納">ファイルのデータベースへの格納<a class="anchor" href="#ファイルのデータベースへの格納"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>TODO: 後で画像保存する処理実装する</li>
+</ul></section></section><section><h3 id="26-メール送信">2.6 メール送信<a class="anchor" href="#26-メール送信"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>MEMO: 省略</li>
+</ul></section></section><section><h2 id="第3章-データアクセス">第3章 データアクセス<a class="anchor" href="#第3章-データアクセス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>本chapterでは、O/RマッパーとしてDomaを使った実装方法を説明
+Domaは2way-SQLと呼ばれるSQLテンプレートを利用できるので、SQL分の見通しがよくなるという特徴がある</p><p>実行時にSQLテンプレートとJavaソースコードとの不整合を検知して間違いを指摘する機能も備わっていて、とても使い勝手がよいO/Rマッパーです</p><section><h3 id="31-スターター">3.1 スターター<a class="anchor" href="#31-スターター"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>2way-SQLとは
+<ul>
+<li>SQLのコメントに条件分岐を記述することで、プログラムのSQLテンプレートとしての利用と、囲うせずにそのままツールでの利用という２通りの使い方が可能になっているSQL文</li>
+</ul>
+</li>
+</ul></section><section><h3 id="32-domaの使い方">3.2 Domaの使い方<a class="anchor" href="#32-domaの使い方"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3></section><section><h3 id="33-エンティティ共通処理">3.3 エンティティ共通処理<a class="anchor" href="#33-エンティティ共通処理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>すべてのエンティティにシステム固有のシステム制御項目（作成者、作成日時、更新者、更新日時、削除者、削除日時）を用いて、エンティティを取り扱うときに、すべてのテーブルに共通のルールを適用する場合の共通処理について説明</p><section><h4 id="エンティティ基底クラス">エンティティ基底クラス<a class="anchor" href="#エンティティ基底クラス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>エンティティ基底クラスを用意し、共通的に使うフィールドを定義することができる</p><p><code>@Entity</code>アノテーションにリスナーを指定すると、更新・登録・削除のタイミングで共通的な処理を実行することができる</p><ul>
+<li>TODO: 共通項目実装</li>
+</ul></section></section><section><h3 id="34-ページング処理">3.4 ページング処理<a class="anchor" href="#34-ページング処理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>DOMAはページング処理を行うための仕組みとして検索オプションを提供している</p>
+</li>
+<li>
+<p>TODO: 要実装</p>
+</li>
+</ul></section><section><h3 id="35-排他制御">3.5 排他制御<a class="anchor" href="#35-排他制御"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="楽観的排他制御">楽観的排他制御<a class="anchor" href="#楽観的排他制御"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>データ不整合を保険的に防ぐ方法
+複数人が同じデータを編集してしまった場合に、先に保存したほうの編集内容が後から保存した内容で上書きされてしまうといったことを防ぐことができる</p><p>Domaを使って楽観的排他制御を行うには以下の条件を満たす必要がある</p><ul>
+<li>
+<p>エンティティのフィールドに<code>@Version</code>アノテーションが付与されている</p>
+</li>
+<li>
+<p>Daoインターフェースに付与したアノテーションのignoreVersionをtrueにしていない</p>
+</li>
+<li>
+<p>テーブルに数値型の改定番号カラムが定義されている</p>
+</li>
+<li>
+<p>流れ</p>
+<ol>
+<li>Formオブジェクト二改定番号のフィールドを定義する</li>
+<li>コントローラに<code>@SessionAttribute</code>アノテーションを付与する。</li>
+<li>編集画面の初期表示処理で改定番号を含めてデータを取得して、Formオブジェクトに詰め替える</li>
+<li>更新処理で、更新対象データを取得して、そのデータをFormオブジェクトの値で上書きする</li>
+<li>Daoの更新処理を呼び出す（ここで排他制御がかかる</li>
+<li>不要になったFormオブジェクトをセッションからクリアする</li>
+</ol>
+</li>
+<li>
+<p>TODO: 楽観的排他制御について深堀り、実装→悲観的排他制御だけでアプリとしては回せそう</p>
+</li>
+<li>
+<p>Column セッション情報の格納先について</p>
+<ul>
+<li>楽観的排他制御の説明の中でSessionAttributeを使ってFormオブジェクトをセッション情報に保存する方法を紹介しました。サンプルプロジェクトでは、SpringSessionモジュールを依存関係に追加しているので、SpringBootによるオートコンフィグレーションが行われます。SpringSessionには、以下の格納先に対するオートコンフィグレーションが用意されています。
+<ul>
+<li>JDBC</li>
+<li>Redis</li>
+<li>Hazelcast</li>
+<li>MongoDB</li>
+</ul>
+</li>
+<li>セッション情報の格納先を変更したい場合は、設定ファイルにリスト3.11を記述することで変更することができます。
+<ul>
+<li>redisにする場合：<code>spring.session.store-type=redis</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>TODO: セッションの格納先はREDISにする</p>
+</li>
+</ul></section><section><h4 id="悲観的排他制御">悲観的排他制御<a class="anchor" href="#悲観的排他制御"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>データベースの行ロック機能を使った排他制御で、在庫数のような頻繁に同時更新がかかるようなデータの整合性を担保する方法として利用される</p><p>Domaでは、悲観的排他制御を行うための仕組みも用意されていて、ページング処理の説明と同じ用に検索オプションを使う</p><p>悲観的排他制御を行うときに注意すべきなのは、検索結果が０件になるような条件で検索すると、行ロックではなくテーブルロックがかかる点です！！！
+処理時間が長い処理でテーブルロックがかかってしまうと、処理の滞留が発生してしまい、システム全体が不安定な状態二なることもあるので注意する</p></section></section><section><h3 id="36-論理削除">3.6 論理削除<a class="anchor" href="#36-論理削除"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>DBのレコードを削除するのではなく、削除フラグによってレコードの削除を表すという方法</p><section><h4 id="更新機能による実現">更新機能による実現<a class="anchor" href="#更新機能による実現"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li><code>@Update(excludeNull = true) // Nullの項目は更新対象にしない</code></li>
+</ul></section><section><h4 id="エンティティリスナーによる共通処理">エンティティリスナーによる共通処理<a class="anchor" href="#エンティティリスナーによる共通処理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>リスナーの中の<code>preUpdate</code>メソッドの中で、メソッド名が論理削除のメソッド名と一致するかを確認する</li>
+</ul></section><section><h4 id="論理削除レコードの除外">論理削除レコードの除外<a class="anchor" href="#論理削除レコードの除外"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>論理削除を行うことをアプリケーション内で統一している場合は、データ取得のSQLに、論理削除フラグによる削除データの除外が行われる用にする必要がある</p>
+</li>
+<li>
+<p>Column 参考文献</p>
+<ul>
+<li>BLOG.IK.AM <a href="https://blog.ik.am/">https://blog.ik.am/</a>
+<ul>
+<li>初めてのSpringBoot著者</li>
+</ul>
+</li>
+<li>SlideShare Toshiaki Maki <a href="https://www.slideshare.net/makingx">https://www.slideshare.net/makingx</a></li>
+</ul>
+</li>
+</ul></section></section></section><section><h2 id="第4章-セキュリティ">第4章 セキュリティ<a class="anchor" href="#第4章-セキュリティ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>本chapterでは、SpringSecurityを使った認証・認可とそれらにまつわる課題を解決する実装方法を説明</p><section><h3 id="41-スターター">4.1 スターター<a class="anchor" href="#41-スターター"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:107ch"><code><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">compile 'org.springframework.boot:spring-boot-starter-security'</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h3 id="42-認証">4.2 認証<a class="anchor" href="#42-認証"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="認証情報の取得">認証情報の取得<a class="anchor" href="#認証情報の取得"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>UserDetailsServiceをimplementsして実装する方法</li>
+<li>TODO: 権限周りが実装できていないので見ておく</li>
+</ul></section><section><h4 id="ログイン機能">ログイン機能<a class="anchor" href="#ログイン機能"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>ログイン機能のコントローラを実装します。
+デフォルトでも組み込みのログイン画面を表示することが可能ですが、ほとんどの場合において画面を変更する必要があるので、Thymeleafテンプレートを使ってログイン画面を表示する用に実装し、それ以降の処理はSpringSecurityと連携するようにします。</p><ul>
+<li>TODO: タイムアウト処理やログイン成功処理など実装の必要があればサンプルを基に実装する
+<ul>
+<li>/authorize　にfowardできなくて、formオブジェクト経由のエラーチェックが実装できなかった</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="43-rememberme">4.3 RememberMe<a class="anchor" href="#43-rememberme"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>一般的なWebサービスでは、ログイン画面に「ログインしたままにする」というチェックボックスがあることがしばしばある
+一定期間内であればセッションがタイムアウトしても自動ログイン処理が行われる機能が提供されるので、何度もログイン画面でパスワードを入力する不便さを解消することができる</p><section><h4 id="ログイン記録の永続化">ログイン記録の永続化<a class="anchor" href="#ログイン記録の永続化"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>TODO: 自動ログイン機能は必要になれば実装しておきたい
+<ul>
+<li>合わせて不要なレコードを削除する機能も実装する必要がある</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="44-認可">4.4 認可<a class="anchor" href="#44-認可"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>管理機能を備えたWebアプリケーションにおいては、ログインユーザーごとに権限を付与して、特定のユーザーのみが操作することができるように制御することがよくある
+このようなアクセス制御を行う場合は、以下の要件が満たされていると汎用的に使えるためとても便利</p><ul>
+<li>
+<p>要件</p>
+<ul>
+<li>システムを利用するユーザーは、複数のロール（役割）を持つことができる</li>
+<li>特定リソースの操作を識別する単位として権限を定義することができる</li>
+<li>ロールは、複数の権限を持つことができる</li>
+<li>システムの移動中にロールの持つパーミッションや対象のリソースを変更することができる</li>
+</ul>
+</li>
+<li>
+<p>SpringSecurityを使った認可の実装方法としては、アノテーションを使う方法と、JavaConfigでURLベースの条件式をていk技する方法がある</p>
+</li>
+<li>
+<p>これらの方法では、システムの稼働中に新たに役割に権限を追加したり、することが困難</p>
+</li>
+<li>
+<p>認証処理の中でデータベースからロール権限を取得して、コントローラのメソッドレベルでの認可制御を行うようにしている</p>
+</li>
+</ul><section><h4 id="権限管理データをロード">権限管理データをロード<a class="anchor" href="#権限管理データをロード"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="権限とメソッドの紐付け">権限とメソッドの紐付け<a class="anchor" href="#権限とメソッドの紐付け"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="認可制御のインターセプター">認可制御のインターセプター<a class="anchor" href="#認可制御のインターセプター"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>TODO: 権限管理はあとで見直す</li>
+</ul></section></section><section><h3 id="45-csrf対策">4.5 CSRF対策<a class="anchor" href="#45-csrf対策"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="java" class="wrap" style="--ecMaxLine:56ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#99A0A6;--1:#99A0A6">// 以下を追加するとformにhiddenでcsrfトークンが埋め込まれる</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">http.</span><span style="--0:#B392F0;--1:#B392F0">csrf</span><span style="--0:#E1E4E8;--1:#E1E4E8">()</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">  </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">.</span><span style="--0:#B392F0;--1:#B392F0">csrfTokenRepository</span><span style="--0:#E1E4E8;--1:#E1E4E8">(</span><span style="--0:#F97583;--1:#F97583">new</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">CookieCsrfTokenRepository</span><span style="--0:#E1E4E8;--1:#E1E4E8">());</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h3 id="46-二重送信防止">4.6 二重送信防止<a class="anchor" href="#46-二重送信防止"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>二重送信防止するためのチェック方法</p>
+<ul>
+<li>JavaScriptでボタンを連打できないようにする</li>
+<li>PostRedirectGetパターンを適用</li>
+<li>トークンを使った送信済みチェックをする</li>
+</ul>
+</li>
+<li>
+<p>TODO: ここで紹介されているやり方だと、二重送信防止チェックをするのは、UPDATEが伴う処理のみに限定できる</p>
+<ul>
+<li>ページ遷移や検索処理で二重送信が行われた場合は除外できるという仕組みになっている</li>
+<li>ここの実装方法の方がより現実的なので後で真似る</li>
+</ul>
+</li>
+</ul></section></section><section><h2 id="第5章-画面開発">第5章 画面開発<a class="anchor" href="#第5章-画面開発"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="51-thymeleaf">5.1 Thymeleaf<a class="anchor" href="#51-thymeleaf"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>SpringMVCといえばJSP一択だったが、HTML5に準拠した形で管理できる方が望ましい</p><ul>
+<li>メリット
+<ul>
+<li>Spring推奨</li>
+<li>HTML5準拠</li>
+<li>デザイナとの分業がしやすい</li>
+<li>ブラウザで直接参照できる</li>
+</ul>
+</li>
+</ul></section><section><h3 id="52-formバインディング">5.2 Formバインディング<a class="anchor" href="#52-formバインディング"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>FormBeanの定義方法とバリデーション方法</li>
+</ul></section><section><h3 id="53-事前評価">5.3 事前評価<a class="anchor" href="#53-事前評価"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>アプリケーションで扱うデータは特定の変換処理をかけたいことがよくある
+Thymeleafでは事前評価をサポートしている</p><section><h4 id="事前評価の実装例">事前評価の実装例<a class="anchor" href="#事前評価の実装例"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>表示する言語を翻訳する例が紹介されている</li>
+<li>FormBeanの値と、実際に表示したい値が異なる場合に有用だと思う</li>
+<li><code>&#x3C;p th:text="${@myapp.translator.Translator@translateToEnglish(textVar)}">some text here ...&#x3C;/p></code></li>
+</ul></section></section><section><h3 id="54-テンプレート共有">5.4 テンプレート共有<a class="anchor" href="#54-テンプレート共有"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="テンプレートの部品化">テンプレートの部品化<a class="anchor" href="#テンプレートの部品化"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>includeとreplaceの話</li>
+</ul></section><section><h4 id="テンプレートの共通化">テンプレートの共通化<a class="anchor" href="#テンプレートの共通化"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>レイアウトという機能でテンプレートの共通化をサポートします
+HTMLのレイアウトやJavaScriptおよびCSSのインクルードを一元管理できる
+本機能を用いてテンプレートの共通化を採用することでソースコードの保守性や品質も向上するため、積極的に導入すべき機能</p><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:69ch"><code><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.3.0') {</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">exclude group: "org.codehaus.groovy", module: "groovy"</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">}</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="java" class="wrap" style="--ecMaxLine:49ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">@</span><span style="--0:#F97583;--1:#F97583">Configuration</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#F97583;--1:#F97583">public</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">class</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">WebConfig</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">extends</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">WebMvcConfigurer</span><span style="--0:#E1E4E8;--1:#E1E4E8"> {</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">  </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">@</span><span style="--0:#F97583;--1:#F97583">Bean</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">  </span><span style="--0:#F97583;--1:#F97583">public</span><span style="--0:#E1E4E8;--1:#E1E4E8"> LayoutDialect </span><span style="--0:#B392F0;--1:#B392F0">layoutDialect</span><span style="--0:#E1E4E8;--1:#E1E4E8">() {</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">    </span><span style="--0:#F97583;--1:#F97583">return</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">new</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">LayoutDialect</span><span style="--0:#E1E4E8;--1:#E1E4E8">();</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">  </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">}</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><ul>
+<li>
+<p>レイアウト機能を利用するために、<code>xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"</code>を指定する</p>
+</li>
+<li>
+<p><code>layout:fragment="任意の文字列"</code>で各ページで差し替えるエリアを指定する</p>
+</li>
+<li>
+<p>MEMO: Spring徹底入門でも紹介されていたが、画面の全体像がわかりづらくなりやすいためincludeを用いることにする</p>
+</li>
+</ul></section></section><section><h3 id="55-thymeleafのその他の機能">5.5 Thymeleafのその他の機能<a class="anchor" href="#55-thymeleafのその他の機能"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="エスケープなしのテキスト">エスケープなしのテキスト<a class="anchor" href="#エスケープなしのテキスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>通常、クロスサイトスクリプティング対策のためSpringはタグ文字列をエスケープして表示している</p>
+</li>
+<li>
+<p>場合によってはエスケープしないで、文字列を表示したいケースがある</p>
+</li>
+<li>
+<p><code>&#x3C;p th:utext="#{home.welcom}">Welcom to our grocery store!&#x3C;/p></code></p>
+</li>
+<li>
+<p>このutextを利用する場合は、XSSの脆弱性を含まない用に注意が必要</p>
+</li>
+</ul></section><section><h4 id="日付操作拡張">日付操作拡張<a class="anchor" href="#日付操作拡張"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>Thymeleafでは、Date/TimeAPIをデフォルトでサポートしていないため拡張ライブラリーを使用する必要がある</p><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:101ch"><code><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-java8time</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '3.0.4.RELEASE'</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="html" class="wrap" style="--ecMaxLine:80ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">&#x3C;</span><span style="--0:#85E89D;--1:#85E89D">input</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">class</span><span style="--0:#E1E4E8;--1:#E1E4E8">=</span><span style="--0:#9ECBFF;--1:#9ECBFF">"form-control"</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">type</span><span style="--0:#E1E4E8;--1:#E1E4E8">=</span><span style="--0:#9ECBFF;--1:#9ECBFF">"text"</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">name</span><span style="--0:#E1E4E8;--1:#E1E4E8">=</span><span style="--0:#9ECBFF;--1:#9ECBFF">"holidayDate"</span></div></div><div class="ec-line" style="--ecIndent:1ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"> </span><span style="--0:#B392F0;--1:#B392F0">th:value</span><span style="--0:#E1E4E8;--1:#E1E4E8">=</span><span style="--0:#9ECBFF;--1:#9ECBFF">"${(value != null) ? #temporals.format(value, 'yyyy/MM/dd') : '' }"</span><span style="--0:#E1E4E8;--1:#E1E4E8"> /></span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><p>※その他にもThymeleafは各種の拡張機能をサポートしている</p></section></section><section><h3 id="56-静的コンテンツ管理">5.6 静的コンテンツ管理<a class="anchor" href="#56-静的コンテンツ管理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>BtoCのアプリケーションを構築する際、UI/UXの向上が欠かせないため、クライアントサイドライブラリを有効活用する必要がある
+JavaScriptやCSSを適切に管理していない状況では、次の問題が発生することがありました。</p><ul>
+<li>
+<p>JavaScriptやCSSが適切にバージョニングされていないため、ブラウザキャッシュにより、リリース時に古いバージョンが提供されてしまう。</p>
+</li>
+<li>
+<p>JavaScriptやCSSライブラリが構成管理されていないため、安易な外部ライブラリの利用により障害が発生してしまう</p>
+</li>
+<li>
+<p>本節では、Webアプリケーションの静的コンテンツについて</p>
+<ul>
+<li>配置場所</li>
+<li>キャッシュ制御</li>
+<li>アクセス制御</li>
+<li>クライアントライブラリの構成管理方法
+<ul>
+<li>を解説！！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><section><h4 id="静的コンテンツの配置場所">静的コンテンツの配置場所<a class="anchor" href="#静的コンテンツの配置場所"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>SpringBootでは、SpringMVCのオートコンフィグレーションに以下の設定がされており、デフォルトでは次の４点のパスに静的コンテンツを配置できる</p><ul>
+<li>/resources/</li>
+<li>/static/</li>
+<li>/public/</li>
+<li>/META-INF/resources/</li>
+</ul></section><section><h4 id="キャシュ制御">キャシュ制御<a class="anchor" href="#キャシュ制御"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>キャッシュする時間は、application.(properties|yml) や ResourceHandlerRegistryのオーバーラードで調整</p><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="yml" class="wrap" style="--ecMaxLine:75ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#85E89D;--1:#85E89D">spring</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#85E89D;--1:#85E89D">resources</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#99A0A6;--1:#99A0A6">#    cache-period: 86400 # 1日間キャッシュさせる</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">    </span><span style="--0:#85E89D;--1:#85E89D">chain</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">      </span><span style="--0:#85E89D;--1:#85E89D">strategy</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">        </span><span style="--0:#85E89D;--1:#85E89D">content</span><span style="--0:#E1E4E8;--1:#E1E4E8">:</span></div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent">          </span><span style="--0:#85E89D;--1:#85E89D">enabled</span><span style="--0:#E1E4E8;--1:#E1E4E8">: </span><span style="--0:#79B8FF;--1:#79B8FF">true</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#99A0A6;--1:#99A0A6"># 静的コンテンツのキャッシュ無効設定 MD5ハッシュが計算される バージョン管理戦略と呼ばれるらしい</span></div></div><div class="ec-line" style="--ecIndent:10ch"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent">          </span><span style="--0:#85E89D;--1:#85E89D">paths</span><span style="--0:#E1E4E8;--1:#E1E4E8">: </span><span style="--0:#9ECBFF;--1:#9ECBFF">/**</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><ul>
+<li>TODO: バージョン管理戦略を実施した場合のキャッシュの挙動を確認しておく</li>
+</ul></section><section><h4 id="アクセス制御">アクセス制御<a class="anchor" href="#アクセス制御"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>Faviconなどの画像ファイルやクライアントライブラリは未認証、認証にかかわらずアクセスできる必要がある
+SpringBootでは、SpringSecurityのオートコンフィグレーションにリストの設定がされており、デフォルトで次の５点のパスはpublicアクセス可能</p><p>しかし、SEOに必要なrobots.txtやsitemap.xmlは含まれないため、これらのファイルをPublicアクセス可能とするには、JavaConfigで設定を上書きする必要がある</p><ul>
+<li>
+<p>デフォルトで許可されている５点</p>
+<ul>
+<li>/css/</li>
+<li>/js/</li>
+<li>/images/</li>
+<li>/webjars/</li>
+<li>favicon.ico</li>
+</ul>
+</li>
+<li>
+<p>TODO: SEO対策に必要な知識を習得しておく必要がある</p>
+</li>
+</ul><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="java" class="wrap" style="--ecMaxLine:75ch"><code><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span class="indent">  </span><span style="--0:#F97583;--1:#F97583">private</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">static</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">final</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">String</span><span style="--0:#E1E4E8;--1:#E1E4E8">[] STATIC_RESOURCES </span><span style="--0:#F97583;--1:#F97583">=</span><span style="--0:#E1E4E8;--1:#E1E4E8"> {</span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">      </span><span style="--0:#9ECBFF;--1:#9ECBFF">"/favicon.ico"</span><span style="--0:#E1E4E8;--1:#E1E4E8">, </span><span style="--0:#9ECBFF;--1:#9ECBFF">"/css/**"</span><span style="--0:#E1E4E8;--1:#E1E4E8">, </span><span style="--0:#9ECBFF;--1:#9ECBFF">"/js/**"</span><span style="--0:#E1E4E8;--1:#E1E4E8">, </span><span style="--0:#9ECBFF;--1:#9ECBFF">"/img/**"</span><span style="--0:#E1E4E8;--1:#E1E4E8">, </span><span style="--0:#9ECBFF;--1:#9ECBFF">"/lib/**"</span><span style="--0:#E1E4E8;--1:#E1E4E8">, </span><span style="--0:#9ECBFF;--1:#9ECBFF">"/font/**"</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">  </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">};</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">  </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">@</span><span style="--0:#F97583;--1:#F97583">Override</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">  </span><span style="--0:#F97583;--1:#F97583">public</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">void</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">configure</span><span style="--0:#E1E4E8;--1:#E1E4E8">(WebSecurity web) {</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">    </span><span style="--0:#99A0A6;--1:#99A0A6">// セキュリティ対策が不要なリソースがある場合、SpringSecurityの処理を適用しないようにする</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent">    </span><span style="--0:#99A0A6;--1:#99A0A6">//    web.ignoring().antMatchers("/resources/static/**");</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">    </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">web.</span><span style="--0:#B392F0;--1:#B392F0">ignoring</span><span style="--0:#E1E4E8;--1:#E1E4E8">().</span><span style="--0:#B392F0;--1:#B392F0">antMatchers</span><span style="--0:#E1E4E8;--1:#E1E4E8">(STATIC_RESOURCES);</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">  </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">}</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h4 id="クライアントライブラリの構成管理">クライアントライブラリの構成管理<a class="anchor" href="#クライアントライブラリの構成管理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>サーバサイドエンジニア中心のチーム構成だとフロントライブラリの管理が抜けてしまうことがよくある</p><p>本項では、WebJarsを用いてクライントライブラリを管理する方法を紹介</p><ul>
+<li>Dependenciesの追加方法を説明</li>
+</ul><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:77ch"><code><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">// https://mvnrepository.com/artifact/org.webjars/webjars-locator-core</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">compile group: 'org.webjars', name: 'webjars-locator-core', version: '0.45'</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section></section></section><section><h2 id="第6章-api開発">第6章 API開発<a class="anchor" href="#第6章-api開発"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>金融機関でのAPI公開の動きが急激に加速しているように、APIというキーワードはビジネス領域でもよく目にする用になってきている
+システム開発でも迅速に機能をリリースしていくためにはAPI連携は書かせず、API連携の重要度は日に日に高まってきている</p><section><h3 id="61-spring-でのapi開発">6.1 Spring でのAPI開発<a class="anchor" href="#61-spring-でのapi開発"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>MSA(Micro Service Architecture)開発やSPA開発ではAPI連携が必須
+一方小売業界ではオムニチャネルといった言葉が生まれている</p><p>チャネルの違いを意識しないようにするには、バックエンドのサービスをAPI化し、PC/スマホ/他サービスなどの複数のチャネルから透過的に利用できるようにする必要がある</p><section><h4 id="api仕様">API仕様<a class="anchor" href="#api仕様"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="リソース実装">リソース実装<a class="anchor" href="#リソース実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="コントローラ実装">コントローラ実装<a class="anchor" href="#コントローラ実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="エラーハンドリング実装">エラーハンドリング実装<a class="anchor" href="#エラーハンドリング実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p><code>@RestControllerAdvice</code>アノテーションを指定して作成</p></section></section><section><h3 id="62-springでのapi連携">6.2 SpringでのAPI連携<a class="anchor" href="#62-springでのapi連携"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>現在のシステム開発でアジリティを追求するためにはAPI連携は欠かせません</p><section><h4 id="resttemplate">RestTemplate<a class="anchor" href="#resttemplate"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>SpringではRestTemplateというRESTクライアントを提供している
+RestTemplateを用いると、Javaオブジェクトとレスポンスボディの変換も容易に実現できる</p></section><section><h4 id="ユーザー一覧取得apiへの連携">ユーザー一覧取得APIへの連携<a class="anchor" href="#ユーザー一覧取得apiへの連携"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="ユーザー作成apiへの連携">ユーザー作成APIへの連携<a class="anchor" href="#ユーザー作成apiへの連携"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="63-api開発効率の最大化">6.3 API開発効率の最大化<a class="anchor" href="#63-api開発効率の最大化"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>API開発でクライアント側でモックを用意して実装をすすめる必要がある</p><p>API定義をExcelなどのドキュメントで管理し、Excelなどのドキュメントに基づきクライアント側でモックの準備をすすめると、仕様の認識齟齬が発生することが多くなってしまいます。</p><p>またAPIの仕様変更時の連携のオーバーヘッドも大きくなってしまいます。</p><p>本節では、現在の開発での必須要素であるAPI連携をより円滑にすすめるためにAPI管理にSwaggerを用い、API開発の効率を上げる方法を説明</p><section><h4 id="swaggerとは">Swaggerとは<a class="anchor" href="#swaggerとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>OpenAPI仕様に基づくAPI開発ツールのフレームワークであり、APIのライフサイクル全体に渡って、設計から文書の管理、テストおよびデプロイまでを可能にします。</p><ul>
+<li>
+<p>大きな利点は以下の４つ</p>
+<ul>
+<li>OpenAPI準拠</li>
+<li>YAMLを用いた宣言的な記法</li>
+<li>コード自動生成</li>
+<li>エコシステムの充実（SwaggerHub）</li>
+</ul>
+</li>
+<li>
+<p>OpenAPI準拠</p>
+<ul>
+<li>マイクロソフト、Googleなどの大手の企業を含むOpenAPIInitiativeがLinuxFoundationの協力のもとで結成され、APIの記述のために採用したのがSwagger</li>
+<li>API管理のデファクトスタンダードと呼ばれるほど普及している</li>
+</ul>
+</li>
+<li>
+<p>YAMLを用いた宣言的な記法</p>
+<ul>
+<li>SwaggerはAPI定義をYAML(JSON)により宣言的に記載できます。</li>
+<li>また、定義したYAMLからSwaggerUIというツールを用いると、HTMLベースの定義書やモックを作成できます。</li>
+<li>SwaggerUIを利用し、APIを公開すると、クライアント側は動く仕様としてAPIを参照できるため、API連詠によるコミュニケーションコストを低下させることができます。</li>
+</ul>
+</li>
+<li>
+<p>コード自動生成</p>
+<ul>
+<li>Swaggerには、Swagger CodegenというSwaggerUIで公開されたAPI仕様を基にコードを自動生成するツールがある</li>
+</ul>
+</li>
+</ul><p>TODO: Dockerを用いてSwaggerCodegenを用いたスタブサーバーの起動例　確認しておく</p><ul>
+<li>エコシステムの充実(SwaggerHub)
+<ul>
+<li>SwaggerCodegenを用いてスタブサーバーを起動し、開発チームで共有する方針も悪くないですが、ホスト環境の管理やAPI仕様の変更の都度、コードの再生成および再起動が必要になります。</li>
+<li>Swaggerはエコシステムも充実しており、SwaggerHubというAPI管理のプラットフォームがあります。</li>
+<li>SwaggerHubはSwaggerを使ったモックサーバーやテスト環境などAPI管理に関するサービスをまとめて提供しているため、APIの管理工数を下げることが可能です。</li>
+<li>SwaggerHubはAPIドキュメントの編集/表示、モックサーバーの立ち上げ、SwaggerCodegenの機能などをブラウザベースで提供しています。</li>
+</ul>
+</li>
+</ul><p>TODO: SwaggerHubは一回使ってみる必要あり！！！
+→お金かかるから断念… チーム開発に有用かも？</p></section><section><h4 id="springでの利用springfox">Springでの利用(SpringFox)<a class="anchor" href="#springでの利用springfox"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>SwaggerでのAPI管理がデファクトスタンダードになっていること、Swaggerを利用することのメリットを説明しました。
+本項では、SwaggerをSpringで利用する方法を説明します。</p><p>Springでは、SpringFoxを用いるとAPIドキュメントの自動生成が可能
+SpringFoxはSwaggerUIの提供もサポートしているため、APIを用いたチーム開発を円滑にすすめることができる
+次の手順に従い、SpringFoxの利用方法を説明</p><ul>
+<li>依存関係の設定</li>
+<li>共通設定カスタマイズ</li>
+<li>個別エンドポイントのカスタマイズ</li>
+<li>静的ドキュメント生成</li>
+</ul><ol>
+<li>依存関係の設定</li>
+</ol><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:77ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><ol start="2">
+<li>共通設定カスタマイズ(JavaConfig)</li>
+</ol><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="java" class="wrap" style="--ecMaxLine:55ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">@</span><span style="--0:#F97583;--1:#F97583">Configuration</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">@</span><span style="--0:#F97583;--1:#F97583">Import</span><span style="--0:#E1E4E8;--1:#E1E4E8">({ ThymeleafConfig.class, </span><span style="--0:#99A0A6;--1:#99A0A6">// Thymeleafを使用することを明示</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">    </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">GoogleAutoConfiguration.class })</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">@</span><span style="--0:#F97583;--1:#F97583">EnableSwagger2</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#F97583;--1:#F97583">public</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">class</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">AppConfig</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">implements</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">WebMvcConfigurer</span><span style="--0:#E1E4E8;--1:#E1E4E8"> {</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><p>APIControllerのみグルーピングする方法を紹介</p><ol start="3">
+<li>個別エンドポイントのカスタマイズ</li>
+</ol><p>アノテーションでAPIごとの説明を追加できる</p><ol start="4">
+<li>静的ドキュメント生成</li>
+</ol><p>SwaggerUIを動的に生成する方法は、API連携開発の効率を上げてくれるため、開発フェーズでは導入しておくと効果的</p><p>しかし本番サービス稼働後に上述の手順を有効化しておくと、SwaggerUIの外部公開制御が必要になります</p><p>本項では、別のアプローチとして、SwaggerのAPI定義から静的ドキュメントを生成する方法を紹介</p><ul>
+<li>
+<p>依存関係の設定</p>
+</li>
+<li>
+<p>テストクラスの追加</p>
+</li>
+<li>
+<p>HTML変換</p>
+</li>
+<li>
+<p>依存関係の設定</p>
+<ul>
+<li>SwaggerからAsciiDocへの変換をサポートしているSwagger2Markupというライブラリがある</li>
+<li>Swagger2MarkupをSpring向けにカスタマイズした、springfox-staticdocsを依存関係に追加する</li>
+</ul>
+</li>
+<li>
+<p>テストクラスの追加</p>
+<ul>
+<li>テストコードを作成し、CIサイクルに含めておくと、静的なドキュメントのAsciiDocが自動生成される</li>
+</ul>
+</li>
+<li>
+<p>HTML変換</p>
+<ul>
+<li>HTMLへの変換はasciidoctorを利用する</li>
+</ul>
+</li>
+</ul><p>TODO: HTMLへ変換するCI構築する</p></section><section><h4 id="spring-rest-docs">Spring REST Docs<a class="anchor" href="#spring-rest-docs"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>Springでのドキュメント生成の自動化には、Spring REST Docsを採用する方法もある</p><ul>
+<li>
+<p>利点</p>
+<ul>
+<li>テストをパスしないドキュメントは作成されないため、「動く仕様書」として信頼できる。</li>
+<li>asciidoctorを用いた簡潔な記法</li>
+</ul>
+</li>
+<li>
+<p>手順</p>
+<ul>
+<li>依存関係の設定</li>
+<li>雛形生成</li>
+<li>テストコード生成</li>
+</ul>
+</li>
+</ul></section></section></section><section><h2 id="第7章-チーム開発">第7章 チーム開発<a class="anchor" href="#第7章-チーム開発"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>システム開発では、１人ですべての作業を簡潔させることはできません。</p><p>最近のシステム開発で主流となってきている機能ごとに分割して開発する手法のMSA(MicroServieceArchitecture)開発でも、５～８人でのチーム開発（Two Pizza Team）が良いとされています。</p><section><h3 id="71-インフラの構成管理">7.1 インフラの構成管理<a class="anchor" href="#71-インフラの構成管理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>ローカルPC、検証環境、本番環境（オンプレミスもしくはクラウド）など、プログラムは様々な環境で動く可能性があります。</p><p>本節では、特定の環境にロックインされないようにする方法を紹介
+旧来のシステム開発では、Excelなどで作成された手順書を用いて、半日～２日かけて開発環境を構築することが当たり前でした
+しかし最近では、Infrastracture as Code(IaC)やDockerをはじめとするコンテナ技術が広く普及してきたことにより、上述のような方法を採用することはとても効率的とは言えません</p><section><h4 id="docker">Docker<a class="anchor" href="#docker"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>「私のローカル環境では再現しません」をなくそう
+秘伝のたれ的な作業が影響して、このような環境差異によるトラブルが発生しがち</p><p>コンテナ技術のDockerを用いて、環境構築手順をコード化してGithubなどにコミットし、環境の使い捨てができる状態にしておくことで、上述のようなトラブルを抑制できる</p><ul>
+<li>
+<p>メリット</p>
+<ul>
+<li>インフラ構築手順のコード化（Dockerfile）</li>
+<li>環境依存性による問題の排除</li>
+<li>廃棄容易姓</li>
+</ul>
+</li>
+<li>
+<p>Column クラウドベースの統合開発環境（AWS Cloud9）</p>
+<ul>
+<li>ここ数年、ブラウザのみでコードを記述、実行、デバッグできる統合開発環境の利用が活発化している</li>
+<li>ブラウザベースの統合開発環境の有名なサービスとして、AWS Cloud9がある</li>
+<li>AWS Cloud9を利用すると、開発には非力なマシン（ipadなど）でも、いつでもどこでも開発が可能</li>
+</ul>
+</li>
+<li>
+<p>インフラ構築手順のコード化（Dockerfile）</p>
+<ul>
+<li>開発に関わる全ての文書は構成管理の対象とすることが望ましい</li>
+<li>チーム開発では、アプリケーションプログラムは必然的に構成管理の対象となりますが、設計文書やインフラ構築手順は構成管理の対象外になってしまうことがある</li>
+<li>インフラ構築手順のコード（Dockerfile）をSCMにコミットすることで、利用しているディストリビューション、設定ファイルの状態がコードで明確化されるため、インフラに関わるトラブルを抑制できる</li>
+</ul>
+</li>
+<li>
+<p>環境依存性による問題の排除</p>
+</li>
+<li>
+<p>廃棄容易姓</p>
+</li>
+<li>
+<p>Column Tweleve-Factor App</p>
+<ul>
+<li>コンテナ開発が活発になってきているのと同時に、クラウドアプリケーション開発のベストプラクティスの１つとして、The Twelve-Factor Appが取り上げ垂れることが多くなってきています。</li>
+<li>The Twelve-Factor Appは、Herokuのプラットフォーム開発での治験をプラクティスに落とし込んだもので、コードベース、依存関係、プロセス、並行性、廃棄容易姓、開発/本番一致などの１２の要素から構成されます。</li>
+<li>アプリケーションをThe Twelve-Factor Appに適用させることができれば、コンテナベースの開発に適用していることになるため、オンプレミス、クラウドなどの実行環境に関わらずアプリケーションをデプロイできます。</li>
+</ul>
+</li>
+</ul><p>TODO: The Twelve-Factor Appについて深堀り</p><ul>
+<li>Windows10proではHyper-Vを有効化することでDockerを利用できます。</li>
+<li>ここでは、Windows10 Pro以外でDockerを利用する方法を紹介します</li>
+<li>VagrantとVirtualBoxでDocker環境を構築</li>
+</ul><p>TODO: VagrantとDockerのコマンドについて説明しているので再度理解した上で読んで見る
+SpringBootで利用するための設定についても記載があるので組み込んでおく</p></section></section><section><h3 id="72-データベースの構成管理">7.2 データベースの構成管理<a class="anchor" href="#72-データベースの構成管理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>データベースの構成管理をするための、OSSのDBマイグレーションツールのFlywayを紹介</li>
+</ul><section><h4 id="flywayの利用">Flywayの利用<a class="anchor" href="#flywayの利用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>SpringBootで利用するための設定
+<ul>
+<li>依存下院系の設定</li>
+<li>プロパティ設定</li>
+<li>マイグレーションファイルの準備</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="73-メンテナブルなテストコード">7.3 メンテナブルなテストコード<a class="anchor" href="#73-メンテナブルなテストコード"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>テストコードは重要
+本節では、GroovyベースのテスティングフレームワークのSpockを用いてテストコードの可読性を上げる方法を紹介</p><section><h4 id="spock">Spock<a class="anchor" href="#spock"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>言語仕様に、RSpecやScalaなどのよい点を取り入れており、大きく次の３点の利点がある</p><ul>
+<li>可読性</li>
+<li>データ駆動テスト</li>
+<li>Power Assertions</li>
+</ul><p>TODO: SpringでのSpockの利用方法を紹介
+GroovyやScalaなどをキャッチアップする必要がありそう</p></section></section><section><h3 id="74-ドキュメント生成ツールの活用">7.4 ドキュメント生成ツールの活用<a class="anchor" href="#74-ドキュメント生成ツールの活用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>設計書が適切に管理できていない例</p>
+<ul>
+<li>詳細設計書がそもそもない</li>
+<li>Textファイル、Excel、Wikiなどにドキュメントが散乱している</li>
+<li>Excelなどで納品ドキュメントとして管理されているが、ソースコードと乖離している、および設計書がないプログラムがある</li>
+</ul>
+</li>
+<li>
+<p>本節では、チーム開発で共有するドキュメントについて述べる</p>
+</li>
+<li>
+<p>ドキュメント管理ツールのSphinxを紹介</p>
+</li>
+</ul><section><h4 id="sphinx">Sphinx<a class="anchor" href="#sphinx"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>Sphinxはドキュメントを簡単に作ることができるようにするツール</p>
+</li>
+<li>
+<p>セットアップ</p>
+<ul>
+<li>Pythonを利用しているため、Pythonの実行環境が必要</li>
+<li>Dockerを用いた方法を紹介</li>
+</ul>
+</li>
+</ul><p>TODO: 後ほど実施</p><ul>
+<li>Sphinxの特徴
+<ul>
+<li>テキスト(MarkDown)形式</li>
+<li>CIとの相性がよい</li>
+<li>様々な出力形式をサポート</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="75-ソースジェネレータ">7.5 ソースジェネレータ<a class="anchor" href="#75-ソースジェネレータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>SpringMVCに基づいた画面開発では、１つの機能を追加するために、多岐にわたるファイルの作成が必要
+画面開発のたびに発生するファイル作成作業を効率化することで開発生産性を向上させることができる</p><p>通常のプロジェクト開発では多くの画面を開発する必要があり、大規模なプロジェクトだと数百画面もの開発が必要になってくる
+プロジェクト開発で必要になってくる画面開発にかかる以下のコストを削減することで、開発生産性をさらに向上させることができる</p><ul>
+<li>開発メンバー参画の際のパッケージ構成のベストプラクティスの共有</li>
+<li>新規画面開発の際の必要なソースコード一式の作成作業</li>
+</ul><p>この方法論は古くから知られており、有名なプロダクトとしては、YEOMANやAngularJSでも同様のツールセットが用意されている
+→ AngularCliのことか</p><p>ここでは、Thymeleafを用いて、Gradleのカスタムプラグインとして、ソースジェネレータを作成する方法を紹介</p><section><h4 id="ソースジェネレータプラグインの導入">ソースジェネレータプラグインの導入<a class="anchor" href="#ソースジェネレータプラグインの導入"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>次の手順で導入
+<ul>
+<li>GradlePluginの実装</li>
+<li>GradlePluginの利用</li>
+</ul>
+</li>
+</ul><p>TODO: 余裕があればソースコード生成の自動化を組めたら</p><ul>
+<li>メンバー全員に自動生成の仕組みが浸透していない状態で導入すると、ごちゃごちゃするのであまりおすすめできないらしい</li>
+</ul></section></section></section><section><h2 id="第8章-運用">第8章 運用<a class="anchor" href="#第8章-運用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>システム開発は、「開発を完了させること」＝「業務やサービスの提供が滞りなく進むこと」ではない
+システムは、システムトラブルなどの望まない状態を排除・軽減し、利用者に継続的に使われていくことではじめて価値を生んでいきます。
+IPAによると、運用コストはシステム開発の全体の3/4以上のコストを占め、運用の重要性が高まってきている</p><section><h3 id="81-環境ごとの設定管理">8.1 環境ごとの設定管理<a class="anchor" href="#81-環境ごとの設定管理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="spring-profiles">Spring Profiles<a class="anchor" href="#spring-profiles"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>開発/本番環境の柔軟な切り替え</p></section><section><h4 id="環境ごとの設定管理">環境ごとの設定管理<a class="anchor" href="#環境ごとの設定管理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>ファイルを分ける方法を記載→理解しているので飛ばす</p></section></section><section><h3 id="82-アプリケーションサーバー設定">8.2 アプリケーションサーバー設定<a class="anchor" href="#82-アプリケーションサーバー設定"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>本設では、SringBootで提供している組み込み型のWebサーバー（Embedded Web Servers）を配備するサーバーの設定方法を紹介</p><section><h4 id="実行可能jar">実行可能Jar<a class="anchor" href="#実行可能jar"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>以下を加えることでビルド時に依存下院系のあるライブラリを梱包したJarを容易に作成できる</p><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:16ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">bootJar {</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">launchScript()</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">}</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h4 id="アプリケーションサーバーの設定及びリリース">アプリケーションサーバーの設定及びリリース<a class="anchor" href="#アプリケーションサーバーの設定及びリリース"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>systemdを用いたアプリケーションサーバーの設定</li>
+</ul><p>TODO:　jarファイルの生成とDocker組み合わせまでできたらやってみる</p></section></section><section><h3 id="83-アプリケーションの状態確認">8.3 アプリケーションの状態確認<a class="anchor" href="#83-アプリケーションの状態確認"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>システム開発では、利用者に見える機能開発や画面デザインが優先されてしまい、SLAの検討が後回しになることが少なくありません。</p><p>本設では、SpringBootでのアプリケーションの状態の確認方法について紹介</p><section><h4 id="springbootactuator">SpringBootActuator<a class="anchor" href="#springbootactuator"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>SpringBootには、Actuatorという安定運用に寄与する強力な機能があるActuatorを有効にすると、HTTPやJMX経由でアプリケーションの状態を確認でき、自前でヘルスチェックのエンドポイントを実装する必要はなくなる</p><ul>
+<li>SpringBootActuatorを有効化する</li>
+</ul><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="gradle" class="wrap" style="--ecMaxLine:107ch"><code><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">  </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.3.0.RELEASE'</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><p>上記の設定だけで、デフォルトではシャットダウンを除く全てのエンドポイントが有効になります</p></section><section><h4 id="主要なエンドポイント">主要なエンドポイント<a class="anchor" href="#主要なエンドポイント"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>Beans</p>
+<ul>
+<li>アプリケーションに登録されたBeanの一覧を取得します。Curlでのリクエスト例を紹介</li>
+</ul>
+</li>
+<li>
+<p>Environment</p>
+<ul>
+<li>アプリケーションで利用している環境変数の一覧を取得</li>
+</ul>
+</li>
+<li>
+<p>Health</p>
+<ul>
+<li>アプリケーションのヘルスチェック。AutoConfigurationの状態をもとにデータベース接続やDiskFullのチェックを実施します</li>
+</ul>
+</li>
+<li>
+<p>HeapDump</p>
+<ul>
+<li>ヒープダンプファイルをHTTPエンドポイントから取得できる</li>
+</ul>
+</li>
+<li>
+<p>Mappings</p>
+<ul>
+<li>アプリケーションのエンドポイントとリクエストパスのマッピング情報を出力します。SpringFoxなどを導入しなくてもアプリケーションのエンドポイントの詳細な情報が取得できる</li>
+</ul>
+</li>
+<li>
+<p>Metrics</p>
+<ul>
+<li>アプリケーションの現在の状態を出力</li>
+</ul>
+</li>
+<li>
+<p>Thread Dump</p>
+<ul>
+<li>スレッドダンプを取得します</li>
+</ul>
+</li>
+<li>
+<p>Prometheus</p>
+<ul>
+<li>インフラサービス監視ツールのPrometheusへ連携するメトリクスを出力するエンドポイント</li>
+<li>2018/10現在、Prometheusエンドポイントを有効にするためには、ライブラリを追加する必要があるらしい</li>
+</ul>
+</li>
+<li>
+<p>Column Prometheusとは</p>
+<ul>
+<li>サーバーやインフラなどのメトリクスを取得できるOSSの統合監視ソリューション</li>
+<li>Prometheusはインストールや設定が容易で、かつ十分な機能を持ち管理しやすいという特徴を持ちます。</li>
+<li>Go言語で開発されており、バイナリと設定ファイルを用意するだけで利用できる他、Zabbixなどと異なり、データを格納するデータベースを別途用意する必要もありません。</li>
+<li>また、DockerやKubernetesといったコンテナ/クラスター管理ツールとの連携機能もあり、容易に監視対象を設定できるため、マイクロサービス開発を推進している企業での導入が増加</li>
+</ul>
+</li>
+</ul></section><section><h4 id="エルスチェックのカスタマイズ">エルスチェックのカスタマイズ<a class="anchor" href="#エルスチェックのカスタマイズ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>Actuatorのデフォルトのヘルスチェックも強力ですが、ヘルスチェックをカスタマイズすることも可能</p><p>システム独自のチェックをすることができる</p><p>HealthIndicatorインターフェースを実装するBeanを登録することで実現できる</p></section><section><h4 id="springbootactuatorのセキュリティ制御">SpringBootActuatorのセキュリティ制御<a class="anchor" href="#springbootactuatorのセキュリティ制御"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>アプリケーションの機密情報を取得できるため、システム管理者以外からのアクセスは遮断する必要がある</p><p>Spring Boot 2系では、/info, /health以外のエンドポイントはデフォルトで認可ありとなります。
+認可なしにしつつ、Listenポートの変更及び接続元IPを制限する設定は以下</p></section></section><section><h3 id="84-アプリケーション監視">8.4 アプリケーション監視<a class="anchor" href="#84-アプリケーション監視"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>システムを運用していくためには、アプリケーション状態の可視化およびアプリケーション異常を迅速に検知する必要がある</p><p>クラウドを用いた開発が普通（ニューノーマル）となった現在では、監視設計についてもクラウドに適したものにしていく必要があります。
+本設では、システム運用に欠かせないアプリケーション監視について、Prometheusを用いる方法を説明</p><section><h4 id="prometheus">Prometheus<a class="anchor" href="#prometheus"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>メリット
+<ul>
+<li>導入の敷居の低さ</li>
+<li>クラウドネイティブ時代に適した設計</li>
+<li>オープンソース</li>
+</ul>
+</li>
+</ul><p>なお、本番環境のトータルの運用コストを見据える場合は、有償の監視サービスのMackerelやDatadogも検討対象にしてみる</p></section><section><h4 id="prometheusの導入">Prometheusの導入<a class="anchor" href="#prometheusの導入"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>インストール方法は次の３つ</p>
+<ul>
+<li>バイナリのダウンロード</li>
+<li>Docker</li>
+<li>ソースビルド</li>
+</ul>
+</li>
+<li>
+<p>PrometheusのDownloadページよりターゲットOSのファイルをダウンロードし、展開するだけでインストールは完了</p>
+</li>
+</ul></section><section><h4 id="prometheusのサービスディスカバリー">Prometheusのサービスディスカバリー<a class="anchor" href="#prometheusのサービスディスカバリー"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>Prometheusにはサービスディスカバリ機能が備わっており、サービスの拡張に自動で追従します。
+例えば、AWS EC2を利用している場合、サーバーの増減に自動で追従します</p></section><section><h4 id="springアプリケーションとの連携">Springアプリケーションとの連携<a class="anchor" href="#springアプリケーションとの連携"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>SpringActuatorとPrometheusは連携できる</li>
+<li>設定する方法を記載</li>
+</ul></section><section><h4 id="メトリクスの可視化">メトリクスの可視化<a class="anchor" href="#メトリクスの可視化"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>単体でもメトリクスの可視化はできるが、Grafanaと連携すればより強力にビジュアライズできる</p><ul>
+<li>ダウンロード
+<ul>
+<li>バイナリのダウンロード</li>
+<li>パッケージマネージャインストール</li>
+</ul>
+</li>
+</ul></section><section><h4 id="アラート通知">アラート通知<a class="anchor" href="#アラート通知"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>Prometheusは複数のコンポーネントで構成されており、アラート通知もオプション構成となっている</p><ul>
+<li>
+<p>AlertManagerのインストール</p>
+<ul>
+<li>アラート通知を実現するためには、Prometheus本体のPush通知を処理するAlertManagerのインストールが必要</li>
+<li>バイナリファイルをダウンロードして展開する</li>
+</ul>
+</li>
+<li>
+<p>Slack通知設定</p>
+<ul>
+<li>本書では、Slack通知の設定方法を説明</li>
+<li>AlertManagerはメール、HipChatなどの連携をデフォルトでサポートしています</li>
+</ul>
+</li>
+</ul><p>TODO:　このあたりは見返して設定していきたい</p></section></section><section><h3 id="85-リクエスト追跡">8.5 リクエスト追跡<a class="anchor" href="#85-リクエスト追跡"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>本番環境では、可用性要件を考慮の上、アプリケーションサーバーを冗長化することが多く行われます。
+また並行性を考慮するとアプリケーションサーバーは状態をNoSQLやRDBに保持させるステートレス構成とし、
+スケールアウト及びスケールイン構成とすることも多く行われます。</p><p>アプリケーションが多層で連携する場合、各層でリクエストを処理するサーバーが不定となるため、ユーザーの行動履歴をトレースするためには、リクエスト追跡の仕掛けを導入する必要があります。本節では、リクエスト追跡の方法としてnginxを用いる方法を紹介</p><section><h4 id="nginxトレース">nginxトレース<a class="anchor" href="#nginxトレース"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>静的コンテンツ配信の最適化やプロキシ用途でnginxを導入することは多く行われる</p><p>nginxは以下の用に設定すると、リクエストIDがCookieに付与される</p><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="conf" class="wrap" style="--ecMaxLine:29ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">userid           on;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">userid_name      uid;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">userid_domain    example.com;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">userid_path      /;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">userid_expires   365d;</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h4 id="nginxとのトレースidの統合">nginxとのトレースIDの統合<a class="anchor" href="#nginxとのトレースidの統合"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>前項では、ミドルウェア（nginx）でリクエスト追跡IDを発行する方法を紹介
+リクエスト追跡を切れ目なく実現するために、nginxとリクエスト追跡IDの統合の方法を紹介</p><p>リクエスト追跡機能は横断的関心事（cross-cutting concerns）のため、SpringAOPで実装する方針が望ましいと言えます</p><ul>
+<li>
+<p><code>RequestTrackingInterceptor.java</code>に実装した内容のことを説明していた</p>
+</li>
+<li>
+<p>Column ログ集約ソリューション</p>
+<ul>
+<li>複数台構成のアプリケーションをステートレスにと持つことを望ましい構成とすると、各アプリケーションサーバーにSSH接続してログを確認する方法では運用が大変</li>
+<li>上述の課題に対応するためには、ログ集約の仕組みを導入する方法がよい</li>
+<li>ログ集約のソリューションとしては、商用のSplunk、DatadogやOSSのFluentd、Logs、AzureではLogAnalyticsなどの仕組みがある。アプリケーションを複数台で運用する際はこれらのソリューションの導入も検討してみて</li>
+</ul>
+</li>
+</ul><p>TODO: OSSのFluentdは使ってみたい</p></section></section><section><h3 id="86-レイテンシ分析">8.6 レイテンシ分析<a class="anchor" href="#86-レイテンシ分析"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>リクエスト追跡が可能な構成で、かつ応答遅延が発生した場合は、ボトルネック箇所を特定し対応を検討する必要がある
+また、MSA開発では、多層、多数のサービスが連携するため、サービスのどこがボトルネックであるか特定できる仕組みの導入が望ましいと言えます。</p><p>本節では、SpringエコシステムであるSpringCloudプロジェクトのSpringCloudSleuthを用いてレイテンシ分析する方法を紹介</p><section><h4 id="spring-cloud-sleuth">Spring Cloud Sleuth<a class="anchor" href="#spring-cloud-sleuth"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>FrontentとBackendで同じIDを出力して処理を追うことができますよっていう説明
+RestTemplateを使用する必要があるみたい</p><p>ここでレイテンシが図られる様子
+Zipkinで可視化できるみたい</p></section></section><section><h3 id="87-無停止デプロイ">8.7 無停止デプロイ<a class="anchor" href="#87-無停止デプロイ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>BtoCサービス開発の場合、サービスに影響をおよぼさず無停止でアプリケーションをデプロイする必要が多くあります。
+特に利用者が多い場合は、必須の要件となります。</p><p>本節では、オンプレミスの条件付きで、無停止でアプリケーションを更新する方法を紹介</p><section><h4 id="ローリングデプロイ">ローリングデプロイ<a class="anchor" href="#ローリングデプロイ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="ローリングデプロイ作業フロー">ローリングデプロイ作業フロー<a class="anchor" href="#ローリングデプロイ作業フロー"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>Step1. アプリサーバー#1へのデプロイ
+<ul>
+<li>プロキシサーバーからアプリサーバー#1へのリクエスト振り分けを停止</li>
+<li>アプリサーバー#1のアプリケーションをデプロイ</li>
+</ul>
+</li>
+</ul></section><section><h4 id="ローリングデプロイ作業手順">ローリングデプロイ作業手順<a class="anchor" href="#ローリングデプロイ作業手順"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>TODO: nginxの設定ファイルの変更方法も記載しているので後で参考にして設定しておきたい</p></section></section><section><h3 id="88-コンテナオーケストレーションツールへのデプロイ">8.8 コンテナオーケストレーションツールへのデプロイ<a class="anchor" href="#88-コンテナオーケストレーションツールへのデプロイ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>コンテナをデプロイする基盤としてのコンテナオーケストレーションツールは、激しい開発競争が繰り広げられましたが、Kubernetesがデファクトスタンダードとなっている</p><p>本節では、SpringBootアプリケーションを、Dockerコンテナを用い、コンテナオーケストレーションツールのKubernetesを用いてデプロイする方法を紹介</p><section><h4 id="コンテナイメージの作成">コンテナイメージの作成<a class="anchor" href="#コンテナイメージの作成"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>TODO: Kubernetesを使ったコンテナ管理…後でDockerを一通り使い倒した後確認する</p></section></section></section><section><h2 id="第9章-spring-bootアプリケーションが想定しているシステム構成">第9章 （Spring Bootアプリケーションが想定している）システム構成<a class="anchor" href="#第9章-spring-bootアプリケーションが想定しているシステム構成"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>どんなにアプリケーションコードが優れていても、システム・アーキテクチャ設計が適切でないと安定的にサービスを提供できません。本ChapterではSpringBootで作成したアプリケーションを中心とした本番環境のシステム・アーキテクチャ構成について検討します。</p><section><h3 id="91-システムアーキテクチャ考察">9.1 システム・アーキテクチャ考察<a class="anchor" href="#91-システムアーキテクチャ考察"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>データベースを用いるSpringBootで作成したアプリケーションの場合、１つの仮想サーバーにアプリケーションおよびデータベースを構築することで、最小限の構成によるサービスの提供は可能</p><p>クラウドネイティブが常識となった現在では、クラウドベンダーが提供するマネージドサービスの特性を理解し、適切なアーキテクチャ設計を行う必要があります。</p><section><h4 id="システムが必要とする要件">システムが必要とする要件<a class="anchor" href="#システムが必要とする要件"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>要件
+<ul>
+<li>可用性：稼働率は99.9%以上を目標とすること</li>
+<li>拡張性：スループットの増加に対して、サービスが低下しない性能を維持するための資源の追加が容易に行えること</li>
+<li>完全性：データの操作にはACIDを保証し、データの堅牢性を実現すること</li>
+</ul>
+</li>
+</ul></section><section><h4 id="システム要件の検討">システム要件の検討<a class="anchor" href="#システム要件の検討"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>可用性</p>
+<ul>
+<li>システム構築ではSLAが明記されることが普通</li>
+<li>サービス品質がSLAの保証値を著しく下回った場合には、ペナルティが発生することもあります。</li>
+<li>SLAに可用性99.9%と記載されている場合、数値として年間にして９時間弱、月間にして４４分弱以内の停止しか許さないシステム構成を検討する必要がある</li>
+</ul>
+</li>
+<li>
+<p>拡張性</p>
+<ul>
+<li>システム構築では、サービス特性によりシステムへの負荷がばらついたり、突発的な高負荷が発生したりすることがあります。</li>
+<li>可能な限りシステムリソースのスケールアウト及びスケールインできるように設計することが望ましいと言えます。</li>
+</ul>
+</li>
+<li>
+<p>完全性</p>
+<ul>
+<li>システム構築では、システムじの状態をRDBなどのデータストアに保管することが普通</li>
+<li>システムで保管した情報資産が正当な権利を持たない人により変更されていないことを確実にしておくよう設計する必要があります。また、データの消失を防ぐための対策も実施していく必要があります</li>
+</ul>
+</li>
+<li>
+<p>コスト</p>
+<ul>
+<li>Capter8で解説したように、運用コストはシステム開発全体の3/4以上のコストを締めます。
+<ul>
+<li>システムリソースの運用コスト（ハードウェアコストやライセンスコストなど）</li>
+<li>システム運用のコスト（人件費など）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="92-システムアーキテクチャ案">9.2 システム・アーキテクチャ案<a class="anchor" href="#92-システムアーキテクチャ案"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>AWSを利用したアーキテクチャ例を記載している</p><section><h4 id="構成要素一覧">構成要素一覧<a class="anchor" href="#構成要素一覧"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="可用性">可用性<a class="anchor" href="#可用性"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="拡張性">拡張性<a class="anchor" href="#拡張性"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="コスト">コスト<a class="anchor" href="#コスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="93-構築チュートリアル">9.3 構築チュートリアル<a class="anchor" href="#93-構築チュートリアル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>Teraformを利用した環境構築を紹介している</p></section></section><section><h2 id="第10章-spring5spring-boot2の新機能">第10章 Spring5/Spring Boot2の新機能<a class="anchor" href="#第10章-spring5spring-boot2の新機能"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>2017年にリリースされたSpring5,2018年にリリースされたSpringBoot2の新機能のうち、
+今後重要になると考えられるWebFluxについて説明</p><section><h3 id="101-webflux">10.1 WebFlux<a class="anchor" href="#101-webflux"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>HTTPを利用したシステムの範囲が拡大し、同時アクセスが増えていくにつれて、Webアプリケーションにおけるコンピュータリソースに対して待ちが多いことがわかってきました。
+そのため非同期処理を用いたWebアプリケーションが求められる様になりました。その解決案の１つとしてリアクティブプログラミングが選ばれ、Srping5/SpringBoot2においてはWebFlux飛ばれるリアクティブプログラミングを用いたWebプログラムを書くことができるようになりました。
+このプログラムは同期ではないのでブロックされることなく、実施されてI/O待ちのような状態にはならず、I/Oが発生したタイミングで実施されることになります。</p><p>TODO:　実装ハードル高そう。色々考えること多いので後で見返す</p></section></section><section><h2 id="第11章-ローカル開発環境の構築について">第11章 ローカル開発環境の構築について<a class="anchor" href="#第11章-ローカル開発環境の構築について"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2></section><section><h2 id="第12章-サンプルアプリについて">第12章 サンプルアプリについて<a class="anchor" href="#第12章-サンプルアプリについて"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2></section></section>  </div> <script type="module">document.addEventListener("click",function(s){const t=s.target;if(t&&t.classList.contains("copy-btn")){const c=t.closest("pre")?.querySelector("code"),i=Array.from(c?.querySelectorAll(".code:not(summary *)")??[]).map(e=>e.textContent).map(e=>e===`
+`?"":e).join(`
+`);navigator.clipboard.writeText(i);const o=t.getAttribute("data-timeout-id");o&&clearTimeout(parseInt(o)),t.classList.add("success");const n=setTimeout(()=>{t.classList.remove("success")},1e3);t.setAttribute("data-timeout-id",n.toString())}});</script> <div class="relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 mb-6 rounded-xl license-container onload-animation"> <div class="transition font-bold text-black/75 dark:text-white/75"> SpringBoot2徹底活用 </div> <a href="https://tutttuwi.github.io/posts/2020-06_springboot2徹底活用/" class="link text-[var(--primary)]"> https://tutttuwi.github.io/posts/2020-06_springboot2徹底活用/ </a> <div class="flex gap-6 mt-2"> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">Author</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">Tomoaki Tsutsui</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">Published at</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">2020-06-07</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">License</div> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="link text-[var(--primary)] line-clamp-2">CC BY-NC-SA 4.0</a> </div> </div> <svg width="0.97em" height="1em" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5" data-icon="fa6-brands:creative-commons">   <symbol id="ai:fa6-brands:creative-commons" viewBox="0 0 496 512"><path fill="currentColor" d="m245.83 214.87l-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93c-22.13 0-33.22 14.61-33.22 43.84c0 23.57 9.21 43.84 33.22 43.84c14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98c-22.6 0-73.96-10.32-73.96-77.05c0-58.69 43-77.06 72.63-77.06c30.72-.01 52.7 11.95 65.99 35.86m143.05 0l-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93c-22.14 0-33.22 14.61-33.22 43.84c0 23.55 9.23 43.84 33.22 43.84c14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98c-22.69 0-73.96-9.87-73.96-77.05c0-58.67 42.97-77.06 72.63-77.06c30.71-.01 52.58 11.95 65.56 35.86M247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248c129.93 0 248.44-100.87 248.44-248c0-137.87-106.62-248-248.44-248m.87 450.81c-112.54 0-203.7-93.04-203.7-202.81c0-105.42 85.43-203.27 203.72-203.27c112.53 0 202.82 89.46 202.82 203.26c-.01 121.69-99.68 202.82-202.84 202.82"/></symbol><use href="#ai:fa6-brands:creative-commons"></use>  </svg> </div> </div> </div> <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full"> <a href="/posts/2020-06_gradle徹底入門_次世代ビルドツールによる自動化基盤の構築/" class="w-full font-bold overflow-hidden active:scale-95"> <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4"> <svg width="1em" height="1em" class="text-[2rem] text-[var(--primary)]" data-icon="material-symbols:chevron-left-rounded">   <symbol id="ai:material-symbols:chevron-left-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z"/></symbol><use href="#ai:material-symbols:chevron-left-rounded"></use>  </svg> <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75"> Gradle徹底入門 次世代ビルドツールによる自動化基盤の構築 </div> </div> </a> <a href="/posts/2020-05_spring徹底入門/" class="w-full font-bold overflow-hidden active:scale-95"> <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4"> <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75"> Spring徹底入門 </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[2rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </div> </a> </div>  <div class="footer col-span-2 onload-animation hidden lg:block"> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center">
+&copy; <span id="copyright-year">2026</span> Tomoaki Tsutsui. All Rights Reserved. /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/rss.xml">RSS</a> /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/sitemap-index.xml">Sitemap</a><br> <!--
+        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        --> </div> </div> </div> </div> </main> <div class="footer col-span-2 onload-animation block lg:hidden"> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center">
+&copy; <span id="copyright-year">2026</span> Tomoaki Tsutsui. All Rights Reserved. /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/rss.xml">RSS</a> /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/sitemap-index.xml">Sitemap</a><br> <!--
+        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        --> </div> </div> </div> </div> <!-- There can't be a filter on parent element, or it will break `fixed` --><div class="back-to-top-wrapper hidden lg:block" data-astro-cid-eymb5ayk> <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="backToTop()" data-astro-cid-eymb5ayk> <button aria-label="Back to Top" class="btn-card h-[3.75rem] w-[3.75rem]" data-astro-cid-eymb5ayk> <svg width="1em" height="1em" class="mx-auto" data-astro-cid-eymb5ayk="true" data-icon="material-symbols:keyboard-arrow-up-rounded">   <symbol id="ai:material-symbols:keyboard-arrow-up-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m12 10.8l-3.9 3.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"/></symbol><use href="#ai:material-symbols:keyboard-arrow-up-rounded"></use>  </svg> </button> </div> </div>  <script>
+function backToTop() {
+    window.scroll({ top: 0, behavior: 'smooth' });
+}
+</script> </div> </div>  <div class="absolute w-full z-0 hidden 2xl:block"> <div class="relative max-w-[var(--page-width)] mx-auto"> <!-- TOC component --> <div id="toc-wrapper" class="hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center"> <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar"> <div id="toc" class="w-full h-full transition-swup-fade "> <div class="h-8 w-full"></div> <table-of-contents class="group"><a href="#現場至上主義springboot2徹底活用" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold bg-[var(--toc-badge-bg)] text-[var(--btn-content)]">1</div><div class="transition text-sm text-50">現場至上主義SpringBoot2徹底活用</div></a><a href="#理解したこと" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">理解したこと</div></a><a href="#書籍情報" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">書籍情報</div></a><a href="#第1章-spring-bootの構成" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第1章 Spring Bootの構成</div></a><a href="#第2章-webアプリケーションにおける共通処理" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第2章 Webアプリケーションにおける共通処理</div></a><a href="#第3章-データアクセス" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第3章 データアクセス</div></a><a href="#第4章-セキュリティ" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第4章 セキュリティ</div></a><a href="#第5章-画面開発" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第5章 画面開発</div></a><a href="#第6章-api開発" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第6章 API開発</div></a><a href="#第7章-チーム開発" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第7章 チーム開発</div></a><a href="#第8章-運用" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第8章 運用</div></a><a href="#第9章-spring-bootアプリケーションが想定しているシステム構成" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第9章 （Spring Bootアプリケーションが想定している）システム構成</div></a><a href="#第10章-spring5spring-boot2の新機能" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第10章 Spring5/Spring Boot2の新機能</div></a><a href="#第11章-ローカル開発環境の構築について" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第11章 ローカル開発環境の構築について</div></a><a href="#第12章-サンプルアプリについて" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">第12章 サンプルアプリについて</div></a><div id="active-indicator" style="opacity: 0" class="-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"></div></table-of-contents><script type="module">class l extends HTMLElement{tocEl=null;visibleClass="visible";observer;anchorNavTarget=null;headingIdxMap=new Map;headings=[];sections=[];tocEntries=[];active=[];activeIndicator=null;constructor(){super(),this.observer=new IntersectionObserver(this.markVisibleSection,{threshold:0})}markVisibleSection=t=>{t.forEach(e=>{const i=e.target.children[0]?.getAttribute("id"),s=i?this.headingIdxMap.get(i):void 0;s!=null&&(this.active[s]=e.isIntersecting),e.isIntersecting&&this.anchorNavTarget==e.target.firstChild&&(this.anchorNavTarget=null)}),this.active.includes(!0)||this.fallback(),this.update()};toggleActiveHeading=()=>{let t=this.active.length-1,e=this.active.length-1,i=-1;for(;t>=0&&!this.active[t];)this.tocEntries[t].classList.remove(this.visibleClass),t--;for(;t>=0&&this.active[t];)this.tocEntries[t].classList.add(this.visibleClass),e=Math.min(e,t),i=Math.max(i,t),t--;for(;t>=0;)this.tocEntries[t].classList.remove(this.visibleClass),t--;if(e>i)this.activeIndicator?.setAttribute("style","opacity: 0");else{let s=this.tocEl?.getBoundingClientRect().top||0,n=this.tocEl?.scrollTop||0,o=this.tocEntries[e].getBoundingClientRect().top-s+n,c=this.tocEntries[i].getBoundingClientRect().bottom-s+n;this.activeIndicator?.setAttribute("style",`top: ${o}px; height: ${c-o}px`)}};scrollToActiveHeading=()=>{if(this.anchorNavTarget||!this.tocEl)return;const t=document.querySelectorAll(`#toc .${this.visibleClass}`);if(!t.length)return;const e=t[0],i=t[t.length-1],s=this.tocEl.clientHeight;let n;i.getBoundingClientRect().bottom-e.getBoundingClientRect().top<.9*s?n=e.offsetTop-32:n=i.offsetTop-s*.8,this.tocEl.scrollTo({top:n,left:0,behavior:"smooth"})};update=()=>{requestAnimationFrame(()=>{this.toggleActiveHeading(),this.scrollToActiveHeading()})};fallback=()=>{if(this.sections.length)for(let t=0;t<this.sections.length;t++){let e=this.sections[t].getBoundingClientRect().top,i=this.sections[t].getBoundingClientRect().bottom;if(this.isInRange(e,0,window.innerHeight)||this.isInRange(i,0,window.innerHeight)||e<0&&i>window.innerHeight)this.markActiveHeading(t);else if(e>window.innerHeight)break}};markActiveHeading=t=>{this.active[t]=!0};handleAnchorClick=t=>{const e=t.composedPath().find(i=>i instanceof HTMLAnchorElement);if(e){const i=decodeURIComponent(e.hash?.substring(1)),s=this.headingIdxMap.get(i);s!==void 0?this.anchorNavTarget=this.headings[s]:this.anchorNavTarget=null}};isInRange(t,e,i){return e<t&&t<i}connectedCallback(){const t=document.querySelector(".prose");t?t.addEventListener("animationend",()=>{this.init()},{once:!0}):console.debug("Animation element not found")}init(){if(this.tocEl=document.getElementById("toc-inner-wrapper"),!!this.tocEl&&(this.tocEl.addEventListener("click",this.handleAnchorClick,{capture:!0}),this.activeIndicator=document.getElementById("active-indicator"),this.tocEntries=Array.from(document.querySelectorAll("#toc a[href^='#']")),this.tocEntries.length!==0)){this.sections=new Array(this.tocEntries.length),this.headings=new Array(this.tocEntries.length);for(let t=0;t<this.tocEntries.length;t++){const e=decodeURIComponent(this.tocEntries[t].hash?.substring(1)),i=document.getElementById(e),s=i?.parentElement;i instanceof HTMLElement&&s instanceof HTMLElement&&(this.headings[t]=i,this.sections[t]=s,this.headingIdxMap.set(e,t))}this.active=new Array(this.tocEntries.length).fill(!1),this.sections.forEach(t=>this.observer.observe(t)),this.fallback(),this.update()}}disconnectedCallback(){this.sections.forEach(t=>this.observer.unobserve(t)),this.observer.disconnect(),this.tocEl?.removeEventListener("click",this.handleAnchorClick)}}customElements.get("table-of-contents")||customElements.define("table-of-contents",l);</script> <div class="h-8 w-full"></div> </div> </div> </div> <!-- #toc needs to exist for Swup to work normally -->  </div> </div>  <!-- increase the page height during page transition to prevent the scrolling animation from jumping --> <div id="page-height-extend" class="hidden h-[300vh]" data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"></div>  <script type="module" src="/_astro/Layout.astro_astro_type_script_index_0_lang.DAHrxWCB.js"></script> <script type="module" src="/_astro/Layout.astro_astro_type_script_index_1_lang.D-ve5fSU.js"></script></body></html> <script type="module">function n(e){const s=document.getElementById("sidebar"),o=document.getElementById("main-grid"),t=document.getElementById("swup-container");if(!s||!o||!t)return;e.startsWith("/posts/")?(s.classList.add("hidden"),o.classList.remove("grid-cols-1","lg:grid-cols-[17.5rem_auto]"),o.classList.add("grid-cols-1","lg:grid-cols-[auto]"),t.classList.remove("col-span-2","lg:col-span-1"),t.classList.add("col-span-1")):(s.classList.remove("hidden"),o.classList.remove("grid-cols-1","lg:grid-cols-[auto]"),o.classList.add("grid-cols-1","lg:grid-cols-[17.5rem_auto]"),t.classList.remove("col-span-1"),t.classList.add("col-span-2","lg:col-span-1"))}n(window.location.pathname);const i=()=>{window.swup.hooks.on("visit:start",e=>{const s=new URL(e.to.url,window.location.origin);n(s.pathname)}),window.swup.hooks.on("content:replace",()=>{n(window.location.pathname)})};window?.swup?.hooks?i():document.addEventListener("swup:enable",i);</script>

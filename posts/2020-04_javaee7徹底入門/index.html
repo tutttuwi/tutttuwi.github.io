@@ -1,0 +1,2675 @@
+<!DOCTYPE html><html lang="en" class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]" data-overlayscrollbars-initialize data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"> <head><title>Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築 - Home</title><meta charset="UTF-8"><meta name="description" content="Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築 - Home"><meta name="author" content="Tomoaki Tsutsui"><meta property="og:site_name" content="Home"><meta property="og:url" content="https://tutttuwi.github.io/posts/2020-04_javaee7%E5%BE%B9%E5%BA%95%E5%85%A5%E9%96%80/"><meta property="og:title" content="Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築 - Home"><meta property="og:description" content="Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築 - Home"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://tutttuwi.github.io/posts/2020-04_javaee7%E5%BE%B9%E5%BA%95%E5%85%A5%E9%96%80/"><meta name="twitter:title" content="Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築 - Home"><meta name="twitter:description" content="Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築 - Home"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.13.10"><link rel="icon" href="/favicon/icon.png" sizes="32x32"><!-- Set the theme before the page is rendered to avoid a flash --><script>(function(){const DEFAULT_THEME = "auto";
+const LIGHT_MODE = "light";
+const DARK_MODE = "dark";
+const AUTO_MODE = "auto";
+const BANNER_HEIGHT_EXTEND = 30;
+const PAGE_WIDTH = 75;
+const configHue = 250;
+
+			// Load the theme from local storage
+			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
+			switch (theme) {
+				case LIGHT_MODE:
+					document.documentElement.classList.remove('dark');
+					break
+				case DARK_MODE:
+					document.documentElement.classList.add('dark');
+					break
+				case AUTO_MODE:
+					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.documentElement.classList.add('dark');
+					} else {
+						document.documentElement.classList.remove('dark');
+					}
+			}
+
+			// Load the hue from local storage
+			const hue = localStorage.getItem('hue') || configHue;
+			document.documentElement.style.setProperty('--hue', hue);
+
+			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
+			offset = offset - offset % 4;
+			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+		})();</script><!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築","description":"Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築","keywords":["教科書","JAVA"],"author":{"@type":"Person","name":"Tomoaki Tsutsui","url":"https://tutttuwi.github.io/"},"datePublished":"2020-04-12","inLanguage":"en"}</script><link rel="alternate" type="application/rss+xml" title="Tomoaki Tsutsui" href="https://tutttuwi.github.io/rss.xml"><!-- MermaidJS --><script type="module">
+			import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+			mermaid.initialize({ 
+				startOnLoad: true,
+				theme: 'dark',
+				securityLevel: 'loose'
+			});
+			window.mermaid = mermaid;
+		</script><link rel="stylesheet" href="/_astro/Layout.y4KPJ9hc.css">
+<link rel="stylesheet" href="/_astro/Layout.DSulWsr7.css">
+<link rel="stylesheet" href="/_astro/_page_.CoKYm2jU.css">
+<link rel="stylesheet" href="/_astro/_page_.ZlghMKVQ.css">
+<link rel="stylesheet" href="/_astro/about.BtniRLn_.css">
+<style>input.svelte-1wah7ro:focus{outline:0}.search-panel.svelte-1wah7ro{max-height:calc(100vh - 100px);overflow-y:auto}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k){-webkit-appearance:none;height:1.5rem;background-image:var(--color-selection-bar);transition:background-image .15s ease-in-out}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb:active{background:#fff9}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;border-width:0;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb:active{background:#fff9}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb:active{background:#fff9}
+</style><script type="module" src="/_astro/page.Z8IJTFqj.js"></script></head> <body class=" min-h-screen transition " data-overlayscrollbars-initialize data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"> <div id="config-carrier" data-hue="250"></div>    <div id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto"> <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all"> <div id="navbar" class="z-50 onload-animation"> <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation --> <div class="card-base !overflow-visible max-w-[var(--page-width)] h-[4.5rem] !rounded-t-none mx-auto flex items-center justify-between px-4"> <a href="/" class="btn-plain scale-animation rounded-lg h-[3.25rem] px-5 font-bold active:scale-95"> <div class="flex flex-row text-[var(--primary)] items-center text-md"> <svg width="1em" height="1em" class="text-[1.75rem] mb-1 mr-2" data-icon="material-symbols:home-outline-rounded">   <symbol id="ai:material-symbols:home-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75"/></symbol><use href="#ai:material-symbols:home-outline-rounded"></use>  </svg> Home </div> </a> <div class="hidden md:flex"> <a aria-label="Home" href="/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> Home  </div> </a><a aria-label="Archive" href="/archive/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> Archive  </div> </a><a aria-label="About" href="/about/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> About  </div> </a> </div> <div class="flex"> <!--<SearchPanel client:load>--> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event("astro:only"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="AEJ6w" component-url="/_astro/Search.DpBcKkHr.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> <button aria-label="Display Settings" class="btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="display-settings-switch"> <svg width="1em" height="1em" class="text-[1.25rem]" data-icon="material-symbols:palette-outline">   <symbol id="ai:material-symbols:palette-outline" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22q-2.05 0-3.875-.788t-3.187-2.15t-2.15-3.187T2 12q0-2.075.813-3.9t2.2-3.175T8.25 2.788T12.2 2q2 0 3.775.688t3.113 1.9t2.125 2.875T22 11.05q0 2.875-1.75 4.413T16 17h-1.85q-.225 0-.312.125t-.088.275q0 .3.375.863t.375 1.287q0 1.25-.687 1.85T12 22m-5.5-9q.65 0 1.075-.425T8 11.5t-.425-1.075T6.5 10t-1.075.425T5 11.5t.425 1.075T6.5 13m3-4q.65 0 1.075-.425T11 7.5t-.425-1.075T9.5 6t-1.075.425T8 7.5t.425 1.075T9.5 9m5 0q.65 0 1.075-.425T16 7.5t-.425-1.075T14.5 6t-1.075.425T13 7.5t.425 1.075T14.5 9m3 4q.65 0 1.075-.425T19 11.5t-.425-1.075T17.5 10t-1.075.425T16 11.5t.425 1.075T17.5 13M12 20q.225 0 .363-.125t.137-.325q0-.35-.375-.825T11.75 17.3q0-1.05.725-1.675T14.25 15H16q1.65 0 2.825-.962T20 11.05q0-3.025-2.312-5.038T12.2 4Q8.8 4 6.4 6.325T4 12q0 3.325 2.338 5.663T12 20"/></symbol><use href="#ai:material-symbols:palette-outline"></use>  </svg> </button> <astro-island uid="rIw13" component-url="/_astro/LightDarkSwitch.Cq210o6L.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;LightDarkSwitch&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> <button aria-label="Menu" name="Nav Menu" class="btn-plain scale-animation rounded-lg w-11 h-11 active:scale-90 md:!hidden" id="nav-menu-switch"> <svg width="1em" height="1em" class="text-[1.25rem]" data-icon="material-symbols:menu-rounded">   <symbol id="ai:material-symbols:menu-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></symbol><use href="#ai:material-symbols:menu-rounded"></use>  </svg> </button> </div> <div id="nav-menu-panel" class="float-panel float-panel-closed absolute transition-all fixed right-4 px-2 py-2"> <a href="/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> Home </div> <svg width="1em" height="1em" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <symbol id="ai:material-symbols:chevron-right-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.6 4.6q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7z"/></symbol><use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a><a href="/archive/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> Archive </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a><a href="/about/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> About </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a> </div> <astro-island uid="ZsVUom" component-url="/_astro/DisplaySettings.9NB11Dvr.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;DisplaySettings&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> </div> </div> <script type="module">function c(){localStorage.theme==="dark"?(document.documentElement.classList.remove("dark"),localStorage.theme="light"):(document.documentElement.classList.add("dark"),localStorage.theme="dark")}function o(){let t=document.getElementById("scheme-switch");t&&(t.onclick=function(){c()});let n=document.getElementById("display-settings-switch");n&&(n.onclick=function(){let e=document.getElementById("display-setting");e&&e.classList.toggle("float-panel-closed")});let l=document.getElementById("nav-menu-switch");l&&(l.onclick=function(){let e=document.getElementById("nav-menu-panel");e&&e.classList.toggle("float-panel-closed")})}o();</script> <script>(function(){const scriptUrl = "/pagefind/pagefind.js";
+
+async function loadPagefind() {
+    try {
+        const response = await fetch(scriptUrl, { method: 'HEAD' });
+        if (!response.ok) {
+            throw new Error(`Pagefind script not found: ${response.status}`);
+        }
+
+        const pagefind = await import(scriptUrl);
+
+        await pagefind.options({
+            excerptLength: 20
+        });
+
+        window.pagefind = pagefind;
+
+        document.dispatchEvent(new CustomEvent('pagefindready'));
+        console.log('Pagefind loaded and initialized successfully, event dispatched.');
+    } catch (error) {
+        console.error('Failed to load Pagefind:', error);
+        window.pagefind = {
+            search: () => Promise.resolve({ results: [] }),
+            options: () => Promise.resolve(),
+        };
+        document.dispatchEvent(new CustomEvent('pagefindloaderror'));
+        console.log('Pagefind load error, event dispatched.');
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadPagefind);
+} else {
+    loadPagefind();
+}
+})();</script> </div> </div>   <div class="absolute w-full z-30 pointer-events-none" style="top: 5.5rem"> <!-- The pointer-events-none here prevent blocking the click event of the TOC --> <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto overflow-x-hidden"> <div id="main-grid" class="transition duration-700 w-full min-w-0 left-0 right-0 grid grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto lg:gap-4 px-0 md:px-4 grid-cols-1 lg:grid-cols-[auto]"> <!-- Banner image credit -->  <!-- TODO: サイドバー調整 (mt-4 lg:mt-0を無理やり調整しているがgapで調整したい) --><div id="sidebar" class="mb-4 row-start-2 row-end-3 col-span-2 lg:row-start-1 lg:row-end-2 lg:col-span-1 lg:max-w-[17.5rem] onload-animation w-full mt-4 lg:mt-0"> <div class="flex flex-col w-full gap-4 mb-4"> <div class="card-base p-3"> <a aria-label="Go to About Page" href="/about/" class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
+       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95"> <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
+        w-full h-full z-50 flex items-center justify-center"> <svg width="1.13em" height="1em" class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl" data-icon="fa6-regular:address-card">   <symbol id="ai:fa6-regular:address-card" viewBox="0 0 576 512"><path fill="currentColor" d="M512 80c8.8 0 16 7.2 16 16v320c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16zM64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64zm144 224a64 64 0 1 0 0-128a64 64 0 1 0 0 128m-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16h192c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80zm200-144c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24z"/></symbol><use href="#ai:fa6-regular:address-card"></use>  </svg> </div> <div class="mx-auto lg:w-full h-full lg:mt-0  overflow-hidden relative"> <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div> <img src="/_astro/avatar.Dt7w5_qZ_Zpns3d.webp" alt="Profile Image of the Author" style="object-position: center" loading="lazy" decoding="async" fetchpriority="auto" width="400" height="400" class="w-full h-full object-cover">  </div> </a> <div class="px-2"> <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">Tomoaki Tsutsui</div> <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div> <div class="text-center text-neutral-400 mb-2.5 transition">I&#39;m a software engineer.</div> <div class="flex flex-wrap gap-2 justify-center mb-1"> <a rel="me" aria-label="Twitter" href="https://x.com/tutttwien" target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90"> <svg width="1em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:twitter">   <symbol id="ai:fa6-brands:twitter" viewBox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645c0 138.72-105.583 298.558-298.558 298.558c-59.452 0-114.68-17.219-161.137-47.106c8.447.974 16.568 1.299 25.34 1.299c49.055 0 94.213-16.568 130.274-44.832c-46.132-.975-84.792-31.188-98.112-72.772c6.498.974 12.995 1.624 19.818 1.624c9.421 0 18.843-1.3 27.614-3.573c-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319c-28.264-18.843-46.781-51.005-46.781-87.391c0-19.492 5.197-37.36 14.294-52.954c51.655 63.675 129.3 105.258 216.365 109.807c-1.624-7.797-2.599-15.918-2.599-24.04c0-57.828 46.782-104.934 104.934-104.934c30.213 0 57.502 12.67 76.67 33.137c23.715-4.548 46.456-13.32 66.599-25.34c-7.798 24.366-24.366 44.833-46.132 57.827c21.117-2.273 41.584-8.122 60.426-16.243c-14.292 20.791-32.161 39.308-52.628 54.253"/></symbol><use href="#ai:fa6-brands:twitter"></use>  </svg> </a><a rel="me" aria-label="GitHub" href="https://github.com/tutttuwi" target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90"> <svg width="0.97em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:github">   <symbol id="ai:fa6-brands:github" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6c-3.3.3-5.6-1.3-5.6-3.6c0-2 2.3-3.6 5.2-3.6c3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9c2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9c.3 2 2.9 3.3 5.9 2.6c2.9-.7 4.9-2.6 4.6-4.6c-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2c12.8 2.3 17.3-5.6 17.3-12.1c0-6.2-.3-40.4-.3-61.4c0 0-70 15-84.7-29.8c0 0-11.4-29.1-27.8-36.6c0 0-22.9-15.7 1.6-15.4c0 0 24.9 2 38.6 25.8c21.9 38.6 58.6 27.5 72.9 20.9c2.3-16 8.8-27.1 16-33.7c-55.9-6.2-112.3-14.3-112.3-110.5c0-27.5 7.6-41.3 23.6-58.9c-2.6-6.5-11.1-33.3 2.6-67.9c20.9-6.5 69 27 69 27c20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27c13.7 34.7 5.2 61.4 2.6 67.9c16 17.7 25.8 31.5 25.8 58.9c0 96.5-58.9 104.2-114.8 110.5c9.2 7.9 17 22.9 17 46.4c0 33.7-.3 75.4-.3 83.6c0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252C496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2c1.6 1.6 3.9 2.3 5.2 1c1.3-1 1-3.3-.7-5.2c-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9c1.6 1 3.6.7 4.3-.7c.7-1.3-.3-2.9-2.3-3.9c-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2c2.3 2.3 5.2 2.6 6.5 1c1.3-1.3.7-4.3-1.3-6.2c-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2c-1.4-2.3-4-3.3-5.6-2"/></symbol><use href="#ai:fa6-brands:github"></use>  </svg> </a><a rel="me" aria-label="LinkedIn" href="https://www.linkedin.com/in/tutttuwi/" target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90"> <svg width="0.88em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:linkedin">   <symbol id="ai:fa6-brands:linkedin" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5c0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7c-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5c67.2 0 79.7 44.3 79.7 101.9z"/></symbol><use href="#ai:fa6-brands:linkedin"></use>  </svg> </a>  </div> </div> </div> </div> <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4"> <widget-layout data-id="categories" data-is-collapsed="false" class="pb-4 card-base onload-animation" style="animation-delay: 150ms; --collapsedHeight: 7.5rem;" data-astro-cid-ucso7hve="true"> <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">Categories</div> <div id="categories" class="collapse-wrapper px-4 overflow-hidden" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <a href="/archive/?category=%E6%9B%B8%E7%B1%8D" aria-label="View all posts in the 書籍 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 書籍 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 61 </div> </div> </button> </a> </div>  </widget-layout>  <script type="module">class d extends HTMLElement{constructor(){if(super(),this.dataset.isCollapsed!=="true")return;const e=this.dataset.id,t=this.querySelector(".expand-btn"),s=this.querySelector(`#${e}`);t.addEventListener("click",()=>{s.classList.remove("collapsed"),t.classList.add("hidden")})}}customElements.get("widget-layout")||customElements.define("widget-layout",d);</script> <widget-layout data-id="tags" data-is-collapsed="true" class="pb-4 card-base onload-animation" style="animation-delay: 200ms; --collapsedHeight: 7.5rem;" data-astro-cid-ucso7hve="true"> <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">Tags</div> <div id="tags" class="collapse-wrapper px-4 overflow-hidden collapsed" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">  <div class="flex gap-2 flex-wrap"> <a href="/archive/?tag=AI" aria-label="View all posts with the AI tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  AI </a><a href="/archive/?tag=AWS" aria-label="View all posts with the AWS tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  AWS </a><a href="/archive/?tag=Azure" aria-label="View all posts with the Azure tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Azure </a><a href="/archive/?tag=CSS" aria-label="View all posts with the CSS tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  CSS </a><a href="/archive/?tag=DA" aria-label="View all posts with the DA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  DA </a><a href="/archive/?tag=DB" aria-label="View all posts with the DB tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  DB </a><a href="/archive/?tag=EX" aria-label="View all posts with the EX tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  EX </a><a href="/archive/?tag=Excel" aria-label="View all posts with the Excel tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Excel </a><a href="/archive/?tag=HTML" aria-label="View all posts with the HTML tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  HTML </a><a href="/archive/?tag=IPA" aria-label="View all posts with the IPA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  IPA </a><a href="/archive/?tag=Java" aria-label="View all posts with the Java tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Java </a><a href="/archive/?tag=JAVA" aria-label="View all posts with the JAVA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  JAVA </a><a href="/archive/?tag=Javascript" aria-label="View all posts with the Javascript tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Javascript </a><a href="/archive/?tag=Linux" aria-label="View all posts with the Linux tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Linux </a><a href="/archive/?tag=LLM" aria-label="View all posts with the LLM tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  LLM </a><a href="/archive/?tag=LPIC" aria-label="View all posts with the LPIC tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  LPIC </a><a href="/archive/?tag=NW" aria-label="View all posts with the NW tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  NW </a><a href="/archive/?tag=PHP" aria-label="View all posts with the PHP tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  PHP </a><a href="/archive/?tag=Ruby" aria-label="View all posts with the Ruby tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Ruby </a><a href="/archive/?tag=Security" aria-label="View all posts with the Security tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Security </a><a href="/archive/?tag=VBA" aria-label="View all posts with the VBA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  VBA </a><a href="/archive/?tag=%E3%83%AC%E3%82%B7%E3%83%94" aria-label="View all posts with the レシピ tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  レシピ </a><a href="/archive/?tag=%E5%85%A5%E9%96%80%E6%9B%B8" aria-label="View all posts with the 入門書 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  入門書 </a><a href="/archive/?tag=%E5%86%8D%E8%AA%AD" aria-label="View all posts with the 再読 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  再読 </a><a href="/archive/?tag=%E5%8F%97%E9%A8%93%E5%AF%BE%E7%AD%96%E3%81%BE%E3%81%A8%E3%82%81" aria-label="View all posts with the 受験対策まとめ tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  受験対策まとめ </a><a href="/archive/?tag=%E5%95%8F%E9%A1%8C%E9%9B%86" aria-label="View all posts with the 問題集 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  問題集 </a><a href="/archive/?tag=%E6%8A%80%E8%A1%93%E6%9B%B8%E7%B1%8D" aria-label="View all posts with the 技術書籍 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  技術書籍 </a><a href="/archive/?tag=%E6%95%99%E7%A7%91%E6%9B%B8" aria-label="View all posts with the 教科書 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  教科書 </a><a href="/archive/?tag=%E8%AA%AD%E6%9B%B8%E4%B8%AD" aria-label="View all posts with the 読書中 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  読書中 </a> </div>  </div> <div class="expand-btn px-4 -mb-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <button class="btn-plain rounded-lg w-full h-9" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <svg width="1em" height="1em" class="text-[1.75rem]" data-astro-cid-ucso7hve="true" data-icon="material-symbols:more-horiz">   <symbol id="ai:material-symbols:more-horiz" viewBox="0 0 24 24"><path fill="currentColor" d="M6 14q-.825 0-1.412-.587T4 12t.588-1.412T6 10t1.413.588T8 12t-.587 1.413T6 14m6 0q-.825 0-1.412-.587T10 12t.588-1.412T12 10t1.413.588T14 12t-.587 1.413T12 14m6 0q-.825 0-1.412-.587T16 12t.588-1.412T18 10t1.413.588T20 12t-.587 1.413T18 14"/></symbol><use href="#ai:material-symbols:more-horiz"></use>  </svg> More </div> </button> </div> </widget-layout>   </div> </div> <main id="swup-container" class="transition-swup-fade overflow-hidden min-w-0 col-span-1"> <div id="content-wrapper" class="onload-animation"> <!-- the overflow-hidden here prevent long text break the layout--> <!-- make id different from windows.swup global property -->   <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4"> <div id="post-container" class="card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full "> <!-- word count and reading time --> <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:notes-rounded">   <symbol id="ai:material-symbols:notes-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h10q.425 0 .713.288T15 17t-.288.713T14 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></symbol><use href="#ai:material-symbols:notes-rounded"></use>  </svg> </div> <div class="text-sm">17454  words</div> </div> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:schedule-outline-rounded">   <symbol id="ai:material-symbols:schedule-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M13 11.6V8q0-.425-.288-.712T12 7t-.712.288T11 8v3.975q0 .2.075.388t.225.337l3.3 3.3q.275.275.7.275T16 16t.275-.7t-.275-.7zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.325 0 5.663-2.337T20 12t-2.337-5.663T12 4T6.337 6.338T4 12t2.338 5.663T12 20"/></symbol><use href="#ai:material-symbols:schedule-outline-rounded"></use>  </svg> </div> <div class="text-sm"> 87  minutes </div> </div> </div> <!-- title --> <div class="relative onload-animation"> <div data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title" class="transition w-full block font-bold mb-3
+                    text-3xl md:text-[2.25rem]/[2.75rem]
+                    text-black/90 dark:text-white/90
+                    md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+                    before:absolute before:top-[0.75rem] before:left-[-1.125rem]
+                "> Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築 </div> </div> <!-- metadata --> <div class="onload-animation"> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-5"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <symbol id="ai:material-symbols:calendar-today-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V3q0-.425.288-.712T7 2t.713.288T8 3v1h8V3q0-.425.288-.712T17 2t.713.288T18 3v1h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></symbol><use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2020-04-12</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <symbol id="ai:material-symbols:book-2-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 15.325q.35-.175.725-.25T7.5 15H8V4h-.5q-.625 0-1.062.438T6 5.5zM10 15h8V4h-8zm-4 .325V4zM7.5 22q-1.45 0-2.475-1.025T4 18.5v-13q0-1.45 1.025-2.475T7.5 2H18q.825 0 1.413.587T20 4v12.525q0 .2-.162.363t-.588.362q-.35.175-.55.5t-.2.75t.2.763t.55.487t.55.413t.2.562v.25q0 .425-.288.725T19 22zm0-2h9.325q-.15-.35-.237-.712T16.5 18.5q0-.4.075-.775t.25-.725H7.5q-.65 0-1.075.438T6 18.5q0 .65.425 1.075T7.5 20"/></symbol><use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E6%9B%B8%E7%B1%8D" aria-label="View all posts in the 書籍 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 書籍 </a> </div> </div> <!-- tags --> <div class="items-center flex"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:tag-rounded">   <symbol id="ai:material-symbols:tag-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m9 16l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T6.3 18.8L7 16H4.275q-.5 0-.8-.387T3.3 14.75q.075-.35.35-.55t.625-.2H7.5l1-4H5.775q-.5 0-.8-.387T4.8 8.75q.075-.35.35-.55t.625-.2H9l.825-3.275Q9.9 4.4 10.15 4.2t.6-.2q.475 0 .775.375t.175.825L11 8h4l.825-3.275q.075-.325.325-.525t.6-.2q.475 0 .775.375t.175.825L17 8h2.725q.5 0 .8.387t.175.863q-.075.35-.35.55t-.625.2H16.5l-1 4h2.725q.5 0 .8.388t.175.862q-.075.35-.35.55t-.625.2H15l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T12.3 18.8L13 16zm.5-2h4l1-4h-4z"/></symbol><use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=%E6%95%99%E7%A7%91%E6%9B%B8" aria-label="View all posts with the 教科書 tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 教科書 </a><div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=JAVA" aria-label="View all posts with the JAVA tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> JAVA </a>  </div> </div> </div> <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div> </div> <!-- always show cover as long as it has one -->  <div data-pagefind-body class="prose dark:prose-invert prose-base !max-w-none custom-md mb-6 markdown-content onload-animation"> <!--<div class="prose dark:prose-invert max-w-none custom-md">--> <!--<div class="max-w-none custom-md">-->  <section><h1 id="java-ee-7徹底入門-標準javaフレームワークによる高信頼性webシステムの構築">Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築<a class="anchor" href="#java-ee-7徹底入門-標準javaフレームワークによる高信頼性webシステムの構築"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h1><ul>
+<li>
+<p>形式：書籍</p>
+</li>
+<li>
+<p>発売日：2015年12月15日</p>
+</li>
+<li>
+<p>ISBN：9784798140926</p>
+</li>
+<li>
+<p>価格：本体3,800円＋税</p>
+</li>
+<li>
+<p>仕様：B5変・584ページ</p>
+</li>
+<li>
+<p>分類：プログラミング・開発</p>
+</li>
+<li>
+<p>シリーズ：徹底入門</p>
+</li>
+<li>
+<p>書籍ページ <a href="https://www.shoeisha.co.jp/book/detail/9784798140926">https://www.shoeisha.co.jp/book/detail/9784798140926</a></p>
+</li>
+<li>
+<p>サンプルプログラム <a href="https://www.shoeisha.co.jp/book/download/9784798140926/detail">https://www.shoeisha.co.jp/book/download/9784798140926/detail</a></p>
+</li>
+</ul><section><h2 id="chapter-1-java-eeの基礎知識">Chapter 1 Java EEの基礎知識<a class="anchor" href="#chapter-1-java-eeの基礎知識"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="11-java-eeのこれまで">1.1 Java EEのこれまで<a class="anchor" href="#11-java-eeのこれまで"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>1995年 Sun Microsytems,Inc</p>
+<ul>
+<li>JDK1.0 α版</li>
+</ul>
+</li>
+<li>
+<p>1998年 Sun JPEと呼ぶプロジェクトを立ち上げ</p>
+<ul>
+<li>サーバー側の企業アプリケーション開発にJavaを利用できるようにするために立ち上げ</li>
+</ul>
+</li>
+<li>
+<p>1999年12月 フレームワーク提供(J2EE 1.2)</p>
+<ul>
+<li>10個の機能から構成
+<ul>
+<li>JSP+Servlet → 急速に普及</li>
+<li>EJB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>2001年 J2EE 1.3</p>
+</li>
+<li>
+<p>2003年 J2EE 1.4</p>
+<ul>
+<li>XML対応</li>
+</ul>
+</li>
+<li>
+<p>このころ、オープンソースのフレームワークも台頭</p>
+</li>
+<li>
+<p>2006年5月 簡単開発(Ease of Development)をテーマに、名前を改名</p>
+<ul>
+<li>Java Platform Enterprise Edition(JavaEE)と改め新バージョンをリリース</li>
+<li>Java EE 5
+<ul>
+<li>普及には至らず</li>
+<li>改善をすすめる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>2009年12月 JavaEE5をさらに大幅改善したJavaEE6をリリース</p>
+<ul>
+<li>CDI</li>
+<li>プロファイル：全仕様に対するサブセットを提供</li>
+<li>プルーニング：使われなくなって古くなった使用を整理するための仕組み</li>
+<li>→ ミッションクリティカルな企業システムでも採用されるようになった</li>
+</ul>
+</li>
+</ul><section><h4 id="113-java-ee-7-へ-----3つのテーマ">1.1.3 Java EE 7 へ --- 3つのテーマ<a class="anchor" href="#113-java-ee-7-へ-----3つのテーマ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JavaEE6のリリース後、すぐに次期バージョンの検討</p>
+<ul>
+<li>目をつけたのは「クラウド」</li>
+<li>より簡単にJavaEEアプリケーションをスケールするような機能を考え、GlassFishというアプリケーション・サーバー上で実際に動作するサンプルも作成
+<ul>
+<li>外部からのフィードバックやスペックリードが集まって再検討した結果次期が早いと判断し見送り</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Column JavaEE7 におけるクラウド対応の見送り</p>
+<ul>
+<li>2012年8月12日 開発の遅れと、仕様化に対する十分な経験、検討が足りなかったため見送りを決定</li>
+<li>期待があった分失望の声もあったが</li>
+<li>有識者やベンダーの多くはこの決断を支持</li>
+</ul>
+</li>
+<li>
+<p>新しいテーマを考えた</p>
+<ul>
+<li>HTML5対応</li>
+<li>開発用意/生産性の向上</li>
+<li>エンタープライズニーズへの対応</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="12-java-eeの全体像">1.2 Java EEの全体像<a class="anchor" href="#12-java-eeの全体像"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>Java EEに含まれる機能の全体像を把握してください</p>
+</li>
+<li>
+<p>JavaEEは企業システムのアプリケーション開発に必要なさまざまな機能を１つにまとめた包括仕様（umbrella specification）の総称</p>
+</li>
+<li>
+<p>大小さまざまな39個の仕様から構成されています。</p>
+</li>
+<li>
+<p>主に</p>
+<ul>
+<li>インテグレーションテクノロジー</li>
+<li>ビジネスロジックテクノロジー</li>
+<li>プレゼンテーションテクノロジー
+<ul>
+<li>を組み合わせながらシステムを構築する</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>インテグレーションテクノロジー</p>
+<ul>
+<li>外部システムと連携するための機能を提供</li>
+<li>外部システム
+<ul>
+<li>データベース</li>
+<li>メールサーバー</li>
+<li>メッセージングプロバイダ（OpenMQ,WebShereMQ）</li>
+<li>エンタープライズ情報システム（ERP,メインフレーム）等がある</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ビジネスロジックテクノロジー</p>
+<ul>
+<li>外部システムと連携するプログラムの実装とユーザーインターフェースのプログラムの実装の間に入り、企業システムの業務で必要とされる処理を実装
+<ul>
+<li>トランザクションの処理や業務のフローの実装など</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>プレゼンテーションテクノロジー</p>
+<ul>
+<li>様々なデバイスからアクセスされることを考慮する必要がある</li>
+<li>人だけでなく、物も含め、企業システムに対してアクセスするためのインターフェースを提供</li>
+</ul>
+</li>
+</ul><section><h4 id="122-java-eeに含まれる機能">1.2.2 Java EEに含まれる機能<a class="anchor" href="#122-java-eeに含まれる機能"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>Java Persistence API(JPA)</p>
+<ul>
+<li>ORM機能</li>
+<li>JavaSEでも利用可能</li>
+</ul>
+</li>
+<li>
+<p>Java Messagge Service(JMS)</p>
+<ul>
+<li>外部のメッセージングプロバイダを経由して非同期でテキストメッセージやバイナリメッセージを送受信</li>
+<li>JavaSEでも利用可能</li>
+</ul>
+</li>
+<li>
+<p>Batch Applications for the Java Platform</p>
+<ul>
+<li>データをまとめて一括処理する場合に利用</li>
+<li>JavaSEでも利用可能</li>
+</ul>
+</li>
+<li>
+<p>Java Mail API</p>
+<ul>
+<li>電子メールクライアントを作成するために必要な機能を提供</li>
+</ul>
+</li>
+<li>
+<p>Java EE Connector Architecture(JCA)</p>
+<ul>
+<li>EAIを行うために必要な機能を提供</li>
+</ul>
+</li>
+<li>
+<p>DI/CDI</p>
+<ul>
+<li>JavaEEに含まれる技術を疎結合で結び合わせるための技術</li>
+</ul>
+</li>
+<li>
+<p>Enterprise JavaBeans(EJB)</p>
+<ul>
+<li>もともと、分散コンポーネントを作成するための技術として作られました</li>
+<li>JavaEE5以降、EJBはビジネスロジックを簡単に実装するための技術として大きく生まれ変わりました</li>
+<li>XMLの設定は不要で、クラスに対して宣言的に定義できるようになっています。</li>
+</ul>
+</li>
+<li>
+<p>Java Transaction API(JTA)</p>
+<ul>
+<li>トランザクション管理を行うための技術</li>
+</ul>
+</li>
+<li>
+<p>JavaServer Pages(JSP), JSP Standard Tag Library(JSTL)</p>
+<ul>
+<li>JSPは動的ページ作成</li>
+<li>JSTLは、ページ内のループ処理やSQLを使用したデータベースアクセスなど、JSPで共通する機能を隠蔽して利用できるようにした専用タグ
+<ul>
+<li>JSFの導入以降は徐々に置き換えが進む</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>JSON-P</p>
+<ul>
+<li>JavaEE7から新たに導入されたJavaEEでJSONを扱うための機能</li>
+<li>次期バージョンでは、JSONデータとJavaオブジェクトをマッピングするJSON Bindingの提供も予定されている
+<ul>
+<li>→ もう対応されている？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Expression Language(EL)</p>
+<ul>
+<li>簡単な式や変数などを用いて、記述内容の評価が行える言語として作られました</li>
+</ul>
+</li>
+<li>
+<p>Servlet</p>
+<ul>
+<li>ServletのプログラムはServletコンテナ（Webコンテナとも呼ばれる）と呼ばれる実行環境上でどうsあ</li>
+<li>HTTP/1.0及び1.1のリクエストに応答する</li>
+<li>ServletはHTTP処理に対する低レベルAPIしか提供しないため、現在はServletのAPIだけでプログラミングを行う場面は少ない</li>
+<li>JSFのようなServletコンテナ上で動作する上位フレームワークへ処理を以上するための仲介役として利用されることが多い</li>
+</ul>
+</li>
+<li>
+<p>WebSocket</p>
+<ul>
+<li>HTTPプロトコルをアップグレードした、双方向/全二重通信が可能なプロトコル</li>
+<li>HTTPと比べてメッセージ送受信の際のオーバーヘッドが少ないため、効果的にリアルタイムメッセージの送受信ができる</li>
+</ul>
+</li>
+<li>
+<p>Java API for RESTful Web Services(JAX-RS)</p>
+<ul>
+<li>RESTアーキテクチャに基づいてWebサービスを実装するための機能を提供</li>
+<li>従来、Webサービスの実装にはSOAP Webサービス(JAX-WS)とXMLを用いるのが主流だった</li>
+<li>現在は、分散システム間連携を行うために、RESTful WebサービスとJSONを組み合わせて実装する場面が多くなっている</li>
+<li>JAX-RSの仕様は、HTTPの仕様と密接に関連しており、HTTPメソッドに対応するアノテーションを用いて処理を実装する
+<ul>
+<li>JAX-WSからJAX-RSへと主流が変わってきたことを理解した</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>JavaServer Faces(JSF)</p>
+<ul>
+<li>コンポーネントベースで開発が可能なWebアプリケーション開発フレームワーク</li>
+<li>画面は、フェースレット（Facelets）と呼ばれるXHTML形式のテキストファイルに、HTMLタグやJSF専用タグを記入してデザイン</li>
+<li>バックエンドの処理はマネージドビーン（Managed Bean）と呼ばれるPOJOクラス、もしくはCDIクラスで処理を実装</li>
+<li>JSFは標準でHTML5やAjaxへも対応しており、Javascriptの知識がなくても簡単にAjaxプログラミングが行えます</li>
+</ul>
+</li>
+<li>
+<p>ビーンバリデーション</p>
+<ul>
+<li>データの整合性を検証するための機能</li>
+</ul>
+</li>
+<li>
+<p>Common Annotation</p>
+<ul>
+<li>JavaEE5でMetadata facility for Javaという機能が追加された</li>
+<li>これに関連して、JavaSE環境、JavaEE環境の両方で共通して利用可能なアノテーションが定期された</li>
+<li>例えば
+<ul>
+<li>インスタンスの生成時、破棄時になんらかの処理を行うことを規定したもの</li>
+<li>処理に対する実行権限を規定したもの</li>
+<li>データベース設定を規定したもの</li>
+</ul>
+</li>
+<li>これらのアノテーションを利用して宣言的にプログラミングを行う</li>
+</ul>
+</li>
+<li>
+<p>Managed Bean</p>
+<ul>
+<li>Common Annotationの中に、Managed Beanというアノテーションがある</li>
+<li>JavaEE環境で管理されているBeanであることが明示される</li>
+<li>Managed Beanは、アプリケーション・サーバーで管理されているリソースの参照や、インスタンスのライフサイクル管理ができる</li>
+<li><strong>通常、Managed Beanのアノテーションを付加したクラスを実装することはほとんど無い</strong>
+<ul>
+<li>しかし、Managed Beanの機能を持つ上位機能（CDI、EJB）でManaged Beanの機能を利用する</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Interceptors</p>
+<ul>
+<li>複数の機能間で横断的な関心事の実装を行うための機能です。</li>
+<li>例えば
+<ul>
+<li>ログの出力や各処理時間の計測、セキュリティの検査などは、特定部分の実装に限らず、システムの全体で必要な実装</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Concurrency Utilities for Java EE</p>
+<ul>
+<li>JavaEE環境で新たにスレッドを生成するための機能</li>
+<li>JavaEE6まではサーバー環境上で新たなスレッドを生成することは非推奨でした。なぜならば、作成されたスレッドがアプリケーション・サーバーから管理できないスレッドとして動作するためでした</li>
+<li>たとえば
+<ul>
+<li>セキュリティ情報や、トランザクション情報、コンテキスト情報などを一切含まないため、アプリケーション・サーバーから制御することは不可能</li>
+</ul>
+</li>
+<li>そこで、サーバーが管理できるスレッドを作るために、JavaEE7からConcurrency Utilities for Java EEが新たに導入された</li>
+</ul>
+</li>
+</ul></section><section><h4 id="123-java-ee-の仕様策定">1.2.3 Java EE の仕様策定<a class="anchor" href="#123-java-ee-の仕様策定"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>Javaの仕様はJCP(Java Community Process)という団体で管理</p>
+<ul>
+<li>Java Specification Requests(JSR)と呼ぶ仕様のリクエストに対して、一意の番号を割り当てて管理している</li>
+</ul>
+</li>
+<li>
+<p>JSRをJCPに提出するために必要な成果物について記載（割愛）</p>
+</li>
+</ul></section><section><h4 id="124-java-eeの実行環境とプロファイル">1.2.4 Java EEの実行環境とプロファイル<a class="anchor" href="#124-java-eeの実行環境とプロファイル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>割愛</li>
+</ul></section></section><section><h3 id="13-java-eeアプリケーション開発の基本">1.3 Java EEアプリケーション開発の基本<a class="anchor" href="#13-java-eeアプリケーション開発の基本"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="131-java-eeアプリケーションモデル">1.3.1 Java EEアプリケーションモデル<a class="anchor" href="#131-java-eeアプリケーションモデル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>3階層アプリケーションの開発モデルを採用している
+<ul>
+<li>ビジネスロジックとユーザーインターフェースを切り分けて実装することが大事</li>
+<li>柔軟性の高いシステムを構築していくことが大事</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="14-開発環境の準備">1.4 開発環境の準備<a class="anchor" href="#14-開発環境の準備"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>サンプルアプリケーション
+<ul>
+<li>JavaSE8</li>
+<li>JavaEE7</li>
+<li>GlassFishv4.1.1 (JavaEE参照実装)</li>
+</ul>
+</li>
+</ul><section><h4 id="141-oracle-jdkのインストール">1.4.1 Oracle JDKのインストール<a class="anchor" href="#141-oracle-jdkのインストール"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="142-netbeansのインストール">1.4.2 NetBeansのインストール<a class="anchor" href="#142-netbeansのインストール"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="143-netbeansの起動">1.4.3 NetBeansの起動<a class="anchor" href="#143-netbeansの起動"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="15-サンプルアプリケーションの概要">1.5 サンプルアプリケーションの概要<a class="anchor" href="#15-サンプルアプリケーションの概要"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="151-ナレッジバンク">1.5.1 ナレッジバンク<a class="anchor" href="#151-ナレッジバンク"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>個人が保有する知識情報（ナレッジ）を共有するためのWebアプリケーション</p>
+</li>
+<li>
+<p>JavaEE7で一般的なWebアプリケーションを実装するために必要な機能を使用して構築されている</p>
+</li>
+<li>
+<p>画面遷移などの説明</p>
+</li>
+</ul></section><section><h4 id="152-ナレッジバンクのセットアップ">1.5.2 ナレッジバンクのセットアップ<a class="anchor" href="#152-ナレッジバンクのセットアップ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>プロジェクトを読み込み</li>
+</ul></section></section><section><h3 id="16-まとめ">1.6 まとめ<a class="anchor" href="#16-まとめ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>この章のまとめを記載（割愛）</li>
+</ul></section></section><section><h2 id="chapter-2-プレゼンテーション層の開発jsfの基本">Chapter 2 プレゼンテーション層の開発――JSFの基本<a class="anchor" href="#chapter-2-プレゼンテーション層の開発jsfの基本"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><ul>
+<li>以下の３層に分けて開発を行う
+<ul>
+<li>プレゼンテーション層</li>
+<li>ビジネスロジック層</li>
+<li>インテグレーション層</li>
+</ul>
+</li>
+</ul><section><h3 id="21-jsf概要">2.1 JSF概要<a class="anchor" href="#21-jsf概要"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="211-javaserver-facesjsfとは">2.1.1 JavaSErver Faces(JSF)とは<a class="anchor" href="#211-javaserver-facesjsfとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JSFとはJavaEE5から追加されたプレゼンテーション層を作成するための仕様</p>
+<ul>
+<li>今まではServletを使用していた
+<ul>
+<li>サーブレットとは：ブラウザとHTTP通信を行う基礎的な仕様で、最小限の機能を提供
+<ul>
+<li>入力値とJavaオブジェクトのマッピング</li>
+<li>入力値のチェック</li>
+<li>エラーメッセージのハンドリング
+<ul>
+<li>など多くの機能が不足していた</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Column MVC1.0</p>
+<ul>
+<li>次のバージョンのJavaEE8には、「MVC1.0」というプレゼンテーション層を開発する新しい仕様が加わる予定</li>
+<li>Webアプリケーションを開発するフレームワークには、HTTPの通信に紐付けて処理を記述するアクションベースのフレームワーク</li>
+<li>入力フィールドやボタンに紐付けて処理を記述するコンポーネントベースのフレームワークがある</li>
+<li>本書で記述するJSFはコンポーネントベースのフレームワーク</li>
+<li>そのため開発者から、アクションベースの選択肢も必要という意見があがり、JavaEE8でアクションベースのフレームワークである「MVC1.0」を追加することになった</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="22-jsfの構成要素">2.2 JSFの構成要素<a class="anchor" href="#22-jsfの構成要素"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="221-画面と処理フェースレットとマネージドビーン">2.2.1 画面と処理（フェースレットとマネージドビーン）<a class="anchor" href="#221-画面と処理フェースレットとマネージドビーン"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>フェースレットとは</p>
+<ul>
+<li>画面レイアウトを記述するXHTMLベースのテンプレートエンジン</li>
+<li>XHTMLとは、HTMLをXMLの文法に適合するように定義し直したもの</li>
+</ul>
+</li>
+<li>
+<p>フェースレットとBeanがどのように紐付いているかを確認</p>
+</li>
+<li>
+<p>Column マネージドビーンとバッキングビーン</p>
+<ul>
+<li>フェースレット似バインドするJavaクラスはマネージドビーンといいますが、</li>
+<li>フェースレットの裏側で処理を行うという意味で、バッキングビーンと呼ばれることもあります。</li>
+<li>マネージドビーンがCDIでも代用できるようになった頃からJSFで使用するマネージドビーンをバッキングビーンと呼ぶことが多くなった</li>
+</ul>
+</li>
+</ul></section><section><h4 id="222-マネージドビーンとスコープ">2.2.2 マネージドビーンとスコープ<a class="anchor" href="#222-マネージドビーンとスコープ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>スコープ：マネージドビーンのデータをいつまで保有するかを指定する</p>
+</li>
+<li>
+<p>スコープの一覧の紹介</p>
+</li>
+</ul></section></section><section><h3 id="23-jsfの画面遷移">2.3 JSFの画面遷移<a class="anchor" href="#23-jsfの画面遷移"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="231-画面遷移の方法">2.3.1 画面遷移の方法<a class="anchor" href="#231-画面遷移の方法"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JSFで次の画面に遷移する場合、遷移先の名前を文字列で指定</p>
+<ul>
+<li>この画面遷移に使用する文字列を「outcome値」といいます</li>
+<li>遷移するフェースレットのパスを指定</li>
+</ul>
+</li>
+<li>
+<p>静的な遷移</p>
+<ul>
+<li>マネージドビーンの処理を行わずに直接次の画面に遷移する方法</li>
+</ul>
+</li>
+<li>
+<p>動的な遷移</p>
+<ul>
+<li>マネージドビーンで処理を行い、その結果を基に任意の画面へ遷移する方法</li>
+<li>EL式でメソッドをバインドしている</li>
+</ul>
+</li>
+</ul></section><section><h4 id="232-画面のリダイレクト">2.3.2 画面のリダイレクト<a class="anchor" href="#232-画面のリダイレクト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>画面遷移</p>
+<ul>
+<li>フォワード：処理後に直接Web画面を生成して結果を返す</li>
+<li>リダイレクト：一度ブラウザに処理を返した後にサーバーに再アクセスしてWeb画面を生成する</li>
+</ul>
+</li>
+<li>
+<p>JSFではリダイレクトを使用して次の画面に遷移する方法を提供している</p>
+<ul>
+<li>１画面前のURLを表示することを避けるためにこの機能を提供
+<ul>
+<li><code>?faces-redirect=true</code>というパラメータを付与すると動くらしい</li>
+</ul>
+</li>
+<li>問題：リクエストスコープが効かなくなる
+<ul>
+<li>対策：フラッシュスコープという特別なスコープを提供している</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="24-jsfの内部処理">2.4 JSFの内部処理<a class="anchor" href="#24-jsfの内部処理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="241-コンポーネント指向">2.4.1 コンポーネント指向<a class="anchor" href="#241-コンポーネント指向"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JSFではWebアプリケーションをより直感的に開発するためにコンポーネントという考え方を導入している</p>
+</li>
+<li>
+<p>メリット</p>
+<ul>
+<li>Web画面と処理の紐付けを直感的に行える（HTTPの理解が不要）</li>
+<li>コンポーネントが再利用しやすい</li>
+<li>Web画面のプロトタイプ作成が容易に行える</li>
+</ul>
+</li>
+<li>
+<p>コンポーネントツリーとしてアクセスできるJavaクラスが存在するらしい</p>
+</li>
+</ul></section><section><h4 id="242-ライフサイクル">2.4.2 ライフサイクル<a class="anchor" href="#242-ライフサイクル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ol>
+<li>ビューの復元(Restore View)</li>
+<li>リクエスト値の適用(Apply Request Values)</li>
+<li>入力チェック(Process Validations)</li>
+<li>モデル値の更新(Update Model Values)</li>
+<li>アプリケーションの実施(Invoke Application)</li>
+<li>画面の生成(REnder Response)</li>
+</ol><ul>
+<li>最初のアクセスの場合
+<ul>
+<li>①の復元フェーズ終了後に、⑥の画面生成フェーズに進み、画面を表示</li>
+</ul>
+</li>
+<li>ポストバックの場合
+<ul>
+<li>すでにコンポーネントツリーがあり、値の入力やボタンの操作が実施されているので、</li>
+<li>①→⑥まで順番に実施</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="25-jsfの基本設定">2.5 JSFの基本設定<a class="anchor" href="#25-jsfの基本設定"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="251-フォルダ構成">2.5.1 フォルダ構成<a class="anchor" href="#251-フォルダ構成"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JSFを使用したWebアプリケーションを作成するにはWAR形式のプロジェクトを作成</p>
+</li>
+<li>
+<p>EAR形式もある</p>
+<ul>
+<li>複数のWARファイルやJARファイルを１つにまとめてZIPにしたもの</li>
+</ul>
+</li>
+</ul></section><section><h4 id="252-設定ファイル">2.5.2 設定ファイル<a class="anchor" href="#252-設定ファイル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>必要な設定ファイル</p>
+<ul>
+<li>web.xml</li>
+<li>faces-config.xml</li>
+<li>アプリケーションサーバーの設定ファイル</li>
+</ul>
+</li>
+<li>
+<p>web.xml</p>
+<ul>
+<li>デプロイメントディスクリプタというWebアプリケーションの設定を記述するファイル
+<ul>
+<li>webアプリケーションの初期設定</li>
+<li>サーブレットの設定</li>
+<li>セキュリティの設定</li>
+</ul>
+</li>
+<li>WebアプリケーションでJSFを使用する場合は、web.xmlにJSFが提供するFacesServletを設定</li>
+</ul>
+</li>
+<li>
+<p>サーブレットの定義</p>
+<ul>
+<li>JSFは内部でサーブレットを使用している</li>
+<li>そのためJSFを使用するにはJSFのサーブレット指定が必要</li>
+<li>ロードオンスタートアップの指定はサーバーの起動時にサーブレットのインスタンス化と初期化を行うという指定</li>
+</ul>
+</li>
+<li>
+<p>サーブレットのマッピング定義</p>
+<ul>
+<li>URLパターンとサーブレットの定義で指定したサーブレット名を指定</li>
+<li>URLパターンは「/faces/*」という指定がJSFでは一般的らしい</li>
+<li>facesで始まっている場合に、JSFのアクセスであるとみなされる</li>
+</ul>
+</li>
+<li>
+<p>faces-config.xml</p>
+<ul>
+<li>JSFの設定を記述するファイル
+<ul>
+<li>国際化のせてい</li>
+<li>フェーズリスなのクラス指定など</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>アプリケーション・サーバー用の設定ファイル</p>
+</li>
+</ul></section><section><h4 id="253-リソースフォルダ">2.5.3 リソースフォルダ<a class="anchor" href="#253-リソースフォルダ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>JSFの仕様で<code>resources</code>フォルダに配置するフォルダ構成が決められているらしい</li>
+<li><code>resouces/[ローカルプレフィックス]/[ライブラリ名]/[ライブラリバージョン]/[リソース名]/[リソースバージョン]</code>
+<ul>
+<li>→わかりにくいと感じた</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="26-フェースレットタグライブラリ">2.6 フェースレットタグライブラリ<a class="anchor" href="#26-フェースレットタグライブラリ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="261-タグライブラリの種類">2.6.1 タグライブラリの種類<a class="anchor" href="#261-タグライブラリの種類"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>タグライブラリ</p>
+<ul>
+<li>画面レイアウトで使用するタグを定義したもの</li>
+</ul>
+</li>
+<li>
+<p>種類</p>
+<ul>
+<li>コアタグライブラリ：他のタグライブラリのサポート的な機能を提供するタグライブラリ</li>
+<li>HTMLタグライブラリ：HTMLのタグを生成するタグライブラリ</li>
+<li>フェースレットテンプレーティングタグライブラリ：画面のテンプレート処理や繰り返し処理などを提供するタグライブラリ</li>
+<li>コンポジットコンポーネントタグライブラリ：コンポジットコンポーネントの作成に使用するタグライブラリ</li>
+<li>JSTLコア/ファンクションタグライブラリ：JSPで使用するタグライブラリ</li>
+</ul>
+</li>
+<li>
+<p>最も使用頻度が高いのは「HTMLタグライブラリ</p>
+</li>
+<li>
+<p>JSTLコア/ファンクションタグライブラリ：JSPというJavaEEの仕様で使用するライブラリでJSFでも使用できるが、他のフェースレットが提供するタグライブラリとの実行タイミングが違うため不具合が発生しやすく、基本的に利用しない</p>
+</li>
+<li>
+<p>※ここで再確認</p>
+<ul>
+<li>JSF
+<ul>
+<li>フェースレット
+<ul>
+<li>フェースレットタグライブラリ</li>
+<li>EL式</li>
+</ul>
+</li>
+<li>マネージドビーン</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>タグライブラリを利用するには、冒頭でネームスペースの宣言が必要</p>
+</li>
+</ul></section><section><h4 id="262-htmlタグライブラリ">2.6.2 HTMLタグライブラリ<a class="anchor" href="#262-htmlタグライブラリ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>一覧を表で記載（割愛）</li>
+</ul></section><section><h4 id="263-ヘッダーとボディ">2.6.3 ヘッダーとボディ<a class="anchor" href="#263-ヘッダーとボディ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p><code>&#x3C;h:head></code>
+<code>&#x3C;h:body></code></p></section><section><h4 id="264-リソース">2.6.4 リソース<a class="anchor" href="#264-リソース"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="265-文字の出力">2.6.5 文字の出力<a class="anchor" href="#265-文字の出力"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="266-リンクとボタン">2.6.6 リンクとボタン<a class="anchor" href="#266-リンクとボタン"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>(割愛)</p></section></section><section><h3 id="27-elexpression-language">2.7 EL（Expression Language）<a class="anchor" href="#27-elexpression-language"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="271-elとは">2.7.1 ELとは<a class="anchor" href="#271-elとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>ELとは、演算の結果や値の参照結果を返却するための簡易記法</li>
+<li><code>#</code>または、<code>$</code>で始まり、波括弧で囲んだ中に式を記述
+<ul>
+<li><code>$</code>を使用した場合：ページがレンダリングされた時点で即時評価</li>
+<li><code>#</code>を使用した場合：コンポーネントに式として渡され、ライフサイクルのタイミングで遅延評価される
+<ul>
+<li>JSFでは基本的に<code>$</code>を使用せずに、<code>#</code>を使用する</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h4 id="272-オブジェクトの参照">2.7.2 オブジェクトの参照<a class="anchor" href="#272-オブジェクトの参照"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li><code>@Named</code>を付与したマネージドビーンの名前はEL式から参照できる</li>
+</ul></section><section><h4 id="273-暗黙オブジェクト">2.7.3 暗黙オブジェクト<a class="anchor" href="#273-暗黙オブジェクト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>暗黙的に参照可能なオブジェクト一覧を記載（割愛）</li>
+</ul></section><section><h4 id="274-演算子">2.7.4 演算子<a class="anchor" href="#274-演算子"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>算術演算子</li>
+<li>関係演算子</li>
+<li>論理演算子</li>
+<li>三項演算子</li>
+<li>空演算子
+<ul>
+<li><code>empty a</code> : aがNullまたは空文字の場合trueを返す</li>
+</ul>
+</li>
+</ul></section><section><h4 id="275-メソッドの呼び出し">2.7.5 メソッドの呼び出し<a class="anchor" href="#275-メソッドの呼び出し"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>メソッドも呼び出せるよって言う説明（割愛）</li>
+</ul></section></section></section><section><h2 id="chapter-3-プレゼンテーション層の開発jsfの応用-その1">Chapter 3 プレゼンテーション層の開発――JSFの応用 その1<a class="anchor" href="#chapter-3-プレゼンテーション層の開発jsfの応用-その1"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="31-入力チェック">3.1 入力チェック<a class="anchor" href="#31-入力チェック"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="311-入力チェックバリデーションとは">3.1.1 入力チェック（バリデーション）とは<a class="anchor" href="#311-入力チェックバリデーションとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>JSFのライフサイクルの中にある</li>
+<li>JSFでは入力した値をチェックする機能を提供している</li>
+<li>バリデーションの方法として以下の２つを提供
+<ul>
+<li>JSFの初期から提供されているJSFのバリデーション</li>
+<li>JavaEE6で導入されたビーンバリデーション★</li>
+</ul>
+</li>
+</ul></section><section><h4 id="312-jsfのバリデーション">3.1.2 JSFのバリデーション<a class="anchor" href="#312-jsfのバリデーション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>バリデーションタグを利用する（割愛）</li>
+</ul></section><section><h4 id="313-jsfのカスタムバリデータ">3.1.3 JSFのカスタムバリデータ<a class="anchor" href="#313-jsfのカスタムバリデータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>細かなチェックをするために独自でバリデータを作成する方法
+<ul>
+<li>メソッドを作成する方法</li>
+<li>クラスを作成する方法</li>
+</ul>
+</li>
+</ul></section><section><h4 id="314-ビーンバリデーションとは">3.1.4 ビーンバリデーションとは<a class="anchor" href="#314-ビーンバリデーションとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>ビーンのフィールドにアノテーションを付与するだけでチェックができる</li>
+</ul></section><section><h4 id="315-ビーンバリデーションのバリデータ">3.1.5 ビーンバリデーションのバリデータ<a class="anchor" href="#315-ビーンバリデーションのバリデータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>ビーンバリデーションのアノテーション一覧</p>
+<ul>
+<li><code>@NotNull</code></li>
+<li><code>@Null</code></li>
+<li><code>@Max</code></li>
+<li><code>@Min</code></li>
+<li><code>.....</code></li>
+</ul>
+</li>
+<li>
+<p>point: 入力値が空文字の場合NULL値として扱う場合、web.xmlにパラメータを追加する必要がある</p>
+<ul>
+<li><code>javax.faces.INTERPRET_EMPTY_STRING_SUBMITED_VALUES_AS_NULL</code></li>
+</ul>
+</li>
+</ul></section><section><h4 id="316-ビーンバリデーションのエラーメッセージ変更">3.1.6 ビーンバリデーションのエラーメッセージ変更<a class="anchor" href="#316-ビーンバリデーションのエラーメッセージ変更"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>メッセージを変更する方法は２つある
+<ul>
+<li>アノテーションに、<code>message</code>属性を指定する</li>
+<li>propertiesファイルで管理する
+<ul>
+<li>多言語対応などする場合、こちらが得策</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h4 id="317-ビーンバリデーションのバリデータ統合">3.1.7 ビーンバリデーションのバリデータ統合<a class="anchor" href="#317-ビーンバリデーションのバリデータ統合"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>MEMO: ★このテクニックは覚えておきたい</li>
+<li>入力チェックに複数の条件がある場合には、フィールドに標準のアノテーションを複数設定するが、同じような条件を何度も設定するのは面倒なので、アノテーションを作成してまとめる</li>
+</ul></section><section><h4 id="318-ビーンバリデーションのカスタマイズバリデータ">3.1.8 ビーンバリデーションのカスタマイズバリデータ<a class="anchor" href="#318-ビーンバリデーションのカスタマイズバリデータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>ビーンバリデーションのカスタマイズも可能
+<ul>
+<li>MEMO:（実装方法省略）</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="32-コンバータ">3.2 コンバータ<a class="anchor" href="#32-コンバータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="321-コンバータの役割">3.2.1 コンバータの役割<a class="anchor" href="#321-コンバータの役割"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>Web画面に表示する文字列とマネージドビーンのプロパティで保持するJavaのオブジェクトを変換するための仕組み</p>
+</li>
+<li>
+<p>JSFにより自動的に変換されるオブジェクトも存在する</p>
+<ul>
+<li>short</li>
+<li>int</li>
+<li>long</li>
+<li>float</li>
+<li>double</li>
+<li>boolean</li>
+<li>byte</li>
+<li>char</li>
+<li>BigInteger</li>
+<li>BigDecimal</li>
+</ul>
+</li>
+<li>
+<p>JSFでは任意のフォーマットで画面表示を行うため、標準のコンバータを提供している</p>
+</li>
+</ul></section><section><h4 id="322-標準のコンバータ">3.2.2 標準のコンバータ<a class="anchor" href="#322-標準のコンバータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>JSFが標準で提供するコンバータは、日付や数値とおじ列を相互に変換するコンバータ
+<ul>
+<li>f<convertdatetime></convertdatetime></li>
+<li>f<convertnumber></convertnumber></li>
+</ul>
+</li>
+</ul></section><section><h4 id="323-カスタムコンバータ">3.2.3 カスタムコンバータ<a class="anchor" href="#323-カスタムコンバータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>独自で作成したクラスなどの標準のコンバータでは対応できないクラスでは、独自にコンバータを作成する</p>
+<ul>
+<li>JSFが提供する<code>javax.faces.convert.Converter</code>インターフェースを実装したクラスを作成する</li>
+</ul>
+</li>
+<li>
+<p>MEMO: 確かに変換が必要な場面は絶対あるはずなので、thymeleafとかがどのように変換を持っているか確認する</p>
+<ul>
+<li>他のフレームワークでも、convertを実装する方法を書いていた
+<ul>
+<li><a href="https://qiita.com/alpha_pz/items/21c6eda2fe227abfa403">https://qiita.com/alpha_pz/items/21c6eda2fe227abfa403</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>MEMO: DBSlectした結果をList(category)にかかえているような書き方をしている</p>
+</li>
+</ul></section></section><section><h3 id="33-コンポーネントのカスタマイズ">3.3 コンポーネントのカスタマイズ<a class="anchor" href="#33-コンポーネントのカスタマイズ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>JSFではフェースレットが提供するコンポーネントを使用してWeb画面を作成</li>
+<li>独自のコンポーネントを作成することもできる</li>
+<li>方法として２つある
+<ul>
+<li>コンポーネントクラスを作成するカスタムコンポーネント</li>
+<li>フェースレットでコンポーネントを組み合わせて作成するコンポジットコンポーネント★</li>
+</ul>
+</li>
+</ul><section><h4 id="331-コンポジットコンポーネント">3.3.1 コンポジットコンポーネント<a class="anchor" href="#331-コンポジットコンポーネント"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>１つのフェースレットファイルを作成するだけで、複数の画面で使い回せるコンポーネントを作成することができる
+<ul>
+<li>MEMO: thymeleafでincludeしている感じと同じ</li>
+</ul>
+</li>
+</ul></section><section><h4 id="332-より高度なコンポジットコンポーネント">3.3.2 より高度なコンポジットコンポーネント<a class="anchor" href="#332-より高度なコンポジットコンポーネント"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.4fsv9.css"><script type="module" src="/_astro/ec.g1fg5.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="xhtml" class="wrap" style="--ecMaxLine:137ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;!-- テンプレート側 --></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;?xml version="1.0" encoding="UTF-8"?></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;!DOCTYPE html></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;html xmlns="http://www.w3.org/1999/xhtml"</span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">      </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">xmlns:h="http://xmlns.jcp.org/jsf/html"</span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">      </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">xmlns:knowledge="http://xmlns.jcp.org/jsf/composite/knowledgecomp"></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:head></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;meta charset="UTF-8" /></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:outputStylesheet library="css" name="style.css" /></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:outputScript name="jsf.js" library="javax.faces"/></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:outputScript library="js" name="application.js" /></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;title>Knowledge Bank&#x3C;/title></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/h:head></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:body></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;div id="top_content"></span></div></div><div class="ec-line" style="--ecIndent:12ch"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">            </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:form id="form"></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h1>&#x3C;h:graphicImage library="img" name="logo.png" />&#x3C;/h1></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;div class="notice"></span></div></div><div class="ec-line" style="--ecIndent:20ch"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">#{flash.notice}</span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/div></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;knowledge:login userId="#{loginBean.userId}" password="#{loginBean.password}" loginButtonAction="#{loginBean.login()}"/></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;div></span></div></div><div class="ec-line" style="--ecIndent:20ch"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:link outcome="account/register" value="アカウント登録"/></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/div></span></div></div><div class="ec-line" style="--ecIndent:12ch"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">            </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/h:form></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/div></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/h:body></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/html></span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="xhtml" class="wrap" style="--ecMaxLine:137ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;!-- 利用する側 --></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;?xml version="1.0" encoding="UTF-8"?></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;!DOCTYPE html></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;html xmlns="http://www.w3.org/1999/xhtml"</span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">      </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">xmlns:h="http://xmlns.jcp.org/jsf/html"</span></div></div><div class="ec-line" style="--ecIndent:6ch"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">      </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">xmlns:knowledge="http://xmlns.jcp.org/jsf/composite/knowledgecomp"></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:head></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;meta charset="UTF-8" /></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:outputStylesheet library="css" name="style.css" /></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:outputScript name="jsf.js" library="javax.faces"/></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:outputScript library="js" name="application.js" /></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;title>Knowledge Bank&#x3C;/title></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/h:head></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:body></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;div id="top_content"></span></div></div><div class="ec-line" style="--ecIndent:12ch"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">            </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:form id="form"></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h1>&#x3C;h:graphicImage library="img" name="logo.png" />&#x3C;/h1></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;div class="notice"></span></div></div><div class="ec-line" style="--ecIndent:20ch"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">#{flash.notice}</span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/div></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;knowledge:login userId="#{loginBean.userId}" password="#{loginBean.password}" loginButtonAction="#{loginBean.login()}"/></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;div></span></div></div><div class="ec-line" style="--ecIndent:20ch"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;h:link outcome="account/register" value="アカウント登録"/></span></div></div><div class="ec-line" style="--ecIndent:16ch"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">                </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/div></span></div></div><div class="ec-line" style="--ecIndent:12ch"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">            </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/h:form></span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">        </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/div></span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent"><span style="--0:#e1e4e8;--1:#e1e4e8">    </span></span><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/h:body></span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code"><span style="--0:#e1e4e8;--1:#e1e4e8">&#x3C;/html></span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div><ul>
+<li>Column: コンポーネントで利用可能な暗黙オブジェクト
+<ul>
+<li>カスタムコンポーネント内でよく利用する暗黙オブジェクト
+<ul>
+<li>cc: コンポジットコンポーネントの情報が取得できる</li>
+<li>component: 現在のコンポーネントの情報や、親や子のコンポーネントの情報にアクセスすることができる</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="34-フェースレットテンプレート">3.4 フェースレットテンプレート<a class="anchor" href="#34-フェースレットテンプレート"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="341-フェースレットテンプレートの利用">3.4.1 フェースレットテンプレートの利用<a class="anchor" href="#341-フェースレットテンプレートの利用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>ヘッダーやサイドバーなどはテンプレート化して管理する説明
+<ul>
+<li>こっちがthymeleafのincludeに近い</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="35-html5フレンドリマークアップ">3.5 HTML5フレンドリマークアップ<a class="anchor" href="#35-html5フレンドリマークアップ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>JavaEE7(JSF2.2)からHTML5の進化へ対応するためにフレンドリマークアップという機能が導入された
+<ul>
+<li>以前のJSFでは任意の属性をHTMLとして出力する場合にコンポーネントをカスタマイズして提供していた</li>
+</ul>
+</li>
+<li>画面デザインをWebデザイナーが行い、リッチなWeb画面を作ることが一般化</li>
+</ul><section><h4 id="351-パススルーアトリビュート">3.5.1 パススルーアトリビュート<a class="anchor" href="#351-パススルーアトリビュート"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="352-パススルーエレメント">3.5.2 パススルーエレメント<a class="anchor" href="#352-パススルーエレメント"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="36-ajax">3.6 Ajax<a class="anchor" href="#36-ajax"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="361-jsfのajax対応">3.6.1 JSFのAjax対応<a class="anchor" href="#361-jsfのajax対応"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>一般的なAjaxの作りでは、データの取得処理や画面の再描画処理をJavascriptで記述する必要がある</p>
+</li>
+<li>
+<p>JSFのAjax機能を利用するとJavascriptをほとんど記述せずにWeb画面の部分更新が可能</p>
+</li>
+<li>
+<p>Ajax専用のタグを使用して、結果をRenderingしている</p>
+</li>
+<li>
+<p>MEMO: 専用のタグでAjax処理ができるのは、コンポーネントベースのフレームワークであるJSFの特徴だと感じた</p>
+</li>
+</ul></section><section><h4 id="362-ajaxを使用した入力チェック">3.6.2 Ajaxを使用した入力チェック<a class="anchor" href="#362-ajaxを使用した入力チェック"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="363-ajaxのイベントハンドリング">3.6.3 Ajaxのイベントハンドリング<a class="anchor" href="#363-ajaxのイベントハンドリング"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>イベント実行中や完了、エラー発生時の処理を記述するための方法</li>
+<li>共通化するための方法を紹介</li>
+</ul></section></section></section><section><h2 id="chapter-4-プレゼンテーション層の開発jsfの応用-その2">Chapter 4 プレゼンテーション層の開発――JSFの応用 その2<a class="anchor" href="#chapter-4-プレゼンテーション層の開発jsfの応用-その2"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="41-認証認可">4.1 認証／認可<a class="anchor" href="#41-認証認可"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="411-認証認可の仕組み">4.1.1 認証/認可の仕組み<a class="anchor" href="#411-認証認可の仕組み"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JavaEEのログイン機能を実現するための認証認可の仕組みについて</p>
+</li>
+<li>
+<p>ログイン機能を利用する手順</p>
+<ol>
+<li>アプリケーションサーバーの認証/認可設定をする。</li>
+<li>アプリケーションの認証/認可設定をする。</li>
+<li>プログラムでログイン/ログアウト機能を作成する。</li>
+</ol>
+</li>
+</ul></section><section><h4 id="412-アプリケーションサーバーの認証設定">4.1.2 アプリケーションサーバーの認証設定<a class="anchor" href="#412-アプリケーションサーバーの認証設定"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>アプリケーション・サーバーに認証の設定を行う必要がある</p>
+<ul>
+<li>認証データの指定先に
+<ul>
+<li>ファイル</li>
+<li>データベース</li>
+<li>LDAPサーバー　などを指定する</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ナレッジバンクではデータベースを指定している</p>
+</li>
+<li>
+<p>Glasfishを使用した認証の設定方法を説明</p>
+</li>
+<li>
+<p>Glasfishの管理コンソール</p>
+<ul>
+<li><code>http://localhost:4848/</code></li>
+</ul>
+</li>
+<li>
+<p>認証設定を行うには</p>
+<ul>
+<li>Configurations＞server-config＞Security＞Realms＞New</li>
+</ul>
+</li>
+<li>
+<p>ナレッジバンクではJDBCレルムを使用するので</p>
+<ul>
+<li>ClassNameにJDBCRealmを選択する</li>
+</ul>
+</li>
+</ul></section><section><h4 id="413-アプリケーションの認証設定">4.1.3 アプリケーションの認証設定<a class="anchor" href="#413-アプリケーションの認証設定"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>アプリケーションサーバーの認証設定が終了したら、</li>
+<li>今度はアプリケーションの認証設定を行う</li>
+</ul></section><section><h4 id="414-ログインログアウト機能の作成">4.1.4 ログイン/ログアウト機能の作成<a class="anchor" href="#414-ログインログアウト機能の作成"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>Oracle18cで接続を試していたがどうしてもうまく行かなかった</p>
+</li>
+<li>
+<p>Oracle11gだとすぐにうまく行った</p>
+</li>
+<li>
+<p>ログインの仕組みを作って、</p>
+</li>
+<li>
+<p>実際にloginのfaceletでコンテキストのログインメソッドを呼び出して、認証を済ませる</p>
+<ul>
+<li>MEMO: springsecurityみたいなやつ　認証設定は必ず実装しておく</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="42-国際化">4.2 国際化<a class="anchor" href="#42-国際化"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="421-jsfの国際化">4.2.1 JSFの国際化<a class="anchor" href="#421-jsfの国際化"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>プロパティファイルでロケール管理して、<code>faces-config.xml</code>で切り替え</li>
+<li>UIViewRootクラスのgetLocaleメソッドやsetLocaleメソッドでも切り替えることができるみたい
+<ul>
+<li>MEMO: ロケール切り替えは実装しておくべき</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="43-ブックマーカビリティ">4.3 ブックマーカビリティ<a class="anchor" href="#43-ブックマーカビリティ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="431-ブックマーカビリティとは">4.3.1 ブックマーカビリティとは<a class="anchor" href="#431-ブックマーカビリティとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JSFでは最初にブラウザからアクセスが来た際に、処理をせずに画面を表示する</p>
+</li>
+<li>
+<p>しかし、Webアプリケーションでデータの一覧や詳細を表示する画面では、なにかしらの事前処理やデータの取得処理が必要</p>
+<ul>
+<li>そこで、JSFでは初回アクセス時に処理を実施する機能を提供している</li>
+</ul>
+</li>
+<li>
+<p>使い方について説明（割愛）</p>
+</li>
+</ul></section></section><section><h3 id="44-フェーズリスナ">4.4 フェーズリスナ<a class="anchor" href="#44-フェーズリスナ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>JSFのライフサイクル</p>
+<ol>
+<li>ビューの復元(Restore View)</li>
+<li>リクエスト値の適用(Apply Request Values)</li>
+<li>入力チェック(Process Validations)</li>
+<li>モデル値の更新(Update Model Values)</li>
+<li>アプリケーションの実施(Invoke Application)</li>
+<li>画面の生成(REnder Response)</li>
+</ol>
+</li>
+<li>
+<p>フェーズ前後で横断的に行う処理はフェーズリスナを使用する</p>
+</li>
+</ul><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="java" class="wrap" style="--ecMaxLine:77ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#F97583;--1:#F97583">package</span><span style="--0:#E1E4E8;--1:#E1E4E8"> knowledgebank.web.listener;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#F97583;--1:#F97583">import</span><span style="--0:#E1E4E8;--1:#E1E4E8"> java.util.logging.Logger;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#F97583;--1:#F97583">import</span><span style="--0:#E1E4E8;--1:#E1E4E8"> javax.faces.event.PhaseEvent;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#F97583;--1:#F97583">import</span><span style="--0:#E1E4E8;--1:#E1E4E8"> javax.faces.event.PhaseId;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span style="--0:#F97583;--1:#F97583">import</span><span style="--0:#E1E4E8;--1:#E1E4E8"> javax.faces.event.PhaseListener;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span style="--0:#F97583;--1:#F97583">public</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">class</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">KnowledgePhaseListener</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">implements</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">PhaseListener</span><span style="--0:#E1E4E8;--1:#E1E4E8"> {</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">    </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">Logger logger </span><span style="--0:#F97583;--1:#F97583">=</span><span style="--0:#E1E4E8;--1:#E1E4E8"> Logger.</span><span style="--0:#B392F0;--1:#B392F0">getLogger</span><span style="--0:#E1E4E8;--1:#E1E4E8">(KnowledgePhaseListener.class.</span><span style="--0:#B392F0;--1:#B392F0">getName</span><span style="--0:#E1E4E8;--1:#E1E4E8">());</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">    </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">@</span><span style="--0:#F97583;--1:#F97583">Override</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent">    </span><span style="--0:#F97583;--1:#F97583">public</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">void</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">beforePhase</span><span style="--0:#E1E4E8;--1:#E1E4E8">(PhaseEvent </span><span style="--0:#FFAB70;--1:#FFAB70">event</span><span style="--0:#E1E4E8;--1:#E1E4E8">) {</span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">        </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">logger.</span><span style="--0:#B392F0;--1:#B392F0">info</span><span style="--0:#E1E4E8;--1:#E1E4E8">(event.</span><span style="--0:#B392F0;--1:#B392F0">getPhaseId</span><span style="--0:#E1E4E8;--1:#E1E4E8">() </span><span style="--0:#F97583;--1:#F97583">+</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#9ECBFF;--1:#9ECBFF">" beforePhase"</span><span style="--0:#E1E4E8;--1:#E1E4E8">);</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">    </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">    </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">@</span><span style="--0:#F97583;--1:#F97583">Override</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code"><span class="indent">    </span><span style="--0:#F97583;--1:#F97583">public</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">void</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">afterPhase</span><span style="--0:#E1E4E8;--1:#E1E4E8">(PhaseEvent </span><span style="--0:#FFAB70;--1:#FFAB70">event</span><span style="--0:#E1E4E8;--1:#E1E4E8">) {</span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">        </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">logger.</span><span style="--0:#B392F0;--1:#B392F0">info</span><span style="--0:#E1E4E8;--1:#E1E4E8">(event.</span><span style="--0:#B392F0;--1:#B392F0">getPhaseId</span><span style="--0:#E1E4E8;--1:#E1E4E8">() </span><span style="--0:#F97583;--1:#F97583">+</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#9ECBFF;--1:#9ECBFF">" afterPhase"</span><span style="--0:#E1E4E8;--1:#E1E4E8">);</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">    </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code">
+</div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">    </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">@</span><span style="--0:#F97583;--1:#F97583">Override</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent">    </span><span style="--0:#F97583;--1:#F97583">public</span><span style="--0:#E1E4E8;--1:#E1E4E8"> PhaseId </span><span style="--0:#B392F0;--1:#B392F0">getPhaseId</span><span style="--0:#E1E4E8;--1:#E1E4E8">() {</span></div></div><div class="ec-line" style="--ecIndent:8ch"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code"><span class="indent">        </span><span style="--0:#F97583;--1:#F97583">return</span><span style="--0:#E1E4E8;--1:#E1E4E8"> PhaseId.ANY_PHASE;</span></div></div><div class="ec-line" style="--ecIndent:4ch"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent"><span style="--0:#E1E4E8;--1:#E1E4E8">    </span></span><span style="--0:#E1E4E8;--1:#E1E4E8">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">}</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h3 id="45-java-ee-7で導入されたjsfの機能">4.5 Java EE 7で導入されたJSFの機能<a class="anchor" href="#45-java-ee-7で導入されたjsfの機能"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="451-jsf-22-の追加機能">4.5.1 JSF 2.2 の追加機能<a class="anchor" href="#451-jsf-22-の追加機能"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>JSF2.2の仕様には大きな特徴として以下の４つが紹介されている
+<ul>
+<li>HTML5フレンドリマークアップ（パススルーアトリビュートと、パススルーエレメント）</li>
+<li>リソース・ライブラリコントラクト</li>
+<li>Faces Flows</li>
+<li>ステートレスビュー</li>
+</ul>
+</li>
+</ul></section><section><h4 id="452-リソースライブラリコントラクト">4.5.2 リソース・ライブラリコントラクト<a class="anchor" href="#452-リソースライブラリコントラクト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>リソースの塊を簡単に切り替えることができる仕組み</p><ul>
+<li>あまり便利に思わなかった</li>
+</ul></section><section><h4 id="453-faces-flows">4.5.3 Faces Flows<a class="anchor" href="#453-faces-flows"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>フロー処理について記載されている</li>
+<li>スコープを設定ファイルやJavaアノテーションで保持できるみたい
+<ul>
+<li>MEMO: 他のフレームワークではどのようにスコープ持っているのか確認</li>
+</ul>
+</li>
+</ul></section><section><h4 id="454-ステートレスビュー">4.5.4 ステートレスビュー<a class="anchor" href="#454-ステートレスビュー"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>状態を保持しないビューを作成する機能</p>
+</li>
+<li>
+<p>JSFでは画面を表示する際にサーバー側似コンポーネントツリーを作成し、同一画面を表示している間はそのコンポーネントツリーを保持していると説明しました。</p>
+</li>
+<li>
+<p>ステートレスビューを使用すると、そのコンポーネントツリーを毎回破棄市、アクセスが来るたびに再作成する動きに変わる</p>
+</li>
+<li>
+<p>ステートレスなアプリを作る上で欠かせない</p>
+<ul>
+<li>MEMO: 他のフレームワークの場合は、redisなどでセッション管理している</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="46-まとめ">4.6 まとめ<a class="anchor" href="#46-まとめ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>ここまでの内容を理解していれば、十分JSFを使用してWebアプリケーションを作成することができる</p>
+</li>
+<li>
+<p>紹介していないライブラリ</p>
+<ul>
+<li>PrimeFaces</li>
+<li>RichFaces</li>
+<li>OmniFaces</li>
+</ul>
+</li>
+<li>
+<p>MEMO: 時間があれば見てみる程度で良いかも</p>
+</li>
+</ul></section></section><section><h2 id="chapter-5-ビジネスロジック層の開発cdiの利用">Chapter 5 ビジネスロジック層の開発――CDIの利用<a class="anchor" href="#chapter-5-ビジネスロジック層の開発cdiの利用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><ul>
+<li>
+<p>本章と次章ではCDIとEJBについて解説</p>
+</li>
+<li>
+<p>本章ではCDI</p>
+<ul>
+<li>CDIとEJBの違いについて解説</li>
+<li>CDIがJavaEEに採用された経緯</li>
+<li>CDIの機能　について解説</li>
+</ul>
+</li>
+</ul><section><h3 id="51-cdiとejb">5.1 CDIとEJB<a class="anchor" href="#51-cdiとejb"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="511-ビジネスロジック層の部品">5.1.1 ビジネスロジック層の部品<a class="anchor" href="#511-ビジネスロジック層の部品"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>CDI,EJB</p>
+<ul>
+<li>いずれも「ビジネスロジック」を記述するための部品である</li>
+</ul>
+</li>
+<li>
+<p>CDI</p>
+<ul>
+<li>JavaEE6から採用された新しい技術</li>
+</ul>
+</li>
+<li>
+<p>EJB</p>
+<ul>
+<li>Java2Enterprise Edition（J2EE）の頃から存在する歴史ある技術</li>
+</ul>
+</li>
+</ul></section><section><h4 id="512-cdiとejbの違い">5.1.2 CDIとEJBの違い<a class="anchor" href="#512-cdiとejbの違い"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>CDIとEJBの違いは「設計の柔軟性」</li>
+<li>CDIの方が自由度が高い</li>
+</ul></section></section><section><h3 id="52-didependency-injection">5.2 DI（Dependency Injection）<a class="anchor" href="#52-didependency-injection"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>CDIについて知る前にDIについて理解しておく必要がある</li>
+<li>DIが考案された歴史的な背景をたどって、CDIの意義について知ることにする</li>
+</ul><section><h4 id="521-diとは">5.2.1 DIとは<a class="anchor" href="#521-diとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>DI</p>
+<ul>
+<li>部品間の依存関係を少なくすることで、部品の分離と結合をコントロールするための考え方、及びその仕組みのこと</li>
+</ul>
+</li>
+<li>
+<p>「依存」とは、クラス同士が強いつながりを持つことを意味している</p>
+</li>
+<li>
+<p>直接クラスを宣言し、インスタンス化している強い依存関係は、それ自体で処理が完結しているプログラムモジュール、例えば、</p>
+</li>
+<li>
+<p>ビジネスロジック層でしか動かないクラス間の依存については問題ありません。</p>
+</li>
+<li>
+<p>一方で各層をまたがる依存関係はできる限り弱い方がよいという考えがある</p>
+</li>
+<li>
+<p>依存関係を弱く保つことができれば、変更点は少なくてすむ</p>
+</li>
+</ul></section><section><h4 id="522-diによる依存関係の解消">5.2.2 DIによる依存関係の解消<a class="anchor" href="#522-diによる依存関係の解消"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>DIコンテナがあれば、実行時に動的にクラスを選択できる</p>
+</li>
+<li>
+<p>用途としては以下</p>
+<ul>
+<li>ある条件において別の実装クラスを必要とするケース
+<ul>
+<li>処理の流れ自体は変わらないが、ユーザーやリクエストの状況に応じて手続きが異なる、あるいは出力先が異なる</li>
+</ul>
+</li>
+<li>テストや開発中のモック入れ替え
+<ul>
+<li>層をまたぐ処理や開発中のクラスを利用しなければならないときに、仮となるモックを利用し、将来的に完成したクラスを入れ替える場合。</li>
+<li>あるいはテストデータを返却するテスト用のモックと完成したクラスを入れ替える場合</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>COLUMN ファクトリメソッドパターン</p>
+<ul>
+<li>DIが実現している実装の入れ替えは、ファクトリメソッドパターンと呼ばれるデザインパターンを採用することでも実現可能</li>
+<li>ファクトリメソッドパターンはオブジェクトの生成を管理するクラスを設けることで、任意の振る舞いを持つオブジェクトを取得する方式</li>
+<li>ただし、ファクトリメソッドパターンを利用していても、結局返却するインスタンスを選択する処理をソースコードに記述しておく必要があり、</li>
+<li>インスタンスをソースコード外で管理するには、プロパティファイルなどを用いる必要があるので、そうするよりはDIコンテナを利用するほうが楽</li>
+<li>MEMO: 再読</li>
+</ul>
+</li>
+</ul></section><section><h4 id="523-javaeeへのdi取り込み">5.2.3 JavaEEへのDI取り込み<a class="anchor" href="#523-javaeeへのdi取り込み"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>(
+割愛
+)</p></section></section><section><h3 id="53-cdi">5.3 CDI<a class="anchor" href="#53-cdi"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>CDIとはJavaEE6から導入されたJavaEEアプリケーションサーバー上でDI機能を提供するための仕様</p>
+</li>
+<li>
+<p>CDIを使用するために必要な定義</p>
+<ul>
+<li>インジェクションポイント：<code>@Inject</code>が指定された変数</li>
+<li>CDIビーン：スコープに関するアノテーションが付与されたクラス</li>
+</ul>
+</li>
+<li>
+<p>Column 設定ファイル beans.xml</p>
+<ul>
+<li>JavaEE7 からCDIを使うための設定ファイルであるbeans.xmlは特定の用途を除き不要になりました</li>
+<li>beanx.xmlはインジェクションポイントとCDIビーンの関係性を記述するためのものでしたが、現在では自動的に解決する用になっている</li>
+</ul>
+</li>
+<li>
+<p>CDIの利点</p>
+<ul>
+<li>インジェクションを行うのが簡単（アノテーションのみで設定ファイル不要）</li>
+<li>DIを基礎とした様々な機能があらかじめ準備されている</li>
+</ul>
+</li>
+</ul></section><section><h3 id="54-cdi基本編">5.4 CDI基本編<a class="anchor" href="#54-cdi基本編"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>CDI限定子：複数のインジェクション候補クラスが存在する場合に、クラスを特定するためのアノテーション <code>javax.inject.Qualifier</code></li>
+</ul><section><h4 id="541-cdiコンテナによるインジェクション">5.4.1 CDIコンテナによるインジェクション<a class="anchor" href="#541-cdiコンテナによるインジェクション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>CDIコンテナに存在するスコープを過ぎたオブジェクトは破棄される</li>
+</ul></section><section><h4 id="542-cdiの型解決方法">5.4.2 CDIの型解決方法<a class="anchor" href="#542-cdiの型解決方法"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>CDIがインジェクションポイントに対して注入する対象となるインスタンスを解決する方法は２通りある</p>
+<ul>
+<li>インジェクションポイントと対象インスタンスが１対１の場合（自動解決）</li>
+<li>CDI限定子もしくは、beans.xml(@Alternative)で解決する方法</li>
+</ul>
+</li>
+<li>
+<p>結論：CDI限定子（Qualifier）を使用して書いていくのがよい</p>
+<ul>
+<li>設定ファイルも必要ないし、ソースコードを柔軟に変更しながら開発ができるため</li>
+</ul>
+</li>
+<li>
+<p>Column インターフェースを利用するべきか</p>
+<ul>
+<li>結論：インターフェースは準備しておくべき</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="55-cdi応用編">5.5 CDI応用編<a class="anchor" href="#55-cdi応用編"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>CDIに関わる応用的な利用方法について記述</li>
+<li>CDIの付加機能
+<ul>
+<li>イベント処理：CDIビーン上である条件を満たした場合に、別のクラスに対して通知を行う機能</li>
+<li>ステレオタイプ：複数アノテーションをまとめて定義する機能</li>
+<li>プロデューサ/ディスポーザ：クラスではなく、フィールドそのものやメソッドの戻り値をインジェクションポイントに注入する機能</li>
+<li>インターセプター/デコレータ：処理の前後に別の処理を入れ込んだり、追加したりする機能</li>
+</ul>
+</li>
+</ul><section><h4 id="551-イベント処理">5.5.1 イベント処理<a class="anchor" href="#551-イベント処理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>イベント処理とは</p>
+<ul>
+<li>設定した閾値を超えるなど、特定の条件を満たす情報が発生したとき、その通知と情報をやりとりすることを指す</li>
+<li>CDIではイベント発火はCDIビーン上で行い、それを処理するクラスを特別な呼び方として「オブザーバ」と呼ぶ</li>
+</ul>
+</li>
+<li>
+<p>イベント処理の実装</p>
+<ul>
+<li>イベント情報を格納するクラスを準備する</li>
+<li>イベントを発火するCDIビーンを作成する</li>
+<li>オブザーバクラスを作成する</li>
+</ul>
+</li>
+<li>
+<p>イベント処理の留意事項</p>
+<ul>
+<li>イベント発火からオブザーバの処理までがすべて同期で実行される</li>
+<li>非同期だと勘違いしないように</li>
+<li>参照関係を持たず、プログラムモジュール間似おける情報のやり取りを非同期で実行したい場合には、次章で説明するJMSを利用するなど別の方法を検討する必要がある</li>
+</ul>
+</li>
+</ul></section><section><h4 id="552-ステレオタイプの利用">5.5.2 ステレオタイプの利用<a class="anchor" href="#552-ステレオタイプの利用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>複数のアノテーション定義をまとめて管理できる</p>
+</li>
+<li>
+<p><code>@StereoType</code>を付与してまとめていく</p>
+</li>
+<li>
+<p>上書きもできるが、あまり上書きしすぎると良くない</p>
+</li>
+<li>
+<p>MEMO: 管理方法について</p>
+<ul>
+<li>パッケージ名を<code>stereotype</code>で切って管理する</li>
+<li>クラス名称の接尾字に<code>Type</code>をつけておくとアノテーションがステレオタイプで有ることを明示できる</li>
+</ul>
+</li>
+<li>
+<p>MEMO: Springでもまとめていくアノテーションあるか</p>
+</li>
+</ul></section><section><h4 id="553-プロデューサディスポーザの利用">5.5.3 プロデューサ/ディスポーザの利用<a class="anchor" href="#553-プロデューサディスポーザの利用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>プロデューサを利用すると、インジェクションポイントに注入するオブジェクトをプログラム上で動的に変更することができる</p>
+</li>
+<li>
+<p>プロデューサにより作成されたオブジェクトが終了処理の必要なオブジェクトである場合、ディスポーザを利用することで終了処理を記述することができる</p>
+</li>
+<li>
+<p>プロデューサアノテーションをメソッドに付与して戻り値に<code>@Inject</code>指定した変数と同じ型を指定してあげる</p>
+</li>
+<li>
+<p>メソッドで処理されたあとのオブジェクトがDIコンテナに格納され、インジェクションされる</p>
+</li>
+<li>
+<p>Disposesアノテーションは、Producerメソッドで提供されたクラスの終了処理を行うためのディスポーザ</p>
+</li>
+<li>
+<p>MEMO: Springにもこの概念があるかどうか確認</p>
+</li>
+</ul></section><section><h4 id="554-インターセプタとデコレータ">5.5.4 インターセプタとデコレータ<a class="anchor" href="#554-インターセプタとデコレータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>インターセプターとデコレータについて解説</p>
+<ul>
+<li>すでに作成済みのメソッドの処理に対して、外部のクラスを用いてその処理の前後や、処理内容に変更を加えることができる技術</li>
+</ul>
+</li>
+<li>
+<p>インターセプター：対象となる処理の前後やライフサイクルに応じて処理を行うための仕組み</p>
+</li>
+<li>
+<p>定義方法</p>
+<ul>
+<li><code>@Interceptor</code>を付与したクラスを作成、メソッドに特定のアノテーション付与して機能に関与しない処理を実装</li>
+<li>利用側のメソッドで<code>@Interceptors()</code>の引数に作成したインターセプタークラスを追加する</li>
+<li>または、beans.xmlに使用するインターセプターを定義する</li>
+</ul>
+</li>
+<li>
+<p>Column どこでインターセプターを定義する？</p>
+<ul>
+<li>機能処理内にインターセプター（非機能処理）を記載するのはナンセンス</li>
+<li>beans.xmlで管理する方が良いのではという意見が記載されている</li>
+</ul>
+</li>
+<li>
+<p>デコレータ：機能追加をするための仕組み</p>
+<ul>
+<li>共通のインターフェースを実装したクラスに処理を委譲する</li>
+</ul>
+</li>
+<li>
+<p>MEMO: デコレータの使い所について確認</p>
+<ul>
+<li>Springで同様の機能あるかどうか</li>
+<li>インターセプター＝AOP？こちらも使い所についてまとめておく</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="56-まとめ">5.6 まとめ<a class="anchor" href="#56-まとめ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>機能が非常に豊富であることと、ルール似基づいた設計と実装が必要であることをご理解いただけたと思います。</p></section></section><section><h2 id="chapter-6-ビジネスロジック層の開発ejbの利用">Chapter 6 ビジネスロジック層の開発――EJBの利用<a class="anchor" href="#chapter-6-ビジネスロジック層の開発ejbの利用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="61-enterprise-java-beansejb">6.1 Enterprise Java Beans（EJB）<a class="anchor" href="#61-enterprise-java-beansejb"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="611-ejbとは">6.1.1 EJBとは<a class="anchor" href="#611-ejbとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>アプリケーションサーバー上で動作するJavaのプログラムのうち、特に「ビジネスロジック」を担当する部品を指す</p>
+</li>
+<li>
+<p>EJBは</p>
+<ul>
+<li>サーブレットやJSF、Webサーバーなどアプリケーションサーバー外からのリクエストを受け付ける層と</li>
+<li>データベースなどへ情報の永続化を行う層の中間の層の部品として機能する</li>
+</ul>
+</li>
+<li>
+<p>機能 EJB3.2</p>
+<ul>
+<li>トランザクション制御</li>
+<li>Java Persistence APIを介した永続化処理</li>
+<li>Java Messageing Serviceを介したメッセージ駆動処理</li>
+<li>非同期実行制御</li>
+<li>同期実行制御</li>
+<li>スケジュールに基づいた実行</li>
+<li>JNDIを介したインスタンス取得（現在はアノテーションを利用）</li>
+<li>リモートクライアントからの実行</li>
+<li>セキュリティ</li>
+</ul>
+</li>
+</ul></section><section><h4 id="612-ejbの利点">6.1.2 EJBの利点<a class="anchor" href="#612-ejbの利点"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>JavaEETutorialを参考</li>
+<li>EJBの利点
+<ul>
+<li>EJBコンテナがシステムレベルのサービスを提供してくれるため、開発者はビジネスロジックの構築に集中できる</li>
+<li>クライアントとの分離。クライアントにはビジネスロジックを実装する必要がない</li>
+<li>JavaEE準拠のアプリケーションサーバー上であればどこでも動く</li>
+</ul>
+</li>
+</ul></section><section><h4 id="613-ejbの種類">6.1.3 EJBの種類<a class="anchor" href="#613-ejbの種類"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>３種類ある
+<ul>
+<li>セッションビーン</li>
+<li>メッセージドリブンビーン</li>
+<li>タイマー</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="62-セッションビーン">6.2 セッションビーン<a class="anchor" href="#62-セッションビーン"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="621-セッションビーンとは">6.2.1 セッションビーンとは<a class="anchor" href="#621-セッションビーンとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>EJBの中核を成すコンポーネント</li>
+</ul></section><section><h4 id="622-セッションビーンの種類">6.2.2 セッションビーンの種類<a class="anchor" href="#622-セッションビーンの種類"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>セッションビーンの種類
+<ul>
+<li>ステートレスセッションビーン</li>
+<li>ステートフルセッションビーン</li>
+<li>シングルトン</li>
+<li>タイマー</li>
+</ul>
+</li>
+</ul></section><section><h4 id="623-ステートレスセッションビーン">6.2.3 ステートレスセッションビーン<a class="anchor" href="#623-ステートレスセッションビーン"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>一番良く利用されるEJBであり、ごくシンプルで基本的なEJB</p>
+</li>
+<li>
+<p>ステートレスセッションビーンのクラスに<code>@Stateless</code>を付与</p>
+</li>
+<li>
+<p>利用側は<code>@EJB</code>を付与して使用する</p>
+</li>
+<li>
+<p><code>@Stateful</code>アノテーションを利用する</p>
+</li>
+<li>
+<p>留意点</p>
+<ul>
+<li>クライアントごとにステートフルセッションビーンのインスタンスが作成される</li>
+</ul>
+</li>
+<li>
+<p>サーブレットからステートフルセッションビーンを呼び出す場合、</p>
+</li>
+<li>
+<p>通常サーブレットは１リクエストスレッドにより１つのインスタンスが利用されるモデルであるため、</p>
+</li>
+<li>
+<p>状態を保持できない</p>
+</li>
+<li>
+<p>ライフサイクルの制御</p>
+<ul>
+<li>生成</li>
+<li>活性化</li>
+<li>非活性化</li>
+<li>破棄</li>
+</ul>
+</li>
+<li>
+<p>非活性化されると、メモリ外にシリアライズ処理され出力される。</p>
+</li>
+<li>
+<p>必要になるとデシリアライズされ、メモリ上に復帰する</p>
+</li>
+</ul></section><section><h4 id="625-シングルトンセッションビーン">6.2.5 シングルトンセッションビーン<a class="anchor" href="#625-シングルトンセッションビーン"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p><code>@Singleton</code>アノテーションを付与</p>
+</li>
+<li>
+<p>設定ファイルの読み出しの管理などで使う</p>
+</li>
+<li>
+<p>COLUMN <code>@Startup</code>アノテーション</p>
+<ul>
+<li>デプロイされたアプリケーションが有効化されたタイミングですぐにオブジェクトを生成するよう、アプリケーションサーバーに支持するもの</li>
+<li><code>@DependsOn</code>というアノテーションもある
+<ul>
+<li>初期化の依存関係を解消するためのもの</li>
+</ul>
+</li>
+<li>MEMO: Springの場合初期化のアノテーションは何を使っているか</li>
+</ul>
+</li>
+</ul></section><section><h4 id="626-非同期処理">6.2.6 非同期処理<a class="anchor" href="#626-非同期処理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>実装には「<code>@Asynchronous</code>アノテーション」を使用</p>
+</li>
+<li>
+<p>クラスかメソッドに定義する</p>
+<ul>
+<li>クラスの場合はすべてのメソッドが非同期になる</li>
+<li>メソッドの場合は対象メソッドのみ非同期になる</li>
+</ul>
+</li>
+<li>
+<p>MEMO: Futureインターフェースを介した操作について理解する</p>
+</li>
+<li>
+<p>Column 非同期処理の再実行</p>
+<ul>
+<li>EJBの非同期実行には処理の再投入（再実行）のためのAPIは定義されていないので</li>
+<li>自前で実装するか、他のアーキテクチャを利用する方法も検討する</li>
+<li>キューを利用して後述のメッセージドリブンビーンを使うなどが考えられる</li>
+</ul>
+</li>
+</ul></section><section><h4 id="627-トランザクション">6.2.7 トランザクション<a class="anchor" href="#627-トランザクション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li><code>@TransactionManagement</code>アノテーション</li>
+<li><code>@TransactionAttribute</code>アノテーションを使用するらしい</li>
+</ul><p>詳しい使い方については割愛</p></section></section><section><h3 id="63-メッセージドリブンビーン">6.3 メッセージドリブンビーン<a class="anchor" href="#63-メッセージドリブンビーン"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>メッセージドリブンビーン（Message Driven Bean: MDB）について解説していく
+<ul>
+<li>メッセージと呼ばれるものを受け取ることで起動するという用途が限定的なコンポーネント</li>
+</ul>
+</li>
+</ul><section><h4 id="631-メッセージドリブン便とは">6.3.1 メッセージドリブン便とは<a class="anchor" href="#631-メッセージドリブン便とは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>MEMO: JMSも理解を深める必要あり</p>
+</li>
+<li>
+<p>JMS</p>
+<ul>
+<li>キューまたはトピックと呼ばれる方式を利用して、主にシステム間やアプリケーション間の情報を受け渡しを行うための仕組み</li>
+</ul>
+</li>
+<li>
+<p>Column キューとトピック</p>
+<ul>
+<li>キューとトピックの違いは、送信元と受取側の数の違いにある
+<ul>
+<li>キュー：１対１</li>
+<li>トピック：N対M（多対多）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>メッセージの受取を担当するのがメッセージドリブンビーン</p>
+</li>
+<li>
+<p>MDBは常にキューまたはトピックにメッセージが配信されるのを待機し、監視している</p>
+</li>
+</ul></section><section><h4 id="632-実装例">6.3.2 実装例<a class="anchor" href="#632-実装例"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>割愛</p><ul>
+<li>MEMO: JMSの使用方法とSpringJMSを使う</li>
+</ul></section></section><section><h3 id="64-タイマー">6.4 タイマー<a class="anchor" href="#64-タイマー"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="641-タイマーとは">6.4.1 タイマーとは<a class="anchor" href="#641-タイマーとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>EJBには時間を指定して起動するための「タイマーサービス」というものが定義されている</li>
+</ul><p>タイマーはバッチ処理とは異なるので、むやみに使用するべきではない</p><ul>
+<li>使用方法は以下の２種類存在する
+<ul>
+<li>TimerServiceAPIから登録する</li>
+<li><code>@Schedule</code>を使って登録する</li>
+</ul>
+</li>
+</ul></section><section><h4 id="642-タイマーサービスのサンプル">6.4.2 タイマーサービスのサンプル<a class="anchor" href="#642-タイマーサービスのサンプル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>割愛</p></section><section><h4 id="643-scheduleの実装サンプル">6.4.3 @Scheduleの実装サンプル<a class="anchor" href="#643-scheduleの実装サンプル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>割愛</p></section></section><section><h3 id="65-ejbの設計">6.5 EJBの設計<a class="anchor" href="#65-ejbの設計"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>EJBというのはあくまでビジネスロジックの実装を任されているコンポーネント</p>
+</li>
+<li>
+<p>アプリケーションはビジネスロジックだけでは成り立たない</p>
+</li>
+<li>
+<p>ブラウザの画面などのプレゼンテーション層</p>
+</li>
+<li>
+<p>Webサービスなどのロジック呼び出し部分、データベース接続などの永続化層、外部サービスの呼び出しなどもある</p>
+</li>
+<li>
+<p>EJBはこれらの処理の中間に位置することになる</p>
+</li>
+<li>
+<p>EJBを設計する上でまず考える必要があるのは、この「外部の層との接点」</p>
+</li>
+</ul><section><h4 id="651-ejbメソッドの呼び出しに関する設計">6.5.1 EJBメソッドの呼び出しに関する設計<a class="anchor" href="#651-ejbメソッドの呼び出しに関する設計"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>（１）やり取りする情報を保持するクラスを作成し、サーブレットとEJB双方から共通のクラスとして参照する</p>
+<ul>
+<li>あまりにも多くの情報を保持し、データベースへの永続化が終わるリクエストの最後まで保持し続けるような長寿クラスにならないように注意する必要</li>
+</ul>
+</li>
+<li>
+<p>（２）引数が増えた分についてはメソッドをオーバーロードして対応する</p>
+<ul>
+<li>注意：公開するメソッドが増えて、Webサービスのエンドポイントになるような場合はWSDLの変更が発生するため注意</li>
+</ul>
+</li>
+<li>
+<p>Column JSPからのEJB呼び出し</p>
+<ul>
+<li>画面生成とビジネスロジックの分離ができないためやめた方がいい</li>
+</ul>
+</li>
+</ul></section><section><h4 id="652-ローカル呼び出しとリモート呼び出し">6.5.2 ローカル呼び出しとリモート呼び出し<a class="anchor" href="#652-ローカル呼び出しとリモート呼び出し"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>リモート呼び出しは可能な限り使わないことをおすすめする</p>
+</li>
+<li>
+<p>リモート呼び出しが必要なパターン</p>
+<ul>
+<li>バッチの実装</li>
+<li>GUIを持つクライアントからのビジネスロジック呼び出し</li>
+<li>多段アプリケーションサーバー構成（処理量による業務分離、接続形態によるレイヤー分割）</li>
+</ul>
+</li>
+<li>
+<p>代替手段としてはEJBはローカル使用のみにしておき</p>
+<ul>
+<li>JAX-RSなどを使用した層を準備することが考えられる</li>
+</ul>
+</li>
+<li>
+<p>MEMO: JAX-RS層について深堀り</p>
+</li>
+</ul></section><section><h4 id="653-同期非同期">6.5.3 同期/非同期<a class="anchor" href="#653-同期非同期"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>基本的に非同期にするメソッドはいかに絞るとよい
+<ul>
+<li>すぐに結果を必要としないもの</li>
+<li>結果を得るのに相応の時間がかかる処理</li>
+</ul>
+</li>
+</ul></section><section><h4 id="654-負荷量">6.5.4 負荷量<a class="anchor" href="#654-負荷量"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>MEMO: 設計する際の負荷について考えるべき</li>
+</ul></section><section><h4 id="655-データベースアクセス">6.5.5 データベースアクセス<a class="anchor" href="#655-データベースアクセス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JPA</p>
+</li>
+<li>
+<p>JPA以外のO/RマッピングもしくはDAOフレームワーク</p>
+</li>
+<li>
+<p>JDBCの直接呼び出し</p>
+</li>
+<li>
+<p>通常はEJBと親和性が高いJPAをEJBトランザクション管理下に置くのが容易</p>
+</li>
+</ul></section></section><section><h3 id="66-ejbのテスト">6.6 EJBのテスト<a class="anchor" href="#66-ejbのテスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="661-ejbのテストの必要性と難しさ">6.6.1 EJBのテストの必要性と難しさ<a class="anchor" href="#661-ejbのテストの必要性と難しさ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>EJBの最大の弱点はテストがしづらいものであった</p>
+</li>
+<li>
+<p>JavaSEでも必要な資材を準備すれば動くようになったが、一部対応していないらしい</p>
+</li>
+</ul></section><section><h4 id="662-ejbテストの準備">6.6.2 EJBテストの準備<a class="anchor" href="#662-ejbテストの準備"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>EJBContainerからEJBモジュールを取得し、Junitなどでテストを実施する説明</li>
+</ul></section></section><section><h3 id="67-まとめ">6.7 まとめ<a class="anchor" href="#67-まとめ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>CDIとEJBをうまく組み合わせて設計していこうという説明</p></section></section><section><h2 id="chapter-7-データアクセス層の開発jpaの基本">Chapter 7 データアクセス層の開発――JPAの基本<a class="anchor" href="#chapter-7-データアクセス層の開発jpaの基本"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>本章と次章では、JavaEEのにおけるデータベースへのアクセス方法であるJPAについて解説</p><p>エンティティやクエリといったJPAの構成要素と、JPQLとCriteriaAPIの２種類のクエリについて説明</p><section><h3 id="71-jpaの基礎知識">7.1 JPAの基礎知識<a class="anchor" href="#71-jpaの基礎知識"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>永続化：Javaのプロセスが終了しても、データが消えずに残るような状態にすること</li>
+</ul><section><h4 id="711-jpaの構成要素">7.1.1 JPAの構成要素<a class="anchor" href="#711-jpaの構成要素"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>エンティティクラス（データのレイアウトを規定）とエンティティオブジェクト（データを保持）</li>
+<li>エンティティマネージャ
+<ul>
+<li>エンティティオブジェクトとレコードの紐付けを管理</li>
+</ul>
+</li>
+<li>クエリ
+<ul>
+<li>データを操作</li>
+</ul>
+</li>
+<li>永続化ユニット
+<ul>
+<li>データベースへの接続情報などJPAの設定を記述する</li>
+</ul>
+</li>
+</ul></section><section><h4 id="712-エンティティクラスとエンティティオブジェクト">7.1.2 エンティティクラスとエンティティオブジェクト<a class="anchor" href="#712-エンティティクラスとエンティティオブジェクト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>そのまま、クラスとオブジェクトという理解</li>
+<li>テーブルとレコード　になぞらえて考えられる</li>
+</ul></section><section><h4 id="713-エンティティマネージャ">7.1.3 エンティティマネージャ<a class="anchor" href="#713-エンティティマネージャ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>エンティティオブジェクトを取得したり、データベースへ反映、削除したりする</li>
+<li>永続化コンテキストの配下にないものは、データベースへは反映されない</li>
+<li><code>persist()</code>メソッドで管理下におくみたい</li>
+</ul></section><section><h4 id="714-クエリ">7.1.4 クエリ<a class="anchor" href="#714-クエリ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>エンティティマネージャが持つ基本的なメソッドを利用する他に、より自由度の高いクエリを用いる方法がある</p>
+</li>
+<li>
+<p>JPAが用意しているクエリの定義方法</p>
+<ul>
+<li>JPQL: SQLに似た記法で記載でき、DBMSを意識しなくて良い</li>
+<li>Criteria API: APIを使ってクエリを組み立てて行く手法。DBMSを意識しなくて良い</li>
+<li>ネイティブクエリ: SQL文をかいていく必要があるので、DBMSが変わればここも変更しないと行けない</li>
+</ul>
+</li>
+<li>
+<p>理由がなければJPQLを用いるのが良いだろう</p>
+</li>
+</ul></section><section><h4 id="715-永続化ユニット">7.1.5 永続化ユニット<a class="anchor" href="#715-永続化ユニット"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>永続化似関する設定をまとめたもので、実態は<code>persistence.xml</code>という名前のXMLファイル</p>
+</li>
+<li>
+<p>設定項目としては以下のようなものがある</p>
+<ul>
+<li>永続化ユニットの名前</li>
+<li>トランザクションマネージャの設定</li>
+<li>永続化プロバイダ（JPAの実行エンジン）のクラス名</li>
+<li>永続化プロバイダに与えるプロパティ</li>
+<li>接続先データソースの名前★</li>
+<li>エンティティクラスの名前★</li>
+</ul>
+</li>
+<li>
+<p>データベースの接続先を設定する方法</p>
+<ul>
+<li>アプリケーションサーバーで定義されているデータソースの名前を指定する方法</li>
+<li>永続化プロバイダのプロパティとして、接続先アドレスやユーザー名、パスワードなどを設定する方法　が挙げられる</li>
+</ul>
+</li>
+<li>
+<p>JPAの実行エンジンにどれがエンティティクラスなのか検知してもらう設定も入れる</p>
+</li>
+</ul></section><section><h4 id="716-jpaのメリット">7.1.6 JPAのメリット<a class="anchor" href="#716-jpaのメリット"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>ResultSetからDTOにうつして..という処理を記述しなくてよい</li>
+<li>メソッドかクエリでアクセスできる</li>
+<li>コード量が従来よりも少ない</li>
+<li>メモリ上にキャッシュされたエンティティオブジェクトを利用できる
+<ul>
+<li>アプリ開発者はキャッシュの有無を意識する必要はない</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="72-エンティティの基本">7.2 エンティティの基本<a class="anchor" href="#72-エンティティの基本"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>（割愛）</p><section><h4 id="721-エンティティクラスの実装">7.2.1 エンティティクラスの実装<a class="anchor" href="#721-エンティティクラスの実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>エンティティクラスには<code>@Entity</code>を付与する</p>
+</li>
+<li>
+<p>publicでなければならず、finalであってはならない</p>
+</li>
+<li>
+<p>引数のないコンストラクタを作成しとくべき</p>
+</li>
+<li>
+<p>Column Serializableについて</p>
+<ul>
+<li>EJBのリモート呼び出し</li>
+<li>複数のアプリケーションサーバーでJPAの２次キャッシュを構成する場合</li>
+<li>MEMO: 他のORMはSerializableに定義しているか確認</li>
+</ul>
+</li>
+</ul></section><section><h4 id="722-id">7.2.2 ID<a class="anchor" href="#722-id"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>エンティティクラスはIDとして定義したフィールドを使用して<code>hashCode</code>メソッド、</li>
+<li><code>equals(Object)</code>メソッドを実装しなければ行けない→通常IDEで自動生成できる</li>
+<li><code>toString()</code>をオーバーライドしておくとデバッグに役立つ！</li>
+<li>MEMO: 他のORMでも<code>toString()</code>オーバーライドしたりしてるか確認</li>
+</ul></section><section><h4 id="723-リレーション">7.2.3 リレーション<a class="anchor" href="#723-リレーション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p><code>@OneToMany</code>等によるエンティティの紐付け型を説明</p>
+</li>
+<li>
+<p>MEMO: 他のORMでも存在するか確認</p>
+</li>
+<li>
+<p>１対１のリレーションについて</p>
+<ul>
+<li>通常１対１のリレーションだと、同一エンティティに保持してしまうことが望ましい</li>
+<li>ただし、ライフサイクルが異なるデータだと、別のエンティティに分けた方が良いケースがある</li>
+<li>例）アカウント情報とアカウントに紐づく会社情報
+<ul>
+<li>アカウント情報：作成されてから削除されるまで</li>
+<li>会社情報：入社して初めてできる、会社に所属しなければレコードがない
+<ul>
+<li>などのような状況</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="73-エンティティマネージャの基本">7.3 エンティティマネージャの基本<a class="anchor" href="#73-エンティティマネージャの基本"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>
+<p>エンティティマネージャの実態は <code>javax.persistence.EntityManager</code>インターフェース</p>
+</li>
+<li>
+<p>このインターフェースに用意されているメソッドを通してエンティティを操作する</p>
+</li>
+<li>
+<p>EntityManagerのインスタンスはCDIを用いてアプリケーションサーバーからインジェクションで取得する</p>
+</li>
+<li>
+<p><code>@PersistenceContext</code>アノテーションを付与し、属性似unitNameを指定</p>
+</li>
+<li>
+<p><code>persistence.xml</code>の<code>&#x3C;persistence-unit></code>タグのname属性と一致した名前を指定</p>
+</li>
+</ul><section><h4 id="731-エンティティのライフサイクル">7.3.1 エンティティのライフサイクル<a class="anchor" href="#731-エンティティのライフサイクル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>ライフサイクル
+<ul>
+<li>NEW</li>
+<li>MANAGED</li>
+<li>REMOVED</li>
+<li>DETACHED</li>
+</ul>
+</li>
+</ul></section><section><h4 id="732-エンティティオブジェクトの作成と永続化">7.3.2 エンティティオブジェクトの作成と永続化<a class="anchor" href="#732-エンティティオブジェクトの作成と永続化"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="java" class="wrap" style="--ecMaxLine:41ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#99A0A6;--1:#99A0A6">// NEW状態でまだ永続化コンテキストと紐付いてない</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">Account account </span><span style="--0:#F97583;--1:#F97583">=</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#F97583;--1:#F97583">new</span><span style="--0:#E1E4E8;--1:#E1E4E8"> </span><span style="--0:#B392F0;--1:#B392F0">Account</span><span style="--0:#E1E4E8;--1:#E1E4E8">();</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#99A0A6;--1:#99A0A6">// MANAGED状態になる 次のコミットのタイミングでデータベースに反映される</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">EntiryManager em </span><span style="--0:#F97583;--1:#F97583">=</span><span style="--0:#E1E4E8;--1:#E1E4E8"> xxx;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">em.</span><span style="--0:#B392F0;--1:#B392F0">persist</span><span style="--0:#E1E4E8;--1:#E1E4E8">(account);</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h4 id="733-エンティティオブジェクトの取得と更新">7.3.3 エンティティオブジェクトの取得と更新<a class="anchor" href="#733-エンティティオブジェクトの取得と更新"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="java" class="wrap" style="--ecMaxLine:45ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#99A0A6;--1:#99A0A6">// 取得したいEntityクラスとIDを指定</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#99A0A6;--1:#99A0A6">// MANAGED状態で取得される</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">Account account </span><span style="--0:#F97583;--1:#F97583">=</span><span style="--0:#E1E4E8;--1:#E1E4E8"> em.</span><span style="--0:#B392F0;--1:#B392F0">find</span><span style="--0:#E1E4E8;--1:#E1E4E8">(Account.class, </span><span style="--0:#79B8FF;--1:#79B8FF">0</span><span style="--0:#E1E4E8;--1:#E1E4E8">);</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#99A0A6;--1:#99A0A6">// setter経由で値を設定するとデータベースに反映される（コミットしたタイミングで）</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">account.</span><span style="--0:#B392F0;--1:#B392F0">setName</span><span style="--0:#E1E4E8;--1:#E1E4E8">(</span><span style="--0:#9ECBFF;--1:#9ECBFF">'てらだよしお'</span><span style="--0:#E1E4E8;--1:#E1E4E8">);</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h4 id="734-エンティティの削除">7.3.4 エンティティの削除<a class="anchor" href="#734-エンティティの削除"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="java" class="wrap" style="--ecMaxLine:19ch"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#E1E4E8;--1:#E1E4E8">em.</span><span style="--0:#B392F0;--1:#B392F0">remove</span><span style="--0:#E1E4E8;--1:#E1E4E8">(account);</span></div></div></code><button class="copy-btn" aria-label="Copy code"><div class="copy-btn-icon"><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon copy-icon"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"></path></svg><svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="copy-btn-icon success-icon"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"></path></svg></div></button></pre></figure></div></section><section><h4 id="735-デタッチ">7.3.5 デタッチ<a class="anchor" href="#735-デタッチ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>EJBのメソッドの外へ出るとDETACHED状態になる</p><ul>
+<li>MEMO: 通常アプリでEntityクラスをそのまま画面で使用することは良くないと考える</li>
+</ul></section></section><section><h3 id="74-クエリapi">7.4 クエリAPI<a class="anchor" href="#74-クエリapi"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>JPQLとCriteriaAPIを使ったQuery作成方法を記載</p><section><h4 id="741-パラメータ">7.4.1 パラメータ<a class="anchor" href="#741-パラメータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>JPQLとCriteriaAPIはパラメータを取ることができる
+パラメータは位置で指定する方法と名前で指定する方法があるが通常は名前で指定した方がよい</p><ul>
+<li>MEMO: 名前で指定するルールを作った方が良さそう</li>
+</ul></section><section><h4 id="742-サンプルデータ">7.4.2 サンプルデータ<a class="anchor" href="#742-サンプルデータ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>ダウンロードデータの中にあるサンプルデータについての説明</p></section></section><section><h3 id="75-jpql">7.5 JPQL<a class="anchor" href="#75-jpql"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>JPQL(Java Persistence Query Language)</li>
+</ul><section><h4 id="751-jpqlの基本構文">7.5.1 JPQLの基本構文<a class="anchor" href="#751-jpqlの基本構文"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="755-フェッチ">7.5.5 フェッチ<a class="anchor" href="#755-フェッチ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>取得するエンティティにリレーションが定義されている場合、リレーション先のエンティティを</p>
+</li>
+<li>
+<p>どのタイミングでデータベースから取得するかを決めることができる</p>
+</li>
+<li>
+<p>これを「フェッチ戦略」という</p>
+<ul>
+<li>Eagerフェッチ</li>
+<li>Lazyフェッチ</li>
+</ul>
+</li>
+<li>
+<p>Eagerフェッチ</p>
+<ul>
+<li>findメソッド実行時に、リレーション定義されている参照先のオブジェクトも取得する</li>
+<li>リレーション先のエンティティオブジェクトを同時に使用することの多い場合は、</li>
+<li>Eagerフェッチを使用する</li>
+</ul>
+</li>
+<li>
+<p>Lazyフェッチ</p>
+<ul>
+<li>取得処理時には、リレーション先のエンティティオブジェクトを取得せず、</li>
+<li>リレーション先にはじめてアクセスする際に取得する</li>
+<li>リレーション先のエンティティオブジェクトを頻繁に使用しない場合はLazyにすべき</li>
+<li>デメリット
+<ul>
+<li>どこでエンティティの取得が行われたか分かりづらい</li>
+<li>性能の劣化の場所を特定しづらい</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>N+1問題とJOINフェッチ</p>
+<ul>
+<li>１回のクエリを発行したあとにN回のクエリの発行を必要とすることをN+1問題という</li>
+<li>リレーションが増えるほど、発行するクエリの数が増える</li>
+<li>これに対応するためにJOIN FETCH節を利用する</li>
+<li>JOIN句の後ろにFETCHがつくだけ</li>
+</ul>
+</li>
+</ul></section><section><h4 id="756-エンティティオブジェクトの集計">7.5.6 エンティティオブジェクトの集計<a class="anchor" href="#756-エンティティオブジェクトの集計"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>シンプルにCountなどを使う方法</li>
+<li>型を意識する必要がある場合、コンストラクタ式を利用する必要があるらしい
+<ul>
+<li>割愛））</li>
+</ul>
+</li>
+</ul></section><section><h4 id="757-名前付きクエリ">7.5.7 名前付きクエリ<a class="anchor" href="#757-名前付きクエリ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>開発者はJPQLのクエリに名前をつけることができる</p>
+</li>
+<li>
+<p>名前をつけられたJPQLのクエリを「名前付きクエリ」と呼ぶ</p>
+</li>
+<li>
+<p><code>@NamedQueries</code>と<code>@NamedQuery</code>を使って名前定義しておく方法</p>
+<ul>
+<li>MEMO: 他のORMはSQLファイルで管理するのではと思う</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="76-criteriaapi">7.6 CriteriaAPI<a class="anchor" href="#76-criteriaapi"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>Criteriaクエリを利用してクエリを構築していく</li>
+<li>JPQLと役割は同じであるため、JPQL同様に以下の要素から構成
+<ul>
+<li>SELECT</li>
+<li>FROM</li>
+<li>JOIN</li>
+<li>WHERE</li>
+<li>ORDERBY</li>
+</ul>
+</li>
+</ul><section><h4 id="761-criteria-apiの基本構文">7.6.1 Criteria APIの基本構文<a class="anchor" href="#761-criteria-apiの基本構文"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>（割愛）</p><ul>
+<li>利用のメリットがあまりわかない
+<ul>
+<li>発行されているSQLが分かりづらい</li>
+<li>SQLNativeでかけない</li>
+<li>メソッドなど覚えなくては行けない</li>
+</ul>
+</li>
+</ul></section></section></section><section><h2 id="chapter8-データアクセス層の開発-jpaの応用">Chapter8 データアクセス層の開発 JPAの応用<a class="anchor" href="#chapter8-データアクセス層の開発-jpaの応用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><ul>
+<li>エンティティとデータベースの関連付け</li>
+<li>キャッシュなどJPAの応用的な使い方について紹介</li>
+</ul><section><h3 id="81-高度なエンティティの利用方法">8.1 高度なエンティティの利用方法<a class="anchor" href="#81-高度なエンティティの利用方法"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>日時を指定する日時型、</li>
+<li>連続した一意の数字を設定するシーケンス、</li>
+<li>リレーション先のエンティティへ処理を伝播するカスケードを紹介</li>
+</ul><section><h4 id="811-フィールドに関する応用">8.1.1 フィールドに関する応用<a class="anchor" href="#811-フィールドに関する応用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>日時</p>
+<ul>
+<li>JPAで日時を使用するには、エンティティクラスのフィールドに<code>java.util.Date型</code>を指定</li>
+<li><code>@Temporal</code>アノテーションを付与して、引数にTemporalTypeを指定</li>
+</ul>
+</li>
+<li>
+<p>シーケンス</p>
+<ul>
+<li>エンティティのIDにはサロゲートキーを使用するのが　一般的</li>
+<li>サロゲートキーは人工的に作成されたキーであり、業務上の意味がないもの</li>
+<li>MEMO: 一般的にサロゲートキーが使われているのか確認</li>
+<li><code>@SequenceGenerator</code>アノテーションを付与し、作成したシーケンスからエンティティフィールドに自動で値を設定するには</li>
+<li><code>@GeneratedValue</code>アノテーションを使用する</li>
+<li>MEMO: DBとどのように絡んでくるのか、DB定義側も自動的にシーケンス定義が作成されるのか
+<ul>
+<li>どのDBもだいたいシーケンス定義を作成できるのか</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>カスケード</p>
+<ul>
+<li>エンティティオブジェクトに任意の操作をしたあと、リレーション先までその操作を反映させるための機能</li>
+<li>MEMO: 他のORMはどのようにこの機能を持っているか確認</li>
+</ul>
+</li>
+<li>
+<p>複合ID</p>
+<ul>
+<li><code>@IdClass</code>か<code>@EmbeddedId</code>を使用して実装する
+<ul>
+<li>どちらも主キークラスとして定義する必要あり</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="82-ライフサイクルコールバック">8.2 ライフサイクルコールバック<a class="anchor" href="#82-ライフサイクルコールバック"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>JPAではコールバックメソッドを使用することで、エンティティオブジェクトの操作に対応した処理を実行することができる</li>
+<li>実装方法は２種類
+<ul>
+<li>エンティティクラスに実装
+<ul>
+<li>エンティティの値を変更する場合にとどめてく</li>
+</ul>
+</li>
+<li>エンティティリスナに実装
+<ul>
+<li>エンティティの値を変更する処理は実装せず、共通で使用するような処理にとどめておく</li>
+</ul>
+</li>
+<li>→あまり複雑にならないように注意</li>
+</ul>
+</li>
+<li>MEMO: 他のORMにはコールバックメソッドの仕組みある？どんな処理を実装するのがベター？</li>
+</ul></section><section><h3 id="83-エンティティクラスとテーブル構造">8.3 エンティティクラスとテーブル構造<a class="anchor" href="#83-エンティティクラスとテーブル構造"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>Javaアプリケーション開発者がエンティティクラスを作成すると、JPAはエンティティクラスの定義を読み込み、
+データベースへテーブルを作成する</p><ul>
+<li>MEMO: 他のORMはテーブル自動作成とかされるのか確認</li>
+</ul><section><h4 id="831-テーブル名とカラム名">8.3.1 テーブル名とカラム名<a class="anchor" href="#831-テーブル名とカラム名"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>エンティティの変数とカラム名を変更する方法について記載</p><ul>
+<li>多対多の中間表の名前の付け方</li>
+<li>LOB定義 <code>@Lob</code></li>
+</ul></section><section><h4 id="832-索引">8.3.2 索引<a class="anchor" href="#832-索引"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>索引を作成する方法について記載
+<ul>
+<li><code>@Index(columnList =  "xxxxx,xxxxx,xxxxxx")</code></li>
+</ul>
+</li>
+</ul></section><section><h4 id="833-制約">8.3.3 制約<a class="anchor" href="#833-制約"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>精度とスケール、長さ</p>
+<ul>
+<li><code>@Column(precision=15, scale=0)</code></li>
+<li><code>@Column(length=500)</code></li>
+</ul>
+</li>
+<li>
+<p>一意制約</p>
+</li>
+<li>
+<p>MEMO: 他のORMでもDBMSの方言を吸収しながらテーブル定義ができるか確認、できなければJPAってすごい</p>
+<ul>
+<li>他のシステムも同じDBを参照していた場合、衝突する可能性あるので、AP<db></db>が対になるようなシステムであればよいかも</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="84-トランザクション">8.4 トランザクション<a class="anchor" href="#84-トランザクション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>JavaEEには
+<ul>
+<li>EJBコンテナにより自動的に開始されるトランザクション</li>
+<li>Java開発者が任意で開始するトランザクション
+<ul>
+<li>がある</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h3 id="85-キャッシュ">8.5 キャッシュ<a class="anchor" href="#85-キャッシュ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="851-これまでのデータアクセス">8.5.1 これまでのデータアクセス<a class="anchor" href="#851-これまでのデータアクセス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="852-キャッシュを使用したデータアクセス">8.5.2 キャッシュを使用したデータアクセス<a class="anchor" href="#852-キャッシュを使用したデータアクセス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>Column 複数アプリケーションによるデータ更新
+<ul>
+<li>複数のアプリケーションが同一のデータベースを更新する場合や他のノードやデータベースでデータが更新されると、</li>
+<li>キャッシュされているエンティティに伝播されないので、整合性が取れなくなる</li>
+<li>MEMO: かなり致命的な問題だと思う… マスタテーブルに使うとか？</li>
+<li>MEMO: 今キャッシュされているエンティティ情報をログに出力する方法などがあれば可視化されてわかりやすいが、ある？</li>
+</ul>
+</li>
+</ul></section><section><h4 id="855-プリロード">8.5.5 プリロード<a class="anchor" href="#855-プリロード"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>EJBの<code>@Startup</code>などを利用してアプリケーション起動時に１回だけSQLを実行したり、</li>
+<li>JSFやWebサービスを利用して外から初期化処理を起動できるようにすること
+<ul>
+<li>１回読み込んでおくことでキャッシュに乗せて処理を早くする</li>
+</ul>
+</li>
+</ul></section><section><h4 id="856-eclipselink">8.5.6 EclipseLink<a class="anchor" href="#856-eclipselink"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>GlassFishではJPAの実行エンジンとして、EclipseLinkを使用している</p>
+</li>
+<li>
+<p>EclipseLinkには</p>
+<ul>
+<li>エンティティキャッシュ
+<ul>
+<li>エンティティオブジェクトをキャッシュする機能</li>
+</ul>
+</li>
+<li>問い合わせキャッシュ　の２種類が存在する
+<ul>
+<li>クエリの結果をキャッシュする機能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>MEMO: EcllipseLink以外の実行エンジンなどが存在する？</p>
+</li>
+</ul></section></section><section><h3 id="86-永続化ユニット">8.6 永続化ユニット<a class="anchor" href="#86-永続化ユニット"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li><a href="http://itdoc.hitachi.co.jp/manuals/link/cosmi_v0870/APKC/EU070266.HTM">http://itdoc.hitachi.co.jp/manuals/link/cosmi_v0870/APKC/EU070266.HTM</a></li>
+</ul><p>アプリケーションからJPAを使用する場合，次のような情報を定義する必要があります。</p><p>アプリケーション内のエンティティクラスの情報
+エンティティクラスとデータベーステーブルとのマッピング情報
+JPAプロバイダがデータベースコネクションを取得するためのデータソースの情報
+これらの情報を定義したものを永続化ユニットといいます。</p><ul>
+<li>
+<p>APサーバーにJNDIを定義し、APサーバー経由で接続→こちらを推奨しますとのこと</p>
+</li>
+<li>
+<p>設定ファイルをアプリケーションに保持して直接接続</p>
+</li>
+<li>
+<p>Column JavaSEでJPAを使う</p>
+<ul>
+<li>jarファイルをクラスパスに追加して、persistence.xmlを用意すれば使えますとのこと</li>
+<li>EJBコンテナがないので、EntityManagerFactory経由でEntityManagerオブジェクトを取得する</li>
+</ul>
+</li>
+</ul></section><section><h3 id="87-環境構築手順">8.7 環境構築手順<a class="anchor" href="#87-環境構築手順"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>割愛</p></section><section><h3 id="88-アプリケーション開発手順">8.8 アプリケーション開発手順<a class="anchor" href="#88-アプリケーション開発手順"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="882-jpqlの開発">8.8.2 JPQLの開発<a class="anchor" href="#882-jpqlの開発"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>IDE上で試しにSQL流せる機能</p><ul>
+<li>MEMO: 他のORMにも同様の機能あるか確認する</li>
+</ul></section></section></section><section><h2 id="chapter9-restful-webサービスの開発">Chapter9 RESTful Webサービスの開発<a class="anchor" href="#chapter9-restful-webサービスの開発"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="91-webサービスの基礎">9.1 Webサービスの基礎<a class="anchor" href="#91-webサービスの基礎"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="911-webサービスとは">9.1.1 Webサービスとは<a class="anchor" href="#911-webサービスとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>サーバーで行われたなんらかの処理の結果をHTMLではなく、処理結果だけで返すものをWebサービスと呼びます</p>
+</li>
+<li>
+<p>Webサービスを実現するために使われる技術</p>
+<ul>
+<li>SOAP: 信頼性を必要とする企業間でのWebサービスで多用されている</li>
+<li>REST: 一般に公開されているWebサービスでよく使用されている
+<ul>
+<li>RESTベースのWebサービスをRESTfulWebサービスと呼ぶ</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>JavaEEでもSOAPとRESTを利用したWebサービスを作成するためのAPIを提供している</p>
+<ul>
+<li>SOAPを使用したWebサービスを作成するAPIがJAX-WS</li>
+<li>RESTful Webサービスを作成するAPIが、JAX-RS</li>
+</ul>
+</li>
+</ul></section><section><h4 id="912-restful-webサービスとは">9.1.2 RESTful Webサービスとは<a class="anchor" href="#912-restful-webサービスとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>RESTful Webサービスとは、RESTに則ったWebサービス</p>
+</li>
+<li>
+<p>REST原則</p>
+<ul>
+<li>a.すべてのリソースに一意なアドレス（URI）を与える</li>
+<li>b.情報の操作には予め定義された命令体型（統一インターフェイスという）を使用する</li>
+<li>c.プラットフォームに応じて複数の表現（データ形式）を使用する</li>
+<li>d.セッションなどの状態管理を行わず、ステートレスに通信する</li>
+<li>e.アプリケーションはリンクによって、次の状態に遷移する</li>
+</ul>
+</li>
+<li>
+<p>上記のすべてを守る必要はないが、少なくとも、aとbは守っておくべき</p>
+</li>
+<li>
+<p>制約がゆるいので、かんたんに実装できる</p>
+</li>
+<li>
+<p>一方、SOAPは定義が厳密なので実装ハードルが高い</p>
+</li>
+</ul></section><section><h4 id="913-restとhttp">9.1.3 RESTとHTTP<a class="anchor" href="#913-restとhttp"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>HTTPヘッダー</li>
+<li>HTTPメソッド
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+</ul>
+</li>
+<li>URI
+<ul>
+<li>MEMO: マトリックスパラメータは初めて聞いた</li>
+</ul>
+</li>
+<li>ステータスコード</li>
+</ul></section></section><section><h3 id="92-jax-rsの基本">9.2 JAX-RSの基本<a class="anchor" href="#92-jax-rsの基本"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="921-jax-rsとは">9.2.1 JAX-RSとは<a class="anchor" href="#921-jax-rsとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>リクエストパラメータ</p>
+<ul>
+<li>マーシャル：XML形式やJSON形式→Javaオブジェクト</li>
+<li>アンマーシャル：Javaオブジェクト→XML形式やJSON形式</li>
+<li>JAX-RS2.0仕様の参照実装はJersey</li>
+<li>JerseyはGlassFishサーバーでも使用されている</li>
+</ul>
+</li>
+<li>
+<p>主に５つの機能を提供</p>
+<ul>
+<li>１．HTTPメソッド/URIパターンとリソースメソッドとのバインド機能</li>
+<li>２．メッセージボディのデータ形式指定機能</li>
+<li>３．リクエスト情報のインジェクション機能</li>
+<li>４．リクエスト/レスポンスのメッセージボディの変換機能</li>
+<li>５．例外のレスポンスマッピング機能</li>
+</ul>
+</li>
+</ul></section><section><h4 id="922-サンプルアプリケーションにおけるjax-rsの機能">9.2.2 サンプルアプリケーションにおけるJAX-RSの機能<a class="anchor" href="#922-サンプルアプリケーションにおけるjax-rsの機能"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="93-restful-webサービス作成のための事前準備">9.3 RESTful Webサービス作成のための事前準備<a class="anchor" href="#93-restful-webサービス作成のための事前準備"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="931-restful-webサービスの認証方式">9.3.1 RESTful Webサービスの認証方式<a class="anchor" href="#931-restful-webサービスの認証方式"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>ナレッジバンクのRESTサービス機能ではWEBアプリケーション機能で採用しているFORM認証ではなく</p>
+</li>
+<li>
+<p>BASIC認証で認証を行う</p>
+</li>
+<li>
+<p>BASIC認証を行うための設定を記載</p>
+<ul>
+<li>web.xmlに追記するみたい</li>
+</ul>
+</li>
+<li>
+<p>MEMO: 他のフレームワークでBASIC認証を行う方法について整理</p>
+</li>
+</ul></section><section><h4 id="932-データクラスdto">9.3.2 データクラス（DTO）<a class="anchor" href="#932-データクラスdto"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>クライアントからのリクエストをJavaオブジェクトに変換する際に受け皿クラスを作成
+<ul>
+<li><code>@XMLRootElementアノテーション</code>などを不要しないと行けないらしく、不便そう</li>
+</ul>
+</li>
+</ul></section><section><h4 id="933-application-サブクラス">9.3.3 Application サブクラス<a class="anchor" href="#933-application-サブクラス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>作成するリソースクラスなど、JAX-RSで使用する一連のファイルをJAX-RSランタイムに通知するためにApplicationサブクラスをクラスパス上に配置</li>
+<li>このファイルの存在により、作成するリソースクラスをRESTful Webサービスとして公開できる</li>
+<li><code>ApplicationConfig.java</code>に<code>@ApplicationPath("xxxxxx")</code>を指定することでOK</li>
+</ul></section></section><section><h3 id="94-restサービスクラスサーバー側の作成">9.4 RESTサービスクラス（サーバー側）の作成<a class="anchor" href="#94-restサービスクラスサーバー側の作成"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="941-リソースクラスの構成要素">9.4.1 リソースクラスの構成要素<a class="anchor" href="#941-リソースクラスの構成要素"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>RESTful Webサービスで提供する処理を定義するRESTサービスクラスを作成します。</li>
+<li>RESTではすべてをリソースとして扱うため、リソースクラスとも呼ばれる
+<ul>
+<li>MEMO: Springの場合、Controller</li>
+</ul>
+</li>
+</ul></section><section><h4 id="942-エンドポイントuriの設定">9.4.2 エンドポイントURIの設定<a class="anchor" href="#942-エンドポイントuriの設定"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li><code>@Path("{id}")</code></li>
+<li>などと指定</li>
+</ul></section><section><h4 id="943-httpメソッドとリソースメソッドのバインド">9.4.3 HTTPメソッドとリソースメソッドのバインド<a class="anchor" href="#943-httpメソッドとリソースメソッドのバインド"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li><code>@GET</code>,<code>@POST</code>などを指定</li>
+</ul></section><section><h4 id="944-メッセージボディのデータ形式指定">9.4.4 メッセージボディのデータ形式指定<a class="anchor" href="#944-メッセージボディのデータ形式指定"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p><code>@Consumes({})</code>: クライアントから受け取るデータ形式</p>
+</li>
+<li>
+<p><code>@Produces({})</code>: クライアントに返却するデータ形式</p>
+</li>
+<li>
+<p>MINEタイプの抽象化：<code>javax.ws.rs.core.MediaType</code></p>
+<ul>
+<li><code>APPLICATION_XML = "application/xml";</code></li>
+<li>などの定義がある</li>
+</ul>
+</li>
+<li>
+<p>Column コンテンツネゴシエーション</p>
+<ul>
+<li>クライアントがサーバーにリクエストする際に、返してもらいたいメッセージボディのデータ形式やエンコード方式などをリクエストヘッダーで要求できる</li>
+<li>これを「HTTPコンテンツネゴシエーション」といいます。</li>
+<li>コンテンツネゴシエーションはAcceptヘッダーに要求するデータ形式を指定して行う</li>
+<li>要求されたデータ形式をサーバーが提供できない場合、「406 Not Acceptable」のステータスコードをクライアントに返す
+<ul>
+<li><code>Accept-Charset</code>ヘッダー、<code>Accept-Language</code>ヘッダー、<code>Accept-Encoding</code>ヘッダーなど</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>MEMO: 見たことはあったが用語として抑えれてなかったので覚えておく</p>
+</li>
+<li>
+<p>メッセージボディとJavaオブジェクトとのマッピング</p>
+<ul>
+<li>アンマーシャル：<code>javax.ws.rs.ext.MessageBodyReader</code></li>
+<li>マーシャル：<code>javax.ws.rs.ext.MessageBodyWriter</code></li>
+</ul>
+</li>
+</ul></section><section><h4 id="945-リクエスト情報のインジェクション">9.4.5 リクエスト情報のインジェクション<a class="anchor" href="#945-リクエスト情報のインジェクション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li><code>@javax.ws.rs.PathParam</code>アノテーション：{id}などのパスパラメータを取得</li>
+<li><code>@javax.ws.rs.QueryParam</code>アノテーション：クエリパラメータを取得</li>
+<li><code>@javax.ws.rs.MatrixParam</code>アノテーション：URIのマトリクスパラメータを取得する</li>
+<li><code>@javax.ws.rs.FormParam</code>アノテーション：HTMLのフォームから送信された情報を取得する</li>
+<li><code>@javax.ws.rs.HeaderParam</code>アノテーション：リクエストヘッダーから値を取得する</li>
+<li><code>@javax.ws.rs.CookieParam</code>アノテーション：リクエストのCookieヘッダーから値を取得する</li>
+<li><code>@javax.ws.rs.core.Context</code>アノテーション：リクエストURIやリクエストヘッダー、セキュリティ情報などのコンテキスト情報を取得する汎用的なアノテーション</li>
+<li><code>@javax.ws.rs.BeanParam</code>アノテーション：リクエストのパラメータ一式をビーンとして取得する</li>
+<li><code>@javax.ws.rs.DefaultValue</code>アノテーション：対象に値が入らなかった場合、デフォルト値を指定するアノテーション</li>
+</ul></section><section><h4 id="946-リクエストのメッセージボディの受取">9.4.6 リクエストのメッセージボディの受取<a class="anchor" href="#946-リクエストのメッセージボディの受取"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>リクエストの引数にアノテーションを付与しなければ、メッセージボディを受け取れる</li>
+</ul></section><section><h4 id="947-入力チェック">9.4.7 入力チェック<a class="anchor" href="#947-入力チェック"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>リクエストのメッセージボディにマッピングしているJavaオブジェクトをバリデーションするには<code>@Valid</code>アノテーションを使用する</li>
+</ul></section><section><h4 id="948-レスポンスの定義">9.4.8 レスポンスの定義<a class="anchor" href="#948-レスポンスの定義"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>return する時に <code>javax.ws.rs.core.Response</code>クラスを用意している</p>
+</li>
+<li>
+<p><code>Response.created(URI.create("/knowledge" + knowledge.getId())).build()</code></p>
+<ul>
+<li>みたいな感じで生成して返却する</li>
+</ul>
+</li>
+<li>
+<p>レスポンスメッセージボディのみを指定するときは、Response型以外のオブジェクトを戻り値にするとよい</p>
+</li>
+<li>
+<p>エンティティプロバイダ（<code>MessageBodyWriter</code>インターフェース実装クラス）がリクエストのAcceptヘッダーに指定されているデータ形式に変換し、レスポンスのメッセージボディに書き出します</p>
+</li>
+<li>
+<p>成功時のレスポンスにメッセージボディが含まれている場合、「200 OK」</p>
+</li>
+<li>
+<p>メッセージボディが含まれていない場合、「204 No Content」</p>
+<ul>
+<li>MEMO: レスポンスの 204 No Contentは覚えておく</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="95-httpメソッドに応じた処理">9.5 HTTPメソッドに応じた処理<a class="anchor" href="#95-httpメソッドに応じた処理"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="951-ナレッジの検索getメソッドによる操作">9.5.1 ナレッジの検索（GETメソッドによる操作）<a class="anchor" href="#951-ナレッジの検索getメソッドによる操作"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="952-ナレッジの登録postメソッドによる操作">9.5.2 ナレッジの登録（POSTメソッドによる操作）<a class="anchor" href="#952-ナレッジの登録postメソッドによる操作"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="953-ナレッジの更新putメソッドによる操作">9.5.3 ナレッジの更新（PUTメソッドによる操作）<a class="anchor" href="#953-ナレッジの更新putメソッドによる操作"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="954-ナレッジの削除deleteメソッドによる操作">9.5.4 ナレッジの削除（DELETEメソッドによる操作）<a class="anchor" href="#954-ナレッジの削除deleteメソッドによる操作"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="955-例外クラス">9.5.5 例外クラス<a class="anchor" href="#955-例外クラス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JAX-RSの例外クラスを使用する</p>
+</li>
+<li>
+<p>JAX-RS2.0の例外体系</p>
+<ul>
+<li>非チェック例外である、<code>WebApplicationException</code>を用意している
+<ul>
+<li>コンストラクタにステータスコードを指定すると、アプリケーションからスローされた際にステータスコードを含んだResponseインスタンスをクライントに返す</li>
+<li>何も指定しなかったら 500 Internal Server Error</li>
+</ul>
+</li>
+<li>JAX-RS2.0ではこのクラスを継承した例外クラスが追加された</li>
+</ul>
+</li>
+<li>
+<p>ClientErrorExceptionを継承した例外クラス</p>
+<ul>
+<li>BadRequestException(400)</li>
+<li>NotAuthorizedException(401)</li>
+</ul>
+</li>
+<li>
+<p>ServerErrorExceptionを継承した例外クラス</p>
+<ul>
+<li>InternalServerErrorException(500)</li>
+<li>ServiceUnavailableException(503)</li>
+</ul>
+</li>
+<li>
+<p>MEMO: 他のフレームワークでもこの標準エラーを使用しているような気がする。あとで確認しておく</p>
+</li>
+<li>
+<p>独自例外の作成方法</p>
+<ul>
+<li>RuntimeExceptionを継承して例外クラスを作成</li>
+<li>マッパークラスを作成し、JAX-RSに認識させる</li>
+</ul>
+</li>
+<li>
+<p>MEMO: 独自例外を作成することは必ず必要になってくるので、ここ後で見返しておく</p>
+<ul>
+<li>Responseが持っているステータスについても覚えておく</li>
+</ul>
+</li>
+<li>
+<p>MEMO: 標準提供の例外をマッピングすることも可能！</p>
+<ul>
+<li>標準のExceptionはステータスコードしかクライアントに返却しないため、ここでマッピングして再定義しておくと、メッセージも合わせて返却できるということ</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="96-restクライアントクラスクライアント側の作成">9.6 RESTクライアントクラス（クライアント側）の作成<a class="anchor" href="#96-restクライアントクラスクライアント側の作成"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="961-データクラスdto">9.6.1 データクラス（DTO）<a class="anchor" href="#961-データクラスdto"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="962-restクライアントクラス">9.6.2 RESTクライアントクラス<a class="anchor" href="#962-restクライアントクラス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>MEMO: Javaクライアント側でJAX-RSのWebサービスを利用したい場合の実装方法
+<ul>
+<li>BASIC認証にサードパーティのクラスを使う</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="97-メッセージフィルタクラス">9.7 メッセージフィルタクラス<a class="anchor" href="#97-メッセージフィルタクラス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="971-メッセージフィルタとエンティティインターセプタ">9.7.1 メッセージフィルタとエンティティインターセプタ<a class="anchor" href="#971-メッセージフィルタとエンティティインターセプタ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>JAX-RS2.0では新たに、
+<ul>
+<li>メッセージフィルタ：リクエスト/レスポンスヘッダーの編集などに使用</li>
+<li>エンティティボディインターセプター：エンティティボディの編集などに使用</li>
+</ul>
+</li>
+</ul><p>割愛</p><ul>
+<li>MEMO: Logging用のフィルタの実装について考える ベストプラクティスは？
+<ul>
+<li>FileterとInterceptorの違い<a href="https://meetup-jp.toast.com/698">https://meetup-jp.toast.com/698</a></li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="98-まとめ">9.8 まとめ<a class="anchor" href="#98-まとめ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>JAX-RS
+<ul>
+<li>アノテーションでRESTful-Webサービスを作成できる</li>
+</ul>
+</li>
+</ul></section></section><section><h2 id="chapter10-バッチアプリケーションの開発">Chapter10 バッチアプリケーションの開発<a class="anchor" href="#chapter10-バッチアプリケーションの開発"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>JavaEE7では、Javaにおけるバッチ処理の標準化仕様が盛り込まれました。</p><p>この仕様はJSR352(Batch Applications for the Java Platform)で規定されている</p><p>通称「jBatch」と呼ばれている</p><section><h3 id="101-jbatchの基本">10.1 jBatchの基本<a class="anchor" href="#101-jbatchの基本"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="1011-バッチ処理とその特徴">10.1.1 バッチ処理とその特徴<a class="anchor" href="#1011-バッチ処理とその特徴"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>バッチ処理とは</p>
+<ul>
+<li>複数のデータや複数の処理を一括して実行する方式のこと</li>
+<li>一方、Webブラウザなどの画面を介して入力と応答が繰り返される処理をリアルタイム処理、オンライン処理と呼ぶ</li>
+</ul>
+</li>
+<li>
+<p>特徴</p>
+<ul>
+<li>一度に多くのデータが処理される</li>
+<li>実行時間が長い</li>
+<li>非対話型（人間による画面での入出力操作を伴わない）</li>
+<li>リクエストに従って起動されることよりも、実行する時刻を指定して起動されることが多い</li>
+</ul>
+</li>
+</ul></section><section><h4 id="1012-jbatchとは">10.1.2 jBatchとは<a class="anchor" href="#1012-jbatchとは"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>jBatchとは</p>
+<ul>
+<li>前項で述べたような特徴を持つバッチ処理をJava言語で実装するためのフレームワーク</li>
+<li>業務システムにおけるバッチ処理は、全体的な処理の流れや設計時に注意すべきポイントなど、</li>
+<li>時代や言語を伴わない共通点が多く見られる</li>
+<li>jBatchはこうした業務システムのバッチ処理似求められる要素を盛り込んだ「以前から培われている雛形」を標準として提供</li>
+<li>jBatchを使わなくてもバッチ処理を実現できるが、活用することで、理解が容易で考慮漏れの少ないバッチ処理を効率よく提供刷ることができる</li>
+</ul>
+</li>
+<li>
+<p>jBatchの機能と構成要素</p>
+<ul>
+<li>大まかに言うと
+<ul>
+<li>ジョブ</li>
+<li>ステップ
+<ul>
+<li>で構成される</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ジョブ：全体の流れを記述</li>
+<li>ステップ：ここの処理を実装する</li>
+<li>ジョブとステップの分離により、業務の変更に対して柔軟に対応できる仕組みになっている</li>
+</ul>
+</li>
+<li>
+<p>jBatchのアーキテクチャはオープンソースのSpringBatchから多くを受け継いでいるが</p>
+</li>
+<li>
+<p>ジョブとステップの分離は、メインフレーム時代から受け継がれているもの</p>
+</li>
+<li>
+<p>メインフレームでは、全体の流れはジョブとしてJCLによって記述され、</p>
+</li>
+<li>
+<p>業務ロジックはステップとして、COBOLやPL/Iなどの言語で記述されたプログラムを用いて実装される</p>
+</li>
+<li>
+<p>jBatchの機能と構成要素</p>
+</li>
+<li>
+<p>jBatchにはジョブとステップ以外にいくつか保s所的な機能がある</p>
+<ul>
+<li>リスナ：ジョブやステップの開始直前または終了直後に処理を差し込む</li>
+<li>ジョブリポジトリ：ジョブやステップの状態を永続的に保持する</li>
+<li>コンテキスト：一時的に保持する</li>
+<li>メトリック：統計的な情報を確認刷る</li>
+</ul>
+</li>
+</ul></section><section><h4 id="1013-ジョブ">10.1.3 ジョブ<a class="anchor" href="#1013-ジョブ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>ジョブはステップの入れ物</p>
+<ul>
+<li>１つのジョブの中には１つ以上のステップが必要</li>
+<li>XMLで記述する
+<ul>
+<li>各ステップの呼び出し先クラス</li>
+<li>実行順序</li>
+<li>ジョブ全体や各ステップに対する設定、エラー発生時の挙動なども記述</li>
+<li>記述のルールを示した仕様は、JSL(Job Specification Language)と呼ばれる</li>
+<li>ジョブを記述したXMLファイルはJob XMLファイルと呼ばれる</li>
+</ul>
+</li>
+<li>JSLには処理の実行順序を制御するために、以下のXML要素が用意されている
+<ul>
+<li>フロー（flow）</li>
+<li>スプリット（split）</li>
+<li>デシジョン（decision）</li>
+<li>遷移要素（Transition Elements）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>全体図が記載されている（書籍を見たほうが良い）</p>
+</li>
+<li>
+<p>フロー：複数のステップをまとめる要素</p>
+</li>
+<li>
+<p>スプリット：複数のフローを同時実行させることができる</p>
+</li>
+<li>
+<p>デシジョン：ジョブ内部で次の遷移先を細かくカスタマイズするための機能</p>
+</li>
+<li>
+<p>遷移要素</p>
+<ul>
+<li>next: 遷移先には、ステップ、フロー、スプリット、デシジョンが指定できる</li>
+<li>end: 正常終了</li>
+<li>stop: 中断</li>
+<li>fail: 異常終了</li>
+</ul>
+</li>
+<li>
+<p>リトライとスキップ</p>
+<ul>
+<li>リトライ：チャンク型ステップの処理中に特定の例外が発生した場合に、再度そのデータの処理を試みる</li>
+<li>スキップ：チャンク型ステップの処理中に特定の例外が発生した場合に、データを飛ばして次に進む</li>
+<li>リトライもしくはスキップ対象の例外クラスをJob XMLの中に定義</li>
+</ul>
+</li>
+<li>
+<p>ジョブオペレータ</p>
+<ul>
+<li>ジョブ自体の開始や停止の全体的な制御を行う</li>
+</ul>
+</li>
+<li>
+<p>ジョブオペレータの呼び出し方法</p>
+<ul>
+<li>バッチ処理の特徴として、「実行する時刻を指定して起動されることが多い」という点をあげたが、</li>
+<li>jBatchの仕様にはバッチを決まった時間に起動する方式に関する規定や、それを実現するAPIも含まれていない</li>
+<li>この部分に関しては、ジョブスケジューラを連携させる方式が一般的に
+<ul>
+<li>Linuxなどであればcron</li>
+<li>Windowsであればタスクスケジューラ</li>
+<li>その他市販のジョブスケジューラを使用する…など</li>
+</ul>
+</li>
+<li>ジョブを臨時で実行したい場合や、何らかの異常が発生し、人間が介入して原因を取り除いたあとに再実行する場合は、リクエストに従って起動することになります。（これを「アドホックな実行」と呼びます）
+<ul>
+<li>そういった場合、画面などのユーザーインターフェースがあると便利だが、この点に関してもjBatchは規定ない</li>
+</ul>
+</li>
+<li>実装する際には、オペレータの運用も考える必要がある</li>
+</ul>
+</li>
+<li>
+<p>MEMO: 手動実行されたジョブか、スケジュールで実行されたジョブかを識別する方法を仕込んでおいた方が良いと思った</p>
+</li>
+</ul></section><section><h4 id="1014-ステップ">10.1.4 ステップ<a class="anchor" href="#1014-ステップ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>バッチ内部の個々の処理を実装する部分
+<ul>
+<li>ステップの実態は、jBatchのAPIの中で定義されているJavaインターフェースであり、実装テンプレートを提供している</li>
+</ul>
+</li>
+<li>ステップには２種類ある
+<ul>
+<li>チャンク型：複数のデータを逐次的に処理するために使われる
+<ul>
+<li><code>ItemReader</code>,<code>ItemProcessor</code>,<code>ItemWriter</code>の３つで構成される</li>
+<li>ItemReaderとItemProcessorを繰り返したあと、ItemWriterが呼ばれる（デフォルトで１０回）</li>
+<li>この塊（１０回などの処理の塊）をチャンクと呼ぶ</li>
+</ul>
+</li>
+<li>バッチレット型：単体で完結する処理で使われます
+<ul>
+<li>データの加工や計算を１件ずつ繰り返すような処理ではなく、データに依存しない処理やコマンド実行などの処理を担います。</li>
+<li>例えば、ディレクトリ作成やファイル圧縮、送受信処理などの処理</li>
+<li>「タスク志向のステップ」と呼ばれる場合もある</li>
+<li>MEMO: このような単純な処理であれば、スクリプトで完結しそうな気もする..</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h4 id="1015-補助機能">10.1.5 補助機能<a class="anchor" href="#1015-補助機能"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>リスナ</p>
+<ul>
+<li>リスナを用いることで、バッチ処理の進行に応じた特定のタイミングで任意の処理を実行することができる</li>
+<li>「特定のタイミング」には、ジョブやステップの開始及び終了、リトライやスキップの発生などがある</li>
+</ul>
+</li>
+<li>
+<p>各処理のタイミングごとにリスナが用意されている</p>
+</li>
+<li>
+<p>リスナの設置は任意で、設置したい場合、リスナのクラス名をJob XMLの中で記述</p>
+</li>
+<li>
+<p>ジョブリポジトリ：開発者が意識して操作したりしない部分みたい</p>
+<ul>
+<li>実行中のジョブの情報や、実行が終わったジョブに関する情報が保存される</li>
+<li>情報の更新はコンテナによって自動的に行われ、情報の取得は、前述のジョブオペレータや、後述するコンテキスト、メトリックAPIを利用する</li>
+</ul>
+</li>
+<li>
+<p>コンテキスト</p>
+<ul>
+<li>種類
+<ul>
+<li>ジョブコンテキスト</li>
+<li>ステップコンテキスト</li>
+</ul>
+</li>
+<li>それぞれ、実行中のジョブやステップに関する情報を提供する役割を担う
+<ul>
+<li>名前やID、ステータスなどがある</li>
+<li>コンテキストへのアクセスは、jBatchAPIのJobContext、StepContextインターフェースを経由して行います</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>メトリック</p>
+<ul>
+<li>チャンク型のステップに対して、実行時の統計情報を提供するのがメトリック</li>
+<li>情報
+<ul>
+<li>読み取りレコード数</li>
+<li>書き込みレコード数</li>
+<li>スキップが発生した数</li>
+<li>など、処理量に関するもの</li>
+</ul>
+</li>
+<li>メトリックへのアクセスには、jBatchAPI似あるMetricインターフェースを経由して行う</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="102-jbatchの利用基本編">10.2 jBatchの利用――基本編<a class="anchor" href="#102-jbatchの利用基本編"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>実際に実装してみる
+<ul>
+<li>JobXMLの実装</li>
+<li>チャンク型ステップの実装</li>
+<li>バッチレット型ステップの実装</li>
+<li>ジョブ実行部分の実装</li>
+<li>実行結果の確認</li>
+</ul>
+</li>
+</ul><section><h4 id="1021-jobxmlの実装">10.2.1 JobXMLの実装<a class="anchor" href="#1021-jobxmlの実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>バッチの全体を表すJobXMLを作成刷る</p>
+</li>
+<li>
+<p>ファイル名から拡張子を取り除いた部分がそのままジョブの名前となります。</p>
+</li>
+<li>
+<p>ジョブの名前は実行時にJobOperatorクラスのメソッドにわたす形で利用される</p>
+</li>
+<li>
+<p>それぞれの要素説明</p>
+<ul>
+<li>job</li>
+<li>step</li>
+<li>chunk</li>
+<li>batchlet</li>
+</ul>
+</li>
+</ul></section><section><h4 id="1022-チャンク型ステップの実装">10.2.2 チャンク型ステップの実装<a class="anchor" href="#1022-チャンク型ステップの実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="1025-バッチレット型ステップの実装">10.2.5 バッチレット型ステップの実装<a class="anchor" href="#1025-バッチレット型ステップの実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>Batchletを実装
+<ul>
+<li>prosess,stopを実装して処理を書くだけ</li>
+<li>保守性を高い状態に保つためにも、１機能の実装にとどめておくべき</li>
+</ul>
+</li>
+</ul></section><section><h4 id="1026-ジョブ実行部分の実装">10.2.6 ジョブ実行部分の実装<a class="anchor" href="#1026-ジョブ実行部分の実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>JobInstanceとJobExecution</p>
+<ul>
+<li>最初にジョブを実行すると、コンテナ内部ではこの２つのインスタンスが生成される
+<ul>
+<li>JobInstanceはジョブの１回分を表現</li>
+<li>JobExecutionはジョブの実行そのものを表現している</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>パッケージング</p>
+<ul>
+<li>jBatchでもWebアプリケーションと同様に、構成するファイル群をwarファイル形式にまとめてコンテナにデプロイ刷る</li>
+<li>ここで注意が必要なのは、JobXMLファイルの配置場所
+<ul>
+<li>JobXMLは、warファイル内部の<code>WEB-INF/classes/META-INF/batch-jobs</code>ディレクトリの配下に「ジョブ名.xml」という名前で配置しなければ行けない</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>MEMO: パッケージングする際には一般的にどのようにしているか確認、Gradleとかの前処理で調整している？</p>
+</li>
+</ul></section><section><h4 id="1027-実行結果の確認">10.2.7 実行結果の確認<a class="anchor" href="#1027-実行結果の確認"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>バッチログを掲載</p></section></section><section><h3 id="103-jbatchの利用応用編">10.3 jBatchの利用――応用編<a class="anchor" href="#103-jbatchの利用応用編"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="1031-サンプル概要">10.3.1 サンプル概要<a class="anchor" href="#1031-サンプル概要"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>ナレッジ件数ランキング集計バッチ</p>
+</li>
+<li>
+<p>コメント件数ランキング集計バッチ</p>
+</li>
+<li>
+<p>Column キーブレイク処理について</p>
+<ul>
+<li>マスタ表から１件読み込み、トランザクション表を操作して処理するという一連の流れ</li>
+<li>業務におけるバッチ処理では大変多く見られるパターンの１つ</li>
+<li>jBatchのチャンク形式のステップは、このようなキーブレイク処理を念頭においたものと言えるので、本書でも取り上げた</li>
+<li>MEMO: チャンク形式が業務で応用されている例を確認しておくべき
+<ul>
+<li>SQL一本で済ませる場合が多いのでは？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="104-ジョブの作成">10.4 ジョブの作成<a class="anchor" href="#104-ジョブの作成"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="1041-job-xmlの実装">10.4.1 Job XMLの実装<a class="anchor" href="#1041-job-xmlの実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>property要素を利用する方法を記載
+<ul>
+<li>感覚的にはmavenみたいな感じ</li>
+</ul>
+</li>
+</ul></section><section><h4 id="1042-チャンクの実装">10.4.2 チャンクの実装<a class="anchor" href="#1042-チャンクの実装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>※実際に実装刷る際に必要なった時に見返す</p></section></section><section><h3 id="105-ジョブのフロー制御">10.5 ジョブのフロー制御<a class="anchor" href="#105-ジョブのフロー制御"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>※実際に実装刷る際に必要なった時に見返す</p></section><section><h3 id="106-まとめ">10.6 まとめ<a class="anchor" href="#106-まとめ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><ul>
+<li>終了！</li>
+</ul></section></section></section>  </div> <script type="module">document.addEventListener("click",function(s){const t=s.target;if(t&&t.classList.contains("copy-btn")){const c=t.closest("pre")?.querySelector("code"),i=Array.from(c?.querySelectorAll(".code:not(summary *)")??[]).map(e=>e.textContent).map(e=>e===`
+`?"":e).join(`
+`);navigator.clipboard.writeText(i);const o=t.getAttribute("data-timeout-id");o&&clearTimeout(parseInt(o)),t.classList.add("success");const n=setTimeout(()=>{t.classList.remove("success")},1e3);t.setAttribute("data-timeout-id",n.toString())}});</script> <div class="relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 mb-6 rounded-xl license-container onload-animation"> <div class="transition font-bold text-black/75 dark:text-white/75"> Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築 </div> <a href="https://tutttuwi.github.io/posts/2020-04_javaee7徹底入門/" class="link text-[var(--primary)]"> https://tutttuwi.github.io/posts/2020-04_javaee7徹底入門/ </a> <div class="flex gap-6 mt-2"> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">Author</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">Tomoaki Tsutsui</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">Published at</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">2020-04-12</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">License</div> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="link text-[var(--primary)] line-clamp-2">CC BY-NC-SA 4.0</a> </div> </div> <svg width="0.97em" height="1em" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5" data-icon="fa6-brands:creative-commons">   <symbol id="ai:fa6-brands:creative-commons" viewBox="0 0 496 512"><path fill="currentColor" d="m245.83 214.87l-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93c-22.13 0-33.22 14.61-33.22 43.84c0 23.57 9.21 43.84 33.22 43.84c14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98c-22.6 0-73.96-10.32-73.96-77.05c0-58.69 43-77.06 72.63-77.06c30.72-.01 52.7 11.95 65.99 35.86m143.05 0l-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93c-22.14 0-33.22 14.61-33.22 43.84c0 23.55 9.23 43.84 33.22 43.84c14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98c-22.69 0-73.96-9.87-73.96-77.05c0-58.67 42.97-77.06 72.63-77.06c30.71-.01 52.58 11.95 65.56 35.86M247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248c129.93 0 248.44-100.87 248.44-248c0-137.87-106.62-248-248.44-248m.87 450.81c-112.54 0-203.7-93.04-203.7-202.81c0-105.42 85.43-203.27 203.72-203.27c112.53 0 202.82 89.46 202.82 203.26c-.01 121.69-99.68 202.82-202.84 202.82"/></symbol><use href="#ai:fa6-brands:creative-commons"></use>  </svg> </div> </div> </div> <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full"> <a href="/posts/2020-05_spring徹底入門/" class="w-full font-bold overflow-hidden active:scale-95"> <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4"> <svg width="1em" height="1em" class="text-[2rem] text-[var(--primary)]" data-icon="material-symbols:chevron-left-rounded">   <symbol id="ai:material-symbols:chevron-left-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z"/></symbol><use href="#ai:material-symbols:chevron-left-rounded"></use>  </svg> <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75"> Spring徹底入門 </div> </div> </a> <a href="/posts/2020-04_web製作者のためのsassの教科書/" class="w-full font-bold overflow-hidden active:scale-95"> <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4"> <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75"> Web製作者のためのSassの教科書 </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[2rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </div> </a> </div>  <div class="footer col-span-2 onload-animation hidden lg:block"> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center">
+&copy; <span id="copyright-year">2026</span> Tomoaki Tsutsui. All Rights Reserved. /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/rss.xml">RSS</a> /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/sitemap-index.xml">Sitemap</a><br> <!--
+        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        --> </div> </div> </div> </div> </main> <div class="footer col-span-2 onload-animation block lg:hidden"> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center">
+&copy; <span id="copyright-year">2026</span> Tomoaki Tsutsui. All Rights Reserved. /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/rss.xml">RSS</a> /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/sitemap-index.xml">Sitemap</a><br> <!--
+        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        --> </div> </div> </div> </div> <!-- There can't be a filter on parent element, or it will break `fixed` --><div class="back-to-top-wrapper hidden lg:block" data-astro-cid-eymb5ayk> <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="backToTop()" data-astro-cid-eymb5ayk> <button aria-label="Back to Top" class="btn-card h-[3.75rem] w-[3.75rem]" data-astro-cid-eymb5ayk> <svg width="1em" height="1em" class="mx-auto" data-astro-cid-eymb5ayk="true" data-icon="material-symbols:keyboard-arrow-up-rounded">   <symbol id="ai:material-symbols:keyboard-arrow-up-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m12 10.8l-3.9 3.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"/></symbol><use href="#ai:material-symbols:keyboard-arrow-up-rounded"></use>  </svg> </button> </div> </div>  <script>
+function backToTop() {
+    window.scroll({ top: 0, behavior: 'smooth' });
+}
+</script> </div> </div>  <div class="absolute w-full z-0 hidden 2xl:block"> <div class="relative max-w-[var(--page-width)] mx-auto"> <!-- TOC component --> <div id="toc-wrapper" class="hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center"> <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar"> <div id="toc" class="w-full h-full transition-swup-fade "> <div class="h-8 w-full"></div> <table-of-contents class="group"><a href="#java-ee-7徹底入門-標準javaフレームワークによる高信頼性webシステムの構築" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold bg-[var(--toc-badge-bg)] text-[var(--btn-content)]">1</div><div class="transition text-sm text-50">Java EE 7徹底入門 標準Javaフレームワークによる高信頼性Webシステムの構築</div></a><a href="#chapter-1-java-eeの基礎知識" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter 1 Java EEの基礎知識</div></a><a href="#chapter-2-プレゼンテーション層の開発jsfの基本" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter 2 プレゼンテーション層の開発――JSFの基本</div></a><a href="#chapter-3-プレゼンテーション層の開発jsfの応用-その1" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter 3 プレゼンテーション層の開発――JSFの応用 その1</div></a><a href="#chapter-4-プレゼンテーション層の開発jsfの応用-その2" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter 4 プレゼンテーション層の開発――JSFの応用 その2</div></a><a href="#chapter-5-ビジネスロジック層の開発cdiの利用" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter 5 ビジネスロジック層の開発――CDIの利用</div></a><a href="#chapter-6-ビジネスロジック層の開発ejbの利用" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter 6 ビジネスロジック層の開発――EJBの利用</div></a><a href="#chapter-7-データアクセス層の開発jpaの基本" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter 7 データアクセス層の開発――JPAの基本</div></a><a href="#chapter8-データアクセス層の開発-jpaの応用" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter8 データアクセス層の開発 JPAの応用</div></a><a href="#chapter9-restful-webサービスの開発" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter9 RESTful Webサービスの開発</div></a><a href="#chapter10-バッチアプリケーションの開発" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">Chapter10 バッチアプリケーションの開発</div></a><div id="active-indicator" style="opacity: 0" class="-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"></div></table-of-contents><script type="module">class l extends HTMLElement{tocEl=null;visibleClass="visible";observer;anchorNavTarget=null;headingIdxMap=new Map;headings=[];sections=[];tocEntries=[];active=[];activeIndicator=null;constructor(){super(),this.observer=new IntersectionObserver(this.markVisibleSection,{threshold:0})}markVisibleSection=t=>{t.forEach(e=>{const i=e.target.children[0]?.getAttribute("id"),s=i?this.headingIdxMap.get(i):void 0;s!=null&&(this.active[s]=e.isIntersecting),e.isIntersecting&&this.anchorNavTarget==e.target.firstChild&&(this.anchorNavTarget=null)}),this.active.includes(!0)||this.fallback(),this.update()};toggleActiveHeading=()=>{let t=this.active.length-1,e=this.active.length-1,i=-1;for(;t>=0&&!this.active[t];)this.tocEntries[t].classList.remove(this.visibleClass),t--;for(;t>=0&&this.active[t];)this.tocEntries[t].classList.add(this.visibleClass),e=Math.min(e,t),i=Math.max(i,t),t--;for(;t>=0;)this.tocEntries[t].classList.remove(this.visibleClass),t--;if(e>i)this.activeIndicator?.setAttribute("style","opacity: 0");else{let s=this.tocEl?.getBoundingClientRect().top||0,n=this.tocEl?.scrollTop||0,o=this.tocEntries[e].getBoundingClientRect().top-s+n,c=this.tocEntries[i].getBoundingClientRect().bottom-s+n;this.activeIndicator?.setAttribute("style",`top: ${o}px; height: ${c-o}px`)}};scrollToActiveHeading=()=>{if(this.anchorNavTarget||!this.tocEl)return;const t=document.querySelectorAll(`#toc .${this.visibleClass}`);if(!t.length)return;const e=t[0],i=t[t.length-1],s=this.tocEl.clientHeight;let n;i.getBoundingClientRect().bottom-e.getBoundingClientRect().top<.9*s?n=e.offsetTop-32:n=i.offsetTop-s*.8,this.tocEl.scrollTo({top:n,left:0,behavior:"smooth"})};update=()=>{requestAnimationFrame(()=>{this.toggleActiveHeading(),this.scrollToActiveHeading()})};fallback=()=>{if(this.sections.length)for(let t=0;t<this.sections.length;t++){let e=this.sections[t].getBoundingClientRect().top,i=this.sections[t].getBoundingClientRect().bottom;if(this.isInRange(e,0,window.innerHeight)||this.isInRange(i,0,window.innerHeight)||e<0&&i>window.innerHeight)this.markActiveHeading(t);else if(e>window.innerHeight)break}};markActiveHeading=t=>{this.active[t]=!0};handleAnchorClick=t=>{const e=t.composedPath().find(i=>i instanceof HTMLAnchorElement);if(e){const i=decodeURIComponent(e.hash?.substring(1)),s=this.headingIdxMap.get(i);s!==void 0?this.anchorNavTarget=this.headings[s]:this.anchorNavTarget=null}};isInRange(t,e,i){return e<t&&t<i}connectedCallback(){const t=document.querySelector(".prose");t?t.addEventListener("animationend",()=>{this.init()},{once:!0}):console.debug("Animation element not found")}init(){if(this.tocEl=document.getElementById("toc-inner-wrapper"),!!this.tocEl&&(this.tocEl.addEventListener("click",this.handleAnchorClick,{capture:!0}),this.activeIndicator=document.getElementById("active-indicator"),this.tocEntries=Array.from(document.querySelectorAll("#toc a[href^='#']")),this.tocEntries.length!==0)){this.sections=new Array(this.tocEntries.length),this.headings=new Array(this.tocEntries.length);for(let t=0;t<this.tocEntries.length;t++){const e=decodeURIComponent(this.tocEntries[t].hash?.substring(1)),i=document.getElementById(e),s=i?.parentElement;i instanceof HTMLElement&&s instanceof HTMLElement&&(this.headings[t]=i,this.sections[t]=s,this.headingIdxMap.set(e,t))}this.active=new Array(this.tocEntries.length).fill(!1),this.sections.forEach(t=>this.observer.observe(t)),this.fallback(),this.update()}}disconnectedCallback(){this.sections.forEach(t=>this.observer.unobserve(t)),this.observer.disconnect(),this.tocEl?.removeEventListener("click",this.handleAnchorClick)}}customElements.get("table-of-contents")||customElements.define("table-of-contents",l);</script> <div class="h-8 w-full"></div> </div> </div> </div> <!-- #toc needs to exist for Swup to work normally -->  </div> </div>  <!-- increase the page height during page transition to prevent the scrolling animation from jumping --> <div id="page-height-extend" class="hidden h-[300vh]" data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"></div>  <script type="module" src="/_astro/Layout.astro_astro_type_script_index_0_lang.DAHrxWCB.js"></script> <script type="module" src="/_astro/Layout.astro_astro_type_script_index_1_lang.D-ve5fSU.js"></script></body></html> <script type="module">function n(e){const s=document.getElementById("sidebar"),o=document.getElementById("main-grid"),t=document.getElementById("swup-container");if(!s||!o||!t)return;e.startsWith("/posts/")?(s.classList.add("hidden"),o.classList.remove("grid-cols-1","lg:grid-cols-[17.5rem_auto]"),o.classList.add("grid-cols-1","lg:grid-cols-[auto]"),t.classList.remove("col-span-2","lg:col-span-1"),t.classList.add("col-span-1")):(s.classList.remove("hidden"),o.classList.remove("grid-cols-1","lg:grid-cols-[auto]"),o.classList.add("grid-cols-1","lg:grid-cols-[17.5rem_auto]"),t.classList.remove("col-span-1"),t.classList.add("col-span-2","lg:col-span-1"))}n(window.location.pathname);const i=()=>{window.swup.hooks.on("visit:start",e=>{const s=new URL(e.to.url,window.location.origin);n(s.pathname)}),window.swup.hooks.on("content:replace",()=>{n(window.location.pathname)})};window?.swup?.hooks?i():document.addEventListener("swup:enable",i);</script>

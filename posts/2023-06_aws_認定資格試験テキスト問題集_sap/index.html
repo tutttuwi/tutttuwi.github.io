@@ -1,0 +1,2769 @@
+<!DOCTYPE html><html lang="en" class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]" data-overlayscrollbars-initialize data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"> <head><title>AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト) - Home</title><meta charset="UTF-8"><meta name="description" content="AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト) - Home"><meta name="author" content="Tomoaki Tsutsui"><meta property="og:site_name" content="Home"><meta property="og:url" content="https://tutttuwi.github.io/posts/2023-06_aws_%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E8%A9%A6%E9%A8%93%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%95%8F%E9%A1%8C%E9%9B%86_sap/"><meta property="og:title" content="AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト) - Home"><meta property="og:description" content="AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト) - Home"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://tutttuwi.github.io/posts/2023-06_aws_%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E8%A9%A6%E9%A8%93%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%95%8F%E9%A1%8C%E9%9B%86_sap/"><meta name="twitter:title" content="AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト) - Home"><meta name="twitter:description" content="AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト) - Home"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.13.10"><link rel="icon" href="/favicon/icon.png" sizes="32x32"><!-- Set the theme before the page is rendered to avoid a flash --><script>(function(){const DEFAULT_THEME = "auto";
+const LIGHT_MODE = "light";
+const DARK_MODE = "dark";
+const AUTO_MODE = "auto";
+const BANNER_HEIGHT_EXTEND = 30;
+const PAGE_WIDTH = 75;
+const configHue = 250;
+
+			// Load the theme from local storage
+			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
+			switch (theme) {
+				case LIGHT_MODE:
+					document.documentElement.classList.remove('dark');
+					break
+				case DARK_MODE:
+					document.documentElement.classList.add('dark');
+					break
+				case AUTO_MODE:
+					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.documentElement.classList.add('dark');
+					} else {
+						document.documentElement.classList.remove('dark');
+					}
+			}
+
+			// Load the hue from local storage
+			const hue = localStorage.getItem('hue') || configHue;
+			document.documentElement.style.setProperty('--hue', hue);
+
+			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
+			offset = offset - offset % 4;
+			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+		})();</script><!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト)","description":"AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト)","keywords":["教科書","AWS"],"author":{"@type":"Person","name":"Tomoaki Tsutsui","url":"https://tutttuwi.github.io/"},"datePublished":"2023-06-24","inLanguage":"en"}</script><link rel="alternate" type="application/rss+xml" title="Tomoaki Tsutsui" href="https://tutttuwi.github.io/rss.xml"><!-- MermaidJS --><script type="module">
+			import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+			mermaid.initialize({ 
+				startOnLoad: true,
+				theme: 'dark',
+				securityLevel: 'loose'
+			});
+			window.mermaid = mermaid;
+		</script><link rel="stylesheet" href="/_astro/Layout.y4KPJ9hc.css">
+<link rel="stylesheet" href="/_astro/Layout.DSulWsr7.css">
+<link rel="stylesheet" href="/_astro/_page_.CoKYm2jU.css">
+<link rel="stylesheet" href="/_astro/_page_.ZlghMKVQ.css">
+<link rel="stylesheet" href="/_astro/about.BtniRLn_.css">
+<style>input.svelte-1wah7ro:focus{outline:0}.search-panel.svelte-1wah7ro{max-height:calc(100vh - 100px);overflow-y:auto}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k){-webkit-appearance:none;height:1.5rem;background-image:var(--color-selection-bar);transition:background-image .15s ease-in-out}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-webkit-slider-thumb:active{background:#fff9}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;border-width:0;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-moz-range-thumb:active{background:#fff9}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb{-webkit-appearance:none;height:1rem;width:.5rem;border-radius:.125rem;background:#ffffffb3;box-shadow:none}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb:hover{background:#fffc}#display-setting.svelte-d7tq3k input[type=range]:where(.svelte-d7tq3k)::-ms-thumb:active{background:#fff9}
+</style><script type="module" src="/_astro/page.Z8IJTFqj.js"></script></head> <body class=" min-h-screen transition " data-overlayscrollbars-initialize data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"> <div id="config-carrier" data-hue="250"></div>    <div id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto"> <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all"> <div id="navbar" class="z-50 onload-animation"> <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation --> <div class="card-base !overflow-visible max-w-[var(--page-width)] h-[4.5rem] !rounded-t-none mx-auto flex items-center justify-between px-4"> <a href="/" class="btn-plain scale-animation rounded-lg h-[3.25rem] px-5 font-bold active:scale-95"> <div class="flex flex-row text-[var(--primary)] items-center text-md"> <svg width="1em" height="1em" class="text-[1.75rem] mb-1 mr-2" data-icon="material-symbols:home-outline-rounded">   <symbol id="ai:material-symbols:home-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75"/></symbol><use href="#ai:material-symbols:home-outline-rounded"></use>  </svg> Home </div> </a> <div class="hidden md:flex"> <a aria-label="Home" href="/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> Home  </div> </a><a aria-label="Archive" href="/archive/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> Archive  </div> </a><a aria-label="About" href="/about/" class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"> <div class="flex items-center"> About  </div> </a> </div> <div class="flex"> <!--<SearchPanel client:load>--> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event("astro:only"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="AEJ6w" component-url="/_astro/Search.DpBcKkHr.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> <button aria-label="Display Settings" class="btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="display-settings-switch"> <svg width="1em" height="1em" class="text-[1.25rem]" data-icon="material-symbols:palette-outline">   <symbol id="ai:material-symbols:palette-outline" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22q-2.05 0-3.875-.788t-3.187-2.15t-2.15-3.187T2 12q0-2.075.813-3.9t2.2-3.175T8.25 2.788T12.2 2q2 0 3.775.688t3.113 1.9t2.125 2.875T22 11.05q0 2.875-1.75 4.413T16 17h-1.85q-.225 0-.312.125t-.088.275q0 .3.375.863t.375 1.287q0 1.25-.687 1.85T12 22m-5.5-9q.65 0 1.075-.425T8 11.5t-.425-1.075T6.5 10t-1.075.425T5 11.5t.425 1.075T6.5 13m3-4q.65 0 1.075-.425T11 7.5t-.425-1.075T9.5 6t-1.075.425T8 7.5t.425 1.075T9.5 9m5 0q.65 0 1.075-.425T16 7.5t-.425-1.075T14.5 6t-1.075.425T13 7.5t.425 1.075T14.5 9m3 4q.65 0 1.075-.425T19 11.5t-.425-1.075T17.5 10t-1.075.425T16 11.5t.425 1.075T17.5 13M12 20q.225 0 .363-.125t.137-.325q0-.35-.375-.825T11.75 17.3q0-1.05.725-1.675T14.25 15H16q1.65 0 2.825-.962T20 11.05q0-3.025-2.312-5.038T12.2 4Q8.8 4 6.4 6.325T4 12q0 3.325 2.338 5.663T12 20"/></symbol><use href="#ai:material-symbols:palette-outline"></use>  </svg> </button> <astro-island uid="rIw13" component-url="/_astro/LightDarkSwitch.Cq210o6L.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;LightDarkSwitch&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> <button aria-label="Menu" name="Nav Menu" class="btn-plain scale-animation rounded-lg w-11 h-11 active:scale-90 md:!hidden" id="nav-menu-switch"> <svg width="1em" height="1em" class="text-[1.25rem]" data-icon="material-symbols:menu-rounded">   <symbol id="ai:material-symbols:menu-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></symbol><use href="#ai:material-symbols:menu-rounded"></use>  </svg> </button> </div> <div id="nav-menu-panel" class="float-panel float-panel-closed absolute transition-all fixed right-4 px-2 py-2"> <a href="/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> Home </div> <svg width="1em" height="1em" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <symbol id="ai:material-symbols:chevron-right-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.6 4.6q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7z"/></symbol><use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a><a href="/archive/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> Archive </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a><a href="/about/" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "> <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"> About </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[1.25rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg>  </a> </div> <astro-island uid="ZsVUom" component-url="/_astro/DisplaySettings.9NB11Dvr.js" component-export="default" renderer-url="/_astro/client.svelte.BtEbdPyR.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;DisplaySettings&quot;,&quot;value&quot;:&quot;svelte&quot;}"></astro-island> </div> </div> <script type="module">function c(){localStorage.theme==="dark"?(document.documentElement.classList.remove("dark"),localStorage.theme="light"):(document.documentElement.classList.add("dark"),localStorage.theme="dark")}function o(){let t=document.getElementById("scheme-switch");t&&(t.onclick=function(){c()});let n=document.getElementById("display-settings-switch");n&&(n.onclick=function(){let e=document.getElementById("display-setting");e&&e.classList.toggle("float-panel-closed")});let l=document.getElementById("nav-menu-switch");l&&(l.onclick=function(){let e=document.getElementById("nav-menu-panel");e&&e.classList.toggle("float-panel-closed")})}o();</script> <script>(function(){const scriptUrl = "/pagefind/pagefind.js";
+
+async function loadPagefind() {
+    try {
+        const response = await fetch(scriptUrl, { method: 'HEAD' });
+        if (!response.ok) {
+            throw new Error(`Pagefind script not found: ${response.status}`);
+        }
+
+        const pagefind = await import(scriptUrl);
+
+        await pagefind.options({
+            excerptLength: 20
+        });
+
+        window.pagefind = pagefind;
+
+        document.dispatchEvent(new CustomEvent('pagefindready'));
+        console.log('Pagefind loaded and initialized successfully, event dispatched.');
+    } catch (error) {
+        console.error('Failed to load Pagefind:', error);
+        window.pagefind = {
+            search: () => Promise.resolve({ results: [] }),
+            options: () => Promise.resolve(),
+        };
+        document.dispatchEvent(new CustomEvent('pagefindloaderror'));
+        console.log('Pagefind load error, event dispatched.');
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadPagefind);
+} else {
+    loadPagefind();
+}
+})();</script> </div> </div>   <div class="absolute w-full z-30 pointer-events-none" style="top: 5.5rem"> <!-- The pointer-events-none here prevent blocking the click event of the TOC --> <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto overflow-x-hidden"> <div id="main-grid" class="transition duration-700 w-full min-w-0 left-0 right-0 grid grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto lg:gap-4 px-0 md:px-4 grid-cols-1 lg:grid-cols-[auto]"> <!-- Banner image credit -->  <!-- TODO: サイドバー調整 (mt-4 lg:mt-0を無理やり調整しているがgapで調整したい) --><div id="sidebar" class="mb-4 row-start-2 row-end-3 col-span-2 lg:row-start-1 lg:row-end-2 lg:col-span-1 lg:max-w-[17.5rem] onload-animation w-full mt-4 lg:mt-0"> <div class="flex flex-col w-full gap-4 mb-4"> <div class="card-base p-3"> <a aria-label="Go to About Page" href="/about/" class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
+       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95"> <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
+        w-full h-full z-50 flex items-center justify-center"> <svg width="1.13em" height="1em" class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl" data-icon="fa6-regular:address-card">   <symbol id="ai:fa6-regular:address-card" viewBox="0 0 576 512"><path fill="currentColor" d="M512 80c8.8 0 16 7.2 16 16v320c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16zM64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64zm144 224a64 64 0 1 0 0-128a64 64 0 1 0 0 128m-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16h192c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80zm200-144c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24z"/></symbol><use href="#ai:fa6-regular:address-card"></use>  </svg> </div> <div class="mx-auto lg:w-full h-full lg:mt-0  overflow-hidden relative"> <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div> <img src="/_astro/avatar.Dt7w5_qZ_Zpns3d.webp" alt="Profile Image of the Author" style="object-position: center" loading="lazy" decoding="async" fetchpriority="auto" width="400" height="400" class="w-full h-full object-cover">  </div> </a> <div class="px-2"> <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">Tomoaki Tsutsui</div> <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div> <div class="text-center text-neutral-400 mb-2.5 transition">I&#39;m a software engineer.</div> <div class="flex flex-wrap gap-2 justify-center mb-1"> <a rel="me" aria-label="Twitter" href="https://x.com/tutttwien" target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90"> <svg width="1em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:twitter">   <symbol id="ai:fa6-brands:twitter" viewBox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645c0 138.72-105.583 298.558-298.558 298.558c-59.452 0-114.68-17.219-161.137-47.106c8.447.974 16.568 1.299 25.34 1.299c49.055 0 94.213-16.568 130.274-44.832c-46.132-.975-84.792-31.188-98.112-72.772c6.498.974 12.995 1.624 19.818 1.624c9.421 0 18.843-1.3 27.614-3.573c-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319c-28.264-18.843-46.781-51.005-46.781-87.391c0-19.492 5.197-37.36 14.294-52.954c51.655 63.675 129.3 105.258 216.365 109.807c-1.624-7.797-2.599-15.918-2.599-24.04c0-57.828 46.782-104.934 104.934-104.934c30.213 0 57.502 12.67 76.67 33.137c23.715-4.548 46.456-13.32 66.599-25.34c-7.798 24.366-24.366 44.833-46.132 57.827c21.117-2.273 41.584-8.122 60.426-16.243c-14.292 20.791-32.161 39.308-52.628 54.253"/></symbol><use href="#ai:fa6-brands:twitter"></use>  </svg> </a><a rel="me" aria-label="GitHub" href="https://github.com/tutttuwi" target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90"> <svg width="0.97em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:github">   <symbol id="ai:fa6-brands:github" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6c-3.3.3-5.6-1.3-5.6-3.6c0-2 2.3-3.6 5.2-3.6c3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9c2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9c.3 2 2.9 3.3 5.9 2.6c2.9-.7 4.9-2.6 4.6-4.6c-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2c12.8 2.3 17.3-5.6 17.3-12.1c0-6.2-.3-40.4-.3-61.4c0 0-70 15-84.7-29.8c0 0-11.4-29.1-27.8-36.6c0 0-22.9-15.7 1.6-15.4c0 0 24.9 2 38.6 25.8c21.9 38.6 58.6 27.5 72.9 20.9c2.3-16 8.8-27.1 16-33.7c-55.9-6.2-112.3-14.3-112.3-110.5c0-27.5 7.6-41.3 23.6-58.9c-2.6-6.5-11.1-33.3 2.6-67.9c20.9-6.5 69 27 69 27c20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27c13.7 34.7 5.2 61.4 2.6 67.9c16 17.7 25.8 31.5 25.8 58.9c0 96.5-58.9 104.2-114.8 110.5c9.2 7.9 17 22.9 17 46.4c0 33.7-.3 75.4-.3 83.6c0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252C496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2c1.6 1.6 3.9 2.3 5.2 1c1.3-1 1-3.3-.7-5.2c-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9c1.6 1 3.6.7 4.3-.7c.7-1.3-.3-2.9-2.3-3.9c-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2c2.3 2.3 5.2 2.6 6.5 1c1.3-1.3.7-4.3-1.3-6.2c-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2c-1.4-2.3-4-3.3-5.6-2"/></symbol><use href="#ai:fa6-brands:github"></use>  </svg> </a><a rel="me" aria-label="LinkedIn" href="https://www.linkedin.com/in/tutttuwi/" target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90"> <svg width="0.88em" height="1em" class="text-[1.5rem]" data-icon="fa6-brands:linkedin">   <symbol id="ai:fa6-brands:linkedin" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5c0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7c-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5c67.2 0 79.7 44.3 79.7 101.9z"/></symbol><use href="#ai:fa6-brands:linkedin"></use>  </svg> </a>  </div> </div> </div> </div> <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4"> <widget-layout data-id="categories" data-is-collapsed="false" class="pb-4 card-base onload-animation" style="animation-delay: 150ms; --collapsedHeight: 7.5rem;" data-astro-cid-ucso7hve="true"> <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">Categories</div> <div id="categories" class="collapse-wrapper px-4 overflow-hidden" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <a href="/archive/?category=%E6%9B%B8%E7%B1%8D" aria-label="View all posts in the 書籍 category"> <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        "> <div class="flex items-center justify-between relative mr-2"> <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  "> 書籍 </div> <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center"> 61 </div> </div> </button> </a> </div>  </widget-layout>  <script type="module">class d extends HTMLElement{constructor(){if(super(),this.dataset.isCollapsed!=="true")return;const e=this.dataset.id,t=this.querySelector(".expand-btn"),s=this.querySelector(`#${e}`);t.addEventListener("click",()=>{s.classList.remove("collapsed"),t.classList.add("hidden")})}}customElements.get("widget-layout")||customElements.define("widget-layout",d);</script> <widget-layout data-id="tags" data-is-collapsed="true" class="pb-4 card-base onload-animation" style="animation-delay: 200ms; --collapsedHeight: 7.5rem;" data-astro-cid-ucso7hve="true"> <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">Tags</div> <div id="tags" class="collapse-wrapper px-4 overflow-hidden collapsed" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;">  <div class="flex gap-2 flex-wrap"> <a href="/archive/?tag=AI" aria-label="View all posts with the AI tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  AI </a><a href="/archive/?tag=AWS" aria-label="View all posts with the AWS tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  AWS </a><a href="/archive/?tag=Azure" aria-label="View all posts with the Azure tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Azure </a><a href="/archive/?tag=CSS" aria-label="View all posts with the CSS tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  CSS </a><a href="/archive/?tag=DA" aria-label="View all posts with the DA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  DA </a><a href="/archive/?tag=DB" aria-label="View all posts with the DB tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  DB </a><a href="/archive/?tag=EX" aria-label="View all posts with the EX tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  EX </a><a href="/archive/?tag=Excel" aria-label="View all posts with the Excel tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Excel </a><a href="/archive/?tag=HTML" aria-label="View all posts with the HTML tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  HTML </a><a href="/archive/?tag=IPA" aria-label="View all posts with the IPA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  IPA </a><a href="/archive/?tag=Java" aria-label="View all posts with the Java tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Java </a><a href="/archive/?tag=JAVA" aria-label="View all posts with the JAVA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  JAVA </a><a href="/archive/?tag=Javascript" aria-label="View all posts with the Javascript tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Javascript </a><a href="/archive/?tag=Linux" aria-label="View all posts with the Linux tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Linux </a><a href="/archive/?tag=LLM" aria-label="View all posts with the LLM tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  LLM </a><a href="/archive/?tag=LPIC" aria-label="View all posts with the LPIC tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  LPIC </a><a href="/archive/?tag=NW" aria-label="View all posts with the NW tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  NW </a><a href="/archive/?tag=PHP" aria-label="View all posts with the PHP tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  PHP </a><a href="/archive/?tag=Ruby" aria-label="View all posts with the Ruby tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Ruby </a><a href="/archive/?tag=Security" aria-label="View all posts with the Security tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  Security </a><a href="/archive/?tag=VBA" aria-label="View all posts with the VBA tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  VBA </a><a href="/archive/?tag=%E3%83%AC%E3%82%B7%E3%83%94" aria-label="View all posts with the レシピ tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  レシピ </a><a href="/archive/?tag=%E5%85%A5%E9%96%80%E6%9B%B8" aria-label="View all posts with the 入門書 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  入門書 </a><a href="/archive/?tag=%E5%86%8D%E8%AA%AD" aria-label="View all posts with the 再読 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  再読 </a><a href="/archive/?tag=%E5%8F%97%E9%A8%93%E5%AF%BE%E7%AD%96%E3%81%BE%E3%81%A8%E3%82%81" aria-label="View all posts with the 受験対策まとめ tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  受験対策まとめ </a><a href="/archive/?tag=%E5%95%8F%E9%A1%8C%E9%9B%86" aria-label="View all posts with the 問題集 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  問題集 </a><a href="/archive/?tag=%E6%8A%80%E8%A1%93%E6%9B%B8%E7%B1%8D" aria-label="View all posts with the 技術書籍 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  技術書籍 </a><a href="/archive/?tag=%E6%95%99%E7%A7%91%E6%9B%B8" aria-label="View all posts with the 教科書 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  教科書 </a><a href="/archive/?tag=%E8%AA%AD%E6%9B%B8%E4%B8%AD" aria-label="View all posts with the 読書中 tag" class="btn-regular h-8 text-sm px-3 rounded-lg">  読書中 </a> </div>  </div> <div class="expand-btn px-4 -mb-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <button class="btn-plain rounded-lg w-full h-9" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2" data-astro-cid-ucso7hve style="--collapsedHeight: 7.5rem;"> <svg width="1em" height="1em" class="text-[1.75rem]" data-astro-cid-ucso7hve="true" data-icon="material-symbols:more-horiz">   <symbol id="ai:material-symbols:more-horiz" viewBox="0 0 24 24"><path fill="currentColor" d="M6 14q-.825 0-1.412-.587T4 12t.588-1.412T6 10t1.413.588T8 12t-.587 1.413T6 14m6 0q-.825 0-1.412-.587T10 12t.588-1.412T12 10t1.413.588T14 12t-.587 1.413T12 14m6 0q-.825 0-1.412-.587T16 12t.588-1.412T18 10t1.413.588T20 12t-.587 1.413T18 14"/></symbol><use href="#ai:material-symbols:more-horiz"></use>  </svg> More </div> </button> </div> </widget-layout>   </div> </div> <main id="swup-container" class="transition-swup-fade overflow-hidden min-w-0 col-span-1"> <div id="content-wrapper" class="onload-animation"> <!-- the overflow-hidden here prevent long text break the layout--> <!-- make id different from windows.swup global property -->   <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4"> <div id="post-container" class="card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full "> <!-- word count and reading time --> <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:notes-rounded">   <symbol id="ai:material-symbols:notes-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h10q.425 0 .713.288T15 17t-.288.713T14 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></symbol><use href="#ai:material-symbols:notes-rounded"></use>  </svg> </div> <div class="text-sm">17225  words</div> </div> <div class="flex flex-row items-center"> <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"> <svg width="1em" height="1em" data-icon="material-symbols:schedule-outline-rounded">   <symbol id="ai:material-symbols:schedule-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M13 11.6V8q0-.425-.288-.712T12 7t-.712.288T11 8v3.975q0 .2.075.388t.225.337l3.3 3.3q.275.275.7.275T16 16t.275-.7t-.275-.7zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.325 0 5.663-2.337T20 12t-2.337-5.663T12 4T6.337 6.338T4 12t2.338 5.663T12 20"/></symbol><use href="#ai:material-symbols:schedule-outline-rounded"></use>  </svg> </div> <div class="text-sm"> 86  minutes </div> </div> </div> <!-- title --> <div class="relative onload-animation"> <div data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title" class="transition w-full block font-bold mb-3
+                    text-3xl md:text-[2.25rem]/[2.75rem]
+                    text-black/90 dark:text-white/90
+                    md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+                    before:absolute before:top-[0.75rem] before:left-[-1.125rem]
+                "> AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト) </div> </div> <!-- metadata --> <div class="onload-animation"> <div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-5"> <!-- publish date --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">   <symbol id="ai:material-symbols:calendar-today-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V3q0-.425.288-.712T7 2t.713.288T8 3v1h8V3q0-.425.288-.712T17 2t.713.288T18 3v1h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></symbol><use href="#ai:material-symbols:calendar-today-outline-rounded"></use>  </svg> </div> <span class="text-50 text-sm font-medium">2023-06-24</span> </div> <!-- update date -->  <!-- categories --> <div class="flex items-center"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">   <symbol id="ai:material-symbols:book-2-outline-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="M6 15.325q.35-.175.725-.25T7.5 15H8V4h-.5q-.625 0-1.062.438T6 5.5zM10 15h8V4h-8zm-4 .325V4zM7.5 22q-1.45 0-2.475-1.025T4 18.5v-13q0-1.45 1.025-2.475T7.5 2H18q.825 0 1.413.587T20 4v12.525q0 .2-.162.363t-.588.362q-.35.175-.55.5t-.2.75t.2.763t.55.487t.55.413t.2.562v.25q0 .425-.288.725T19 22zm0-2h9.325q-.15-.35-.237-.712T16.5 18.5q0-.4.075-.775t.25-.725H7.5q-.65 0-1.075.438T6 18.5q0 .65.425 1.075T7.5 20"/></symbol><use href="#ai:material-symbols:book-2-outline-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <a href="/archive/?category=%E6%9B%B8%E7%B1%8D" aria-label="View all posts in the 書籍 category" class="link-lg transition text-50 text-sm font-medium
+                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 書籍 </a> </div> </div> <!-- tags --> <div class="items-center flex"> <div class="meta-icon"> <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:tag-rounded">   <symbol id="ai:material-symbols:tag-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m9 16l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T6.3 18.8L7 16H4.275q-.5 0-.8-.387T3.3 14.75q.075-.35.35-.55t.625-.2H7.5l1-4H5.775q-.5 0-.8-.387T4.8 8.75q.075-.35.35-.55t.625-.2H9l.825-3.275Q9.9 4.4 10.15 4.2t.6-.2q.475 0 .775.375t.175.825L11 8h4l.825-3.275q.075-.325.325-.525t.6-.2q.475 0 .775.375t.175.825L17 8h2.725q.5 0 .8.387t.175.863q-.075.35-.35.55t-.625.2H16.5l-1 4h2.725q.5 0 .8.388t.175.862q-.075.35-.35.55t-.625.2H15l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T12.3 18.8L13 16zm.5-2h4l1-4h-4z"/></symbol><use href="#ai:material-symbols:tag-rounded"></use>  </svg> </div> <div class="flex flex-row flex-nowrap items-center"> <div class="hidden mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=%E6%95%99%E7%A7%91%E6%9B%B8" aria-label="View all posts with the 教科書 tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> 教科書 </a><div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+                <a href="/archive/?tag=AWS" aria-label="View all posts with the AWS tag" class="link-lg transition text-50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"> AWS </a>  </div> </div> </div> <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div> </div> <!-- always show cover as long as it has one -->  <div data-pagefind-body class="prose dark:prose-invert prose-base !max-w-none custom-md mb-6 markdown-content onload-animation"> <!--<div class="prose dark:prose-invert max-w-none custom-md">--> <!--<div class="max-w-none custom-md">-->  <section><h1 id="aws認定資格試験テキスト問題集aws認定ソリューションアーキテクト---プロフェッショナル改訂第2版-ａｗｓ認定資格試験テキスト">AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト)<a class="anchor" href="#aws認定資格試験テキスト問題集aws認定ソリューションアーキテクト---プロフェッショナル改訂第2版-ａｗｓ認定資格試験テキスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h1><section><h2 id="書籍情報">書籍情報<a class="anchor" href="#書籍情報"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><ul>
+<li><a href="https://www.sbcr.jp/product/4815617929/">https://www.sbcr.jp/product/4815617929/</a></li>
+</ul><p>山下光洋：著者</p><p>基礎知識から合格する解答力を身につける！</p><p>AWSプラットフォームでシステム設計やアプリケーション開発をするために必要な技術スキルと経験を検証するのが「AWS認定ソリューションアーキテクト-プロフェッショナル」試験です。プロフェッショナル試験では、具体的な業務要件や課題をケース問題で出題されるため、基本となる知識をベースに、要件や課題に対応した最適な解答を導く応用力が求められます。
+本書は、2022年秋に改訂された「SAP-C02 」試験に向けたテキスト＆問題集になっています。出題分野である「複雑な組織に対応するソリューションの設計」「新しいソリューションのための設計」「既存のソリューションの継続的な改善」「ワークロードの移行とモダナイゼーションの加速」に対応して、具体的な要件や課題を読み解きながら、ポイントとなるサービスの利用方法を紹介し、最適な解答につながるように丁寧に解説しています。
+各節末のポイントのまとめは試験の直前に知識の確認に利用してもらえ、各章末の確認テストや最終章の模擬試験は合格に必要な解答力をしっかり身につけてもらえます。</p></section><section><h2 id="コンテンツ">コンテンツ<a class="anchor" href="#コンテンツ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="第1章aws認定ソリューションアーキテクトプロフェッショナル">第1章　AWS認定ソリューションアーキテクト－プロフェッショナル<a class="anchor" href="#第1章aws認定ソリューションアーキテクトプロフェッショナル"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="1試験の概要">1　試験の概要<a class="anchor" href="#1試験の概要"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>IMDb: <a href="https://psbr.hatenablog.com/entry/imdb">https://psbr.hatenablog.com/entry/imdb</a></p>
+<ul>
+<li>Amazonの子会社</li>
+<li>AWS Data Exchangeを使っていて、S3バケットに様々なデータをインポートしている</li>
+</ul>
+</li>
+<li>
+<p>AWS Data Pipeline: AWSリソースやコマンドからAWSリソースへデータを変換、コピーする一連の処理をパイプラインとして設定できる</p>
+<ul>
+<li>現在、マネジメントコンソールからアクセスできなくなったため、今後は重要なサービスではなくなる可能性がある</li>
+</ul>
+</li>
+<li>
+<p>Amazon EMR: EMR(Elastic Map Reduce)はApacheHadoopやSparkなどのOSSをマネージドサービスで提供</p>
+</li>
+<li>
+<p>AWS Glue: ETLサービス</p>
+<ul>
+<li>データを指定した方法で変換してS3などストレージやデータベースにデータを保管できる</li>
+</ul>
+</li>
+<li>
+<p>Amazon Kinesis Data Analytics: ストリーミングデータをSQLなど使い慣れた言語を使ってリアルタイムに抽出検索</p>
+</li>
+<li>
+<p>Amazon Kinesis Data Firehose: 最低60秒のバッファでデータをS3、OpenSearchServiceなどに簡単に格納</p>
+</li>
+<li>
+<p>Amazon Kinesis Data Streams: 秒あたり数GBのデータをリアルタイムにストリーミング処理できます。</p>
+</li>
+<li>
+<p>AWS Lake Formation: データレイクの構築、管理を簡易化</p>
+</li>
+<li>
+<p>Amazon Managed Streaming for Apache Kafka(Amazon MSK): マネージドなApache Kafkaを提供するサービス</p>
+</li>
+<li>
+<p>Amazon OpenSearch Service: Amazon Elasticsearch Serviceの後継サービス</p>
+<ul>
+<li>テキストや非構造化データの全文検索や視覚化、ダッシュボード分析が可能</li>
+</ul>
+</li>
+<li>
+<p>Amazon QuickSight: BIサービス</p>
+</li>
+<li>
+<p>Amazon AppFlow: 外部SaaSからのノーコードなデータ連携サービス</p>
+</li>
+<li>
+<p>AWS AppSync: GraphQL APIとPubSub APIを高速に開発できる</p>
+</li>
+</ul></section><section><h4 id="2お勧めの学習方法">2　お勧めの学習方法<a class="anchor" href="#2お勧めの学習方法"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>模擬試験 AWS Skill Builder</p>
+<ul>
+<li><a href="https://explore.skillbuilder.aws/learn/external-ecommerce;view=none;redirectURL=?ctldoc-catalog-0=se-%22architect%20professional%22">https://explore.skillbuilder.aws/learn/external-ecommerce;view=none;redirectURL=?ctldoc-catalog-0=se-%22architect%20professional%22</a></li>
+</ul>
+</li>
+<li>
+<p>検証用のAWSアカウント</p>
+<ul>
+<li>会社、個人でAWSアカウントを利用して実際に動かしてみる</li>
+</ul>
+</li>
+<li>
+<p>Well-Architected Framework</p>
+<ul>
+<li><a href="https://aws.amazon.com/jp/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&#x26;wa-lens-whitepapers.sort-order=desc&#x26;wa-guidance-whitepapers.sort-by=item.additionalFields.sortDate&#x26;wa-guidance-whitepapers.sort-order=desc">https://aws.amazon.com/jp/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&#x26;wa-lens-whitepapers.sort-order=desc&#x26;wa-guidance-whitepapers.sort-by=item.additionalFields.sortDate&#x26;wa-guidance-whitepapers.sort-order=desc</a></li>
+<li>6つの柱を抑えておく
+<ul>
+<li>オペレーショナル・エクセレンス</li>
+<li>セキュリティ</li>
+<li>パフォーマンス</li>
+<li>コスト最適化</li>
+<li>信頼性</li>
+<li>持続可能性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>その他リソース</p>
+<ul>
+<li>AWS Black Belt</li>
+<li>AWS FAQ</li>
+</ul>
+</li>
+</ul></section></section><section><h3 id="第2章複雑な組織への対応">第2章　複雑な組織への対応<a class="anchor" href="#第2章複雑な組織への対応"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="1組織のネットワーク設計">1　組織のネットワーク設計<a class="anchor" href="#1組織のネットワーク設計"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>VPC内のEC2からリクエストを実行するためには以下のいずれかが必要</p>
+<ul>
+<li>インターネットゲートウェイがアタッチされたVPCのパブリックネットワークでEC2を起動する</li>
+<li>インターネットゲートウェイがアタッチされ、NATゲートウェイが起動しているVPCのプライベートサブネットでEC2を起動</li>
+<li>VPCエンドポイントを設定</li>
+</ul>
+</li>
+<li>
+<p>VPCエンドポイント</p>
+<ul>
+<li>ゲートウェイエンドポイント
+<ul>
+<li>VPCのサービス専用のゲートウェイをアタッチする</li>
+<li>対象サービスはS3とDynamoDB</li>
+</ul>
+</li>
+<li>インターフェースエンドポイント
+<ul>
+<li>VPCのサブネットにENI(Elastic Network Interface)を作成</li>
+<li>ENIに割り当てられたプライベートIPアドレスを使用してサービスにアクセス</li>
+<li>ENIとサービス間のプライベート接続を提供しているのがAWS PrivateLinkという技術</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><section><h5 id="s3ゲートウェイエンドポイント">S3ゲートウェイエンドポイント<a class="anchor" href="#s3ゲートウェイエンドポイント"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>ゲートウェイエンドポイントは利用料金が不要</p><p>オンプレからアクセスする場合はプロキシサーバーを経由してアクセス</p><p>プロキシサーバーの可用性を考慮すると、ELB、EC2、Auto Scalingを検討する必要がある</p></section><section><h5 id="s3インターフェースエンドポイント">S3インターフェースエンドポイント<a class="anchor" href="#s3インターフェースエンドポイント"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>インターフェイスエンドポイントは利用料金が発生する</p><p>インターフェイスエンドポイントは指定したサブネットにENIを作成</p><p>インターフェイスエンドポイントが作成されるとDNS名が発行される</p><p>このDNSをS3のエンドポイントに指定してアプリケーションなどからリクエストを実行</p><p>VPCエンドポイントにはエンドポイントポリシーがあり、デフォルトでは全てのリソース、すべてのアクションを許可している</p></section><section><h5 id="aws-privatelinkを使用したサードパーティサービスの提供">AWS PrivateLinkを使用したサードパーティサービスの提供<a class="anchor" href="#aws-privatelinkを使用したサードパーティサービスの提供"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>独自のソフトウェアサービスをサードパーティサービスと呼ぶことがある</p></section><section><h5 id="awsクライアントvpn">AWSクライアントVPN<a class="anchor" href="#awsクライアントvpn"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>クライアントからVPCへのアクセス</p><p>VPCを介したオンプレミスやインターネット、他のVPCへのOpenVPNベースのVPNクライアントを使用した安全なアクセスを可能にする</p><ul>
+<li>
+<p>認証タイプ</p>
+<ul>
+<li>Active Directory（ユーザーベース）
+<ul>
+<li>AWS Managed Microsoft ADまたは、AD Connectorを使用</li>
+</ul>
+</li>
+<li>シングルサインオン（SAMLベースのフェデレーション、ユーザーベース）
+<ul>
+<li>IAM SAML IDプロバイダー</li>
+</ul>
+</li>
+<li>相互認証（証明書ベース）
+<ul>
+<li>AWS Certificate Managerにアップロードしたサーバー証明書とクライアント証明書を使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>基本設定</p>
+<ul>
+<li>クライアントが使用するIPアドレス用にをCIDRで設定</li>
+<li>AWSクライアントVPNにサブネットを関連付ける</li>
+<li>関連付けられたサブネットにはENIが作成され、ENIにはセキュリティグループがアタッチされる</li>
+</ul>
+</li>
+<li>
+<p>接続ログ</p>
+<ul>
+<li>オプションでCloudwatchLogsに接続ログを記録することができる</li>
+</ul>
+</li>
+<li>
+<p>接続ハンドラ</p>
+<ul>
+<li>接続時にLambda関数で任意のプログラムを実行して、接続の許可・拒否判定ロジックを実装できる</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-site-to-site-vpn">AWS Site-to-Site VPN<a class="anchor" href="#aws-site-to-site-vpn"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>VPCに仮想プライベートゲートウェイをアタッチして、データセンターなどのオンプレミスのルーターと、インタネットプロトコルセキュリティ（IPSec）VPN接続が可能</p><ul>
+<li>
+<p>仮想プライベートゲートウェイ</p>
+<ul>
+<li>ASN（自律システム番号）を指定することもできる</li>
+<li>指定しない場合はAmaxonのデフォルトASN（64512）が使用</li>
+</ul>
+</li>
+<li>
+<p>カスタマーゲートウェイ</p>
+<ul>
+<li>オンプレミス側のルーターなどのこと</li>
+<li>動的ルーティングでは、BGP（ボーダーゲートウェイプロトコル）ASNの指定が可能</li>
+<li>パブリックなASNが無い場合は、プライベートASNを指定できる</li>
+<li>証明書ベースではなく、事前共有キーで認証する場合は、インターネットから接続可能なIPアドレスが必要</li>
+<li>証明書ベースの認証をする場合は、AWS Certificate Managerにプライベート証明書をインポートして指定可能</li>
+</ul>
+</li>
+<li>
+<p>静的ルーティングと動的ルーティング</p>
+<ul>
+<li>カスタマーゲートウェイデバイスがBGPをサポートしている場合は動的ルーティング</li>
+<li>サポートしていない場合は静的ルーティングを選択</li>
+</ul>
+</li>
+<li>
+<p>VPN接続</p>
+<ul>
+<li>Internet Key Exchangeバージョン2(IKEv2):暗号化のための共通鍵を交換する仕組み</li>
+<li>NATトラバーサル: オンプレミス側でNATルーターを介したVPN接続が可能</li>
+<li>デッドピア検出（DPD）：接続先のデバイスが有効かどうかを確認</li>
+</ul>
+</li>
+<li>
+<p>複数のSite-to-SiteVPN接続</p>
+<ul>
+<li>1つの仮想プライベートゲートウェイから、複数のカスタマーゲートウェイにVPN接続を作成可能</li>
+<li>この設計はVPN CloudHubと呼ばれる</li>
+</ul>
+</li>
+<li>
+<p>冗長なSite-to-SiteVPN接続</p>
+<ul>
+<li>カスタマーゲートウェイデバイスを冗長化する構成</li>
+</ul>
+</li>
+<li>
+<p>ソフトウェアVPN</p>
+<ul>
+<li>EC2インスタンスにソフトウェアVPNをセットアップして、インターネットゲートウェイ経由でVPN接続も可能</li>
+<li>次のような要件の場合利用
+<ul>
+<li>コンプライアンス要件により、接続両端を完全にコントロールする必要がある</li>
+<li>IPsec以外のVPNプロトコルが必要</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-direct-connectdx">AWS Direct Connect(DX)<a class="anchor" href="#aws-direct-connectdx"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>ユーザーまたはパートナーのルーター（Customer Router）からDirect Connectのルーター（DX Router）に標準のイーサネット光ファイバーケーブルを介して接続するサービス</p><p>この接続を使用して、VPCやAWSパブリックサービスへの仮想インターフェースを作成</p><p>インターネットサービスプロバイダーを利用する必要なく、オンプレミス拠点間の専用線の代替として、AWSへの接続に使用できるサービス</p><ul>
+<li>
+<p>接続</p>
+<ul>
+<li>専用接続</li>
+<li>ホスト接続</li>
+</ul>
+</li>
+<li>
+<p>VPNバックアップのDirectConnect</p>
+</li>
+<li>
+<p>回復性レベル</p>
+<ul>
+<li>最大回復性：Direct Connectローケーション全体、またはロケーション内部に物理障害があっても、冗長化を継続できる回復性レベル</li>
+<li>高い回復性</li>
+<li>開発とテスト</li>
+<li>クラシック</li>
+<li>AWS Direct Connect フェイルオーバーテスト</li>
+</ul>
+</li>
+<li>
+<p>仮想インターフェース</p>
+<ul>
+<li>AWS Direct Connect接続を使用するには、仮想インターフェイス(VIF)が必要</li>
+<li>仮想インターフェイスの種類は以下（覚えておく）
+<ul>
+<li>プライベート仮想インターフェイス
+<ul>
+<li>オンプレミスのOSでEFSにマウントできる</li>
+</ul>
+</li>
+<li>パブリック仮想インターフェイス
+<ul>
+<li>S3,DynamoDBにアクセスできる</li>
+</ul>
+</li>
+<li>トランジット仮想インターフェイス
+<ul>
+<li>Direct Connect Gatewayに関連付けられたTransit Gatewayにアクセスできる</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>LAG(Link Aggregation Group)</p>
+</li>
+<li>
+<p>Direct Connect の料金</p>
+<ul>
+<li>ポート時間
+<ul>
+<li>容量、接続タイプによって時間料金が決まる</li>
+</ul>
+</li>
+<li>データ転送
+<ul>
+<li>プライベートVIFの場合は、データ転送を行うAWSアカウントに課金される</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Direct Connect 専用接続</p>
+<ul>
+<li>1,10,100Gbpsから選択可能</li>
+</ul>
+</li>
+<li>
+<p>Direct Connect ホスト接続</p>
+<ul>
+<li>500Mbpsを選択可能</li>
+</ul>
+</li>
+<li>
+<p>Direct Connectのポート時間料金が発生するタイミング</p>
+<ul>
+<li>接続確立していないが、接続が作成されてから９０日後から</li>
+<li>９０日経っていないが、Direct Connectエンドポイントとカスタマールーターの接続が確立されたときから</li>
+</ul>
+</li>
+</ul></section><section><h5 id="vpc-ピア接続">VPC ピア接続<a class="anchor" href="#vpc-ピア接続"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>VPCピア接続を使用することで、VPCが他のVPCとの接続をプライベートネットワークで行える</p></section><section><h5 id="aws-transit-gateway">AWS Transit Gateway<a class="anchor" href="#aws-transit-gateway"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>最大5000のVPCやオンプレミス環境の接続を簡素化する</p><ul>
+<li>
+<p>VPCアタッチメント</p>
+</li>
+<li>
+<p>VPN接続</p>
+</li>
+<li>
+<p>Direct Connectトランジット仮想インターフェイス</p>
+</li>
+<li>
+<p>Transit Gatewayピアリング接続</p>
+</li>
+<li>
+<p>Transit Gateway Network Manager</p>
+</li>
+<li>
+<p>Global Accelerator連携のVPN高速化</p>
+</li>
+<li>
+<p>Route 53 プライベートホストゾーンとRoute 53 Resolver</p>
+<ul>
+<li>Route 53 プライベートホストゾーン</li>
+<li>Route 53 Resolver</li>
+</ul>
+</li>
+</ul></section></section><section><h4 id="2マルチアカウント">2　マルチアカウント<a class="anchor" href="#2マルチアカウント"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><section><h5 id="クロスアカウントアクセス">クロスアカウントアクセス<a class="anchor" href="#クロスアカウントアクセス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>組織内でのクロスアカウントアクセス
+<ul>
+<li>複数のAWSアカウントに対して認証が必要な場合の管理</li>
+<li>IAMユーザは特定のAWSアカウントで管理</li>
+<li>組織内の各AWSアカウントにはIAMロールを作成</li>
+<li>AWS STSのAssume RoleアクションによってIAMロールから一時的認証情報を取得して使用</li>
+<li>信頼関係
+<ul>
+<li>誰がIAMロールに対して、sts<assumerole></assumerole>を実行できるかを許可しているのが信頼関係</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="カスタムidブローカーアプリケーション">カスタムIDブローカーアプリケーション<a class="anchor" href="#カスタムidブローカーアプリケーション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>クロスアカウントだけでなく、オンプレミスのアプリからも同様にSDKにより開発したプログラムでIAMロール二リクエストを実行することにより、一時的な認証情報を使用してAWSのサービスをアプリケーションから使用したり、マネジメントコンソールへのリダイレクトURLを生成できる</p></section><section><h5 id="サードパーティ製品へのアクセス許可">サードパーティ製品へのアクセス許可<a class="anchor" href="#サードパーティ製品へのアクセス許可"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>外部のサービスに対して必要なリソースへの操作を許可することもできる</p><p>ただし、「混乱した代理問題」が課題</p><ul>
+<li>
+<p>※AWS作図くんの例</p>
+</li>
+<li>
+<p>「混乱した代理問題」を解決するのが「外部ID」</p>
+</li>
+</ul></section><section><h5 id="aws-directory-service">AWS Directory Service<a class="anchor" href="#aws-directory-service"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>サーバー認証に、組織で管理している既存のActiceDirectoryを使用したいケースがある</p><ul>
+<li>AD Connector
+<ul>
+<li>オンプレミスのデータセンターなどで稼働しているActiveDirectoryの認証をそのまま使えるサービス</li>
+<li>AD Connectorを使えば、Amazon Workspaces, Amazon WorkDocs, Amazon WorkMail, Amazon QuickSightなどのAWSマネージドディレクトリと連携するサービスを、既存のADのユーザ情報で利用できる</li>
+</ul>
+</li>
+<li>Simple AD
+<ul>
+<li>Samba 4 Active Directory Compatible Server</li>
+<li>最大５０００ユーザー
+<ul>
+<li>5000を超える場合はAWS Managed Microsoft ADを利用
+<ul>
+<li>また、他ドメインとの信頼関係、MFA（多要素認証）が必要な場合もAWS Managed Microsoft ADを使用する</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>AWS Directory Service for Microsoft Active Directory(AWS Managed Microsoft AD)
+<ul>
+<li>Microsoft Active Directoryのマネージドサービス</li>
+<li>5000を超えるユーザー</li>
+<li>他ドメインとの信頼関係</li>
+<li>MFA(他要素認証)</li>
+</ul>
+</li>
+</ul></section><section><h5 id="iamアイデンティティセンターaws-ssoの後継">IAMアイデンティティセンター（AWS SSOの後継）<a class="anchor" href="#iamアイデンティティセンターaws-ssoの後継"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>複数のAWSアカウントとSalesforceやBOXなどの外部アプリケーションへのSSOが可能</p><ul>
+<li>
+<p>IAMアイデンティティセンターの認証</p>
+<ul>
+<li>アイデンティティセンターディレクトリ
+<ul>
+<li>認証情報（ユーザ名、パスワード）をIAMアイデンティティセンターで管理、デフォルト設定</li>
+</ul>
+</li>
+<li>ActiveDirectory
+<ul>
+<li>AWS Managed Microsoft ADか、AD Connectorを選択できる</li>
+</ul>
+</li>
+<li>外部IDプロバイダー
+<ul>
+<li>Azure AD,Okta,OneLoginなど外部IDプロバイダーを使用できる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>AWSアカウントへの許可セット</p>
+<ul>
+<li>IAMアイデンティティセンターで許可セットを作成して、AWSアカウントにSSOした際の権限を設定できる</li>
+</ul>
+</li>
+<li>
+<p>外部アプリケーションの追加</p>
+</li>
+<li>
+<p>IAMアイデンティティセンターを使用しないケース</p>
+<ul>
+<li>すでにAD FS(Active Directory Federation Services)や、認証だけでなくOkta、OneLoginのポータルサイトも使用している場合に、</li>
+<li>IAMアイデンティティセンターを使用せずに設定するケースもある</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-organizations">AWS Organizations<a class="anchor" href="#aws-organizations"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>AWS Organizationsを利用していない複数のアカウント環境では、次の重複作業が発生</p><ul>
+<li>アカウント作成時にクレジットカード、電話番号などの登録</li>
+<li>各アカウントのIAMロールのポリシー設定</li>
+<li>請求管理</li>
+<li>CloudTrailなどのさまざまなサービスはアカウントごとの設定</li>
+</ul><p>AWS Organizationsを利用した場合</p><ul>
+<li>
+<p>AWS Organizations APIによるアカウント作成の自動化</p>
+</li>
+<li>
+<p>SCP(サービスコントロールポリシー)による組織単位のポリシー設定</p>
+</li>
+<li>
+<p>一括請求管理</p>
+</li>
+<li>
+<p>各AWSサービスとのサービス統合</p>
+</li>
+<li>
+<p>アカウント作成の自動化</p>
+<ul>
+<li>通常、あWSアカウントの作成時には、メールアドレス、パスワード、住所、電話番号、クレジットカードが必要</li>
+<li>SMSか通話での本人確認も必要</li>
+<li>Organizationsでは、既存アカウントを組織のメンバーアカウントとして招待できますが、新規メンバーアカウントもマネジメントコンソール、CLI、SDKから追加可能</li>
+</ul>
+</li>
+<li>
+<p>SCP(サービスコントロールポリシー)</p>
+<ul>
+<li>Organizations組織でOUやアカウントに設定するポリシー</li>
+<li>予防コントロールとして、OUに所属するアカウント、またはアカウントでの権限を制限できる</li>
+<li>SCPはOUの階層において下のレベルへ継承される</li>
+</ul>
+</li>
+<li>
+<p>SCPの許可リスト戦略</p>
+</li>
+<li>
+<p>SCPの拒否リスト戦略</p>
+</li>
+<li>
+<p>一括請求（コンソリデーテッドビリング）</p>
+<ul>
+<li>１つの請求書、統合請求データ：コストと使用状況データを複数カウントに渡って複合的に分析できる</li>
+<li>合計量によるボリュームディスカウント：複数アカウントの合計容量による従量制の割引が受けられる</li>
+<li>リザーブドインスタンス（RI）、Savings Plansの共有
+<ul>
+<li>組織のアカウントの合計使用量にリザーブドインスタンス、Savings Plansを適用できるので選択しやすくなる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>MEMO: Saving Plans <a href="https://aws.amazon.com/jp/savingsplans/">https://aws.amazon.com/jp/savingsplans/</a></p>
+<ul>
+<li>Savings Plans は、1 年または 3 年の時間単位で利用をコミットする代わりに、オンデマンド料金と比較して最大 72% の請求額の削減を可能にする柔軟な料金モデルです。</li>
+<li>AWS は 3 種類の Savings Plans を提供しています:
+<ul>
+<li>Compute Savings Plans</li>
+<li>EC2 Instance Savings Plans</li>
+<li>Amazon SageMaker Savings Plans</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>AWS CloudFormation StackSets</p>
+<ul>
+<li>複数リージョン、複数アカウントにスタックを作成して、変更・削除・管理できる機能</li>
+<li>Organizationsと統合することで、組織、OU、アカウントを指定して、スタックを作成・変更・削除できる</li>
+</ul>
+</li>
+<li>
+<p>AWS CloudTrail （ユーザのアクティビティやAPI使用量をトレース）</p>
+<ul>
+<li>Organizations組織のマスターアカウントで、組織内のすべてのアカウントについてCloudTrailを有効化できる</li>
+<li>書き出されるS3オブジェクトのプレフィックスには組織IDが含まれる</li>
+</ul>
+</li>
+<li>
+<p>AWS Service Catalog</p>
+<ul>
+<li>IAMユーザ二CloudFormationスタックで作成されるリソースへの直接的なアクセス権限を与えられずに、事前に用意されたテンプレートからスタックを作成できる</li>
+<li>例えば、スタックによって作成されたEC2インスタンスなどのリソースには直接アクセスできませんので、決められたインスタンスタイプ以外を起動したり、セキュリティグループを勝手に変更することはできない</li>
+<li>管理者があらかじめテンプレートを<strong>製品</strong>としてService Catalogに登録し、IAMユーザに許可する製品のリストをポートフォリオとして設定</li>
+<li>ポートフォリオはいわばIAMユーザにとってのサービスカタログメニューで、Organizations組織でOUを指定して共有できる</li>
+</ul>
+</li>
+<li>
+<p>AWS Resource Access Manager(RAM)</p>
+<ul>
+<li>Organizationsと連携して組織、OUとの共有が可能</li>
+<li>Transit Gateway、サブネット、Route53Resolverの転送ルールを複数アカウントで共有可能</li>
+<li>License Managerではソフトウェア・ライセンスを複数アカウントにまたがって管理</li>
+</ul>
+</li>
+<li>
+<p>AWS Control Tower</p>
+<ul>
+<li>複数アカウントのベストプラクティスであるランディングゾーンを児童構築する</li>
+<li>ランディングゾーンは、Organizations組織のベストプラクティス構成</li>
+<li>ログアカウントと監査アカウント
+<ul>
+<li>SecurityOUにログと監査のアカウントを作成</li>
+<li>ログアカウントにはCloudTrailとConfigのログが集約される
+<ul>
+<li>Athenaなどを使用して集約されたログを分析可能</li>
+</ul>
+</li>
+<li>監査アカウント
+<ul>
+<li>各アカウントのSNSトピックのサブスクライバーのLambda関数から、監査アカウントのSNSトピックへ通知がパブリッシュ（送信）される</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>アカウトの追加、招待
+<ul>
+<li>アカウントは、Service Controlポートフォリオで作成されたAccountFactoryで新規作成、または追加ができる</li>
+</ul>
+</li>
+<li>アカウント認証
+<ul>
+<li>Organizationsと連携するIAMアイデンティティセンターによって、各アカウントへのシングルサインオン設定が可能</li>
+</ul>
+</li>
+<li>コントロール（ガードレール）</li>
+<li>ダッシュボード
+<ul>
+<li>Control Tower ランディングゾーンは作成して終わりでなく、ダッシュボードで確認、設定が可能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section></section><section><h4 id="3確認テスト">3　確認テスト<a class="anchor" href="#3確認テスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="第3章ソリューション設計と継続的改善">第3章　ソリューション設計と継続的改善<a class="anchor" href="#第3章ソリューション設計と継続的改善"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="1運用上の優秀性">1　運用上の優秀性<a class="anchor" href="#1運用上の優秀性"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><section><h5 id="デプロイ関連サービス">デプロイ関連サービス<a class="anchor" href="#デプロイ関連サービス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>この節では、リリース作業を自動化するAWSデプロイサービスと、サービスを活用することにより実現しやすくなったデプロイメントパターンを解説</p>
+</li>
+<li>
+<p>Cloud9</p>
+<ul>
+<li>統合開発環境（IDE）をブラウザさえあれば実行できる</li>
+</ul>
+</li>
+<li>
+<p>CodeGuru</p>
+<ul>
+<li>ソースコードのレビューによってバグや問題の抽出、パフォーマンスの最適化を自動化</li>
+</ul>
+</li>
+<li>
+<p>CodeStar</p>
+<ul>
+<li>CodePipeline、CodeCommit、CodeBuild、CodeDeployなどを組み合わせたCICDパイプライン</li>
+</ul>
+</li>
+<li>
+<p>CodeArtifact</p>
+<ul>
+<li>パッケージを適切なアクセス権限でチーム内に公開、共有可能</li>
+</ul>
+</li>
+<li>
+<p>OpsWorks</p>
+<ul>
+<li>Chef、Puppetの機能をマネージドで提供</li>
+</ul>
+</li>
+<li>
+<p>AWS Codecommit</p>
+<ul>
+<li>リポジトリのアクセス許可はIAMポリシーで制限可能</li>
+<li>リポジトリのソースコードなどのデータはKMSのAWSマネージドキーによってサードパーティ暗号化されている</li>
+<li>リポジトリへのアクセス履歴はCloudTrailによって記録</li>
+</ul>
+</li>
+<li>
+<p>AWS CodeBuild</p>
+<ul>
+<li>ビルド環境：AWSが用意したLinux、Windowsコンテナを選択したり任意のコンテナを用意したりもできる</li>
+<li>ソースコード：CodeCommit以外にもS3バケット、Github、Bitbucketが選択可能</li>
+<li>CodeBuildで実行される、テストやコンパイル、パッケージ作成、コンテナイメージ作成などはbuildspec.ymlに事前定義されたコマンドによって実行される</li>
+<li>作成されたパッケージ（アーティファクトファイル）は、指定したS3バケットへ保存されたり、buildspec.ymlに定義したdocker pushコマンドでアップロードしたECRリポジトリに保存される</li>
+</ul>
+</li>
+<li>
+<p>AWS CodeDeploy</p>
+<ul>
+<li>EC2インスタンス、ECSのコンテナ、Lambda関数、オンプレミスサーバーへのデプロイを自動化するサービス</li>
+<li>EC2インスタンス・オンプレミスのデプロイ設定
+<ul>
+<li>AllAtOnce
+<ul>
+<li>正常なホストの最小数値：0</li>
+<li>一度にすべてのインスタンスにデプロイ</li>
+</ul>
+</li>
+<li>HalfAtATime
+<ul>
+<li>正常なホストの最小数値：50%</li>
+<li>一度に最大半分のインスタンスにデプロイ</li>
+</ul>
+</li>
+<li>OneAtAAtime
+<ul>
+<li>正常なホストの最小数値：１</li>
+<li>一度に１つのインスタンスにデプロイ</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ECSのデプロイ設定
+<ul>
+<li>ECSで実行しているコンテナデプロイは、カナリアとリニアから選択可能</li>
+<li>Canary：最初一定の割合のみにリリースしたあと、指定した期間後に残りのリリースを完了</li>
+<li>Linear:最初一定の割合のみにリリースしたあと、指定した感覚でデプロイ対象を増分する
+<ul>
+<li>ECSCanary10Percent5Minutes:最初10%のみ移行、5分後に残り90%も移行</li>
+<li>ECSLinear10Percent1Minutes:すべての移行が完了するまで、1分ごとに10%ずつ移行</li>
+<li>ECSAllAtOnce:一度にすべてのコンテナにデプロイ</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lambdaのデプロイ設定
+<ul>
+<li>AWS Lambdaにはバージョン、エイリアスという機能がある</li>
+<li>バージョン：イミュータブルで開発後にバージョンを作成したら変更できない</li>
+<li>エイリアス：バージョンと紐づけ管理する</li>
+<li>こうすることで迅速なデプロイとロールバックが可能</li>
+<li>LambdaCanary10Percent5Minutes</li>
+<li>LambdaLinear10PercentEvery1Minutes</li>
+<li>LambdaAllAtOnce</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>AWS CloudFormation</p>
+<ul>
+<li>テンプレートをもとにAWSリソースをスタックという単位で作成する</li>
+<li>カスタムリソース
+<ul>
+<li>Resourcesにカスタムリソースを含めて任意のLambda関数を実行することができる</li>
+<li>カスタムリソースを使用してLambda関数を実行することによって、CloudFormationがサポートしていない処理や、必要な情報を動的に取得可能</li>
+</ul>
+</li>
+<li>CloudFormationヘルパースクリプト
+<ul>
+<li>EC2インスタンスへデプロイするアプリケーション向けに、CloudFormationヘルパースクリプトが用意されている</li>
+<li>Amazon Linux AMIにはすでにインストールされていて、<code>/opt/aws/bin</code>にある
+<ul>
+<li><code>cfn-init</code>: パッケージのインストール、ファイルの作成、サービスの開始などが可能</li>
+<li><code>cfn-signal</code>: CreationPolicy、またはWaitConditionにシグナルを送信するために使用可能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>スタックポリシー
+<ul>
+<li>スタックに含まれるリソースノ更新は、テンプレートの更新によって行う</li>
+<li>意図しない更新を防ぐためにはスタックポリシーを使用できる</li>
+</ul>
+</li>
+<li>DeletionPolicy（削除ポリシー）
+<ul>
+<li>スタック削除時に特定のリソースを保護することができる</li>
+<li>データベースやストレージを保護する際などに有効</li>
+</ul>
+</li>
+<li>AWS CDK
+<ul>
+<li>ソースコードからCloudFormationテンプレートを生成することができる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>AWS CodePipeline</p>
+<ul>
+<li>ソース、ビルド、デプロイのCI/CDパイプラインを自動化</li>
+</ul>
+</li>
+<li>
+<p>AWS Elastic Beanstalk</p>
+<ul>
+<li>開発者がすばやくAWSを使い始めることができるようにするサービス</li>
+<li><code>.ebextensions</code>: EB CLIを実行するカレントディレクトリに、<code>.ebextensions</code>ディレクトリを作成して、配下にconfigファイルを配置することで、アプリケーションのカスタマイズが可能</li>
+</ul>
+</li>
+</ul></section><section><h5 id="デプロイメントパターン">デプロイメントパターン<a class="anchor" href="#デプロイメントパターン"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>ローリングデプロイ</p>
+<ul>
+<li>指定したバッチサイズ（インスタンス数、割合）ずつ更新デプロイします。</li>
+</ul>
+</li>
+<li>
+<p>ブルー／グリーンデプロイ</p>
+<ul>
+<li>現在のアプリケーションバージョンをブルー</li>
+<li>新しいバージョンをグリーンとしてデプロイ</li>
+<li>リクエスト送信先を切り替えてリリース方法をブルー／グリーンデプロイと呼ぶ</li>
+<li>Route53を使用したデプロイ</li>
+<li>Application Load Balancerを使用したデプロイ</li>
+<li>EC2 Auto Scalingを使用したデプロイ</li>
+</ul>
+</li>
+</ul></section><section><h5 id="モニタリング">モニタリング<a class="anchor" href="#モニタリング"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>AWS Healthイベント</p>
+<ul>
+<li>AWSアカウントに影響を及ぼすイベントをモニタリングできる</li>
+<li>AWS Personal Health Dashboard
+<ul>
+<li>マネジメントコンソールにサインインんして、ダッシュボードとイベントログで、過去９０日のアカウント固有のイベントとパブリックイベントを確認可能</li>
+<li>問題のイベントタイプコードの例：</li>
+<li>アカウント通知のイベントタイプコードの例</li>
+<li>スケジュールされた変更のイベントタイプコードの例</li>
+</ul>
+</li>
+<li>AWS Health API</li>
+<li>Service Health Dashboard
+<ul>
+<li>インターネット上の公開ページで、パブリックイベントを確認可能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Amazon CloudWatch</p>
+<ul>
+<li>メトリクス、ダッシュボード</li>
+<li>アラーム</li>
+<li>以上検出</li>
+<li>CloudWatch Logs
+<ul>
+<li>AWSサービスうやCloudWatchエージェントによるアプリケーションログなどさまざまなログを収集できる</li>
+</ul>
+</li>
+<li>CloudWatch Synthetics
+<ul>
+<li>CanaryというLambda関数を設定したスケジュールで実行し、指定したウェブページへ定期的に自動アクセス</li>
+<li>その時点のスクリーンショットの取得と、Webページに含まれるコンテンツのダウンロード時間などを記録</li>
+</ul>
+</li>
+<li>CloudWatch RUM
+<ul>
+<li>RUM(リアルユーザモニタリング)は、エンドユーザの場所や使用デバイス別のパフォーマンスやエラー発生情報を収集、モニタリングできる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Amazon VPCのモニタリング</p>
+<ul>
+<li>VPC Flow Logs
+<ul>
+<li>ENIへのインバウンド／アウトバウンドトラフィックに関する情報は、CloudWatchLogsまたはS3バケットへ送信可能</li>
+<li>VPC Flow Logsでは各種のAWS情報をモニタリング可能</li>
+<li>トラフィックミラーリング</li>
+</ul>
+</li>
+<li>AWS X-Ray
+<ul>
+<li>アプリケーションの潜在的なバグとボトルネックを抽出</li>
+<li>X-RayのPutTrace Segments APIアクセ本により、実行時間やリクエストの成功失敗がX-Rayに送信される</li>
+<li>結果をサービスマップやトレース情報で確認可能</li>
+</ul>
+</li>
+<li>SIEM on Amazon OpenSearch Sevice
+<ul>
+<li>SIEM(Security Information and Event Management)と呼ばれるログの収集、一元的なモニタリング、分析が可能なシステムを、</li>
+<li>Amazon OpenSearchServiceを中心として構築できる</li>
+<li>OpenSearch Dashboardsで可視化、分析可能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="構成管理メンテナンス">構成管理、メンテナンス<a class="anchor" href="#構成管理メンテナンス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>AWS Systems Manager
+<ul>
+<li>LinuxやWindowsのEC2インスタンス、オンプレミスサーバにSSMAgent(AWS Ssytems Managerエージェント)をインストールすることで、Systems Managerのマネージドインスタンス(管理対象)にできる</li>
+<li>Session Manager
+<ul>
+<li>セキュリティグループでSSHポートを許可する必要もキーペアを使用する必要も内</li>
+<li>ブラウザのSessionManagerからsudo可能なssm-userを使って対話式コマンドを実行可能</li>
+</ul>
+</li>
+<li>RunCommand
+<ul>
+<li>EC2、オンプレミスサーバーなどマネージドインスタンスに、コマンドドキュメントに事前定義されたコマンドを実行可能</li>
+<li>定形運用をドキュメント化して、Run Commandにより1回のみ実行したり、Lambdaから動的に実行するなども可能</li>
+<li>コマンド実行対象のインスタンスは、インスタンスID、タグ、リソースグループから指定可能</li>
+</ul>
+</li>
+<li>パッチマネージャ
+<ul>
+<li>マネージドインスタンスへのパッチ適用を自動化できる</li>
+</ul>
+</li>
+<li>Automation
+<ul>
+<li>定義済みのオートメーションドキュメントを実行</li>
+<li>例）Health EventのEventBridge連携の自動アクションで紹介したAWS-RestartEC2Instanceの例を紹介
+<ul>
+<li>インスタンスIDとIAMロールがパラメータで定義されている</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>OpsCenter
+<ul>
+<li>運用で発生した問題の確認やステータスを一言管理できる</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-config">AWS Config<a class="anchor" href="#aws-config"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>AWSアカウント内のリソースの設定情報を収集する</p>
+</li>
+<li>
+<p>ControlTowerによって組織内のアカウントすべてのリソースの設定情報を集約することもできます。</p>
+</li>
+<li>
+<p>設定変更の際にイベント通知</p>
+</li>
+<li>
+<p>有効にしておいたルールによって組織で決められたルールやコンプライアンス要件に準拠しているかを確認できる</p>
+</li>
+<li>
+<p>非準拠になり修復する必要がある場合は、修復アクションを設定して自動修復することも可能</p>
+</li>
+<li>
+<p>自動修復にはSystemsManagerAutomationを選択可能</p>
+</li>
+<li>
+<p>S3バッチオペレーション</p>
+<ul>
+<li>S3のオブジェクト管理機能にバッチオペレーションがある</li>
+<li>数十億のオブジェクトを大規模に管理可能</li>
+<li>S3バッチオペレーションが使用するIAMロールには、batchoperations.s3.amazonaws.comからの信頼ポリシーが必要</li>
+</ul>
+</li>
+</ul></section></section><section><h4 id="2セキュリティ">2　セキュリティ<a class="anchor" href="#2セキュリティ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><section><h5 id="ルートユーザーの保護">ルートユーザーの保護<a class="anchor" href="#ルートユーザーの保護"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>ルートユーザはIAMポリシーを設定できず、すべてのアクションが可能</p>
+</li>
+<li>
+<p>ルートユーザは基本的に使用せず、複雑なパスワードとMFAを設定して保護しておくこと</p>
+</li>
+<li>
+<p>メールアドレスは個人に紐づくものではなく、企業のエイリアスやメーリングリストを使用する</p>
+</li>
+<li>
+<p>ルートユーザーにしかできないタスク</p>
+<ul>
+<li>アカウント設定の変更：アカウント名、Eメールアドレス、パスワードの変更</li>
+<li>アクセスキーの作成：ルートユーザーにもアクセスキーを作成できますが非推奨なので作成しないこと</li>
+<li>請求情報へのIAMアクセスの有効化：有効化したあとはIAMユーザー、IAMロールに請求情報へのアクションをポリシーで許可できる</li>
+<li>MFA Delete：S3バケットのMFA Deleteを設定</li>
+<li>S3バケットポリシーの修復：誰もアクセスできないS3バケットポリシーを設定してしまった場合は、ルートユーザーによって削除、編集可能</li>
+</ul>
+</li>
+<li>
+<p>ルートユーザ使用時に通知する</p>
+<ul>
+<li>GuardDutyで検知
+<ul>
+<li>Amazon GuardDuty→AmazonEventBridge→AmazonSNS</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="最小権限の適用">最小権限の適用<a class="anchor" href="#最小権限の適用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>IAM Access Analyzer: 最小権限の原則を適用するために便利なサービス</p><ul>
+<li>
+<p>IAM Access Analyzer</p>
+<ul>
+<li>外部に共有されているリソースの識別</li>
+<li>IAMポリシーの検証</li>
+<li>CloudTrailログに基づいたIAMポリシーの作成</li>
+<li>外部に共有されているリソースの識別
+<ul>
+<li>IAMロール、S3バケット、KMSキー、RDSスナップショットといったアカウントやパブリックなどのアカウント外部と共有可能なリソースを調べて、</li>
+<li>外部と共有されたリソースを検出する</li>
+<li>Organizationsの組織全体での検出が可能だが、リージョンごとに有効化する必要がある</li>
+</ul>
+</li>
+<li>IAMポリシーの検証
+<ul>
+<li>IAM Access AnalyzerはIAMポリシーの作成時に、セキュリティ・エラー・警告・提案の４つの視点で検証してくれる</li>
+</ul>
+</li>
+<li>CloudTrailログに基づいたIAMポリシーの作成
+<ul>
+<li>IAMユーザー、IAMロールが実行したリクエストのCloudTrailログを分析して、適切なIAMポリシーを生成してくれる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>アクセス許可の境界</p>
+<ul>
+<li>IAMユーザー、IAMロールを作成しポリシーを設定するユーザーが過剰な権限を適用することを防ぐ機能</li>
+<li>例）Lambda関数やEC2インスタンス向けのIAMロールを作成することを許可されたユーザがいるとする。
+<ul>
+<li>開発ユーザ自身はapp-bucketにアクセスすることは許可されているが、機密情報が保存されたsecure-bucketへのアクセスは許可されていない</li>
+<li>このとき、開発ユーザーがIAMロールとIAMポリシーを作成する際に、secure-bucketへのフルアクセス許可のあるIAMロールを作成下とすると、開発ユーザはIAMロールをEC2インスタンスに設定して、EC2インスタンス上でCLIなどでの操作でsecure-bucketへアクセスできてしまう</li>
+<li>だからといって、開発ユーザからIAMロールやIAMポリシーの権限を奪ってしまうと開発スピードが落ちる</li>
+<li>この問題を解決するのが<strong>アクセス許可の境界</strong></li>
+<li>アクセス許可の境界はIAMユーザー、IAMロールに追加で設定する管理ポリシーです。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="vpcのセキュリティ">VPCのセキュリティ<a class="anchor" href="#vpcのセキュリティ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>VPCにおけるセキュリティ設定の基礎
+<ul>
+<li>ルートテーブル</li>
+<li>セキュリティグループ：ALB,EC2,ENIを保護するファイアウォール</li>
+<li>ネットワークACL：サブネットを保護するファイアウォール</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-kms">AWS KMS<a class="anchor" href="#aws-kms"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>CMK(カスタマー管理キー)を管理して、データキーを生成・暗号化・復号するなど、復号化に必要なキー管理、キーオペレーションを提供するマネージド・サービス</p><p>さまざまなAWSサービスとシームレスに統合することができる</p><ul>
+<li>
+<p>KMSキーの種類</p>
+<ul>
+<li>カスタマー管理キー：AWSユーザーが作成、管理、完全に制御するキー。キーストレージ料金とリクエスト量に応じた料金が発生</li>
+<li>AWS管理キー：AWSが作成、管理するキー。特定のサービスを使用したり、暗号化するときに選択することで作成される。リクエスト量に応じた課金のみ</li>
+</ul>
+</li>
+<li>
+<p>エンベロープ暗号化</p>
+<ul>
+<li>対象暗号化</li>
+<li>非対称暗号化</li>
+</ul>
+</li>
+<li>
+<p>キーのローテーション</p>
+<ul>
+<li>KMSキーには年ごとに自動ローテーション機能がある</li>
+<li>カスタマー管理キーでは、自動ローテーションはオプションで有効にできる</li>
+<li>AWS管理キーは自動ローテーションが矯正される</li>
+<li>有効にするとKMSは毎年新しいキーマテリアルを生成</li>
+<li>私達はキーIDを指定して暗号化／復号をするのみで、ローテーションされたキーマテリアルの指定は意識しない</li>
+</ul>
+</li>
+<li>
+<p>キーのエイリアス</p>
+<ul>
+<li>カスタマー管理キーにはエイリアスが設定できる</li>
+<li>アプリケーションからはキーIDのかわりにエイリアスを指定してキーへのアクションを実行できる</li>
+</ul>
+</li>
+<li>
+<p>キーのインポート</p>
+<ul>
+<li>カスタマー管理キーの作成時にキーをインポート可能</li>
+<li>オンプレミスで作成したキーマテリアルをアップロードしてカスタマー管理キーとして使用できる</li>
+</ul>
+</li>
+<li>
+<p>KMSをサポートするサービス</p>
+<ul>
+<li>AWS Systems Manager Parameter Store</li>
+<li>AWS Secrets Manager</li>
+<li>Amazon DynamoDB
+<ul>
+<li>デフォルトはDynamoDBが管理するキーで暗号化出来る</li>
+</ul>
+</li>
+<li>Amazon EBS</li>
+<li>Amazon RDS
+<ul>
+<li>暗号化されていないRDSを暗号化するには：スナップショットを暗号化、暗号化されたスナップショットから復元すると同じ暗号化形式で復号化出来る</li>
+</ul>
+</li>
+<li>Amazon WorkSpaces</li>
+<li>Amazon EMR
+<ul>
+<li>ストレージにS3またはEBSを使用します</li>
+</ul>
+</li>
+<li>Amazon Redshift
+<ul>
+<li>4階層のキーで暗号化される。KMSキー＞クラスターキー＞データベースキー＞データ暗号化キー＞クラスタ内のデータブロック</li>
+</ul>
+</li>
+<li>Amazon S3
+<ul>
+<li>クライアントサイド暗号化
+<ul>
+<li>CSE-C</li>
+<li>CSE-KMS</li>
+</ul>
+</li>
+<li>サーバーサイド暗号化
+<ul>
+<li>SSE-S3</li>
+<li>SSE-KMS</li>
+<li>SSE-C</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-cloudhsm">AWS CloudHSM<a class="anchor" href="#aws-cloudhsm"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>キー保存、暗号化を実行するハードウェアを物理的に専有するサービスが、AWS CloudHSM</p><p>CloudHSMはFIPS 140-2レベル3に準拠している</p><p>AWS KMSもFIPS 140-2レベル2に準拠しているが、レベル3が必要な場合はCloudHSMを選択</p><ul>
+<li>CloudHSMの構成</li>
+<li>KMSカスタムキーストア</li>
+<li>CloudHSMのバックアップ</li>
+<li>CloudHSMのユースケース(TDE)</li>
+</ul></section><section><h5 id="aws-certificate-manager">AWS Certificate Manager<a class="anchor" href="#aws-certificate-manager"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>パブリックなSSL/TSL証明書の保存、更新を提供する無料のサービス</p><p>Croud Front,Elastic Load Balancer, API Gatewayと連携してユーザー所有のドメインの証明書を作成出来る</p><p>所有者の確認はメール認証化、CNAME認証で行われる、発行済みの証明書をインポートすることも出来る</p><p>ACMはサイトシールを提供していない</p></section><section><h5 id="aws-private-certificate-authority">AWS Private Certificate Authority<a class="anchor" href="#aws-private-certificate-authority"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>プライベートな独自の証明機関(CA)階層を作成し、ユーザー、デバイス、アプリケーションなどの認証のプライベート証明書を作成可能</p></section><section><h5 id="amazon-cognito">Amazon Cognito<a class="anchor" href="#amazon-cognito"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>Webアプリケーションやモバイルアプリケーションに安全に認証を提供するサービス</p><ul>
+<li>Cognitoユーザープール
+<ul>
+<li>サインアップ・サインインを短期間でアプリケーションに実装
+<ul>
+<li>認証基盤を開発しなくても、モバイルアプリケーションやWebアプリケーションからのサインアップ、サインインのために使用可能</li>
+<li>開発コストを下げて開発機関を短くするためにも有用</li>
+<li>Cognitoユーザープールのみで認証も可能、SNSなど外部での認証も可能</li>
+</ul>
+</li>
+<li>MFA、アドバンスドセキュリティ他
+<ul>
+<li>パスワードポリシー</li>
+<li>メールアドレス、電話番号の検証</li>
+<li>MFA(多要素認証)</li>
+<li>アドバンスドセキュリティ</li>
+</ul>
+</li>
+<li>Lambdaトリガー
+<ul>
+<li>サインアップイベント、サインインイベントをトリガーにAWS Lambda関数を実行できる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IDプール
+<ul>
+<li>モバイルアプリケーションやクライアントサイドJavaScriptが動作しているアプリケーションで、AWSのサービスに対して安全にリクエストを実行したい場合、CognitoIDプールを利用する</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-secrets-manager">AWS Secrets Manager<a class="anchor" href="#aws-secrets-manager"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>データベースなどの認証情報を保持し、取得にはSecrets ManagerへのAPIリクエストを使用します。</p><p>認証情報のローテーション更新が必要となった際には、Secrets Managerがデータベースの認証情報を更新して保持します</p><p>アプリケーションからはSecrets ManagerへGetSecretValueリクエストを実行することで、常に現在の認証情報を取得できるので、認証情報の再配布やそのための長時間に渡るシステムダウンタイムはない</p><ul>
+<li>ローテーション戦略</li>
+</ul></section><section><h5 id="amazon-inspector">Amazon Inspector<a class="anchor" href="#amazon-inspector"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>EC2インスタンス、ECRコンテナイメージ、Lambda関数を自動的に検出して、脆弱性のスキャンを継続的に行い、レポートで可視化するサービスです。</p><p>以前はInspector用のエージェントが必要で、EC2のみスキャン可能でしたが、そのバージョンはAmazon Inspector Classicになった</p></section><section><h5 id="aws-waf">AWS WAF<a class="anchor" href="#aws-waf"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>Web Application Firewall</p><p>CloudFront,APIGateway,ApplicationLoadBalancer,AppSync GraphQL API, Cognitoユーザープール、App Runnerへのリクエストに対応できる</p><ul>
+<li>AWS WAFの構成と料金</li>
+<li>AWS WAFの代表的なマネージドルール</li>
+</ul></section><section><h5 id="aws-shield">AWS Shield<a class="anchor" href="#aws-shield"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>DDoS攻撃から保護するサービスで、StandardとAdvancedがある</p><ul>
+<li>
+<p>AWS Shield Standardは無料で有効になり、AWSサービスへのベーシックなネットワークレイヤー攻撃を自動的に緩和する</p>
+</li>
+<li>
+<p>Advancedは1ヶ月3000USDのサブスクリプションサービスで、Organizations組織で利用可能</p>
+</li>
+<li>
+<p>AWS Shield Advancedで可能になること</p>
+</li>
+<li>
+<p>AWS Shield Engagement Lambda</p>
+<ul>
+<li>DDoS攻撃を自動検知して、エスカレーションアクションを自動化する設計パターン</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-network-firewall">AWS Network Firewall<a class="anchor" href="#aws-network-firewall"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>VPC向けのステートフルなマネージドネットワークファイアウォール及びIPSサービス</p><p>Network Firewallはトラフィック量に応じて自動的にスケールし、複数のAZにエンドポイントをデプロイすることで高可用性を実現</p></section><section><h5 id="aws-firewall-manager">AWS Firewall Manager<a class="anchor" href="#aws-firewall-manager"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>複数アカウントで以下を一元管理
+<ul>
+<li>AWS WAF</li>
+<li>AWS Shield Advanced</li>
+<li>VPCセキュリティグループ</li>
+<li>AWS Network Firewall</li>
+<li>Amazon Route53 Resolver DNSファイアウォール</li>
+</ul>
+</li>
+</ul></section><section><h5 id="amazon-guardduty">Amazon GuardDuty<a class="anchor" href="#amazon-guardduty"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>CloudTrail,S3データログ、VPC Flow Logs、DNSクエリログを分析して脅威を抽出する</p></section><section><h5 id="amazon-macie">Amazon Macie<a class="anchor" href="#amazon-macie"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>S3バケットに保存された機密データを機械学習とパターンマッチングで検出・監視出来る</p><ul>
+<li>参考
+<ul>
+<li><a href="https://dev.classmethod.jp/articles/introduce-to-amazon-macie/">https://dev.classmethod.jp/articles/introduce-to-amazon-macie/</a></li>
+<li>Macieは女の子の名前で「武器」「活発でスポーティで魅力的な人の代表名」という意味</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-security-hub">AWS Security Hub<a class="anchor" href="#aws-security-hub"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>AWS Security Hubは、GuardDutyやMacieなどAWSのセキュリティサービスや外部のサードパーティサービスの検出結果を、AWS Security Finding形式という共通のJSONフォーマットに変換して結合する</p></section><section><h5 id="amazon-detective">Amazon Detective<a class="anchor" href="#amazon-detective"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>GurardDutyの検出結果や、取り込んだログデータソースから、簡単に調査、原因の特定が行えるサービス</p><p>例えば、いつもは呼び出されないAPIリクエストがいつもとは違う送信元から呼び出されたことがGuardDutyで検出されたとする。
+Detectiveではその送信元から最初と最後の呼び出しや、合計時間、IAMロールなどに関連付けている他の検出結果など、調査二必要な情報を次々に確認出来る</p></section></section><section><h4 id="3信頼性">3　信頼性<a class="anchor" href="#3信頼性"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><section><h5 id="災害対策">災害対策<a class="anchor" href="#災害対策"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>RPOとRTO</p>
+<ul>
+<li>RPO(Recovery Point Objective)：目標復旧時点</li>
+<li>RTO(Recovery Time Objective)：目標復旧時間</li>
+</ul>
+</li>
+<li>
+<p>オンプレミスからのバックアップ＆リカバリー</p>
+</li>
+<li>
+<p>AWS Storage Gateway</p>
+<ul>
+<li>オンプレミスから主にS3などのAWSストレージサービスを透過的に使用するためのサービス</li>
+<li>ゲートウェイ種類
+<ul>
+<li>AmazonS3ファイルゲートウェイ</li>
+<li>ボリュームゲートウェイ</li>
+<li>テープゲートウェイ</li>
+<li>Amazon FSｘファイルゲートウェイ</li>
+</ul>
+</li>
+<li>オンプレミスにデプロイする仮想イメージ
+<ul>
+<li>VMware ESXi</li>
+<li>Microsoft Hyper-V 2012R/2016</li>
+<li>Linux KVM</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>AWS マルチリージョンのバックアップ＆リカバリー</p>
+<ul>
+<li>AWSリージョンで稼働しているWEB層/アプリ層/DB層の3層システムの災害対策サイトを他のAWSリージョンにする例</li>
+<li>AMI,ESBは対象範囲がリージョンなので、クロスリージョンコピーをする必要がある</li>
+<li>DLM(Data Lifecycle Manager)で自動取得し、クロスリージョンコピーをスケジューリング出来る</li>
+</ul>
+</li>
+<li>
+<p>AWS Backup</p>
+<ul>
+<li>システム全体のストレージ、データベースサービス之バックアップを一元管理して自動化出来る</li>
+<li>以前から各ストレージ之バックアップ機能（EBSのDataLifecycleManager、RDSの自動スナップショット、DynamoDBのAPIバックアップなど）はあったが、</li>
+<li>それらのスケジュールや世代管理はそれぞれで設定する必要があったが、この機能で一元管理が可能</li>
+<li>バックアップボールト
+<ul>
+<li>バックアップを管理する抽象的な入れ物</li>
+</ul>
+</li>
+<li>バックアッププラン
+<ul>
+<li>ルールとリソースを指定
+<ul>
+<li>ルール：バックアップスケジュール、保存世代、対象のボールトを指定</li>
+<li>リソース：同じリージョンの対象リソースタイプ（EBS、RDSなど）をすべて指定したり、特定のタグキーと値で限定したり出来る</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>パイロットライト</p>
+<ul>
+<li>Web層やアプリ層はAMIとCloudFormationテンプレートを作成しておく</li>
+<li>災害発生時はスタックを作成して復旧</li>
+<li>RDSはクロスリージョンリードレプリカを作成しておき、障害発生時はマスターへ昇格し、スタンバイデータベースを作成</li>
+<li>DynamoDBはグローバルテーブルでレプリカを作成しておく</li>
+<li>※AWS Elastic Disaster Recovery: システムダウンタイム時間を最小に抑えながら、オンプレミスのサーバーをAWSへ復旧</li>
+</ul>
+</li>
+<li>
+<p>ウォームスタンバイ（最小構成のスタンバイ）</p>
+<ul>
+<li>パイロットライト構成に加えて、WEB層とアプリ層を最小構成で稼働させておく</li>
+<li>パイロットライトよりもRTOを短縮できるがコストが増加する</li>
+</ul>
+</li>
+<li>
+<p>マルチサイトアクティブ／アクティブ</p>
+<ul>
+<li>すべてのリソースを常時稼働させておく構成</li>
+</ul>
+</li>
+<li>
+<p>AWS Global Accelerator</p>
+<ul>
+<li>フェールオーバー時間をさらに短縮出来る</li>
+</ul>
+</li>
+<li>
+<p>AWS Fault Injection Simulator</p>
+<ul>
+<li>用意されたシナリオによる障害をAWSリソースに注入することで、災害をシュミレーション出来る</li>
+</ul>
+</li>
+</ul></section><section><h5 id="疎結合化による信頼性の改善">疎結合化による信頼性の改善<a class="anchor" href="#疎結合化による信頼性の改善"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>外部API呼び出し処理を、SNSとSQSでファンアウト(Fanout)して、アプリケーションEC2インスタンスが行っていた処理をLambdaで実行</li>
+<li>順番を守るため、SNSトピックとSQSキューの両方でFIFOトピックとFIFOキューを選択しておく</li>
+<li>このような構成にすることで極力外部のAPIに依存しない設計にすることが出来る</li>
+</ul></section><section><h5 id="データベースへのリクエスト改善">データベースへのリクエスト改善<a class="anchor" href="#データベースへのリクエスト改善"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>RDS Proxy</li>
+</ul></section><section><h5 id="リフトシフトからの信頼性の改善">リフト&#x26;シフトからの信頼性の改善<a class="anchor" href="#リフトシフトからの信頼性の改善"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>WEB層、アプリ層をステートレスにすることで異なるリージョンでも切り替えられるようにする</li>
+</ul></section><section><h5 id="ec2-auto-scaling">EC2 Auto Scaling<a class="anchor" href="#ec2-auto-scaling"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>EC2インスタンスを自動で増減する機能</p><ul>
+<li>
+<p>スケーリングポリシー</p>
+<ul>
+<li>スケールアウト・スケールインをいつ行うか、どのような状態になったら行うか、どうなりそうなら行うかを設定</li>
+</ul>
+</li>
+<li>
+<p>同期的設計</p>
+<ul>
+<li>普通の３層設計</li>
+</ul>
+</li>
+<li>
+<p>非同期的設計</p>
+<ul>
+<li>SQS+Lambdaを挟んだ設計</li>
+<li>※オフロード戦略：少ない処理を先に終わらせ、並列処理が必要なものを非同期で行う</li>
+</ul>
+</li>
+<li>
+<p>SQSに基づくスケーリング</p>
+<ul>
+<li>キューの属性ApporoximateNumberOfMessagesを取得</li>
+<li>Auto ScalingグループからのInService状態のインスタンス数を取得</li>
+<li>CloudWatchのPutMetricDataAPIで送信する。ココマdの処理を定期的に繰り返すLambda関数をデプロイする</li>
+<li>AutoScalingグループのスケーリングポリシーによって、PutMetricDataされたメトリクスのしきい値アラームに応じたスケールアウト・スケールインアクションが実行される</li>
+</ul>
+</li>
+<li>
+<p>ファンアウト</p>
+<ul>
+<li>fanout: 扇形に広がるという意味</li>
+<li>SNSトピック＋SQSキューで複数のキューにためて、複数のAutoScalingグループで処理させる</li>
+</ul>
+</li>
+<li>
+<p>優先処理を考慮したキュー</p>
+<ul>
+<li>SQSの優先度の高い方から取得して処理実施</li>
+</ul>
+</li>
+<li>
+<p>ライフサイクルフック</p>
+<ul>
+<li>スケールアウト時にソフトウェアのデプロイを完全に完了したことを確認してからInServiceにしたり</li>
+<li>スケールイン時に必要なデータをコピー完了してからターミネートする場合などに利用できる
+<ul>
+<li>※一時的にPending<wait></wait>状態にする</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="amazon-route-53">Amazon Route 53<a class="anchor" href="#amazon-route-53"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>パブリックまたはプライベートなホストゾーンやリゾルバーを提供するDNSサービス。ドメインの購入、管理も可能</p><ul>
+<li>Route53ヘルスチェック
+<ul>
+<li>IPアドレスかドメインとポートを指定して、接続テストが実行可能</li>
+</ul>
+</li>
+<li>フェイルオーバールーティングポリシー
+<ul>
+<li>２つのリージョン間でDNSクエリに対して返すIPアドレスが変わる設定</li>
+</ul>
+</li>
+<li>位置情報ルーティングポリシー
+<ul>
+<li>位置情報でルーティングを決める設定</li>
+</ul>
+</li>
+<li>レイテンシールーティングポリシー
+<ul>
+<li>低いレイテンシーのレコードを返す設定</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-service-quotas">AWS Service Quotas<a class="anchor" href="#aws-service-quotas"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>AWSの各サービス使用量には制限がある</p><p>調整可能な制限値と使用量が、現在のAWSアカウントでどうなっているかをAWS Service Quotasで確認可能</p><ul>
+<li>クォータモニタ(AWS Limit Monitor)
+<ul>
+<li>サービス使用量が制限に近づいているかのモニタリングを自動化するソリューション実装</li>
+</ul>
+</li>
+</ul></section></section><section><h4 id="4パフォーマンス">4　パフォーマンス<a class="anchor" href="#4パフォーマンス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><section><h5 id="ec2のパフォーマンス">EC2のパフォーマンス<a class="anchor" href="#ec2のパフォーマンス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>インスタンスタイプ</p>
+<ul>
+<li>m6g.large
+<ul>
+<li>m:ファミリー</li>
+<li>6:世代</li>
+<li>g:追加機能</li>
+<li>large:サイズ</li>
+</ul>
+</li>
+<li>新しい世代を選択したほうがコスト、パフォーマンスでメリットのある場合が多い</li>
+</ul>
+</li>
+<li>
+<p>追加機能について</p>
+<ul>
+<li>d: インスタンスストアが使用できる</li>
+<li>n: ネットワーク強化</li>
+<li>a: AMDプロセッサ搭載</li>
+<li>g: Gravitonプロセッサ搭載</li>
+</ul>
+</li>
+<li>
+<p>インスタンスファミリー</p>
+<ul>
+<li>汎用（T3,T4g,M5,M6g,A1など）：Web、アプリなど</li>
+<li>コンピューティング最適化（C5,C7g）：HPC,メディアトランスコード、機械学習推論など</li>
+<li>メモリ最適化（R5,R6g,X1）：大きなデータセット処理など</li>
+<li>高速コンピューティング（P4,G5,F1,Trn1）：機械学習推論、GPUグラフィックス処理など</li>
+<li>ストレージ最適化（I3,D3,H1）：ビックデータ処理など
+<ul>
+<li>覚え方参考）<a href="https://qiita.com/cloud-solution/items/c8dd9ed491abd3360516">https://qiita.com/cloud-solution/items/c8dd9ed491abd3360516</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>バーストパフォーマンスインスタンス</p>
+<ul>
+<li>T2,T3,T3a,T4gインスタンスにはCPUバーストパフォーマンスがある</li>
+<li>通常はインスタンスサイズごとに決まっているベースラインまでのCPUが使えるが、ベースラインを超えてバースト可能</li>
+<li>ベースラインを超えるときにはCPUクレジットが消費され、ベースラインを下回っているときにはCPUクレジットが蓄積される</li>
+<li>CPU使用率がベースラインを超え続けるような使い方はバーストパフォーマンスインスタンスとしては不向きなので、M5などのインスタンスを検討する</li>
+</ul>
+</li>
+<li>
+<p>拡張ネットワーキング</p>
+<ul>
+<li>現行世代を含むほとんどのインスタンスタイプでは、Elastic Network Adapter(ENA)がサポートされている</li>
+<li>起動時拡張ネットワーキングが有効になっている</li>
+<li>enaモジュールがインストールされていることを確認：<code>modinfo ena</code></li>
+<li>ネットワークインターフェースドライバーの確認：<code>ethtool -i eth0</code></li>
+</ul>
+</li>
+<li>
+<p>ジャンボフレーム</p>
+<ul>
+<li>最大送信単位(MTU<maximum></maximum> Transmission Unit)は単一パケットで渡すことの出来る最大許容サイズのこと</li>
+<li>EC2ではすべてのインスタンスで1500MTUがサポートされている</li>
+<li>かつ、ほとんどのインスタンスで、9001MTU(ジャンボフレーム)がサポートされている</li>
+<li>イーサネットではMTUは1500バイトまでと規定されている<a href="https://e-words.jp/w/MTU.html">https://e-words.jp/w/MTU.html</a></li>
+</ul>
+</li>
+<li>
+<p>プレイスメントグループ</p>
+<ul>
+<li>ネットワークレイテンシを低くして、ネットワークパフォーマンスを向上させる選択肢としてプレイスメントグループがある
+<ul>
+<li>クラスタプレイスメントグループ
+<ul>
+<li>拡張ネットワーキング、ジャンボフレームで高いネットワークスループットを実現</li>
+</ul>
+</li>
+<li>パーティションプレイスメントグループ
+<ul>
+<li>パーティションというセグメントに配置し、各パーティションは異なるラックになる</li>
+</ul>
+</li>
+<li>スプレッドプレイスメントグループ
+<ul>
+<li>1つ1つ異なるラックに配置され、1つのAZごとに7つまでインスタンス起動が可能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="ストレージのパフォーマンス">ストレージのパフォーマンス<a class="anchor" href="#ストレージのパフォーマンス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>Amazon FSx for Lustre</p>
+<ul>
+<li>Lustreという、大規模なHPC(ハイパフォーマンスコンピューティング)やスーパーコンピューターで使用されている分散ファイルシステムがある</li>
+<li>FSx for Lustreは、Lustreを簡単に効率よく起動出来る</li>
+<li>SSD、HDDからストレージを選択可能</li>
+<li>S3と統合することで、S3のオブジェクトをインポートすることも、S3にエクスポートすることも可能</li>
+</ul>
+</li>
+<li>
+<p>Amazon S3のパフォーマンス最適化</p>
+<ul>
+<li>S3マルチパートアップロードとダウンロード</li>
+<li>S3 Transfer Acceleration
+<ul>
+<li>離れた大陸や地域からアップロードが実行される場合、さまざまな影響を受けレイテンシーが高くなる可能性がある</li>
+<li>Transfer Accelerationを有効にすることで、全世界のエッジロケーションを経由してアップロードを実行出来る</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Amazon DynamoDBのパフォーマンス最適化</p>
+<ul>
+<li>投票アプリケーションのように、まとめて集計するように全アイテムにアクセスすることが多く、書き込みの処理時間を短くする要件の場合はランダムサフィックスを検討</li>
+</ul>
+</li>
+</ul></section><section><h5 id="amazon-cloudfront">Amazon CloudFront<a class="anchor" href="#amazon-cloudfront"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>Webコンテンツの配信</p>
+<ul>
+<li>CloudFrontの配信設定のことをディストリビューションと呼ぶ</li>
+</ul>
+</li>
+<li>
+<p>オリジンへのアクセス制限</p>
+<ul>
+<li>OAC(Origin Access Control)
+<ul>
+<li>S3バケットがオリジンの場合は、OACが使用できる</li>
+<li>OACは2022年8月にリリースされた</li>
+<li>以前はOAI(Origin Access Identity)が使用されていたが、SSE-KMSに対応していなかったり、POST、PUTリクエストがそのままではできなかったりと課題があった</li>
+</ul>
+</li>
+<li>カスタムヘッダー
+<ul>
+<li>オリジンがALB等の場合に有効</li>
+</ul>
+</li>
+<li>IPアドレス制限</li>
+</ul>
+</li>
+<li>
+<p>オンデマンドビデオ、ライブストリーミングビデオの配信</p>
+<ul>
+<li>S3二アップロードされた動画をAWS Elemental MediaConvertによってHLSなどに変換して、配信用のS3バケットに保存し、</li>
+<li>CloudFrontディストリビューションから再生アプリケーションやデバイスへ配信</li>
+<li>AWS Elemental MediaLivで、リアルタイムにエンコードしたコンテンツをAWS Elemental MediaStoreに保存して、CloudFrontを使用して配信可能</li>
+</ul>
+</li>
+<li>
+<p>フィールドレベルの暗号化</p>
+</li>
+<li>
+<p>署名付きURLと署名付きCookieを使用したプライベートコンテンツの配信</p>
+</li>
+<li>
+<p>エッジ関数</p>
+<ul>
+<li>CloudFrontディストリビューションへのHTTPリクエスト、レスポンスの処理をエッジ関数でカスタマイズ出来る</li>
+<li>エッジ関数には、CloudFront FunctionsとLambda@Edgeの２種類がある</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-global-accelerator">AWS Global Accelerator<a class="anchor" href="#aws-global-accelerator"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>AWSグローバルネットワークを利用することで、AWSリージョンへのネットワーク経路を最適化、静的エニーキャストIPアドレスが提供される</p><p>BYOIPとしてIPアドレスを持ち込むことも可能</p><ul>
+<li>CloudFrontと似ている</li>
+<li>リージョンまたぎのLBみたいなものみたい</li>
+<li>参考）<a href="https://qiita.com/miyuki_samitani/items/9a320888a833b4aed08c">https://qiita.com/miyuki_samitani/items/9a320888a833b4aed08c</a></li>
+</ul></section><section><h5 id="amazon-elasticache">Amazon ElastiCache<a class="anchor" href="#amazon-elasticache"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>マネージドなインメモリのデータストアとして、Memcachced,Redisを提供</p><ul>
+<li>MemcachedとRedis</li>
+</ul></section><section><h5 id="amazon-rdsのパフォーマンス">Amazon RDSのパフォーマンス<a class="anchor" href="#amazon-rdsのパフォーマンス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>インスタンスクラス</li>
+<li>ストレージ</li>
+<li>リードレプリカ</li>
+<li>読み取り可能なスタンバイを備えたマルチAZ</li>
+</ul></section><section><h5 id="amazon-aurora">Amazon Aurora<a class="anchor" href="#amazon-aurora"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>MySQL,PostgreSQLと互換性のあるそれぞれのタイプを用意している、高いパフォーマンスデータベースエンジン</p><ul>
+<li>サーバーレス
+<ul>
+<li>Serverless V2を使用すると、インスタンスクラスを指定する必要はなく、ACU(Aurora Capacity Unit)の最小値、最大値を決めます</li>
+<li>開始して間もない、リクエスト量の読めないアプリに向いている</li>
+</ul>
+</li>
+</ul></section><section><h5 id="amazon-api-gateway">Amazon API Gateway<a class="anchor" href="#amazon-api-gateway"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>API Gatewayキャッシュ</li>
+<li>API エンドポイント
+<ul>
+<li>エッジ最適化APIエンドポイント</li>
+<li>リージョンAPIエンドポイント</li>
+<li>プライベートAPIエンドポイント</li>
+</ul>
+</li>
+<li>使用量プラン</li>
+<li>APIの認証
+<ul>
+<li>IAM認証</li>
+<li>Cognitoオーソライザー</li>
+<li>Lmabdaオーソライザー</li>
+</ul>
+</li>
+</ul></section></section><section><h4 id="5コスト最適化">5　コスト最適化<a class="anchor" href="#5コスト最適化"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><section><h5 id="amazon-ec2のコスト">Amazon EC2のコスト<a class="anchor" href="#amazon-ec2のコスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>リザーブドインスタンス</p>
+<ul>
+<li>Savings Plansもあるが、リザーブドインスタンスも依然として有効な割引オプション</li>
+</ul>
+</li>
+<li>
+<p>スポットインスタンス</p>
+<ul>
+<li>各AZの各インスタンスタイプの使用されていない量によって決定されるスポット料金</li>
+<li>上限料金をリクエストして使用</li>
+<li>スポット料金が上限料金を超えた場合か、AZに利用可能なキャパシティがなくなった場合、スポットインスタンスは中断される
+<ul>
+<li>中断に備えたベストプラクティス
+<ul>
+<li>リクエスト料金にデフォルトのオンデマンドインスタンス料金を使用</li>
+<li>中断されたインスタンスのかわりにのインスタンスをすぐに起動できるように、AMI,起動テンプレートを準備しておく</li>
+<li>S3、DynamoDB、RDS、EFSなどにデータを保存する</li>
+<li>SQSからジョブメッセージを受信して処理をし、中断時には可視性タイムアウトによって他のインスタンスから再試行可能な構成にする</li>
+<li>中断前の処理が必要な場合、メタデータのポーリングかEventBridgeで検知し処理を完了させる</li>
+<li>Fault injection Simulatorでスポットインスタンス中断を発生させてアプリケーションをテストする</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Dedicated Hosts(専有ホスト)</p>
+<ul>
+<li>専用物理サーバにEC2インスタンスを起動出来る</li>
+</ul>
+</li>
+<li>
+<p>Saving Plans</p>
+<ul>
+<li>1年または3年期間で時間あたりの使用料金を契約することで、割引料金で使用可能
+<ul>
+<li>EC2 Instance Savings Plans</li>
+<li>Compute Savings Plans</li>
+<li>SageMaker Savings Plans</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section><h5 id="amazon-s3のコスト">Amazon S3のコスト<a class="anchor" href="#amazon-s3のコスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>S3ストレージクラス（S3標準とS3標準IA）</p>
+</li>
+<li>
+<p>S3 Intelligent-Tiering</p>
+<ul>
+<li>アップロード後の経過日数によってアクセス頻度の変化するパターンが一定でない場合、S3 Intelligent-Tieringを使用することでコスト最適化が可能</li>
+</ul>
+</li>
+<li>
+<p>S3 リクエスタ支払い</p>
+<ul>
+<li>リクエスト料金とデータ転送料金をリクエストした側のアカウントに請求するのが、リクエスタ支払い</li>
+<li>リクエスタ料金を有効にすると、AWSアカウント以外からのアクセスができなくなる</li>
+<li><code>x-amz-request-payer</code>をヘッダーに含めることで課金される</li>
+</ul>
+</li>
+<li>
+<p>S3 Storage Lens</p>
+<ul>
+<li>複数アカウント、複数のS3バケットの使用状況をS3コンソールのダッシュボードで分析可能</li>
+</ul>
+</li>
+</ul></section><section><h5 id="amazon-dynamodbのコスト">Amazon DynamoDBのコスト<a class="anchor" href="#amazon-dynamodbのコスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>DynamoDBのアイテムの読み込み・書き込みにはオンデマンドモードとプロビジョンドキャパシティモード</p><ul>
+<li>
+<p>オンデマンドモード</p>
+<ul>
+<li>書き込み、読み込みリクエストが発生するごとに料金が発生
+<ul>
+<li>書き込みは1KBの項目100万回あたりの料金：$1.4269</li>
+<li>読み込みは4KBの項目を強い整合性読み込みは100万回、結果整合性の読み込みは200万回分の料金：$0.285</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>プロビジョンドキャパシティモード</p>
+<ul>
+<li>1秒間の書き込み・容量に対して設定するWCU、読み込み回数・容量に対して設定するRCUを設定</li>
+<li>1WCU:1KB/1秒 1回</li>
+<li>1RCU:4KB/1秒 強い整合性1回 結果整合性2回</li>
+</ul>
+</li>
+<li>
+<p>比較</p>
+<ul>
+<li>プロビジョンドキャパシティモードの１時間あたりの料金に合わせた場合、オンデマンドモードでは５２０回リクエストが可能</li>
+<li>プロビジョンドキャパシティモードは１秒間に１回実行できるので、毎秒実行したとして３６００回実行可能のため、オンデマンドモードのほうが高くなる</li>
+<li>頻度が少ない場合や、急激なスパイクが発生する場合はオンデマンドモードのほうが優位性がある</li>
+<li>継続的なリクエストが発生して、ゆるやかな増減がある場合はプロビジョンドキャパシティモードのほうが良い</li>
+<li>請求モードは24時間に１回切り替えることが可能</li>
+</ul>
+</li>
+<li>
+<p>DynamoDB Accelerator(DAX)</p>
+<ul>
+<li>VPC内でDynamoDBキャッシュ二アクセス出来る</li>
+<li>マイクロ秒での応答が必要なケースでDAXを検討する</li>
+</ul>
+</li>
+</ul></section><section><h5 id="その他リザーブドオプション">その他リザーブドオプション<a class="anchor" href="#その他リザーブドオプション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>Amazon RDS</li>
+<li>Amazon ElastiCache</li>
+<li>Amazon Redshift</li>
+<li>Amazon Open Search Service</li>
+</ul></section><section><h5 id="コスト配分タグ">コスト配分タグ<a class="anchor" href="#コスト配分タグ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>タグをサポートしているリソースに適切なタグを設定することは、コスト分析、モニタリングに役立つ</p><p>請求メニューのコスト配分タグで指定してアクティブにできる</p><ul>
+<li>Organizationsタグポリシー</li>
+<li>SCP：SCPで特定のリソース作成時にタグ付けを必須にする</li>
+</ul></section><section><h5 id="aws-cost-explorer">AWS Cost Explorer<a class="anchor" href="#aws-cost-explorer"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>コストの使用状況のグラフビューを使用できる</p><ul>
+<li>コストの予測
+<ul>
+<li>日付範囲に未来の日付を含めることで予測を作成可能</li>
+</ul>
+</li>
+<li>予約とSavings Plans
+<ul>
+<li>使用状況だけでなく、予約の使用状況と過去実績に基づく推奨事項が確認可能</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-cost-anomaly-detection">AWS Cost Anomaly Detection<a class="anchor" href="#aws-cost-anomaly-detection"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>支払いパターンをモニタリングしながら異常なコストを検出する</p></section><section><h5 id="aws-cost-and-usage-repots">AWS Cost and Usage Repots<a class="anchor" href="#aws-cost-and-usage-repots"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>より詳細な課金の情報を、S3に保存されるCSV、Parquestデータで確認可能</p><p>CSVデータを個別にダウンロードして確認、分析するのではなく、AthenaからSQLクエリで分析したり、さらにQuickSightを使用して可視化されたグラフのGUIで分析可能</p></section><section><h5 id="aws-budgets">AWS Budgets<a class="anchor" href="#aws-budgets"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>AWSアカウント、Organizations組織にまたがった全体の予算や、特定の条件でフィルタリングした条件での予算を作成出来る</p></section><section><h5 id="請求アラーム">請求アラーム<a class="anchor" href="#請求アラーム"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>アカウントの請求設定で、「請求アラートを受け取る」オプションを有効にしていると、バージニア北部のCloudWatchで請求アラームを設定可能</p></section><section><h5 id="マネージドサービスの利用">マネージドサービスの利用<a class="anchor" href="#マネージドサービスの利用"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>AWSの請求だけがコストではない、EC2はOSの運用管理も必要</p><ul>
+<li>EC2中心のアーキテクチャからサーバーレスアーキテクチャへ</li>
+<li>NATインスタンスをNATゲートウェイに変更する
+<ul>
+<li>NATゲートウェイは、内部的な冗長化、復元可用性を持っている</li>
+<li>NATインスタンスは、送信先・送信元チェックを無効化したEC2インスタンス</li>
+</ul>
+</li>
+</ul></section><section><h5 id="データ転送料金の削減">データ転送料金の削減<a class="anchor" href="#データ転送料金の削減"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>NATゲートウェイの料金削減</p>
+<ul>
+<li>時間利用料金とデータ処理料金が発生</li>
+<li>データ処理料金はデータ量に応じて増加する</li>
+</ul>
+</li>
+<li>
+<p>メディア配信コストの最適化</p>
+</li>
+</ul></section><section><h5 id="aws-compute-optimizer">AWS Compute Optimizer<a class="anchor" href="#aws-compute-optimizer"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>EC2,AutoScalingグループ,EBSボリューム,Lambda関数,Fargate(ECS)に付いて、使用率メトリクスを分析し、リソースサイズの選択が最適化どうかレポートして、コスト削減とパフォーマンスに関する推奨事項を提供</p></section></section><section><h4 id="6確認テスト">6　確認テスト<a class="anchor" href="#6確認テスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="第4章移行とモダナイゼーションの加速">第4章　移行とモダナイゼーションの加速<a class="anchor" href="#第4章移行とモダナイゼーションの加速"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="1移行評価とアプローチ">1　移行評価とアプローチ<a class="anchor" href="#1移行評価とアプローチ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><section><h5 id="7つのr">7つのR<a class="anchor" href="#7つのr"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>移行する際の考え方についての７つのRが公開されている</p><ul>
+<li>Refactor
+<ul>
+<li>アプリケーションをフルにカスタマイズ出来るケース</li>
+</ul>
+</li>
+<li>Replatform
+<ul>
+<li>アプリケーションのカスタマイズは行わない</li>
+<li>オンプレミスで利用している成約はそのまま引き継ぐ</li>
+</ul>
+</li>
+<li>Repurchase
+<ul>
+<li>これまで組織で構築し運用していたシステムをSaaSなどに変更する方法</li>
+<li>例）サーバーに構築していたRedmineをBacklogやJiraなどのSaaSに変更するケース、社内メールサーバをクラウドメールサーバーに変更するなど</li>
+</ul>
+</li>
+<li>Rehost
+<ul>
+<li>シンプルな載せ替えのこと</li>
+<li>アンマネージドサービスであるEC2を中心に構成</li>
+</ul>
+</li>
+<li>Relocate
+<ul>
+<li>VMware Cloud on AWSの使用を開始し、そのままAWSへ移行する手段</li>
+</ul>
+</li>
+<li>Retain
+<ul>
+<li>検討した結果オンプレミスのままというビジネス判断をしたもの</li>
+<li>システムを見直すいい機会になった</li>
+</ul>
+</li>
+<li>Retire
+<ul>
+<li>移行を検討する段階で、不要なシステムやインフラがあれば、Retire(廃止)します</li>
+</ul>
+</li>
+</ul></section><section><h5 id="移行評価支援のサービス">移行評価支援のサービス<a class="anchor" href="#移行評価支援のサービス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>AWS Cloud Adoption Readiness Tool(CART)</p>
+<ul>
+<li>クラウド支援準備ツール</li>
+<li>６つのパースペクティブについての質問に答えることで準備状況に関する大まかな推奨事項のレポートを生成</li>
+<li><a href="https://cloudreadiness.amazonaws.com/#/cart">https://cloudreadiness.amazonaws.com/#/cart</a></li>
+</ul>
+</li>
+<li>
+<p>AWS Application Discovery Service</p>
+<ul>
+<li>オンプレミスのサーバーの使用状況や設定データを収集することでAWSへの移行計画をサポート</li>
+<li>AWS Migration Hubに統合されており、収集した情報はAWS Migration Hubで確認できる</li>
+<li>WindowsやLinuxにインストール出来るエージェント型</li>
+<li>VMware向けのエージェントレスコネクタ型</li>
+</ul>
+</li>
+</ul></section><section><h5 id="データアプリケーション移行のサービス">データ、アプリケーション移行のサービス<a class="anchor" href="#データアプリケーション移行のサービス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>AWS Snowファミリー</p>
+<ul>
+<li>Snowcone</li>
+<li>Snowball Edage Storage Optimized(ストレージ最適化)</li>
+<li>Snowball Edage Compute Optimized(コンピューティング最適化)</li>
+<li>Snowball Edage Compute Optimized with GPU(コンピューティング最適化GPU)</li>
+<li>Snowmobile
+<ul>
+<li>エクサバイト規模のデータ転送をサポートする</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>AWS DataSync</p>
+<ul>
+<li>オンプレミスなどのデータをS3,EFS,FSxへ安全かつ高速に転送するサービス</li>
+</ul>
+</li>
+<li>
+<p>AWS Application Migration Service(MGN)</p>
+<ul>
+<li>オンプレミスサーバをAWSに移行するサービス</li>
+<li>MGNの料金
+<ul>
+<li>90以内に移行が完了したサーバーにはコスト発生なし</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>AWS Database Migration Service(DMS)</p>
+<ul>
+<li>データベースの移行サービス</li>
+</ul>
+</li>
+</ul></section></section><section><h4 id="2移行後アーキテクチャとモダナイゼーション">2　移行後アーキテクチャとモダナイゼーション<a class="anchor" href="#2移行後アーキテクチャとモダナイゼーション"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><p>クラウドジャーニー：移行してからクラウドの最適化を勧め、継続的な改善が出来る状態にしていくこと</p><section><h5 id="コンテナ">コンテナ<a class="anchor" href="#コンテナ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>Amazon ECS(Amazon Elastic Container Service)</p>
+<ul>
+<li>クラスタ、タスク定義、サービスの設定があり、コンテナイメージの保存先としてECRも利用できる</li>
+<li>Amazon ECR(Amazon Elastic Container Registry)
+<ul>
+<li>コンテナイメージを管理するレジストリ</li>
+<li>ECS,EKS,App Runnerなどのコンテナ実行サービスから使用できる</li>
+</ul>
+</li>
+<li>ECS クラスタ
+<ul>
+<li>コンテナを実行するためのサービスとタスクのグループがクラスタ</li>
+<li>組織のチームや部門ごとに分けたり、アクセス権限やコストで分離したりする</li>
+</ul>
+</li>
+<li>タスク定義
+<ul>
+<li>コンテナイメージ、タスクサイズ、使用するポート、コンテナタスクがAWSサービスへのアクセスを許可するためのIAMロール、コンテナを実行するためのIAMロール、環境変数、ログ記録などを定義</li>
+<li>JSONで直接記述することも可能</li>
+</ul>
+</li>
+<li>サービス
+<ul>
+<li>実行するタスク定義、コンテナを配置するVPC、サブネット、セキュリティグループ、スケーリングポリシー、ALBのターゲットブループ、インフラストラクチャなどが設定出来る</li>
+</ul>
+</li>
+<li>起動タイプトキャパシティプロバイダー
+<ul>
+<li>起動タイプ：AWS FargateとEC2のどちらで実行するか選択可能
+<ul>
+<li>Fargateでコンテナを起動すれば、OS、クラスタの可用性、ソフトウェアの管理が必要なくなり、コンテナの実行に集中出来る</li>
+</ul>
+</li>
+<li>キャパシティプロバイダー
+<ul>
+<li>より詳細にコントロール出来るコンテナの実行環境</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ネットワークモード</li>
+<li>ECSイベントストリーム</li>
+</ul>
+</li>
+<li>
+<p>AWS Proton</p>
+<ul>
+<li>コンテナの実行環境を環境テンプレートとサービステンプレートに分けて、自動構築、管理出来るサービス</li>
+<li>環境テンプレート：VPC、IAMロール、ECSクラスタなどが作成</li>
+<li>サービステンプレート：ALB、ECSタスク、ECSサービス、ECR、CodePipleineが作成</li>
+</ul>
+</li>
+<li>
+<p>Amazon EKS(AMazon Elastic Kubernetes Service)</p>
+<ul>
+<li>コンテナオーケストレーションのためのオープンソースソフトウェアのマネージドサービス</li>
+<li>EKSでもEC2起動タプとFargateを使用できる</li>
+</ul>
+</li>
+<li>
+<p>AWS App Runner</p>
+<ul>
+<li>Githubのそー＾すリポジトリまたはECRイメージからアプリケーションを継続的にデプロイ、運用出来る</li>
+</ul>
+</li>
+<li>
+<p>Amazon Managed Service for Prometheus</p>
+<ul>
+<li>Prometheusとの互換性を持つモニタリングサービス</li>
+<li>コンテナによって構築されたマイクロサービスと相性の良いモニタリングソフトウェア</li>
+<li>Prometheusクエリ言語を使用して、コンテナで構築されたサービスのモニタリングとアラートを出せます</li>
+</ul>
+</li>
+<li>
+<p>Amazon Managed SErvice for Grafana</p>
+<ul>
+<li>Grafanaのフルマネージドサービス</li>
+<li>KibanaやOpenSearch Dashboardsのようにさまざまなデータソースを可視化、分析できるダッシュボード</li>
+<li>Prometheusもデータソースとして使用可能</li>
+</ul>
+</li>
+</ul></section><section><h5 id="amazon-kinesis">Amazon Kinesis<a class="anchor" href="#amazon-kinesis"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>ストリーミングデータを扱うサービス</p><ul>
+<li>Amazon kinesis DataStreams
+<ul>
+<li>ストリームデータを収集して順番通りにリアルタイム処理を実現する</li>
+</ul>
+</li>
+<li>Amazon Kinesis Firehose
+<ul>
+<li>大量のデータを、指定した送信先へ簡単に送る</li>
+</ul>
+</li>
+<li>Amazon Kinesis Data Analytics
+<ul>
+<li>Kinesis Data Streams, Kinesis Data Firehoseのストリーミングデータをもとに、SQLクエリを使用して分析</li>
+</ul>
+</li>
+<li>Amazon Kinesis Video Streams
+<ul>
+<li>動画ストリームをAWSに収集して、Amazon Rekognition Videoなどと連携してリアルタイムな動画分析が行える</li>
+</ul>
+</li>
+<li>Amazon Managed Streaming for Apache Kafka(Amazon MSK)
+<ul>
+<li>マネージドなApache Kafkaを提供するサービス</li>
+</ul>
+</li>
+</ul></section><section><h5 id="s3を中心としたデータレイク">S3を中心としたデータレイク<a class="anchor" href="#s3を中心としたデータレイク"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>データレイク</p>
+<ul>
+<li>クラウドに送信されたデータを収集して保存し、保存したデータを加工処理したり、分析処理したり、可視化したりします</li>
+<li>可視化された結果から気づきを得て、ビジネス戦略を練ったり、エンドユーザーに対して提案したりしている</li>
+</ul>
+</li>
+<li>
+<p>AWS Glue</p>
+<ul>
+<li>フルマネージドなETL(Extract Transform Load)サービス</li>
+<li>S3のデータをGlueデータカタログでカタログ化し、これはAthenaやRedshift Spectrumでも使用可能</li>
+</ul>
+</li>
+<li>
+<p>Amazon Athena</p>
+<ul>
+<li>S3内のデータをSQLを使用して簡単に分析出来るサービス
+<ul>
+<li>S3に保存した、CSV,JSON,ParquestなどのデータをSQLで分析する要件の場合は、まずAthenaを検討する</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>AWS Lake Formation</p>
+<ul>
+<li>データレイクの芝やい構築、きめ細やかなアクセス制限を設定出来る</li>
+<li>ブループリント
+<ul>
+<li>LakeFormationに用意されているブループリントを使用すると、RDSデータベース、CloudTrail、Application Load BalancerからS3へデータを収集するために必要なリソースを自動で作成可能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>AWS Data Exchange</p>
+<ul>
+<li>データプロバイダーが提供するデータ製品をS3バケットにインポート出来る</li>
+</ul>
+</li>
+<li>
+<p>Amazon AppFlow</p>
+<ul>
+<li>Salesforce、ServiceNow,Slack,Datadog,Zendeskなど様々なSaaSサービスから、コード開発することなく、S3やRedshiftなどのAWSサービスへデータを連携でkリウ</li>
+</ul>
+</li>
+<li>
+<p>Amazon SageMaker</p>
+<ul>
+<li>機械学習のトレーニングのための環境構築、作成した推論モデルのデプロイなどを提供しているサービスが、Amazon SageMaker</li>
+</ul>
+</li>
+<li>
+<p>Amazon Comprehend</p>
+<ul>
+<li>文章テキストから自動でキーワードを抽出したり、ネガティブ／ポジティブを判定したり出来る</li>
+</ul>
+</li>
+<li>
+<p>Amazon Rekognition</p>
+<ul>
+<li>画像、動画を分析できるサービス</li>
+<li>S3バケットにアップロードした画像データから顔を比較して個人を特定して顔認証を実現したり、写真内の要素を検出して自動でラベルを設定したりで着る</li>
+</ul>
+</li>
+<li>
+<p>Amazon Forecast</p>
+<ul>
+<li>S3に蓄積した過去の時系列データをもとに、将来予測を作成出来る</li>
+</ul>
+</li>
+<li>
+<p>Amazon Fraud Detector</p>
+<ul>
+<li>オンライン決済詐欺や偽アカウントによる不正を自動検知出来る</li>
+</ul>
+</li>
+<li>
+<p>Amazon Kendra</p>
+<ul>
+<li>S3,FSx,RDSなどのAWSサービスや、SaaSのストレージサービスの情報をインデックスして、自然言語検索サービスを構築できる</li>
+</ul>
+</li>
+<li>
+<p>Amazon Translate</p>
+<ul>
+<li>翻訳サービスで、すぐに使い始めることも出来る</li>
+</ul>
+</li>
+<li>
+<p>Amazon Polly</p>
+<ul>
+<li>テキストを音声に変換するサービス</li>
+<li>言語ごとに男性・女性の音声が用意されていて、プロパティで選択できる</li>
+</ul>
+</li>
+<li>
+<p>Amazon Transcrive</p>
+<ul>
+<li>音声をテキストに変換するサービス</li>
+</ul>
+</li>
+<li>
+<p>Amazon Textract</p>
+<ul>
+<li>手書きのドキュメント化rあ自動で文字を抽出して、テキストデータに出来る</li>
+<li>OCRと呼ばれる技術に該当するサービスですが、従来のOCRのレベルにとどまらず、どこに書いてあっても自動で抽出出来る</li>
+</ul>
+</li>
+<li>
+<p>Amazon Lex</p>
+<ul>
+<li>Alexaと同じ会話形AIチャットボットを作成出来る</li>
+<li>Amazon ConnectやKendraと連携して、サポートセンターを構築するのに役立つ</li>
+</ul>
+</li>
+</ul></section><section><h5 id="amazon-simple-email-service">Amazon Simple Email Service<a class="anchor" href="#amazon-simple-email-service"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>SES受信</p>
+<ul>
+<li>Route53などのDNSサービスで、MXレコードをSESドメインに向けて設定する</li>
+</ul>
+</li>
+<li>
+<p>SES送信</p>
+<ul>
+<li>エンドユーザーからの問い合わせフォームや資料請求、ECサイトでの購入確認メールの送信など、取引における送信メールの自動化、マーケティング目的のダイレクトメールや、エンドユーザーへの一括アナウンスを自動化</li>
+</ul>
+</li>
+<li>
+<p>Amazon PinPoint</p>
+<ul>
+<li>マーケティングのためのサービス</li>
+<li>顧客にメール、ショートメッセージ、アプリケーションプッシュメッセージなどキャンペーンメッセージを送る</li>
+</ul>
+</li>
+</ul></section><section><h5 id="aws-transfer-family">AWS Transfer Family<a class="anchor" href="#aws-transfer-family"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><p>S3バケット、EFSファイルシステムへのデータ保存に、SFTP、FTPS、FTPプロトコルを使用できる</p></section><section><h5 id="ipアドレスに依存した設計">IPアドレスに依存した設計<a class="anchor" href="#ipアドレスに依存した設計"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>Network Load BalancerにIPアドレスを固定する</p>
+<ul>
+<li>固定IPアドレスを持ち込んで設定出来る</li>
+</ul>
+</li>
+<li>
+<p>Elastic Network Interface</p>
+<ul>
+<li>プライベートIPアドレス、MACアドレスやセキュリティグループ、Elastic IPアドレスなどを紐づけておくことが出来る</li>
+</ul>
+</li>
+<li>
+<p>Egress-Only インターネットゲートウェイ</p>
+<ul>
+<li>VPCではIPv6を使用できる</li>
+<li>IPv４では、プライベートサブネットからインターネットへの出口にNATゲートウェイを使用するが、IPv６ではEgress-Onlyインターネットゲートウェイを使用する</li>
+</ul>
+</li>
+</ul></section><section><h5 id="低遅延を実現するサービス">低遅延を実現するサービス<a class="anchor" href="#低遅延を実現するサービス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>AWS Outposts</p>
+<ul>
+<li>AWSのデータセンターで運用されているものと同様のハードウェア機器がラックサーバー単位で指定したオンプレミスデータセンターに設置される</li>
+<li>最も近い場所でAWSサービスを使用できるサービス</li>
+<li>物理的な管理はすべてAWSが実施</li>
+</ul>
+</li>
+<li>
+<p>AWS Local Zones</p>
+<ul>
+<li>リージョンの拡張</li>
+<li>リージョンよりもユーザーに近い拠点で一部のサービスを使用可能</li>
+</ul>
+</li>
+<li>
+<p>AWS Wavelength</p>
+<ul>
+<li>5Gねとワークの通信事業者のネットワークへの直接的なデータ送受信が可能になる</li>
+<li>日本ではKDDI5Gネットワークが利用できる</li>
+</ul>
+</li>
+</ul></section><section><h5 id="マネージドデータベース">マネージドデータベース<a class="anchor" href="#マネージドデータベース"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>目的別データベーストマネージドデータベース</p>
+</li>
+<li>
+<p>Amazon Neptune</p>
+<ul>
+<li>グラフデータベースで、ノード同士の関係性を保存して検索する機能を提供</li>
+</ul>
+</li>
+<li>
+<p>Amazon DocumentDB</p>
+<ul>
+<li>MongoDBと互換性を持ったマネージドデータベースサービス</li>
+</ul>
+</li>
+<li>
+<p>Amazon Keyspaces</p>
+<ul>
+<li>Apache Cassandra互換のマネージドデータベースサービス</li>
+<li>Cassandraクエリ言語、API、Cassandraドライバーをサポートしているので、これまで同様の開発者ツールを使える</li>
+</ul>
+</li>
+<li>
+<p>Amazon Timestream</p>
+<ul>
+<li>時系列データを管理することに特化したマネージドデータベースサービス</li>
+</ul>
+</li>
+</ul></section><section><h5 id="マネージドアプリケーションサービス">マネージドアプリケーションサービス<a class="anchor" href="#マネージドアプリケーションサービス"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h5><ul>
+<li>
+<p>AWS AppSync</p>
+<ul>
+<li>GraphQL APIとPub/Sub APIを高速に開発出来る</li>
+<li>DynamoDBテーブル、OpenSearch Serviceなどへ安全に接続してデータの読み書きが行える</li>
+</ul>
+</li>
+<li>
+<p>AWS Device Farm</p>
+<ul>
+<li>アプリケーション二台する複数のブラウザ、複数のモバイルデバイスからのテストを実行</li>
+</ul>
+</li>
+</ul></section></section><section><h4 id="3確認テスト-1">3　確認テスト<a class="anchor" href="#3確認テスト-1"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="第5章模擬テスト">第5章　模擬テスト<a class="anchor" href="#第5章模擬テスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="1問題">1　問題<a class="anchor" href="#1問題"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section><section><h4 id="2解答と解説">2　解答と解説<a class="anchor" href="#2解答と解説"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4></section></section><section><h3 id="x確認テストまとめ">X.確認テストまとめ<a class="anchor" href="#x確認テストまとめ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><section><h4 id="2-3確認テスト">2-3.確認テスト<a class="anchor" href="#2-3確認テスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>２つのアカウントでクロスアカウントアクセス</p>
+<ul>
+<li>IAM チュートリアル: AWS アカウント間の IAM ロールを使用したアクセスの委任 - AWS Identity and Access Management
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html">https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>外部IDの正しい使い方</p>
+</li>
+<li>
+<p>ADConnector</p>
+<ul>
+<li>オンプレミスのActive Directoryを利用して、AWS　IAMアイデンティティセンターのIDソースにする</li>
+</ul>
+</li>
+<li>
+<p>S3ゲートウェイエンドポイント</p>
+<ul>
+<li>追加料金不要でS3アクセス</li>
+<li>S3インターフェイスエンドポイントは追加料金がかかる</li>
+<li>PrivateLinkはインターフェースエンドポイントを実現している技術の名称</li>
+</ul>
+</li>
+<li>
+<p>PC端末からVPCにVPN接続する必要がある、どの方法が運用負荷がかからないか</p>
+<ul>
+<li>AWS クライアントVPN</li>
+</ul>
+</li>
+<li>
+<p>マネージドSite-to-SiteVPN接続を作成するために必要な要素</p>
+<ul>
+<li>カスタマーゲートウェイ：オンプレミス側のIPアドレスなどの設定</li>
+<li>仮想プライベートゲートウェイ：VPC側二アタッチしてカスタマーゲートウェイとVPN接続</li>
+</ul>
+</li>
+<li>
+<p>仮想プライベートゲートウェイのAWS site-to-siteVPN接続でサポートされている機能</p>
+<ul>
+<li>デッドピア検出</li>
+</ul>
+</li>
+<li>
+<p>コンプライアンス要件によりVPN接続両端を完全にコントロールする必要がある</p>
+<ul>
+<li>ソフトウェアVPN：EC2にソフトウェアVPNをインストr－うするので、インスタンスレベル、OSレベルでコントロール出来る</li>
+</ul>
+</li>
+<li>
+<p>ISPを介さない500Mbpsの接続が必要</p>
+<ul>
+<li>Direct Connectホスト接続</li>
+<li>Direct Connect専用接続：1Gbps,10Gpbs,100Gbpsから選択する</li>
+</ul>
+</li>
+<li>
+<p>DirectConnect ロケーション全体またはロケーション内部に物理障害があってもDirect Connectの冗長化を継続できる回復性は次のどれ？</p>
+<ul>
+<li>最大回復性</li>
+</ul>
+</li>
+<li>
+<p>S3,DynamoDBへの専用接続が必要</p>
+<ul>
+<li>パブリック仮想インターフェース</li>
+</ul>
+</li>
+<li>
+<p>Direct Connectのポート時間料金が発生するのはどれ？</p>
+<ul>
+<li>接続確率していないが、接続が作成されてから90日後から</li>
+<li>90日経っていないが、Direct Connectエンドポイントとカスタマールーターの接続が確率されたときから</li>
+</ul>
+</li>
+<li>
+<p>数十のVPCと複数のデータセンター拠点との複雑な接続が必要、運用負荷を軽減しルーティングの一元管理ができる？</p>
+<ul>
+<li>Transit Gateway</li>
+</ul>
+</li>
+<li>
+<p>複数リージョンでのTransit Gatewayを使った接続は次のどれで実現可能か？</p>
+<ul>
+<li>Transit　Gatewayピア接続</li>
+</ul>
+</li>
+<li>
+<p>オンプレミスト双方向のDNSアクセスを実現できるのは次の打ちどれか？</p>
+<ul>
+<li>Route53 Resolver</li>
+</ul>
+</li>
+<li>
+<p>Organizationsを使用するメリットはどれ？</p>
+<ul>
+<li>SCPによるOU単位でのセキュリティ管理</li>
+<li>一括請求による請求管理の簡易化とディスカウントオプションの適用</li>
+</ul>
+</li>
+<li>
+<p>予防コントロール、検出コントロール、ログ集約アカウント、監査アカウント、AWS IAMアイデンティティセンター連携などマルチアカウントの組織におけるベストプラクティスを自動で簡単に構築出来るOrganizationsと連携したサービスはどれ？</p>
+<ul>
+<li>AWS Control Tower</li>
+</ul>
+</li>
+</ul></section><section><h4 id="3-6確認テスト">3-6.確認テスト<a class="anchor" href="#3-6確認テスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>CodeDeployでEC2インスタンスにアプリケーションをデプロイする直前にOSレベルでの処理を実行したい</p>
+<ul>
+<li>appspec.ymlのBeforeInstallに処理を記述する</li>
+</ul>
+</li>
+<li>
+<p>CloudFormationスタック之作成時にLambda関数を実行して追加の処理を実行したい</p>
+<ul>
+<li>カスタムリソース
+<ul>
+<li>Lambda関数のARNを指定して実行出来る</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>CodeCommitとECRのどちらかが更新されたときに、ECSへのリリースをしたい</p>
+<ul>
+<li>CodePipelineのソースでCodeCommitとECRのそれぞれを設定して２つのEventBridgeルールによってCodePipleineが実行されるようにする</li>
+</ul>
+</li>
+<li>
+<p>EC2インスタンスのホストがリタイアする前に自動でEC2インスタンスのホストを変更したい</p>
+<ul>
+<li>AWS_EC2_PERSISTENT_INSTANCE_RETIREMENT_SCHEDULEDイベントでSystems Manager Automationを呼び出して自動処理が可能</li>
+</ul>
+</li>
+<li>
+<p>AWS X-Ray で抽出できるもの</p>
+<ul>
+<li>アプリケーションのバグ</li>
+<li>アプリケーションのボトルネック</li>
+</ul>
+</li>
+<li>
+<p>VPC内のトラフィックのパケット内容をモニタリング</p>
+<ul>
+<li>トラフィックミラーリング</li>
+</ul>
+</li>
+<li>
+<p>企業はLinuxでのSSH接続を止めることにした、どの手順が必要か？</p>
+<ul>
+<li>EC2インスタンスが引き受けるIAMロール二Amazon SSM ManagedInstance Coreポリシーをアタッチし、IAMユーザはセッションマネージャを使用できるようにポリシー追加</li>
+<li>SSMエージェントがインストール済みのAMIを選択するか、EC2インスタンスにSSMエージェントをインストールする</li>
+<li>EC2インスタンスがSSMサービスへ通信できるようにネットワーク設定する</li>
+</ul>
+</li>
+<li>
+<p>複数のEC2インスタンスに効率的にかつ正確にOSレベルでのコマンドを実行したい</p>
+<ul>
+<li>RunCommand
+<ul>
+<li>複数のターゲットに事前定義したコマンドを一括で実行可能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>特定のEC2インスタンスに特定のパッチを除外して、必要なパッチを適用する方法</p>
+<ul>
+<li>パッチマネージャでベースラインを設定し、対象のEC2インスタンスにタグを設定し、RunCommandを実行する</li>
+</ul>
+</li>
+<li>
+<p>S3バッチオペレーションでできることを３つ</p>
+<ul>
+<li>オブジェクトロックの保持設定</li>
+<li>オブジェクトのコピー</li>
+<li>AWS Lambda関数の呼び出し</li>
+<li>すべてのオブジェクトタグを置換する</li>
+<li>すべてのオブジェクトタグを削除する</li>
+<li>アクセスコントロールリストを置き換える</li>
+<li>S3オブジェクトロックのリーガルホールド</li>
+</ul>
+</li>
+<li>
+<p>なるべくコストを抑えてKMSをを利用したい</p>
+<ul>
+<li>AWS管理キーを使用する
+<ul>
+<li>ストレージ料金分のコストが抑えられます</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>複数のアプリケーションサーバーで使用するパラメータを暗号化して保持したい</p>
+<ul>
+<li>パラメータストア
+<ul>
+<li>システムズマネージャーパラメータストアのSecureStringを使用すれば、</li>
+<li>KMSのキーで暗号化される</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>使用中のEBSボリュームを暗号化しなければならなくなった、どうしたらいい？</p>
+<ul>
+<li>スナップショットを作成して、スナップショットをもとに新規ボリュームを作成するときに暗号化を有効にする</li>
+<li>新しくできた暗号化ボリュームをEC2インスタンスにアタッチする</li>
+</ul>
+</li>
+<li>
+<p>特定のS3バケットでアップロードされるS3オブジェクトの保管時の暗号化設定が必要</p>
+<ul>
+<li>バケットのプロパティでデフォルトの暗号化を設定する</li>
+</ul>
+</li>
+<li>
+<p>キー管理に専有ハードウェアと高可用性が必要、どの選択肢が最適？</p>
+<ul>
+<li>CloudHSMクラスタを複数のAZを指定して起動し、HSMインスタンスを複数作成して使用する</li>
+</ul>
+</li>
+<li>
+<p>Webアプリにユーザがhttps接続できるように証明書が必要、CloudFrontで配信している場合どうしたらいいか</p>
+<ul>
+<li>CloudFrontにACM(AWS Certificate Manager)の証明書を設定する</li>
+</ul>
+</li>
+<li>
+<p>開発するモバイルアプリにサインインする際にMFAが必要</p>
+<ul>
+<li>CognitoユーザープールでMFAを有効にする</li>
+</ul>
+</li>
+<li>
+<p>EC2インスタンスがビットコインのマイングに使用されている可能性があることなどの脅威を検出するサービス</p>
+<ul>
+<li>Amazon GuardDuty</li>
+</ul>
+</li>
+<li>
+<p>RDSデータベースで使用されているパスワードを毎月変更する必要がある</p>
+<ul>
+<li>Secrets Managerシークレットに格納して自動ローテーションを有効にする</li>
+</ul>
+</li>
+<li>
+<p>組織は24時間365日対応のShield Response Team(SRT)を必要としています</p>
+<ul>
+<li>AWS Shield Advanced</li>
+</ul>
+</li>
+<li>
+<p>オンプレミスのストレージ容量を節約しながらオンプレミスのアプリケーション・サーバーからiSCSIで接続してデータを保存したい</p>
+<ul>
+<li>Storage Gatewayボリュームゲートウェイキャッシュモード</li>
+</ul>
+</li>
+<li>
+<p>EC2のスケールインが実行される前に追加の処理が必要、どうすればいいか？</p>
+<ul>
+<li>インスタンス終了するときのライフサイクルフックを設定して、EventBridgeルールを作成し、処理するLambdaをターゲットに設定</li>
+</ul>
+</li>
+<li>
+<p>EC2同士のネットワークレイテンシを極力低くするためのオプションは？</p>
+<ul>
+<li>クラスタプレイスメントグループ</li>
+</ul>
+</li>
+<li>
+<p>Auroraクラスタデータベースへの多くの接続とリクエストにより接続拒否が発生している。どうしたら改善されるか？</p>
+<ul>
+<li>RDS Proxy: SQLリクエストが調整される</li>
+</ul>
+</li>
+<li>
+<p>CloudFrontディストリビューションで配信するサイトのオリジンがS3バケットです。直接S3バケットへのリクエストは拒否したい</p>
+<ul>
+<li>S3バケットポリシーでCloudFront OAC(OriginAccessControl)からのリクエストのみを許可する</li>
+<li>CloudFrontオリジン設定でOACを設定する</li>
+</ul>
+</li>
+<li>
+<p>AWS Global Acceleratorが提供するものは？</p>
+<ul>
+<li>グローバルな静的エニーキャストIPアドレス</li>
+</ul>
+</li>
+<li>
+<p>ElastiCache for Memcahedの特徴</p>
+<ul>
+<li>マルチスレッドでの実行が可能</li>
+<li>自動検出機能によってノードを追加、削除する</li>
+</ul>
+</li>
+<li>
+<p>Redisの方は？</p>
+<ul>
+<li>ソート済みセット型をサポート</li>
+<li>アトミックオペレーションによりキャッシュ内のデータ値をINCR/DECRコマンドで増減</li>
+<li>永続性を持つ</li>
+</ul>
+</li>
+<li>
+<p>API Gatewayで呼び出されるLambdaの実行回数を減らしたい</p>
+<ul>
+<li>API Gateway キャッシュを有効にする</li>
+</ul>
+</li>
+<li>
+<p>リザーブドインスタンスを１年契約しているが、期限切れになったときなるべき未適用期間が発生しないようにしたい</p>
+<ul>
+<li>購入予約をキューに入れる
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ri-market-concepts-buying.html">https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ri-market-concepts-buying.html</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>組織ではオンプレミスアプリケーションをEC2に移行したあと、1年を目標期間として、順次コンテナ化して、部分的にサーバレスアーキテクチャに変更することも予定している。可能化限り割引を適用したい</p>
+<ul>
+<li>Compute Savings Plans
+<ul>
+<li>EC2、Fargate、Lambdaに適用できるので、アーキテクチャを変更してもコンピューティングリソースの割引が受けられる</li>
+</ul>
+</li>
+<li>EC2 Instance Savings Plans,EC2 Reserved Instance<ec2></ec2>にしか適用できない</li>
+<li>SageMaker Savings Plan: Sagemakerインスタンスの割引プラン</li>
+</ul>
+</li>
+<li>
+<p>S3 Intelligent-Tieringの特徴</p>
+<ul>
+<li>アクセスされないオブジェクトは自動的に低頻度階層へ移動し、自動的にコストが最適になる</li>
+<li>Glacier：アーカイブされるのでアクセスするときは取り出しに3～5時間かかる</li>
+<li>ライフサイクルルール：アップロードした日から設定した日数追加したオブジェクトがS3標準IAへ移動する</li>
+<li>オブジェクトロック：コンプライアンスモードではオブジェクトが削除から保護される</li>
+</ul>
+</li>
+<li>
+<p>S3オブジェクトに対してリクエストしたアカウントに請求が発生するようにしたい</p>
+<ul>
+<li>リクエスタ支払いを有効にして、リクエスト側はx-amz-request-payerをリクエストに含める。リクエスト料金とデータ転送料金がリクエスト側に請求される</li>
+</ul>
+</li>
+<li>
+<p>コストの異常検知をするには？</p>
+<ul>
+<li>Cost Anormaly Detectionでコストモニターを作成する</li>
+</ul>
+</li>
+<li>
+<p>課金状況に対して月ごとに増加する予算管理を死体</p>
+<ul>
+<li>コスト予算の月次予算設定で初期予算と成長率を入力する</li>
+</ul>
+</li>
+<li>
+<p>AWS Compute Optimize</p>
+<ul>
+<li>EC2インスタンスタイプ、Lambda関数のメモリ最適化レポートを確認出来る</li>
+</ul>
+</li>
+</ul></section><section><h4 id="4-3確認テスト">4-3.確認テスト<a class="anchor" href="#4-3確認テスト"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>AWS Application Migration Service</p>
+<ul>
+<li>サーバー之継続移行が可能</li>
+</ul>
+</li>
+<li>
+<p>SCTでスキーマ変換してDMSでデータ移行する</p>
+</li>
+<li>
+<p>AWS Glue</p>
+<ul>
+<li>ETLツール</li>
+<li>S3バケットに格納されているJSONデータを変換して別のS3バケットに格納</li>
+</ul>
+</li>
+<li>
+<p>Outposts</p>
+<ul>
+<li>ユーザの敷地内でAWSサービスを実行できるラックを設置して低レイテンシを実現</li>
+</ul>
+</li>
+<li>
+<p>Amazon MQ</p>
+<ul>
+<li>Apache ActiveMQを提供するマネージドサービス</li>
+</ul>
+</li>
+</ul></section><section><h4 id="5-1模擬テストメモ">5-1.模擬テスト（メモ）<a class="anchor" href="#5-1模擬テストメモ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h4><ul>
+<li>
+<p>「ユーザー名をタグに設定しなければ作成できないように制限」しなければならない条件</p>
+<ul>
+<li>アクセス権の境界設定ポリシーが必要</li>
+<li>制限を超えた権限を持つIAMロールをEC2にアタッチしても、境界以上の権限は拒否出来る</li>
+</ul>
+</li>
+<li>
+<p>IAM Permissions boundary（アクセス権限の境界）で明示的に許可していないアクションでも条件次第で実行できるということを評価論理の流れを眺めて再認識してみた | DevelopersIO</p>
+<ul>
+<li><a href="https://dev.classmethod.jp/articles/iam-policies-evaluation-logic-rikai/">https://dev.classmethod.jp/articles/iam-policies-evaluation-logic-rikai/</a></li>
+</ul>
+</li>
+<li>
+<p>S3 RTC(Replication Time Control)を有効にすることで、ほとんどのオブジェクトは数秒でレプリケートされ、</p>
+</li>
+<li>
+<p>99.99%のオブジェクトは15分以内にレプリケートされる</p>
+</li>
+<li>
+<p>15分のしきい値を超えたとき、イベント通知を作成可能</p>
+</li>
+<li>
+<p>AWS Transfer Family</p>
+<ul>
+<li>パブリックアクセス可能なSFTP対応サーバーではElastic IPアドレスは設定できない</li>
+<li><a href="https://dev.classmethod.jp/articles/202210-aws-transfer-family-sftp/">https://dev.classmethod.jp/articles/202210-aws-transfer-family-sftp/</a></li>
+</ul>
+</li>
+<li>
+<p>Amazon SESでエンドユーザーに対してメールを送信出来る</p>
+</li>
+<li>
+<p>メールのイベントは設定セットを作成してメール送信時のパラメータで指定することで、イベントをKinesis Data Firehoseに送信できます</p>
+</li>
+<li>
+<p>Kinesis Data FirehoseはS3バケットへデータを送信出来る</p>
+</li>
+<li>
+<p>S3バケットに送信されたデータはAthenaからSQLクエリで検索、抽出が可能</p>
+</li>
+<li>
+<p>User-Agentなどのパケット内容はVPC Flow Logsでは調査できない</p>
+</li>
+<li>
+<p>VPCトラフィックミラーリングを使用する</p>
+</li>
+<li>
+<p>Dedicated Hostsのアフィニティオプションを使うことで、ライセンス要件を満たせる</p>
+</li>
+<li>
+<p>問題16</p>
+<ul>
+<li>AuroraやRDSデータベースのスナップショットは、クラスタやインスタンスを暗号化しているKMSのCMK(カスタマーマスターキー)で暗号化される</li>
+<li>スナップショット化r復元する際は、CMKを使用する権限が必要</li>
+<li>CMKはエクスポートできない</li>
+</ul>
+</li>
+<li>
+<p>問題18</p>
+<ul>
+<li>DynamoDBに Saving Plansはない</li>
+</ul>
+</li>
+<li>
+<p>問題19</p>
+<ul>
+<li>Elastic IPアドレスをサポートしているのはNetwork Load Balancer</li>
+<li>API GatewayやApplication Load Balancerはサポートしていない</li>
+</ul>
+</li>
+<li>
+<p>問題23</p>
+<ul>
+<li>Kinesis Data Analyticsを四王するとストリーミングデータを１秒未満のレイテンシーで処理出来る</li>
+</ul>
+</li>
+<li>
+<p>問題24</p>
+<ul>
+<li>Redisクラスタのライトスルー戦略</li>
+</ul>
+</li>
+<li>
+<p>問題33</p>
+<ul>
+<li>IPv6アドレスを利用するには</li>
+<li>Egress-Onlyインターネットゲートウェイを使用することでアウトバウンド専用のネットワークを構築可能</li>
+</ul>
+</li>
+<li>
+<p>問題34</p>
+<ul>
+<li>IAMユーザとMFA認証必須化</li>
+<li>TODO: 復習</li>
+</ul>
+</li>
+<li>
+<p>問題36</p>
+<ul>
+<li>サードパーティ製品ごとに外部ID</li>
+</ul>
+</li>
+<li>
+<p>問題60</p>
+<ul>
+<li>Kinesis Video Streams</li>
+<li>Rekognition Video</li>
+<li>倉庫の監視カメラの映像をリアルタイム分析して、人を検出した際に通知したい</li>
+</ul>
+</li>
+<li>
+<p>問題65</p>
+<ul>
+<li>ルートユーザーの認証に対して通知：RootCredentialUsageイベントで検知可能</li>
+<li>CloudTrailのログ集約と迅速な検索：１つのアカウントに集約して、Athenaでデータパーティション分割</li>
+<li>CloudTrailのログ改ざん検知：整合性検証オプションを有効にすればいい</li>
+</ul>
+</li>
+<li>
+<p>問題66</p>
+<ul>
+<li>Application Discovery Serviceは移行の判断や移行の計画を立てることに役立つ</li>
+<li>オンプレミスのサーバーにエージェントをインストールして情報を収集するエージェント型と</li>
+<li>VMWare向けのコネクタ型がある</li>
+</ul>
+</li>
+<li>
+<p>問題68</p>
+<ul>
+<li>FSx for Lustre:高速な共有ストレージ</li>
+<li>AWS Wavelenght:5Gネットワークの通信事業者のネットワークへの直接送受信</li>
+<li>AWS OutPuts:特定の場所にAWSサービスを構築</li>
+<li>AWS Local Zones:ユーザーに近い場所を選択できる</li>
+</ul>
+</li>
+<li>
+<p>問題70</p>
+<ul>
+<li>amazon-efs-utils(EFSマウントヘルパー)をインストールして、</li>
+<li>マウントヘルパーコマンドで、-o tlsオプションを付けてマウントする</li>
+<li>このときEFSファイルシステムIDを指定するので名前解決できている必要がある</li>
+</ul>
+</li>
+<li>
+<p>問題72</p>
+<ul>
+<li>RDS Proxy: データベース接続プールの作成ト再利用により多くのリクエストを調整処理出来る</li>
+</ul>
+</li>
+</ul></section></section></section><section><h2 id="メモ">メモ<a class="anchor" href="#メモ"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>AWS Connector for vCenter
+AWS Step Functions
+Timestream
+Timestream は、高速でスケーラブルかつフルマネージドの専用時系列データベースであり、毎日何兆もの時系列データポイントを保存して分析することができます。Timestream は、リレーショナルデータベースよりも最大 1000 倍高速になることがあります。
+<a href="https://docs.aws.amazon.com/timestream/latest/developerguide/what-is-timestream.html">https://docs.aws.amazon.com/timestream/latest/developerguide/what-is-timestream.html</a></p><p>このソリューションは 2 部に分かれます。IAM Access Analyzer は CloudTrail ログを分析して、外部アクセスが許可されているかどうかを判断します。Macie は S3 バケットを分析して、パブリックオブジェクト、パブリックバケット、または機密情報が Amazon S3 にあるかどうかをチェックします。IAM Access Analyzer と Macie の調査結果は両方とも Security Hub で報告できます。Security Hub は Organizations と統合されているため、単一の Security Hub ダッシュボードを使用して、両方のセキュリティ問題を 1 か所でモニタリングできます。
+IAM Access Analyzer と Security Hub の統合の詳細については、「AWS Security Hub との統合」を参照してください。
+Security Hub との Macie 統合の詳細については、「Amazon Macie Integration with AWS Security Hub (AWS Security Hub との Macie 統合)」を参照してください。
+Security Hub と Organizations との統合の詳細については、「AWS Security Hub: および AWS Organizations」を参照してください。</p><p>SCP を使用できるようにするには、組織内のすべての機能を有効にする必要があります。</p><p>AWS OutPosts サーバーとラックは異なるもの
+<a href="https://engineers.ntt.com/entry/2023/03/24/095642">https://engineers.ntt.com/entry/2023/03/24/095642</a></p><p>EC2 Fleet</p><p>S3 Transfer Acceleration は、CloudFront エッジロケーションと最適化されたネットワークパスを使用して、オブジェクトの転送を高速化します。
+マルチパートアップロードは、チャンクを並列にアップロードすることで、大きなファイルを高速に転送します。この方法では、アップロードのスピードが向上し、失敗したアップロードの回復性が向上します。</p><p>CloudWatch Synthetics を使用して、エンドポイントと API をモニタリングするために、スケジュールに従って実行される設定可能なスクリプトであるカナリアを作成できます。GET メソッドで API カナリアを作成して、サードパーティーサービスが期待どおりに応答しているかどうかを判断できます。Route 53 はアラームステータスを追跡でき、必要に応じてセカンダリリージョンにフェイルオーバーできます。
+Amazon Timestream は、高速でスケーラブルな、サーバーレスの時系列データベースです。Timestream には、時系列関数をサポートし、消費者行動の傾向を特定するのに役立つ組み込みの時系列分析があります。Timestream は数百テラバイトのデータを保存できます。Timestream は、最新データのメモリストアと履歴データの磁気ストアにより、データライフサイクル管理を簡素化します。Timestream は、受信データに対してリアルタイム分析を実行するために、クエリを定期的かつ自動的にスケジュールできます。このソリューションはすべての要件を満たしています。
+AWS PrivateLink VPC間のIPが被っても接続可能</p><p>Amazon QuickSightからAmazon Athenaに接続</p><p>Amazon WorkSpaces</p></section></section>  </div> <script type="module">document.addEventListener("click",function(s){const t=s.target;if(t&&t.classList.contains("copy-btn")){const c=t.closest("pre")?.querySelector("code"),i=Array.from(c?.querySelectorAll(".code:not(summary *)")??[]).map(e=>e.textContent).map(e=>e===`
+`?"":e).join(`
+`);navigator.clipboard.writeText(i);const o=t.getAttribute("data-timeout-id");o&&clearTimeout(parseInt(o)),t.classList.add("success");const n=setTimeout(()=>{t.classList.remove("success")},1e3);t.setAttribute("data-timeout-id",n.toString())}});</script> <div class="relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 mb-6 rounded-xl license-container onload-animation"> <div class="transition font-bold text-black/75 dark:text-white/75"> AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト) </div> <a href="https://tutttuwi.github.io/posts/2023-06_aws_認定資格試験テキスト問題集_sap/" class="link text-[var(--primary)]"> https://tutttuwi.github.io/posts/2023-06_aws_認定資格試験テキスト問題集_sap/ </a> <div class="flex gap-6 mt-2"> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">Author</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">Tomoaki Tsutsui</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">Published at</div> <div class="transition text-black/75 dark:text-white/75 line-clamp-2">2023-06-24</div> </div> <div> <div class="transition text-black/30 dark:text-white/30 text-sm">License</div> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="link text-[var(--primary)] line-clamp-2">CC BY-NC-SA 4.0</a> </div> </div> <svg width="0.97em" height="1em" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5" data-icon="fa6-brands:creative-commons">   <symbol id="ai:fa6-brands:creative-commons" viewBox="0 0 496 512"><path fill="currentColor" d="m245.83 214.87l-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93c-22.13 0-33.22 14.61-33.22 43.84c0 23.57 9.21 43.84 33.22 43.84c14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98c-22.6 0-73.96-10.32-73.96-77.05c0-58.69 43-77.06 72.63-77.06c30.72-.01 52.7 11.95 65.99 35.86m143.05 0l-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93c-22.14 0-33.22 14.61-33.22 43.84c0 23.55 9.23 43.84 33.22 43.84c14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98c-22.69 0-73.96-9.87-73.96-77.05c0-58.67 42.97-77.06 72.63-77.06c30.71-.01 52.58 11.95 65.56 35.86M247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248c129.93 0 248.44-100.87 248.44-248c0-137.87-106.62-248-248.44-248m.87 450.81c-112.54 0-203.7-93.04-203.7-202.81c0-105.42 85.43-203.27 203.72-203.27c112.53 0 202.82 89.46 202.82 203.26c-.01 121.69-99.68 202.82-202.84 202.82"/></symbol><use href="#ai:fa6-brands:creative-commons"></use>  </svg> </div> </div> </div> <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full"> <a href="/posts/2023-06_aws_solutionarchitectspecialist_受験対策メモ/" class="w-full font-bold overflow-hidden active:scale-95"> <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4"> <svg width="1em" height="1em" class="text-[2rem] text-[var(--primary)]" data-icon="material-symbols:chevron-left-rounded">   <symbol id="ai:material-symbols:chevron-left-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z"/></symbol><use href="#ai:material-symbols:chevron-left-rounded"></use>  </svg> <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75"> AWS_SolutionArchitectSpecialist_受験対策まとめ </div> </div> </a> <a href="/posts/2023-02_excelで学ぶ_ビジネスデータ分析の基礎/" class="w-full font-bold overflow-hidden active:scale-95"> <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4"> <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75"> Excelで学ぶ ビジネスデータ分析の基礎 </div> <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[2rem] text-[var(--primary)]" data-icon="material-symbols:chevron-right-rounded">   <use href="#ai:material-symbols:chevron-right-rounded"></use>  </svg> </div> </a> </div>  <div class="footer col-span-2 onload-animation hidden lg:block"> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center">
+&copy; <span id="copyright-year">2026</span> Tomoaki Tsutsui. All Rights Reserved. /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/rss.xml">RSS</a> /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/sitemap-index.xml">Sitemap</a><br> <!--
+        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        --> </div> </div> </div> </div> </main> <div class="footer col-span-2 onload-animation block lg:hidden"> <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">--><div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div> <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">--> <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"> <div class="transition text-50 text-sm text-center">
+&copy; <span id="copyright-year">2026</span> Tomoaki Tsutsui. All Rights Reserved. /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/rss.xml">RSS</a> /
+<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="/sitemap-index.xml">Sitemap</a><br> <!--
+        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        --> </div> </div> </div> </div> <!-- There can't be a filter on parent element, or it will break `fixed` --><div class="back-to-top-wrapper hidden lg:block" data-astro-cid-eymb5ayk> <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="backToTop()" data-astro-cid-eymb5ayk> <button aria-label="Back to Top" class="btn-card h-[3.75rem] w-[3.75rem]" data-astro-cid-eymb5ayk> <svg width="1em" height="1em" class="mx-auto" data-astro-cid-eymb5ayk="true" data-icon="material-symbols:keyboard-arrow-up-rounded">   <symbol id="ai:material-symbols:keyboard-arrow-up-rounded" viewBox="0 0 24 24"><path fill="currentColor" d="m12 10.8l-3.9 3.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"/></symbol><use href="#ai:material-symbols:keyboard-arrow-up-rounded"></use>  </svg> </button> </div> </div>  <script>
+function backToTop() {
+    window.scroll({ top: 0, behavior: 'smooth' });
+}
+</script> </div> </div>  <div class="absolute w-full z-0 hidden 2xl:block"> <div class="relative max-w-[var(--page-width)] mx-auto"> <!-- TOC component --> <div id="toc-wrapper" class="hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center"> <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar"> <div id="toc" class="w-full h-full transition-swup-fade "> <div class="h-8 w-full"></div> <table-of-contents class="group"><a href="#aws認定資格試験テキスト問題集aws認定ソリューションアーキテクト---プロフェッショナル改訂第2版-ａｗｓ認定資格試験テキスト" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold bg-[var(--toc-badge-bg)] text-[var(--btn-content)]">1</div><div class="transition text-sm text-50">AWS認定資格試験テキスト＆問題集　AWS認定ソリューションアーキテクト - プロフェッショナル　改訂第2版 (ＡＷＳ認定資格試験テキスト)</div></a><a href="#書籍情報" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">書籍情報</div></a><a href="#コンテンツ" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">コンテンツ</div></a><a href="#メモ" class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    "><div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold ml-4"><div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div></div><div class="transition text-sm text-50">メモ</div></a><div id="active-indicator" style="opacity: 0" class="-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"></div></table-of-contents><script type="module">class l extends HTMLElement{tocEl=null;visibleClass="visible";observer;anchorNavTarget=null;headingIdxMap=new Map;headings=[];sections=[];tocEntries=[];active=[];activeIndicator=null;constructor(){super(),this.observer=new IntersectionObserver(this.markVisibleSection,{threshold:0})}markVisibleSection=t=>{t.forEach(e=>{const i=e.target.children[0]?.getAttribute("id"),s=i?this.headingIdxMap.get(i):void 0;s!=null&&(this.active[s]=e.isIntersecting),e.isIntersecting&&this.anchorNavTarget==e.target.firstChild&&(this.anchorNavTarget=null)}),this.active.includes(!0)||this.fallback(),this.update()};toggleActiveHeading=()=>{let t=this.active.length-1,e=this.active.length-1,i=-1;for(;t>=0&&!this.active[t];)this.tocEntries[t].classList.remove(this.visibleClass),t--;for(;t>=0&&this.active[t];)this.tocEntries[t].classList.add(this.visibleClass),e=Math.min(e,t),i=Math.max(i,t),t--;for(;t>=0;)this.tocEntries[t].classList.remove(this.visibleClass),t--;if(e>i)this.activeIndicator?.setAttribute("style","opacity: 0");else{let s=this.tocEl?.getBoundingClientRect().top||0,n=this.tocEl?.scrollTop||0,o=this.tocEntries[e].getBoundingClientRect().top-s+n,c=this.tocEntries[i].getBoundingClientRect().bottom-s+n;this.activeIndicator?.setAttribute("style",`top: ${o}px; height: ${c-o}px`)}};scrollToActiveHeading=()=>{if(this.anchorNavTarget||!this.tocEl)return;const t=document.querySelectorAll(`#toc .${this.visibleClass}`);if(!t.length)return;const e=t[0],i=t[t.length-1],s=this.tocEl.clientHeight;let n;i.getBoundingClientRect().bottom-e.getBoundingClientRect().top<.9*s?n=e.offsetTop-32:n=i.offsetTop-s*.8,this.tocEl.scrollTo({top:n,left:0,behavior:"smooth"})};update=()=>{requestAnimationFrame(()=>{this.toggleActiveHeading(),this.scrollToActiveHeading()})};fallback=()=>{if(this.sections.length)for(let t=0;t<this.sections.length;t++){let e=this.sections[t].getBoundingClientRect().top,i=this.sections[t].getBoundingClientRect().bottom;if(this.isInRange(e,0,window.innerHeight)||this.isInRange(i,0,window.innerHeight)||e<0&&i>window.innerHeight)this.markActiveHeading(t);else if(e>window.innerHeight)break}};markActiveHeading=t=>{this.active[t]=!0};handleAnchorClick=t=>{const e=t.composedPath().find(i=>i instanceof HTMLAnchorElement);if(e){const i=decodeURIComponent(e.hash?.substring(1)),s=this.headingIdxMap.get(i);s!==void 0?this.anchorNavTarget=this.headings[s]:this.anchorNavTarget=null}};isInRange(t,e,i){return e<t&&t<i}connectedCallback(){const t=document.querySelector(".prose");t?t.addEventListener("animationend",()=>{this.init()},{once:!0}):console.debug("Animation element not found")}init(){if(this.tocEl=document.getElementById("toc-inner-wrapper"),!!this.tocEl&&(this.tocEl.addEventListener("click",this.handleAnchorClick,{capture:!0}),this.activeIndicator=document.getElementById("active-indicator"),this.tocEntries=Array.from(document.querySelectorAll("#toc a[href^='#']")),this.tocEntries.length!==0)){this.sections=new Array(this.tocEntries.length),this.headings=new Array(this.tocEntries.length);for(let t=0;t<this.tocEntries.length;t++){const e=decodeURIComponent(this.tocEntries[t].hash?.substring(1)),i=document.getElementById(e),s=i?.parentElement;i instanceof HTMLElement&&s instanceof HTMLElement&&(this.headings[t]=i,this.sections[t]=s,this.headingIdxMap.set(e,t))}this.active=new Array(this.tocEntries.length).fill(!1),this.sections.forEach(t=>this.observer.observe(t)),this.fallback(),this.update()}}disconnectedCallback(){this.sections.forEach(t=>this.observer.unobserve(t)),this.observer.disconnect(),this.tocEl?.removeEventListener("click",this.handleAnchorClick)}}customElements.get("table-of-contents")||customElements.define("table-of-contents",l);</script> <div class="h-8 w-full"></div> </div> </div> </div> <!-- #toc needs to exist for Swup to work normally -->  </div> </div>  <!-- increase the page height during page transition to prevent the scrolling animation from jumping --> <div id="page-height-extend" class="hidden h-[300vh]" data-astro-cid-sckkx6r4 style="--bannerOffset: 15vh;--banner-height-home: 65vh;--banner-height: 35vh;--configHue: 250;--page-width: 75rem;"></div>  <script type="module" src="/_astro/Layout.astro_astro_type_script_index_0_lang.DAHrxWCB.js"></script> <script type="module" src="/_astro/Layout.astro_astro_type_script_index_1_lang.D-ve5fSU.js"></script></body></html> <script type="module">function n(e){const s=document.getElementById("sidebar"),o=document.getElementById("main-grid"),t=document.getElementById("swup-container");if(!s||!o||!t)return;e.startsWith("/posts/")?(s.classList.add("hidden"),o.classList.remove("grid-cols-1","lg:grid-cols-[17.5rem_auto]"),o.classList.add("grid-cols-1","lg:grid-cols-[auto]"),t.classList.remove("col-span-2","lg:col-span-1"),t.classList.add("col-span-1")):(s.classList.remove("hidden"),o.classList.remove("grid-cols-1","lg:grid-cols-[auto]"),o.classList.add("grid-cols-1","lg:grid-cols-[17.5rem_auto]"),t.classList.remove("col-span-1"),t.classList.add("col-span-2","lg:col-span-1"))}n(window.location.pathname);const i=()=>{window.swup.hooks.on("visit:start",e=>{const s=new URL(e.to.url,window.location.origin);n(s.pathname)}),window.swup.hooks.on("content:replace",()=>{n(window.location.pathname)})};window?.swup?.hooks?i():document.addEventListener("swup:enable",i);</script>
