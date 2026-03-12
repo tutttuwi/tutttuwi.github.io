@@ -70,6 +70,100 @@ location=North Pole
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>rbenvの設定方法について</title><link>https://tutttuwi.github.io/posts/2026-03-13_setup-rbenv/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-03-13_setup-rbenv/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;flutter開発していて、以下の構成で進めていたが、cocoapodsが不安定になってきたので、gemfileのバージョン固定に乗り換えるためにrbenvの設定方法についてまとめます。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;元々の構成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ツール&lt;/th&gt;
+&lt;th&gt;管理&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;rbenv&lt;/td&gt;
+&lt;td&gt;brew&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ruby&lt;/td&gt;
+&lt;td&gt;brew&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cocoapods&lt;/td&gt;
+&lt;td&gt;brew&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;Gemfile構成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ツール&lt;/th&gt;
+&lt;th&gt;管理&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;rbenv&lt;/td&gt;
+&lt;td&gt;brew&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ruby&lt;/td&gt;
+&lt;td&gt;rbenv/Gemfile&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cocoapods&lt;/td&gt;
+&lt;td&gt;rbenv/Gemfile&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;fastlane&lt;/strong&gt;などを動かす場合は、同じくGemfileでバージョン固定するのが良さそう&lt;/p&gt;
+&lt;h2&gt;1. Homebrewでrbenvをインストール&lt;/h2&gt;
+&lt;p&gt;まずはパッケージマネージャーのHomebrewを使って、rbenvと、Rubyのビルドに必要な&lt;code&gt;ruby-build&lt;/code&gt;をインストールします。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew update
+brew install rbenv ruby-build
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;2. シェルの設定（パスを通す）&lt;/h2&gt;
+&lt;p&gt;インストールしただけではrbenvは動きません。お使いのシェル（多くの場合はZsh）の設定ファイルに、rbenvを初期化する記述を追加します。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo &apos;eval &quot;$(rbenv init -)&quot; &apos; &amp;gt;&amp;gt; ~/.zshrc
+source ~/.zshrc
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Bashを使っている場合は &lt;code&gt;~/.zshrc&lt;/code&gt; を &lt;code&gt;~/.bash_profile&lt;/code&gt; に読み替えてください。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;3. Ruby 4.0.1 のインストール&lt;/h2&gt;
+&lt;p&gt;次に、目的のバージョンをインストールします。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# インストール可能なリストを更新
+brew upgrade ruby-build
+
+# 4.0.1 がリストにあるか確認
+rbenv install -l | grep 4.0.1
+
+# インストール実行
+rbenv install 4.0.1
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;4. バージョンの切り替え&lt;/h2&gt;
+&lt;p&gt;インストールが終わったら、PC全体（global）で使うバージョンを4.0.1に固定します。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rbenv global 4.0.1
+
+# 反映を確認
+ruby -v
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h3&gt;よくあるトラブルと解決策&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;「4.0.1が見つからない」と言われる場合&lt;/strong&gt;: &lt;code&gt;brew upgrade ruby-build&lt;/code&gt; を実行して、rbenvが最新のRubyを知っている状態にしてください。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ビルドエラーが出る場合&lt;/strong&gt;: Xcode Command Line Toolsが必要です。&lt;code&gt;xcode-select --install&lt;/code&gt; を実行してから再度試してみてください。&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>ローカルLLM実践入門</title><link>https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</guid><pubDate>Thu, 17 Apr 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;基本情報&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;価格：2530円（本体2300円）　発行・発売日：2024年12月23日
 
@@ -25318,6 +25412,24 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;li&gt;Googleアシスタントアプリの運用/保守に携わっていく上で必要なスキルを習得するため&lt;/li&gt;
 &lt;li&gt;スピーカー開発関連の知識を増やすため&lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書</title><link>https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2019_01_aws_saa_black.JPG&quot; alt=&quot;2019_01_aws_saa_black&quot; title=&quot;2019_01_aws_saa_black&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AWS サービスについて、Well-architectedフレームワークに沿った５つの観点から説明されておりとても参考になった。（学習メモ参照）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;/pdf/%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8_marked.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AWSサービスについて、どんなサービスがあって、どんな使われ方をして、どのように便利なのかなど、基本的な知識を習得するため&lt;/li&gt;
+&lt;li&gt;AWS SAA資格取得のため&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>Javascript本格入門</title><link>https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Javascript本格入門&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2019_01_js_getting_started.jpg&quot; alt=&quot;2019_01_js_getting_started&quot; title=&quot;2019_01_js_getting_started&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -25337,24 +25449,6 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Nodejs環境でがっちりJavascriptを開発していくにあたり、現在の知識確認とより効率的な開発方法の知識を得るため&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded></item><item><title>徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書</title><link>https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2019_01_aws_saa_black.JPG&quot; alt=&quot;2019_01_aws_saa_black&quot; title=&quot;2019_01_aws_saa_black&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;AWS サービスについて、Well-architectedフレームワークに沿った５つの観点から説明されておりとても参考になった。（学習メモ参照）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;/pdf/%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8_marked.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;AWSサービスについて、どんなサービスがあって、どんな使われ方をして、どのように便利なのかなど、基本的な知識を習得するため&lt;/li&gt;
-&lt;li&gt;AWS SAA資格取得のため&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>AmazonAlexa開発ガイド</title><link>https://tutttuwi.github.io/posts/2019_01_amazonalexa%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_amazonalexa%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;AmazonAlexa開発ガイド&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
@@ -30956,27 +31050,6 @@ public static long generateSerialNumber() {
 &lt;li&gt;HTML/CSS/JSのデザイン知識を蓄えたい&lt;/li&gt;
 &lt;li&gt;可能なことについて理解しておきたい&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>JakartaCommonsクックブック</title><link>https://tutttuwi.github.io/posts/2016_01_apache_commons/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2016_01_apache_commons/</guid><pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;JakartaCommonsクックブック&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2016_01_commons.jpg&quot; alt=&quot;2016_01_commons&quot; title=&quot;2016_01_commons&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.oreilly.co.jp/books/4873112427/&quot;&gt;目次&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;未読
-&lt;ul&gt;
-&lt;li&gt;優先度下げてしまってまだ全部読めてない&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;触りだけ読んだが、必要に迫られたときに持ち寄りたい&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Commonsのライブラリーを業務で有効活用できておらず、どのようなものがあるか体系的に知りたかった&lt;/li&gt;
-&lt;li&gt;車輪の再開発反対派&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>Junit実践入門</title><link>https://tutttuwi.github.io/posts/2016_01_junit%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2016_01_junit%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</guid><pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Junit実践入門&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2016_01_junit.jpg&quot; alt=&quot;2016_01_junit&quot; title=&quot;2016_01_junit&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -31002,6 +31075,27 @@ public static long generateSerialNumber() {
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Junitのフレームワークについて理解できていなかったため、体系的な知識を付ける目的で購入&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>JakartaCommonsクックブック</title><link>https://tutttuwi.github.io/posts/2016_01_apache_commons/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2016_01_apache_commons/</guid><pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;JakartaCommonsクックブック&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2016_01_commons.jpg&quot; alt=&quot;2016_01_commons&quot; title=&quot;2016_01_commons&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.oreilly.co.jp/books/4873112427/&quot;&gt;目次&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;未読
+&lt;ul&gt;
+&lt;li&gt;優先度下げてしまってまだ全部読めてない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;触りだけ読んだが、必要に迫られたときに持ち寄りたい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Commonsのライブラリーを業務で有効活用できておらず、どのようなものがあるか体系的に知りたかった&lt;/li&gt;
+&lt;li&gt;車輪の再開発反対派&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>Java言語で学ぶデザインパターン入門</title><link>https://tutttuwi.github.io/posts/2015_10_java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_10_java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80/</guid><pubDate>Thu, 01 Oct 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Java言語で学ぶデザインパターン入門&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
@@ -31262,6 +31356,27 @@ public static long generateSerialNumber() {
 &lt;li&gt;業務で、電話回線を使用したダイヤルアップ接続をしなければいけない場面があり、そもそもの電話回線の仕組みに興味を持った&lt;/li&gt;
 &lt;li&gt;これまで何本か本を読んできて、なぜ～シリーズの本が読みやすいと感じたので&lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>Windows7 上級マニュアル ネットワーク編</title><link>https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Windows7 上級マニュアル ネットワーク編&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2015_01_windows7_nw.JPG&quot; alt=&quot;2015_01_windows7_nw&quot; title=&quot;2015_01_windows7_nw&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Windowsのネットワーク設定周りの理解を深めることができた&lt;/li&gt;
+&lt;li&gt;DLNAについて&lt;/li&gt;
+&lt;li&gt;自宅でネットワーク周りを整理するための知識&lt;/li&gt;
+&lt;li&gt;ルーター設定&lt;/li&gt;
+&lt;li&gt;PCの共有サーバー化&lt;/li&gt;
+&lt;li&gt;リモートデスクトップについて&lt;/li&gt;
+&lt;li&gt;FTPデーモンについて&lt;/li&gt;
+&lt;li&gt;ローカルPCにデーモンを入れ、ドメインを取得しインターネット公開する方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;より、私生活により沿ったネットワーク関連の知識を深めたい&lt;/li&gt;
+&lt;li&gt;ネットワーク面でより効率的な自宅環境を構築したい&lt;/li&gt;
+&lt;li&gt;WindowsOSは業務で使っているのでなじみある&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>Javaでなぜつくるのか</title><link>https://tutttuwi.github.io/posts/2015_01_java%E3%81%A7%E3%81%AA%E3%81%9C%E3%81%A4%E3%81%8F%E3%82%8B%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_java%E3%81%A7%E3%81%AA%E3%81%9C%E3%81%A4%E3%81%8F%E3%82%8B%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Javaでなぜつくるのか&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2015_01_why_java.jpg&quot; alt=&quot;2015_01_why_java&quot; title=&quot;2015_01_why_java&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -31289,27 +31404,6 @@ public static long generateSerialNumber() {
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Javaの基礎的なところ、概念的なところについて理解を深めたかった&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded></item><item><title>Windows7 上級マニュアル ネットワーク編</title><link>https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Windows7 上級マニュアル ネットワーク編&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2015_01_windows7_nw.JPG&quot; alt=&quot;2015_01_windows7_nw&quot; title=&quot;2015_01_windows7_nw&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Windowsのネットワーク設定周りの理解を深めることができた&lt;/li&gt;
-&lt;li&gt;DLNAについて&lt;/li&gt;
-&lt;li&gt;自宅でネットワーク周りを整理するための知識&lt;/li&gt;
-&lt;li&gt;ルーター設定&lt;/li&gt;
-&lt;li&gt;PCの共有サーバー化&lt;/li&gt;
-&lt;li&gt;リモートデスクトップについて&lt;/li&gt;
-&lt;li&gt;FTPデーモンについて&lt;/li&gt;
-&lt;li&gt;ローカルPCにデーモンを入れ、ドメインを取得しインターネット公開する方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;より、私生活により沿ったネットワーク関連の知識を深めたい&lt;/li&gt;
-&lt;li&gt;ネットワーク面でより効率的な自宅環境を構築したい&lt;/li&gt;
-&lt;li&gt;WindowsOSは業務で使っているのでなじみある&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>コンピュータはなぜ動くのか</title><link>https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;コンピュータはなぜ動くのか&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
