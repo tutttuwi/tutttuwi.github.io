@@ -1,4 +1,129 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Home</title><description>Portfolio</description><link>https://tutttuwi.github.io/</link><language>en</language><item><title>flutter fvm 設定について</title><link>https://tutttuwi.github.io/posts/2026-03-16_fvm-settings/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-03-16_fvm-settings/</guid><pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Home</title><description>Portfolio</description><link>https://tutttuwi.github.io/</link><language>en</language><item><title>flutter JIT エラーで実機デバッグができなくなったことについて</title><link>https://tutttuwi.github.io/posts/2026-03-16_flutter-hotreload-error/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-03-16_flutter-hotreload-error/</guid><pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;flutter開発をしていて、突然実機デバッグビルドができなくなったのでエラーを調査したことについて記載&lt;/p&gt;
+&lt;h2&gt;💻 環境&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Flutter: 3.29.0 (fvm)&lt;/li&gt;
+&lt;li&gt;OS: macOS Tahoe&lt;/li&gt;
+&lt;li&gt;IDE: Cursor&lt;/li&gt;
+&lt;li&gt;実機iPhone: 26.3.1&lt;/li&gt;
+&lt;li&gt;xCode: 26.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;❌ エラー内容&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;Launching lib/main.dart on iPhone in debug mode...
+Automatically signing iOS for device deployment using specified development team in Xcode project: xxxxxxxx
+Xcode build done.                                           83.3s
+You may be prompted to give access to control Xcode. Flutter uses Xcode to run your app. If access is not allowed, you can change this through your Settings &amp;gt; Privacy &amp;amp; Security &amp;gt; Automation.
+version=3.7.2 (stable) (Tue Mar 11 04:27:50 2025 -0700) on &quot;ios_arm64&quot;
+pid=81547, thread=259, isolate_group=vm-isolate(0x1056e1400), isolate=vm-isolate(0x105ccd000)
+os=ios, arch=arm64, comp=no, sim=no
+isolate_instructions=1071d75a0, vm_instructions=1071d75a0
+fp=16d2a9050, sp=16d2a9030, pc=107c2f624
+  pc 0x0000000107c2f624 fp 0x000000016d2a9050 Dart_DumpNativeStackTrace+0x18
+  pc 0x00000001077ddbc8 fp 0x000000016d2a9070 dart::Assert::Fail(char const*, ...) const+0x30
+  pc 0x00000001078d8adc fp 0x000000016d2a9520 dart::Code::FinalizeCode(dart::FlowGraphCompiler*, dart::compiler::Assembler*, dart::Code::PoolAttachment, bool, dart::CodeStatistics*)+0x82c
+  pc 0x0000000107966450 fp 0x000000016d2a9b30 dart::StubCode::Init()+0x320
+  pc 0x0000000107828c94 fp 0x000000016d2aa5e0 dart::Dart::DartInit(Dart_InitializeParams const*)+0x2b18
+  pc 0x0000000107c15ef4 fp 0x000000016d2aaa60 Dart_Initialize+0x60
+  pc 0x000000010779e5c4 fp 0x000000016d2ab030 flutter::DartVM::Create(flutter::Settings const&amp;amp;, fml::RefPtr&amp;lt;flutter::DartSnapshot const&amp;gt;, fml::RefPtr&amp;lt;flutter::DartSnapshot const&amp;gt;, std::_fl::shared_ptr&amp;lt;flutter::IsolateNameServer&amp;gt;)+0x1d64
+  pc 0x00000001076fa73c fp 0x000000016d2ab790 flutter::Shell::Create(flutter::PlatformData const&amp;amp;, flutter::TaskRunners const&amp;amp;, flutter::Settings, std::_fl::function&amp;lt;std::_fl::unique_ptr&amp;lt;flutter::PlatformView, std::_fl::default_delete&amp;lt;flutter::PlatformView&amp;gt;&amp;gt; (flutter::Shell&amp;amp;)&amp;gt; const&amp;amp;, std::_fl::function&amp;lt;std::_fl::unique_ptr&amp;lt;flutter::Rasterizer, std::_fl::default_delete&amp;lt;flutter::Rasterizer&amp;gt;&amp;gt; (flutter::Shell&amp;amp;)&amp;gt; const&amp;amp;, bool)+0x310
+  pc 0x00000001071e6564 fp 0x000000016d2ac520 -[FlutterEngine createShell:libraryURI:initialRoute:]+0xa8c
+  pc 0x0000000107218e64 fp 0x000000016d2ac580 -[FlutterViewController sharedSetupWithProject:initialRoute:]+0x198
+  pc 0x0000000107218ca4 fp 0x000000016d2ac5b0 -[FlutterViewController awakeFromNib]+0x6c
+  pc 0x000000019c255374 fp 0x000000016d2aca80 &amp;lt;redacted&amp;gt;+0x6dc
+  pc 0x000000019c82b61c fp 0x000000016d2acaf0 &amp;lt;redacted&amp;gt;+0xec
+  pc 0x000000019c82b4f4 fp 0x000000016d2acb20 &amp;lt;redacted&amp;gt;+0x50
+  pc 0x000000019c6893e4 fp 0x000000016d2acb80 &amp;lt;redacted&amp;gt;+0x8c
+  pc 0x000000019b3f8a68 fp 0x000000016d2acbc0 &amp;lt;redacted&amp;gt;+0xa8
+  pc 0x000000019c688908 fp 0x000000016d2acdb0 &amp;lt;redacted&amp;gt;+0x280
+  pc 0x000000019bc91ea4 fp 0x000000016d2acde0 &amp;lt;redacted&amp;gt;+0x74
+  pc 0x000000019b33de94 fp 0x000000016d2ace30 _UIScenePerformActionsWithLifecycleActionMask+0x70
+  pc 0x000000019bc92720 fp 0x000000016d2acef0 &amp;lt;redacted&amp;gt;+0xfc
+  pc 0x000000019bc9222c fp 0x000000016d2acf60 &amp;lt;redacted&amp;gt;+0xd4
+  pc 0x000000019bc92538 fp 0x000000016d2ad070 &amp;lt;redacted&amp;gt;+0x260
+  pc 0x000000019bc91fc4 fp 0x000000016d2ad0e0 &amp;lt;redacted&amp;gt;+0xf4
+  pc 0x000000019bc9d444 fp 0x000000016d2ad120 &amp;lt;redacted&amp;gt;+0x94
+  pc 0x000000019c10fcec fp 0x000000016d2ad220 &amp;lt;redacted&amp;gt;+0x2e0
+  pc 0x000000019b33ecac fp 0x000000016d2ad290 _UISceneSettingsDiffActionPerformChangesWithTransitionContextAndCompletion+0xe0
+  pc 0x000000019bc9d140 fp 0x000000016d2ad390 &amp;lt;redacted&amp;gt;+0x13c
+  pc 0x000000019badc3b4 fp 0x000000016d2ad4e0 &amp;lt;redacted&amp;gt;+0x268
+  pc 0x000000019badb448 fp 0x000000016d2ad650 &amp;lt;redacted&amp;gt;+0xd0
+  pc 0x000000019badc020 fp 0x000000016d2ad710 &amp;lt;redacted&amp;gt;+0xf4
+  pc 0x000000019c687968 fp 0x000000016d2ad7d0 &amp;lt;redacted&amp;gt;+0x1dc
+  pc 0x000000019c138adc fp 0x000000016d2ad860 &amp;lt;redacted&amp;gt;+0x120
+  pc 0x00000001b5a00388 fp 0x000000016d2ada10 &amp;lt;redacted&amp;gt;+0x16c
+  pc 0x00000001b5a00840 fp 0x000000016d2ada50 &amp;lt;redacted&amp;gt;+0x80
+  pc 0x00000001b5a001a0 fp 0x000000016d2adb20 &amp;lt;redacted&amp;gt;+0x1b4
+  pc 0x00000001b5a6eb34 fp 0x000000016d2adbe0 &amp;lt;redacted&amp;gt;+0x120
+  pc 0x00000001b5a0df00 fp 0x000000016d2adc20 &amp;lt;redacted&amp;gt;+0xa8
+  pc 0x00000001b5a2ad98 fp 0x000000016d2add70 &amp;lt;redacted&amp;gt;+0x1e0
+  pc 0x00000001b5a2c6fc fp 0x000000016d2ade00 &amp;lt;redacted&amp;gt;+0x10c
+  pc 0x00000001b5a0df00 fp 0x000000016d2ade40 &amp;lt;redacted&amp;gt;+0xa8
+  pc 0x00000001041c62e0 fp 0x000000016d2ade50 _dispatch_client_callout+0x10
+  pc 0x00000001041b0998 fp 0x000000016d2adea0 _dispatch_block_invoke_direct+0x128
+  pc 0x00000001ad0f41d4 fp 0x000000016d2aded0 &amp;lt;redacted&amp;gt;+0x34
+  pc 0x00000001ad0f4054 fp 0x000000016d2adf50 &amp;lt;redacted&amp;gt;+0xe0
+  pc 0x0000000195973f10 fp 0x000000016d2adf60 &amp;lt;redacted&amp;gt;+0x1c
+  pc 0x0000000195973e84 fp 0x000000016d2adf90 &amp;lt;redacted&amp;gt;+0xac
+  pc 0x0000000195951b30 fp 0x000000016d2adff0 &amp;lt;redacted&amp;gt;+0x14c
+  pc 0x00000001959286d8 fp 0x000000016d2aed50 &amp;lt;redacted&amp;gt;+0x334
+  pc 0x0000000195927a6c fp 0x000000016d2aede0 &amp;lt;redacted&amp;gt;+0x214
+  pc 0x000000023753c498 fp 0x000000016d2aee30 GSEventRunModal+0x78
+  pc 0x000000019b302df8 fp 0x000000016d2aeeb0 &amp;lt;redacted&amp;gt;+0x318
+  pc 0x000000019b2abe54 fp 0x000000016d2aef40 UIApplicationMain+0x150
+  pc 0x000000019b3d7820 fp 0x000000016d2aef80 &amp;lt;redacted&amp;gt;+0x24c
+  pc 0x0000000103a6882c fp 0x000000016d2aefd0 $sSo21UIApplicationDelegateP5UIKitE4mainyyFZ+0x78
+  pc 0x0000000103a687a4 fp 0x000000016d2af000 $s6Runner11AppDelegateC5$mainyyFZ+0x2c
+  pc 0x0000000103a688a8 fp 0x000000016d2af020 __debug_main_executable_dylib_entry_point+0x1c
+  pc 0x000000019293ae28 fp 0x000000016d2af690 &amp;lt;redacted&amp;gt;+0x1bcc
+-- End of DumpStackTrace
+=== Crash occurred when compiling unknown function in unoptimized JIT mode in unknown pass
+════════════════════════════════════════════════════════════════════════════════
+A change to iOS has caused a temporary break in Flutter&apos;s debug mode on
+physical devices.
+See https://github.com/flutter/flutter/issues/163984 for details.
+
+In the meantime, we recommend these temporary workarounds:
+
+* When developing with a physical device, use one running iOS 18.3 or lower.
+* Use a simulator for development rather than a physical device.
+* If you must use a device updated to iOS 26.2.1 23C71, use Flutter&apos;s release or
+  profile mode via --release or --profile flags.
+════════════════════════════════════════════════════════════════════════════════
+=== Flow Graph not available
+
+Exited (1).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;🛠 解決方法&lt;/h2&gt;
+&lt;h3&gt;flutterバージョンアップ&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# こちらにアップ
+flutter --version
+# Flutter 3.41.4 • channel stable • https://github.com/flutter/flutter.git
+# Framework • revision ff37bef603 (12 days ago) • 2026-03-03 16:03:22 -0800
+# Engine • hash 99578ad0355da00edb26301c874a3c250a5716f5 (revision e4b8dca3f1) (11 days ago) • 2026-03-03 18:24:54.000Z
+# Tools • Dart 3.11.1 • DevTools 2.54.1
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;環境初期化&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;端末内のアプリを削除しておく&lt;/li&gt;
+&lt;li&gt;プロジェクトは&lt;code&gt;flutter clean&lt;/code&gt;、&lt;code&gt;flutter pub get&lt;/code&gt;からやり直す&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;IDE(vscode/launch.json)経由ではうまく行かない&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;IDEでいつも起動しているところからProfileモードで起動してもうまく行かなかった&lt;/li&gt;
+&lt;li&gt;コマンドラインから立ち上げることでうまく立ち上がることを確認&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;flutter run --profile -d &amp;lt;device-id&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;あとがき&lt;/h2&gt;
+&lt;p&gt;セキュリティ上の理由とのことだが少し不便&lt;/p&gt;
+&lt;p&gt;デバッグはSimulatorで実施するべしとのこと&lt;/p&gt;
+&lt;h2&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/flutter/flutter/issues/163984&quot;&gt;https://github.com/flutter/flutter/issues/163984&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://speakerdeck.com/chigichan24/a-day-hot-reload-was-not-working&quot;&gt;https://speakerdeck.com/chigichan24/a-day-hot-reload-was-not-working&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>flutter fvm 設定について</title><link>https://tutttuwi.github.io/posts/2026-03-16_fvm-settings/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-03-16_fvm-settings/</guid><pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;fvmのセットアップ方法をまとめます。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# インストール
 brew tap leoafarias/fvm
@@ -194,34 +319,6 @@ gem &quot;sqlite3&quot;
 &lt;h3&gt;Gemfile管理のイメージ&lt;/h3&gt;
 &lt;p&gt;Gemfileは「注文書」、Gemfile.lockは「納品書（確定版）」のような関係です。&lt;/p&gt;
 &lt;hr /&gt;
-</content:encoded></item><item><title>Markdownファイルをリアルタイムで編集する方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
-&lt;p&gt;Markdown編集の管理方法について&lt;/p&gt;
-&lt;h2&gt;VSCode Extension&lt;/h2&gt;
-&lt;h3&gt;Markdown Editor&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&quot;&gt;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;拡張機能でWYSIWYGが実現できるエディタ&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Tools&lt;/h2&gt;
-&lt;h3&gt;MarkText&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/marktext/marktext&quot;&gt;https://github.com/marktext/marktext&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;brew&lt;/code&gt;経由だとインストール後に起動できないことを確認しました。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;以下より直接インストールすることで動作確認ができました。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&quot;&gt;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>GoogleCalendarイベント追加リンク作成方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_add-google-calendar-event/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_add-google-calendar-event/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;GoogleCalendarイベントをリンクから作成する方法についてまとめます。&lt;/p&gt;
 &lt;h2&gt;作成方法参考&lt;/h2&gt;
@@ -265,6 +362,34 @@ location=North Pole
 &lt;h2&gt;サンプルURL&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://calendar.google.com/calendar/u/0/r/eventedit?text=Birthday&amp;amp;dates=20201231T193000Z/20201231T223000Z&amp;amp;details=With+clowns+and+stuff&amp;amp;location=North+Pole&quot;&gt;https://calendar.google.com/calendar/u/0/r/eventedit?text=Birthday&amp;amp;dates=20201231T193000Z/20201231T223000Z&amp;amp;details=With+clowns+and+stuff&amp;amp;location=North+Pole&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>Markdownファイルをリアルタイムで編集する方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;Markdown編集の管理方法について&lt;/p&gt;
+&lt;h2&gt;VSCode Extension&lt;/h2&gt;
+&lt;h3&gt;Markdown Editor&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&quot;&gt;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;拡張機能でWYSIWYGが実現できるエディタ&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tools&lt;/h2&gt;
+&lt;h3&gt;MarkText&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/marktext/marktext&quot;&gt;https://github.com/marktext/marktext&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;brew&lt;/code&gt;経由だとインストール後に起動できないことを確認しました。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;以下より直接インストールすることで動作確認ができました。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&quot;&gt;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>ローカルLLM実践入門</title><link>https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</guid><pubDate>Thu, 17 Apr 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;基本情報&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;価格：2530円（本体2300円）　発行・発売日：2024年12月23日
@@ -31131,6 +31256,27 @@ public static long generateSerialNumber() {
 &lt;li&gt;業務でVBAコードを書ければ自動化できるタスクがあったため、将来的にもExcelは使用していくことを考えて知識が欲しい&lt;/li&gt;
 &lt;li&gt;簡単なマクロなら数時間で実装できるスキルが欲しい&lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>HTML5デザイン</title><link>https://tutttuwi.github.io/posts/2016_01_html5%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2016_01_html5%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3/</guid><pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;HTML5デザイン&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2016_01_html5_design.jpg&quot; alt=&quot;2016_01_html5_design&quot; title=&quot;2016_01_html5_design&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://books.mdn.co.jp/books/3213303023/&quot;&gt;目次&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;未読
+&lt;ul&gt;
+&lt;li&gt;優先度下げてしまってまだ全部読めてない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;触りだけ読んだが、必要に迫られたときに持ち寄りたい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;HTML/CSS/JSのデザイン知識を蓄えたい&lt;/li&gt;
+&lt;li&gt;可能なことについて理解しておきたい&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>Junit実践入門</title><link>https://tutttuwi.github.io/posts/2016_01_junit%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2016_01_junit%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</guid><pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Junit実践入門&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2016_01_junit.jpg&quot; alt=&quot;2016_01_junit&quot; title=&quot;2016_01_junit&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -31156,27 +31302,6 @@ public static long generateSerialNumber() {
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Junitのフレームワークについて理解できていなかったため、体系的な知識を付ける目的で購入&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded></item><item><title>HTML5デザイン</title><link>https://tutttuwi.github.io/posts/2016_01_html5%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2016_01_html5%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3/</guid><pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;HTML5デザイン&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2016_01_html5_design.jpg&quot; alt=&quot;2016_01_html5_design&quot; title=&quot;2016_01_html5_design&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://books.mdn.co.jp/books/3213303023/&quot;&gt;目次&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;未読
-&lt;ul&gt;
-&lt;li&gt;優先度下げてしまってまだ全部読めてない&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;触りだけ読んだが、必要に迫られたときに持ち寄りたい&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;HTML/CSS/JSのデザイン知識を蓄えたい&lt;/li&gt;
-&lt;li&gt;可能なことについて理解しておきたい&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>JakartaCommonsクックブック</title><link>https://tutttuwi.github.io/posts/2016_01_apache_commons/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2016_01_apache_commons/</guid><pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;JakartaCommonsクックブック&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
@@ -31358,41 +31483,6 @@ public static long generateSerialNumber() {
 &lt;ul&gt;
 &lt;li&gt;Gold資格取得&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>完全合格ORACLE-MASTER-DBA12c_Bronze</title><link>https://tutttuwi.github.io/posts/2015_05_%E5%AE%8C%E5%85%A8%E5%90%88%E6%A0%BCoracle-master-dba12c_bronze/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_05_%E5%AE%8C%E5%85%A8%E5%90%88%E6%A0%BCoracle-master-dba12c_bronze/</guid><pubDate>Wed, 01 Apr 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;完全合格ORACLE-MASTER-DBA12c_Bronze&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2015_05_dba.JPG&quot; alt=&quot;2015_05_dba&quot; title=&quot;2015_05_dba&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;OracleDBの仕組み&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;データベース管理概要&lt;/li&gt;
-&lt;li&gt;ソフトウェアのインストール&lt;/li&gt;
-&lt;li&gt;Oracle Enterprise Manager Database ExpressおよびSQL管理ツール&lt;/li&gt;
-&lt;li&gt;Oracleネットワーク環境&lt;/li&gt;
-&lt;li&gt;インスタンス管理&lt;/li&gt;
-&lt;li&gt;データベース領域構造&lt;/li&gt;
-&lt;li&gt;ユーザおよびセキュリティ&lt;/li&gt;
-&lt;li&gt;バックアップリカバリ&lt;/li&gt;
-&lt;li&gt;データベースの監視&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;DBMS機能ってこんなのがあるんだということを把握&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;この時期に発売されていた 12c の教科書がこれしかなかったので本書を選んだが、記載方法が自分好みではなかった..&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;/pdf/%E5%AE%8C%E5%85%A8%E5%90%88%E6%A0%BCORACLE-MASTER-DBA12c_Bronze.pdf&quot;&gt;学習ログ&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;DBMSの一般的な知識がつけたかった&lt;/li&gt;
-&lt;li&gt;Oracleは１年目に業務で触っていたため、書籍で勉強を進めていくのに一番よいと判断した&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>オラクル認定資格教科書JavaプログラマGoldSE7</title><link>https://tutttuwi.github.io/posts/2015_04_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Egoldse7/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_04_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Egoldse7/</guid><pubDate>Wed, 01 Apr 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;オラクル認定資格教科書JavaプログラマGoldSE7&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2015_04_java_gold.JPG&quot; alt=&quot;2015_04_java_gold&quot; title=&quot;2015_04_java_gold&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -31440,6 +31530,41 @@ public static long generateSerialNumber() {
 &lt;ul&gt;
 &lt;li&gt;Silverのステップアップとして、JavaGold取得を決意&lt;/li&gt;
 &lt;li&gt;より実用的な深い知識を習得するため&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>完全合格ORACLE-MASTER-DBA12c_Bronze</title><link>https://tutttuwi.github.io/posts/2015_05_%E5%AE%8C%E5%85%A8%E5%90%88%E6%A0%BCoracle-master-dba12c_bronze/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_05_%E5%AE%8C%E5%85%A8%E5%90%88%E6%A0%BCoracle-master-dba12c_bronze/</guid><pubDate>Wed, 01 Apr 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;完全合格ORACLE-MASTER-DBA12c_Bronze&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2015_05_dba.JPG&quot; alt=&quot;2015_05_dba&quot; title=&quot;2015_05_dba&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;OracleDBの仕組み&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;データベース管理概要&lt;/li&gt;
+&lt;li&gt;ソフトウェアのインストール&lt;/li&gt;
+&lt;li&gt;Oracle Enterprise Manager Database ExpressおよびSQL管理ツール&lt;/li&gt;
+&lt;li&gt;Oracleネットワーク環境&lt;/li&gt;
+&lt;li&gt;インスタンス管理&lt;/li&gt;
+&lt;li&gt;データベース領域構造&lt;/li&gt;
+&lt;li&gt;ユーザおよびセキュリティ&lt;/li&gt;
+&lt;li&gt;バックアップリカバリ&lt;/li&gt;
+&lt;li&gt;データベースの監視&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DBMS機能ってこんなのがあるんだということを把握&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;この時期に発売されていた 12c の教科書がこれしかなかったので本書を選んだが、記載方法が自分好みではなかった..&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;/pdf/%E5%AE%8C%E5%85%A8%E5%90%88%E6%A0%BCORACLE-MASTER-DBA12c_Bronze.pdf&quot;&gt;学習ログ&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;DBMSの一般的な知識がつけたかった&lt;/li&gt;
+&lt;li&gt;Oracleは１年目に業務で触っていたため、書籍で勉強を進めていくのに一番よいと判断した&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>電話はなぜつながるのか</title><link>https://tutttuwi.github.io/posts/2015_01_%E9%9B%BB%E8%A9%B1%E3%81%AF%E3%81%AA%E3%81%9C%E3%81%A4%E3%81%AA%E3%81%8C%E3%82%8B%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E9%9B%BB%E8%A9%B1%E3%81%AF%E3%81%AA%E3%81%9C%E3%81%A4%E3%81%AA%E3%81%8C%E3%82%8B%E3%81%AE%E3%81%8B/</guid><pubDate>Sun, 01 Feb 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;電話はなぜつながるのか&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
