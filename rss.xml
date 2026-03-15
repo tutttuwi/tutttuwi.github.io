@@ -23,9 +23,7 @@ source ~/.zshrc
 flutter --version
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;プロジェクトローカルで指定する方法&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h3&gt;プロジェクトローカルで指定する方法&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;# プロジェクトローカルで指定
 fvm use &amp;lt;使用したいバージョン&amp;gt;
 # 作成されるファイル) .fvm/fvm_config.json
@@ -34,6 +32,33 @@ fvm use &amp;lt;使用したいバージョン&amp;gt;
 fvm install
 
 &lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;IDE側でSDK設定
+&lt;ul&gt;
+&lt;li&gt;vscodeの場合（.vscode/settings.json）&lt;/li&gt;
+&lt;li&gt;以下の設定を追加して認識させること&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;dart.flutterSdkPath&quot;: &quot;.fvm/flutter_sdk&quot;,
+  &quot;search.exclude&quot;: {
+    &quot;**/.fvm&quot;: true
+  },
+  &quot;files.exclude&quot;: {
+    &quot;**/.fvm&quot;: true
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;gitignoreでsdkファイルは除外すること&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;# FVM
+.fvm/flutter_sdk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;でも、プロジェクトごとにsdkを置くのはディスク容量取るのであまりやりたくない&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;That&apos;s all!&lt;/p&gt;
 </content:encoded></item><item><title>rbenvの設定方法について</title><link>https://tutttuwi.github.io/posts/2026-03-13_setup-rbenv/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-03-13_setup-rbenv/</guid><pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;flutter開発していて、以下の構成で進めていたが、cocoapodsが不安定になってきたので、gemfileのバージョン固定に乗り換えるためにrbenvの設定方法についてまとめます。&lt;/p&gt;
@@ -169,6 +194,34 @@ gem &quot;sqlite3&quot;
 &lt;h3&gt;Gemfile管理のイメージ&lt;/h3&gt;
 &lt;p&gt;Gemfileは「注文書」、Gemfile.lockは「納品書（確定版）」のような関係です。&lt;/p&gt;
 &lt;hr /&gt;
+</content:encoded></item><item><title>Markdownファイルをリアルタイムで編集する方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;Markdown編集の管理方法について&lt;/p&gt;
+&lt;h2&gt;VSCode Extension&lt;/h2&gt;
+&lt;h3&gt;Markdown Editor&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&quot;&gt;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;拡張機能でWYSIWYGが実現できるエディタ&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tools&lt;/h2&gt;
+&lt;h3&gt;MarkText&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/marktext/marktext&quot;&gt;https://github.com/marktext/marktext&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;brew&lt;/code&gt;経由だとインストール後に起動できないことを確認しました。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;以下より直接インストールすることで動作確認ができました。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&quot;&gt;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>GoogleCalendarイベント追加リンク作成方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_add-google-calendar-event/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_add-google-calendar-event/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;GoogleCalendarイベントをリンクから作成する方法についてまとめます。&lt;/p&gt;
 &lt;h2&gt;作成方法参考&lt;/h2&gt;
@@ -212,34 +265,6 @@ location=North Pole
 &lt;h2&gt;サンプルURL&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://calendar.google.com/calendar/u/0/r/eventedit?text=Birthday&amp;amp;dates=20201231T193000Z/20201231T223000Z&amp;amp;details=With+clowns+and+stuff&amp;amp;location=North+Pole&quot;&gt;https://calendar.google.com/calendar/u/0/r/eventedit?text=Birthday&amp;amp;dates=20201231T193000Z/20201231T223000Z&amp;amp;details=With+clowns+and+stuff&amp;amp;location=North+Pole&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded></item><item><title>Markdownファイルをリアルタイムで編集する方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
-&lt;p&gt;Markdown編集の管理方法について&lt;/p&gt;
-&lt;h2&gt;VSCode Extension&lt;/h2&gt;
-&lt;h3&gt;Markdown Editor&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&quot;&gt;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;拡張機能でWYSIWYGが実現できるエディタ&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Tools&lt;/h2&gt;
-&lt;h3&gt;MarkText&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/marktext/marktext&quot;&gt;https://github.com/marktext/marktext&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;brew&lt;/code&gt;経由だとインストール後に起動できないことを確認しました。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;以下より直接インストールすることで動作確認ができました。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&quot;&gt;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>ローカルLLM実践入門</title><link>https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</guid><pubDate>Thu, 17 Apr 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;基本情報&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;価格：2530円（本体2300円）　発行・発売日：2024年12月23日
@@ -31482,20 +31507,6 @@ public static long generateSerialNumber() {
 &lt;li&gt;ネットワーク面でより効率的な自宅環境を構築したい&lt;/li&gt;
 &lt;li&gt;WindowsOSは業務で使っているのでなじみある&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>コンピュータはなぜ動くのか</title><link>https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;コンピュータはなぜ動くのか&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2015_01_why_pc.JPG&quot; alt=&quot;2015_01_why_pc&quot; title=&quot;2015_01_why_pc&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;PCが動作する仕組みをハード面からソフト面まで説明&lt;/li&gt;
-&lt;li&gt;UML、DB操作、TCP/IP、暗号化技術、XMLなどについて説明&lt;/li&gt;
-&lt;li&gt;まんべんなく、浅く広くという印象&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;PCの動作する仕組みについて深く理解できていないと感じ購入&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>基礎からのサーブレットJSP</title><link>https://tutttuwi.github.io/posts/2015_01_%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%96%E3%83%AC%E3%83%83%E3%83%88jsp/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%96%E3%83%AC%E3%83%83%E3%83%88jsp/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;基礎からのサーブレットJSP&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2015_01_basic_servlet.jpg&quot; alt=&quot;2015_01_basic_servlet&quot; title=&quot;2015_01_basic_servlet&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -31586,6 +31597,20 @@ public static long generateSerialNumber() {
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;JavaSilverレベルの知識が身についたところで、Javaを使用したWebアプリの開発方法について理解したかった&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>コンピュータはなぜ動くのか</title><link>https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;コンピュータはなぜ動くのか&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2015_01_why_pc.JPG&quot; alt=&quot;2015_01_why_pc&quot; title=&quot;2015_01_why_pc&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;PCが動作する仕組みをハード面からソフト面まで説明&lt;/li&gt;
+&lt;li&gt;UML、DB操作、TCP/IP、暗号化技術、XMLなどについて説明&lt;/li&gt;
+&lt;li&gt;まんべんなく、浅く広くという印象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;PCの動作する仕組みについて深く理解できていないと感じ購入&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>Windowsはなぜ動くのか</title><link>https://tutttuwi.github.io/posts/2015_02_windows%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_02_windows%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Windowsはなぜ動くのか&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
