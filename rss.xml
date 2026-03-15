@@ -164,6 +164,46 @@ ruby -v
 &lt;li&gt;&lt;strong&gt;「4.0.1が見つからない」と言われる場合&lt;/strong&gt;: &lt;code&gt;brew upgrade ruby-build&lt;/code&gt; を実行して、rbenvが最新のRubyを知っている状態にしてください。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;ビルドエラーが出る場合&lt;/strong&gt;: Xcode Command Line Toolsが必要です。&lt;code&gt;xcode-select --install&lt;/code&gt; を実行してから再度試してみてください。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;Ruby 4.0.1の準備が整いましたね！次に、プロジェクトでライブラリ（Gem）を管理するための &lt;strong&gt;Gemfile&lt;/strong&gt; を作成しましょう。&lt;/p&gt;
+&lt;p&gt;最も一般的で「作法」に則った方法は、&lt;strong&gt;Bundler&lt;/strong&gt; というツールを使う方法です。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;ここからはGemfileのセットアップ&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;1. Bundlerをインストールする&lt;/h2&gt;
+&lt;p&gt;Ruby 4.0系であれば標準で含まれていることが多いですが、念のため最新をインストールします。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gem install bundler
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;2. Gemfileを自動生成する&lt;/h2&gt;
+&lt;p&gt;プロジェクトのルートディレクトリ（作業フォルダ）に移動して、以下のコマンドを叩きます。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bundle init
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;これだけで、カレントディレクトリに &lt;code&gt;Gemfile&lt;/code&gt; という名前のファイルが作成されます。&lt;/p&gt;
+&lt;h2&gt;3. Gemfileの中身を編集する&lt;/h2&gt;
+&lt;p&gt;生成された &lt;code&gt;Gemfile&lt;/code&gt; をテキストエディタで開き、必要なライブラリを記述します。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# frozen_string_literal: true
+
+source &quot;https://rubygems.org&quot;
+
+# 使用するRubyのバージョンを指定（チーム開発で役立ちます）
+ruby &quot;4.0.1&quot;
+
+# インストールしたいGemをここに書く
+gem &quot;rails&quot;
+gem &quot;sqlite3&quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;4. ライブラリをインストールする&lt;/h2&gt;
+&lt;p&gt;記述が終わったら、ターミナルで以下のコマンドを実行します。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bundle install
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;これにより、Gemのインストールと同時に &lt;strong&gt;&lt;code&gt;Gemfile.lock&lt;/code&gt;&lt;/strong&gt; というファイルが生成されます。これは「どのバージョンのGemをインストールしたか」を正確に記録する重要なファイルです。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3&gt;Gemfile管理のイメージ&lt;/h3&gt;
+&lt;p&gt;Gemfileは「注文書」、Gemfile.lockは「納品書（確定版）」のような関係です。&lt;/p&gt;
+&lt;hr /&gt;
 </content:encoded></item><item><title>ローカルLLM実践入門</title><link>https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</guid><pubDate>Thu, 17 Apr 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;基本情報&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;価格：2530円（本体2300円）　発行・発売日：2024年12月23日
 
@@ -25412,24 +25452,6 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;li&gt;Googleアシスタントアプリの運用/保守に携わっていく上で必要なスキルを習得するため&lt;/li&gt;
 &lt;li&gt;スピーカー開発関連の知識を増やすため&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書</title><link>https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2019_01_aws_saa_black.JPG&quot; alt=&quot;2019_01_aws_saa_black&quot; title=&quot;2019_01_aws_saa_black&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;AWS サービスについて、Well-architectedフレームワークに沿った５つの観点から説明されておりとても参考になった。（学習メモ参照）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;/pdf/%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8_marked.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;AWSサービスについて、どんなサービスがあって、どんな使われ方をして、どのように便利なのかなど、基本的な知識を習得するため&lt;/li&gt;
-&lt;li&gt;AWS SAA資格取得のため&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>Javascript本格入門</title><link>https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Javascript本格入門&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2019_01_js_getting_started.jpg&quot; alt=&quot;2019_01_js_getting_started&quot; title=&quot;2019_01_js_getting_started&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -25449,6 +25471,24 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Nodejs環境でがっちりJavascriptを開発していくにあたり、現在の知識確認とより効率的な開発方法の知識を得るため&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書</title><link>https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2019_01_aws_saa_black.JPG&quot; alt=&quot;2019_01_aws_saa_black&quot; title=&quot;2019_01_aws_saa_black&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AWS サービスについて、Well-architectedフレームワークに沿った５つの観点から説明されておりとても参考になった。（学習メモ参照）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;/pdf/%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8_marked.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AWSサービスについて、どんなサービスがあって、どんな使われ方をして、どのように便利なのかなど、基本的な知識を習得するため&lt;/li&gt;
+&lt;li&gt;AWS SAA資格取得のため&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>AmazonAlexa開発ガイド</title><link>https://tutttuwi.github.io/posts/2019_01_amazonalexa%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_amazonalexa%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;AmazonAlexa開発ガイド&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
