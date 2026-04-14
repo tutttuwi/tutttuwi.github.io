@@ -494,6 +494,194 @@ jobs:
 &lt;h2&gt;まとめ&lt;/h2&gt;
 &lt;p&gt;脆弱性診断ツールの導入は「どの製品を入れるか」だけでなく、「どの順で、誰が、どう回すか」で成果が大きく変わります。
 まずは小さく始めて、&lt;code&gt;SAST/SCA/Secrets/Container&lt;/code&gt; を確実に運用し、次に &lt;code&gt;DAST/OAST&lt;/code&gt; や &lt;code&gt;CSPM&lt;/code&gt; へ広げる進め方が現実的です。&lt;/p&gt;
+</content:encoded></item><item><title>SSO連携について</title><link>https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</guid><pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;SSO（Single Sign-On）は、1回の認証で複数システムにアクセスできる仕組みです。&lt;br /&gt;
+「SSO連携」と一口に言っても、利用するプロトコルやトークンの扱いによって実装パターンが大きく変わります。&lt;/p&gt;
+&lt;p&gt;この記事では、実務でよく使われるSSO連携の実装種別を整理し、各方式の動きと実装観点を図付きでまとめます。&lt;/p&gt;
+&lt;h2&gt;SSO連携の実装種別&lt;/h2&gt;
+&lt;p&gt;代表的な実装種別は次の4つです。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;SAML 2.0ベースSSO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OpenID Connect（OIDC）ベースSSO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OAuth 2.0（認可委譲）を中心にした疑似SSO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ゲートウェイ／リバースプロキシ型SSO&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;補足: 近年の新規開発ではOIDCが中心ですが、企業システムではSAMLが現役のケースも多く、ハイブリッド運用も一般的です。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;各実装種別ごとの具体的な内容&lt;/h2&gt;
+&lt;h3&gt;1) SAML 2.0ベースSSO&lt;/h3&gt;
+&lt;h4&gt;SAMLの方式概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;ブラウザリダイレクトとXMLアサーションを使って認証結果を連携&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IdP（Identity Provider）&lt;/code&gt; が認証し、&lt;code&gt;SP（Service Provider）&lt;/code&gt; が受け入れる&lt;/li&gt;
+&lt;li&gt;企業内業務システムやSaaS連携で現在も広く利用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    participant U as User
+    participant SP as Service Provider
+    participant IdP as Identity Provider
+
+    U-&amp;gt;&amp;gt;SP: サービスへアクセス
+    SP--&amp;gt;&amp;gt;U: IdPへリダイレクト（AuthnRequest）
+    U-&amp;gt;&amp;gt;IdP: ログイン
+    IdP--&amp;gt;&amp;gt;U: SAMLResponse（署名付き）をPOST
+    U-&amp;gt;&amp;gt;SP: SAMLResponseを送信
+    SP-&amp;gt;&amp;gt;SP: 署名検証・属性マッピング
+    SP--&amp;gt;&amp;gt;U: セッション発行
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;SAML実装のポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;メタデータ交換&lt;/strong&gt;: IdP/SP間で証明書・エンドポイントを事前共有&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;署名検証&lt;/strong&gt;: SAMLResponseの署名検証は必須&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;属性マッピング&lt;/strong&gt;: &lt;code&gt;NameID&lt;/code&gt; や属性をアプリのユーザー情報へ対応付け&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;セッション管理&lt;/strong&gt;: SP側セッションの有効期限と再認証条件を設計&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;SAMLが向いているケース&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;既存の企業基盤（ADFS, Shibboleth など）との連携&lt;/li&gt;
+&lt;li&gt;既存SaaS連携がSAML中心の組織&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;2) OpenID Connect（OIDC）ベースSSO&lt;/h3&gt;
+&lt;h4&gt;OIDCの方式概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OAuth 2.0を拡張し、&lt;code&gt;IDトークン（JWT）&lt;/code&gt; で認証情報を表現&lt;/li&gt;
+&lt;li&gt;Web/SPA/モバイルなどモダンなアプリ実装と相性が良い&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Authorization Code Flow + PKCE&lt;/code&gt; が現在の推奨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    participant U as User
+    participant C as Client App
+    participant OP as OIDC Provider
+    participant API as Resource API
+
+    U-&amp;gt;&amp;gt;C: ログイン要求
+    C--&amp;gt;&amp;gt;U: OPへリダイレクト（認可要求）
+    U-&amp;gt;&amp;gt;OP: 認証
+    OP--&amp;gt;&amp;gt;C: 認可コード
+    C-&amp;gt;&amp;gt;OP: コード交換（+PKCE）
+    OP--&amp;gt;&amp;gt;C: IDトークン + Accessトークン
+    C-&amp;gt;&amp;gt;API: Accessトークン付きAPI呼び出し
+    API--&amp;gt;&amp;gt;C: レスポンス
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;OIDC実装のポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;フロー選定&lt;/strong&gt;: サーバーサイド/SPAで適切なフローを選ぶ&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;トークン検証&lt;/strong&gt;: 署名、&lt;code&gt;iss&lt;/code&gt;、&lt;code&gt;aud&lt;/code&gt;、&lt;code&gt;exp&lt;/code&gt; の検証を徹底&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PKCE対応&lt;/strong&gt;: 公開クライアント（SPA/モバイル）では必須&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;リフレッシュ戦略&lt;/strong&gt;: セキュアな保管と失効設計が重要&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;OIDCが向いているケース&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;新規開発のWebアプリ、モバイルアプリ、API中心アーキテクチャ&lt;/li&gt;
+&lt;li&gt;Keycloak、Auth0、Entra IDなどモダンIdP利用時&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;3) OAuth 2.0中心の疑似SSO&lt;/h3&gt;
+&lt;h4&gt;OAuth中心方式の概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OAuthは本来「認可」の仕様であり、認証そのものの標準はOIDCが担う&lt;/li&gt;
+&lt;li&gt;ただし実務では「同じ認可サーバーのトークンで複数APIを呼ぶ」ことで、体感的なSSOを実現するケースがある&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+    U[User] --&amp;gt; FE[Frontend]
+    FE --&amp;gt; AS[Authorization Server]
+    AS --&amp;gt;|Access Token| FE
+    FE --&amp;gt; API1[API A]
+    FE --&amp;gt; API2[API B]
+    FE --&amp;gt; API3[API C]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;OAuth中心方式の実装ポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;認証と認可の分離理解&lt;/strong&gt;: ログイン要件はOIDC併用で満たす&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;スコープ設計&lt;/strong&gt;: API単位の権限境界を明確化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;トークン寿命&lt;/strong&gt;: 短命化と更新制御で漏えいリスクを低減&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;OAuth中心方式の注意点&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OAuth単独では「ユーザーが誰か」を標準化して表現しづらい&lt;/li&gt;
+&lt;li&gt;「SSOを実装したつもり」になる落とし穴があるため、要件定義で認証責務を明確にする&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;4) ゲートウェイ／リバースプロキシ型SSO&lt;/h3&gt;
+&lt;h4&gt;ゲートウェイ型の方式概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;アプリの手前に認証ゲートウェイを置き、認証を共通化する方式&lt;/li&gt;
+&lt;li&gt;各アプリはゲートウェイから渡されるヘッダやクレームを信頼して利用&lt;/li&gt;
+&lt;li&gt;レガシーアプリを短期間でSSO配下に入れたい時に有効&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TB
+    U[User] --&amp;gt; GW[Auth Gateway / Reverse Proxy]
+    GW --&amp;gt; IdP[Identity Provider]
+    GW --&amp;gt; APP1[Legacy App]
+    GW --&amp;gt; APP2[Internal Tool]
+    GW --&amp;gt; APP3[Admin Console]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;ゲートウェイ型の実装ポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;信頼境界の明確化&lt;/strong&gt;: ヘッダ偽装防止（内部NW限定、mTLS等）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;アプリ改修最小化&lt;/strong&gt;: 既存アプリ側は最小限のユーザー受け渡し対応&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;監査ログ&lt;/strong&gt;: ゲートウェイで統一的に認証/アクセスログを取得&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;ゲートウェイ型が向いているケース&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;レガシー資産が多く、アプリ個別改修コストを抑えたい&lt;/li&gt;
+&lt;li&gt;認証統制を入口で一元管理したい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;実装選定の観点（簡易比較）&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;観点&lt;/th&gt;
+&lt;th&gt;SAML&lt;/th&gt;
+&lt;th&gt;OIDC&lt;/th&gt;
+&lt;th&gt;OAuth中心&lt;/th&gt;
+&lt;th&gt;ゲートウェイ型&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;主な用途&lt;/td&gt;
+&lt;td&gt;企業連携/既存SaaS&lt;/td&gt;
+&lt;td&gt;新規Web/SPA/モバイル&lt;/td&gt;
+&lt;td&gt;API認可中心&lt;/td&gt;
+&lt;td&gt;レガシー統合&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;実装難易度&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中〜高&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;モダン開発との相性&lt;/td&gt;
+&lt;td&gt;低〜中&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;認証標準としての明確さ&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;td&gt;低（単独では不足）&lt;/td&gt;
+&lt;td&gt;構成依存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;SSO連携は「どのプロトコルを使うか」だけでなく、&lt;strong&gt;認証責務をどこで担保するか&lt;/strong&gt;を決める設計です。&lt;br /&gt;
+新規開発ではOIDCが第一候補になりやすく、既存環境ではSAMLやゲートウェイ型との併用が現実的です。&lt;/p&gt;
+&lt;p&gt;最終的には、次の3点で選ぶと失敗しにくくなります。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用中のIdP・既存資産との親和性&lt;/li&gt;
+&lt;li&gt;対象アプリ（Web/SPA/モバイル/レガシー）の実装特性&lt;/li&gt;
+&lt;li&gt;監査・運用（失効、ログ、障害時切り戻し）まで含めた運用設計&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>flutter JIT エラーで実機デバッグができなくなったことについて</title><link>https://tutttuwi.github.io/posts/2026-03-16_flutter-hotreload-error/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-03-16_flutter-hotreload-error/</guid><pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;flutter開発をしていて、突然実機デバッグビルドができなくなったのでエラーを調査したことについて記載&lt;/p&gt;
 &lt;h2&gt;💻 環境&lt;/h2&gt;
@@ -815,34 +1003,6 @@ gem &quot;sqlite3&quot;
 &lt;h3&gt;Gemfile管理のイメージ&lt;/h3&gt;
 &lt;p&gt;Gemfileは「注文書」、Gemfile.lockは「納品書（確定版）」のような関係です。&lt;/p&gt;
 &lt;hr /&gt;
-</content:encoded></item><item><title>Markdownファイルをリアルタイムで編集する方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
-&lt;p&gt;Markdown編集の管理方法について&lt;/p&gt;
-&lt;h2&gt;VSCode Extension&lt;/h2&gt;
-&lt;h3&gt;Markdown Editor&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&quot;&gt;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;拡張機能でWYSIWYGが実現できるエディタ&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Tools&lt;/h2&gt;
-&lt;h3&gt;MarkText&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/marktext/marktext&quot;&gt;https://github.com/marktext/marktext&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;brew&lt;/code&gt;経由だとインストール後に起動できないことを確認しました。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;以下より直接インストールすることで動作確認ができました。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&quot;&gt;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>GoogleCalendarイベント追加リンク作成方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_add-google-calendar-event/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_add-google-calendar-event/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;GoogleCalendarイベントをリンクから作成する方法についてまとめます。&lt;/p&gt;
 &lt;h2&gt;作成方法参考&lt;/h2&gt;
@@ -886,6 +1046,34 @@ location=North Pole
 &lt;h2&gt;サンプルURL&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://calendar.google.com/calendar/u/0/r/eventedit?text=Birthday&amp;amp;dates=20201231T193000Z/20201231T223000Z&amp;amp;details=With+clowns+and+stuff&amp;amp;location=North+Pole&quot;&gt;https://calendar.google.com/calendar/u/0/r/eventedit?text=Birthday&amp;amp;dates=20201231T193000Z/20201231T223000Z&amp;amp;details=With+clowns+and+stuff&amp;amp;location=North+Pole&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>Markdownファイルをリアルタイムで編集する方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;Markdown編集の管理方法について&lt;/p&gt;
+&lt;h2&gt;VSCode Extension&lt;/h2&gt;
+&lt;h3&gt;Markdown Editor&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&quot;&gt;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;拡張機能でWYSIWYGが実現できるエディタ&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tools&lt;/h2&gt;
+&lt;h3&gt;MarkText&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/marktext/marktext&quot;&gt;https://github.com/marktext/marktext&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;brew&lt;/code&gt;経由だとインストール後に起動できないことを確認しました。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;以下より直接インストールすることで動作確認ができました。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&quot;&gt;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>ローカルLLM実践入門</title><link>https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</guid><pubDate>Thu, 17 Apr 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;基本情報&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;価格：2530円（本体2300円）　発行・発売日：2024年12月23日
@@ -26065,6 +26253,26 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;ul&gt;
 &lt;li&gt;業務でGitの構成管理方針を決定する立場となったため、今一度基礎から情報を取得する必要があると考えたため&lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>Javascript本格入門</title><link>https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Javascript本格入門&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2019_01_js_getting_started.jpg&quot; alt=&quot;2019_01_js_getting_started&quot; title=&quot;2019_01_js_getting_started&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Javascript開発の体系的な知識&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;細かく理解できていなかった構文に関する知識&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;/pdf/javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Nodejs環境でがっちりJavascriptを開発していくにあたり、現在の知識確認とより効率的な開発方法の知識を得るため&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>Googleアシスタントアプリ開発入門</title><link>https://tutttuwi.github.io/posts/2019_01_google%E3%82%A2%E3%82%B7%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%88%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_google%E3%82%A2%E3%82%B7%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%88%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA%E5%85%A5%E9%96%80/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Googleアシスタントアプリ開発入門&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2019_01_google_assistant_handson.jpg&quot; alt=&quot;2019_01_google_assistant_handson&quot; title=&quot;2019_01_google_assistant_handson&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -26134,26 +26342,6 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;ul&gt;
 &lt;li&gt;Googleアシスタントアプリの運用/保守に携わっていく上で必要なスキルを習得するため&lt;/li&gt;
 &lt;li&gt;スピーカー開発関連の知識を増やすため&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded></item><item><title>Javascript本格入門</title><link>https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Javascript本格入門&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2019_01_js_getting_started.jpg&quot; alt=&quot;2019_01_js_getting_started&quot; title=&quot;2019_01_js_getting_started&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Javascript開発の体系的な知識&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;細かく理解できていなかった構文に関する知識&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;/pdf/javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Nodejs環境でがっちりJavascriptを開発していくにあたり、現在の知識確認とより効率的な開発方法の知識を得るため&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書</title><link>https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
