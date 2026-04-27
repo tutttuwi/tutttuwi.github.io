@@ -1,4 +1,1486 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Home</title><description>Portfolio</description><link>https://tutttuwi.github.io/</link><language>en</language><item><title>脆弱性診断関連ツール種別サマリ</title><link>https://tutttuwi.github.io/posts/2026-04-14_security-summary/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-14_security-summary/</guid><pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Home</title><description>Portfolio</description><link>https://tutttuwi.github.io/</link><language>en</language><item><title>Claude Code Pro で 24 時間自律稼働させる実行可能ベストプラクティス</title><link>https://tutttuwi.github.io/posts/2026-04-28_claude-code-pro-%E8%87%AA%E5%BE%8B%E7%A8%BC%E5%83%8D-%E5%AE%9F%E8%A1%8C%E5%8F%AF%E8%83%BD%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-28_claude-code-pro-%E8%87%AA%E5%BE%8B%E7%A8%BC%E5%83%8D-%E5%AE%9F%E8%A1%8C%E5%8F%AF%E8%83%BD%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9/</guid><description>Pro プランの Claude Code を 24 時間自走させるための、コピペで動く設定・ループ・Hooks のベストプラクティス集</description><pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;この記事のゴール&lt;/h2&gt;
+&lt;p&gt;「機能要件を 1 行書けば、寝ている間に PR が出来上がっている」という状態を、&lt;strong&gt;Pro プラン($20/月)でも実現する&lt;/strong&gt;ための最小構成のベストプラクティスをまとめます。&lt;/p&gt;
+&lt;p&gt;ここでは「&lt;strong&gt;今日から導入できる実装手順&lt;/strong&gt;」だけを順序立てて並べていきます。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;全体像:5 層構成で考える&lt;/h2&gt;
+&lt;p&gt;無人運用は、以下の 5 層をきれいに積み上げることで安定します。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TB
+    A[&quot;⑤ 永続実行層&amp;lt;br/&amp;gt;bash ループ + caffeinate + launchd&quot;]
+    B[&quot;④ 分業層&amp;lt;br/&amp;gt;Skills + Subagents + MCP&quot;]
+    C[&quot;③ 行動原則層&amp;lt;br/&amp;gt;CLAUDE.md + TODO.md&quot;]
+    D[&quot;② 権限層&amp;lt;br/&amp;gt;settings.json + Hooks&quot;]
+    E[&quot;① モデル層&amp;lt;br/&amp;gt;/model sonnet 固定&quot;]
+
+    A --&amp;gt; B --&amp;gt; C --&amp;gt; D --&amp;gt; E
+
+    style E fill:#e1f5ff,stroke:#0277bd
+    style D fill:#fff3e0,stroke:#ef6c00
+    style C fill:#f3e5f5,stroke:#7b1fa2
+    style B fill:#e8f5e9,stroke:#2e7d32
+    style A fill:#fce4ec,stroke:#c2185b
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;層&lt;/th&gt;
+&lt;th&gt;役割&lt;/th&gt;
+&lt;th&gt;主なツール&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;① モデル&lt;/td&gt;
+&lt;td&gt;安定稼働&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/model sonnet&lt;/code&gt; 固定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;② 権限&lt;/td&gt;
+&lt;td&gt;暴走防止&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;settings.json&lt;/code&gt; の deny + Hooks&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;③ 行動原則&lt;/td&gt;
+&lt;td&gt;動作優先・止めない&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;CLAUDE.md&lt;/code&gt; + &lt;code&gt;TODO.md&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;④ 分業&lt;/td&gt;
+&lt;td&gt;コンテキスト圧迫回避&lt;/td&gt;
+&lt;td&gt;Skills + Subagents + MCP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;⑤ 永続実行&lt;/td&gt;
+&lt;td&gt;24 時間化&lt;/td&gt;
+&lt;td&gt;bash ループ + &lt;code&gt;caffeinate&lt;/code&gt; + &lt;code&gt;launchd&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;すべて &lt;code&gt;.claude/&lt;/code&gt; 配下と &lt;code&gt;~/Library/LaunchAgents/&lt;/code&gt; だけで完結します。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;ベストプラクティス 1:モデルは &lt;code&gt;/model sonnet&lt;/code&gt; を明示する&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Pro プランでは Opus はそもそも使えませんが、&lt;strong&gt;Default のままだと週次 Opus 上限に当たってブロックされます&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;起動直後に必ず &lt;code&gt;/model sonnet&lt;/code&gt; を実行しましょう。5 時間制限なら自動切替が効くため止まりません。&lt;/li&gt;
+&lt;li&gt;残量は &lt;code&gt;npx ccusage@latest blocks --live&lt;/code&gt; で常時確認できます。&lt;code&gt;statusLine&lt;/code&gt; に登録するとプロンプト下に常駐表示されます。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;真犯人は Cache Read&lt;/strong&gt; です。月初に &lt;code&gt;ccusage daily --breakdown&lt;/code&gt; で内訳を確認する習慣をつけてください。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+    A[&quot;起動&quot;] --&amp;gt; B{&quot;/model 設定&quot;}
+    B --&amp;gt;|&quot;Default のまま&quot;| C[&quot;❌ 週次 Opus 上限で&amp;lt;br/&amp;gt;ブロック&quot;]
+    B --&amp;gt;|&quot;/model sonnet 明示&quot;| D[&quot;✅ 5h 上限のみ&amp;lt;br/&amp;gt;自動切替で継続&quot;]
+    style C fill:#ffebee,stroke:#c62828
+    style D fill:#e8f5e9,stroke:#2e7d32
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;ベストプラクティス 2:権限は「三層防衛」で固める&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;settings.json&lt;/code&gt; の deny には 2025〜2026 年に既知バグが残っているため、&lt;strong&gt;必ず PreToolUse Hook で重ねがけ&lt;/strong&gt;しましょう。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TB
+    Tool[&quot;Claude がツール実行を試みる&quot;] --&amp;gt; L1{&quot;① settings.json&amp;lt;br/&amp;gt;allow / deny&quot;}
+    L1 --&amp;gt;|&quot;deny ヒット&quot;| Block1[&quot;🛑 ブロック&quot;]
+    L1 --&amp;gt;|&quot;allow / 通過&quot;| L2{&quot;② PreToolUse Hook&amp;lt;br/&amp;gt;block-dangerous.sh&quot;}
+    L2 --&amp;gt;|&quot;exit 2&quot;| Block2[&quot;🛑 ブロック&amp;lt;br/&amp;gt;(deny バグの保険)&quot;]
+    L2 --&amp;gt;|&quot;exit 0&quot;| L3{&quot;③ DevContainer&amp;lt;br/&amp;gt;iptables ファイアウォール&quot;}
+    L3 --&amp;gt;|&quot;許可外通信&quot;| Block3[&quot;🛑 ブロック&quot;]
+    L3 --&amp;gt;|&quot;通過&quot;| Exec[&quot;✅ 実行&quot;]
+
+    style Block1 fill:#ffebee,stroke:#c62828
+    style Block2 fill:#ffebee,stroke:#c62828
+    style Block3 fill:#ffebee,stroke:#c62828
+    style Exec fill:#e8f5e9,stroke:#2e7d32
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; 最小テンプレ&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;permissions&quot;: {
+    &quot;defaultMode&quot;: &quot;acceptEdits&quot;,
+    &quot;allow&quot;: [
+      &quot;Bash(npm:*)&quot;, &quot;Bash(pnpm:*)&quot;, &quot;Bash(git status)&quot;, &quot;Bash(git diff *)&quot;,
+      &quot;Bash(git add *)&quot;, &quot;Bash(git commit -m *)&quot;, &quot;Bash(gh *)&quot;,
+      &quot;Read&quot;, &quot;Edit&quot;, &quot;Write&quot;, &quot;Glob&quot;, &quot;Grep&quot;,
+      &quot;mcp__playwright__*&quot;, &quot;mcp__github__*&quot;, &quot;mcp__context7__*&quot;
+    ],
+    &quot;ask&quot;: [&quot;Bash(git push *)&quot;],
+    &quot;deny&quot;: [
+      &quot;Read(./.env)&quot;, &quot;Read(./.env.*)&quot;, &quot;Read(**/.aws/**)&quot;, &quot;Read(**/.ssh/**)&quot;,
+      &quot;Bash(rm -rf:*)&quot;, &quot;Bash(sudo:*)&quot;, &quot;Bash(curl:*)&quot;, &quot;Bash(wget:*)&quot;
+    ]
+  },
+  &quot;hooks&quot;: {
+    &quot;PreToolUse&quot;: [{
+      &quot;matcher&quot;: &quot;Bash&quot;,
+      &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;,
+        &quot;command&quot;: &quot;$CLAUDE_PROJECT_DIR/.claude/hooks/block-dangerous.sh&quot; }]
+    }],
+    &quot;PostToolUse&quot;: [{
+      &quot;matcher&quot;: &quot;Edit|Write|MultiEdit&quot;,
+      &quot;hooks&quot;: [
+        { &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;npx prettier --write \&quot;$CLAUDE_TOOL_INPUT_FILE_PATH\&quot; 2&amp;gt;/dev/null; true&quot; }
+      ]
+    }],
+    &quot;Stop&quot;: [{
+      &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;,
+        &quot;command&quot;: &quot;afplay /System/Library/Sounds/Glass.aiff &amp;amp; osascript -e &apos;display notification \&quot;Task done\&quot; with title \&quot;Claude Code\&quot;&apos;&quot; }]
+    }]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;抑えておきたい原則&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;defaultMode: acceptEdits&lt;/code&gt;&lt;/strong&gt; が無人運用の基本です。&lt;code&gt;bypassPermissions&lt;/code&gt; は実機では使わないようにしてください。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;exit 2&lt;/code&gt; でブロッキング&lt;/strong&gt;できるのが Hook の強みです(Unix 慣習と逆なので注意してください)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git push&lt;/code&gt; だけは &lt;code&gt;ask&lt;/code&gt; に置いて、PR 作成だけは人間が確認する運用が安全です。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;ベストプラクティス 3:CLAUDE.md は「200 行以下」「動作ルールだけ」&lt;/h2&gt;
+&lt;p&gt;LLM の指示遵守は 150〜200 個が限界と言われています。&lt;code&gt;@docs/architecture.md&lt;/code&gt; のように外出しして、本体は &lt;strong&gt;行動原則&lt;/strong&gt; に絞りましょう。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+    subgraph &quot;✅ CLAUDE.md (200 行以内)&quot;
+        A1[&quot;動作原則&amp;lt;br/&amp;gt;3 つだけ&quot;]
+        A2[&quot;禁止事項&amp;lt;br/&amp;gt;(git add -A など)&quot;]
+        A3[&quot;@docs/... import&quot;]
+    end
+    subgraph &quot;📄 外部ファイル&quot;
+        B1[&quot;docs/architecture.md&quot;]
+        B2[&quot;docs/style-guide.md&quot;]
+        B3[&quot;TODO.md&quot;]
+    end
+    A3 -.必要時にロード.-&amp;gt; B1
+    A3 -.必要時にロード.-&amp;gt; B2
+    A3 -.必要時にロード.-&amp;gt; B3
+    style A1 fill:#e1f5ff
+    style A2 fill:#e1f5ff
+    style A3 fill:#e1f5ff
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;必須の 3 原則&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;動作優先・デザイン後回し&lt;/strong&gt;:UI は最低限の見た目で先に動かす&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解決困難は TODO.md に「⚠️ Blocked」で記録して次へ&lt;/strong&gt;:3 回連続失敗したら諦める&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完了報告の禁止条件&lt;/strong&gt;:failing tests / compile errors が残っていたら完了と言わせない&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;コピペテンプレ(抜粋)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;## 開発フロー
+1. `git switch -c feat/&amp;lt;topic&amp;gt;` でブランチ作成
+2. 実装 → `npm run typecheck` → `npm test` → Playwright 検証
+3. 全グリーンで `git add -p` → Conventional Commits でコミット
+4. 機能完了で `gh pr create --fill`
+
+## 解決困難な課題
+- 同じテストが 3 回連続失敗 → TODO.md に「⚠️ Blocked」追記して次へ
+- 不確実な API は Context7 MCP で確認
+
+## 禁止事項
+- `git add -A` 禁止
+- `.env*`、`*.pem` のコミット禁止
+- `any`、`as`、`@ts-ignore` 禁止
+- 既存テストの削除禁止
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;ベストプラクティス 4:Skills と Subagents で分業する&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TB
+    Main[&quot;🧠 メインエージェント&amp;lt;br/&amp;gt;(タスク分配)&quot;]
+
+    subgraph &quot;Subagents (独立コンテキスト)&quot;
+        S1[&quot;feature-implementer&amp;lt;br/&amp;gt;+ worktree 隔離&quot;]
+        S2[&quot;test-writer&quot;]
+        S3[&quot;code-reviewer&quot;]
+        S4[&quot;debugger&quot;]
+    end
+
+    subgraph &quot;Skills (共有スキル)&quot;
+        K1[&quot;commit&quot;]
+        K2[&quot;run-tests-and-fix&quot;]
+        K3[&quot;verify-in-browser&amp;lt;br/&amp;gt;(Playwright MCP)&quot;]
+    end
+
+    Main --&amp;gt; S1 &amp;amp; S2 &amp;amp; S3 &amp;amp; S4
+    S1 -.使う.-&amp;gt; K1 &amp;amp; K2 &amp;amp; K3
+    S2 -.使う.-&amp;gt; K2
+    S1 -- 最終要約のみ返却 --&amp;gt; Main
+
+    style Main fill:#fff3e0,stroke:#ef6c00
+    style S1 fill:#e8f5e9
+    style S2 fill:#e8f5e9
+    style S3 fill:#e8f5e9
+    style S4 fill:#e8f5e9
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Skills は 3 つだけ用意&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;.claude/skills/&amp;lt;name&amp;gt;/SKILL.md&lt;/code&gt; の YAML frontmatter は &lt;strong&gt;「◯◯と言ったら必ず使え」と押し気味に書く&lt;/strong&gt;のが Anthropic 推奨です。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Skill&lt;/th&gt;
+&lt;th&gt;役割&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;commit&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Conventional Commits を自動生成&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;run-tests-and-fix&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;テスト実行 + 失敗時の修正&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;verify-in-browser&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Playwright MCP で UI を実機検証&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Subagents は 4 つに絞る&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;.claude/agents/&amp;lt;name&amp;gt;.md&lt;/code&gt; に独立コンテキスト・独立権限のエージェントを定義します。&lt;strong&gt;最終要約だけ親に返る&lt;/strong&gt;ためメインを汚染しません。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;feature-implementer&lt;/code&gt;(実装、&lt;code&gt;isolation: worktree&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;test-writer&lt;/code&gt;(テスト作成)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;code-reviewer&lt;/code&gt;(レビュー)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;debugger&lt;/code&gt;(デバッグ)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;5 個以上に増やすと選択ミスが増えます。&lt;strong&gt;3〜7 個が黄金比&lt;/strong&gt;です。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;ベストプラクティス 5:MCP は &lt;code&gt;.mcp.json&lt;/code&gt; ルート直下に置く&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;.claude/.mcp.json&lt;/code&gt; だと一部読み込まれない既知不具合があります。&lt;strong&gt;必ずプロジェクトルート&lt;/strong&gt;に置いてください。&lt;/p&gt;
+&lt;p&gt;無人運用に効く 7 点セット:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;mcpServers&quot;: {
+    &quot;github&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://api.githubcopilot.com/mcp&quot;,
+      &quot;headers&quot;: { &quot;Authorization&quot;: &quot;Bearer ${GITHUB_PAT}&quot; }
+    },
+    &quot;playwright&quot;: { &quot;command&quot;: &quot;npx&quot;, &quot;args&quot;: [&quot;@playwright/mcp@latest&quot;, &quot;--browser=chromium&quot;] },
+    &quot;chrome-devtools&quot;: { &quot;command&quot;: &quot;npx&quot;, &quot;args&quot;: [&quot;chrome-devtools-mcp@latest&quot;] },
+    &quot;context7&quot;: { &quot;command&quot;: &quot;npx&quot;, &quot;args&quot;: [&quot;-y&quot;, &quot;@upstash/context7-mcp@latest&quot;] },
+    &quot;sequential-thinking&quot;: { &quot;command&quot;: &quot;npx&quot;, &quot;args&quot;: [&quot;-y&quot;, &quot;@modelcontextprotocol/server-sequential-thinking&quot;] },
+    &quot;memory&quot;: { &quot;command&quot;: &quot;npx&quot;, &quot;args&quot;: [&quot;-y&quot;, &quot;@modelcontextprotocol/server-memory&quot;] }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️ &lt;code&gt;@modelcontextprotocol/server-github&lt;/code&gt; の npm 版は &lt;strong&gt;2025/4 に deprecated&lt;/strong&gt; になりました。GitHub 公式の HTTP 版を使ってください。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;ベストプラクティス 6:TODO.md 駆動の無限ループで 24 時間化&lt;/h2&gt;
+&lt;p&gt;「LLM の記憶を信じない、ファイルに状態を書き続ける」という &lt;strong&gt;Ralph Wiggum ループ思想&lt;/strong&gt;が核になります。各イテレーションは &lt;strong&gt;フレッシュコンテキスト&lt;/strong&gt; で開始し、知識は Git と TODO.md で永続化させます。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TB
+    Start([&quot;🌙 launchd 22:00 起動&quot;]) --&amp;gt; Loop{&quot;TODO.md に&amp;lt;br/&amp;gt;[ ] タスクあり?&quot;}
+    Loop --&amp;gt;|&quot;なし&quot;| Done([&quot;🎉 全完了通知&amp;lt;br/&amp;gt;(osascript)&quot;])
+    Loop --&amp;gt;|&quot;あり&quot;| Fresh[&quot;🆕 フレッシュ Claude 起動&amp;lt;br/&amp;gt;(timeout 30m)&quot;]
+    Fresh --&amp;gt; Impl[&quot;実装 → テスト → コミット&amp;lt;br/&amp;gt;→ TODO.md 更新&quot;]
+    Impl --&amp;gt; Check{&quot;結果&quot;}
+    Check --&amp;gt;|&quot;ITERATION_COMPLETE&quot;| Loop
+    Check --&amp;gt;|&quot;usage limit&quot;| Wait[&quot;⏰ リセット時刻まで&amp;lt;br/&amp;gt;caffeinate -i sleep&quot;]
+    Wait --&amp;gt; Loop
+    Check --&amp;gt;|&quot;3 回連続失敗&quot;| Block[&quot;⚠️ TODO.md に Blocked 追記&quot;]
+    Block --&amp;gt; Loop
+
+    style Start fill:#e1f5ff
+    style Done fill:#e8f5e9
+    style Wait fill:#fff3e0
+    style Block fill:#ffebee
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;code&gt;claude-loop.sh&lt;/code&gt;(macOS / Linux 両対応・最小版)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env bash
+set -uo pipefail
+TODO=&quot;$(pwd)/TODO.md&quot;; LOG_DIR=&quot;$(pwd)/.claude-loop&quot;; mkdir -p &quot;$LOG_DIR&quot;
+ITER=0; MAX_ITER=&quot;${MAX_ITER:-50}&quot;
+
+while (( ITER &amp;lt; MAX_ITER )); do
+  ITER=$((ITER + 1)); LOG=&quot;$LOG_DIR/iter_${ITER}.log&quot;
+
+  # 未完了タスクが無ければ終了
+  grep -qE &apos;^\s*-\s*\[\s*\]&apos; &quot;$TODO&quot; 2&amp;gt;/dev/null || {
+    osascript -e &apos;display notification &quot;ALL DONE 🎉&quot; with title &quot;Claude Loop&quot;&apos;
+    break
+  }
+
+  timeout 30m claude -p &quot;TODO.md の最上位 [ ] タスクを実装→テスト→コミット→[x]更新。
+完了で &apos;ITERATION_COMPLETE&apos; を最終行に出力。3 回連続失敗で ⚠️Blocked 追記して次へ。&quot; \
+    --permission-mode acceptEdits --output-format text 2&amp;gt;&amp;amp;1 | tee &quot;$LOG&quot;
+
+  # リミット検知 → リセット時刻まで待機
+  if grep -qiE &quot;usage limit reached&quot; &quot;$LOG&quot;; then
+    reset=$(grep -oE &apos;reset at [0-9]+(am|pm)&apos; &quot;$LOG&quot; | tail -1 | awk &apos;{print $3}&apos;)
+    sleep_for=$(( $(date -j -f &apos;%I%p&apos; &quot;$reset&quot; +%s 2&amp;gt;/dev/null || echo 1800) - $(date +%s) + 60 ))
+    (( sleep_for &amp;lt; 60 )) &amp;amp;&amp;amp; sleep_for=1800
+    caffeinate -i sleep &quot;$sleep_for&quot;
+  fi
+done
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;tmux で起動する場合&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;tmux new-session -d -s claude-loop \
+  &quot;caffeinate -i ./claude-loop.sh &amp;gt; .claude-loop/run.log 2&amp;gt;&amp;amp;1&quot;
+tmux attach -t claude-loop   # 監視
+# Ctrl+b d でデタッチ
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;ベストプラクティス 7:Mac の launchd で完全無人化(cron は使わない)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;cron は寝てる Mac では発火しません&lt;/strong&gt;。launchd 一択です。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+    A[&quot;💤 Mac スリープ中&quot;] --&amp;gt; B{{&quot;launchd&amp;lt;br/&amp;gt;22:00 起床&quot;}}
+    B --&amp;gt; C[&quot;caffeinate -i&amp;lt;br/&amp;gt;(スリープ抑止)&quot;]
+    C --&amp;gt; D[&quot;claude-loop.sh&quot;]
+    D --&amp;gt; E[&quot;朝起きたら&amp;lt;br/&amp;gt;PR が積み上がっている&quot;]
+
+    style A fill:#eceff1
+    style B fill:#e1f5ff,stroke:#0277bd
+    style C fill:#fff3e0
+    style E fill:#e8f5e9,stroke:#2e7d32
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;code&gt;~/Library/LaunchAgents/com.user.claude-loop.plist&lt;/code&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;
+&amp;lt;plist version=&quot;1.0&quot;&amp;gt;&amp;lt;dict&amp;gt;
+  &amp;lt;key&amp;gt;Label&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;com.user.claude-loop&amp;lt;/string&amp;gt;
+  &amp;lt;key&amp;gt;ProgramArguments&amp;lt;/key&amp;gt;&amp;lt;array&amp;gt;
+    &amp;lt;string&amp;gt;/usr/bin/caffeinate&amp;lt;/string&amp;gt;&amp;lt;string&amp;gt;-i&amp;lt;/string&amp;gt;
+    &amp;lt;string&amp;gt;/bin/bash&amp;lt;/string&amp;gt;&amp;lt;string&amp;gt;-lc&amp;lt;/string&amp;gt;
+    &amp;lt;string&amp;gt;cd /Users/me/projects/myapp &amp;amp;&amp;amp; /usr/local/bin/claude-loop.sh&amp;lt;/string&amp;gt;
+  &amp;lt;/array&amp;gt;
+  &amp;lt;key&amp;gt;StartCalendarInterval&amp;lt;/key&amp;gt;
+    &amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;Hour&amp;lt;/key&amp;gt;&amp;lt;integer&amp;gt;22&amp;lt;/integer&amp;gt;&amp;lt;key&amp;gt;Minute&amp;lt;/key&amp;gt;&amp;lt;integer&amp;gt;0&amp;lt;/integer&amp;gt;&amp;lt;/dict&amp;gt;
+  &amp;lt;key&amp;gt;EnvironmentVariables&amp;lt;/key&amp;gt;
+    &amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;PATH&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin&amp;lt;/string&amp;gt;&amp;lt;/dict&amp;gt;
+  &amp;lt;key&amp;gt;StandardOutPath&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;/Users/me/.claude-loop/stdout.log&amp;lt;/string&amp;gt;
+  &amp;lt;key&amp;gt;StandardErrorPath&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;/Users/me/.claude-loop/stderr.log&amp;lt;/string&amp;gt;
+&amp;lt;/dict&amp;gt;&amp;lt;/plist&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;4 つの「壁」を事前に潰しましょう(GMO ペパボの知見)&lt;/h3&gt;
+&lt;p&gt;cron / launchd で自走させるとき、毎回ハマる 4 つのポイントがあります。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+    Start[&quot;🚀 launchd 起動&quot;] --&amp;gt; W1{&quot;壁 ①&amp;lt;br/&amp;gt;Bypass&amp;lt;br/&amp;gt;permissions&quot;}
+    W1 --&amp;gt;|&quot;OK&quot;| W2{&quot;壁 ②&amp;lt;br/&amp;gt;Trust this&amp;lt;br/&amp;gt;folder&quot;}
+    W2 --&amp;gt;|&quot;OK&quot;| W3{&quot;壁 ③&amp;lt;br/&amp;gt;MCP&amp;lt;br/&amp;gt;allow/deny&quot;}
+    W3 --&amp;gt;|&quot;OK&quot;| W4{&quot;壁 ④&amp;lt;br/&amp;gt;ファイル&amp;lt;br/&amp;gt;除外リスト&quot;}
+    W4 --&amp;gt;|&quot;OK&quot;| Run[&quot;✅ 自走開始&quot;]
+
+    W1 -.解決策.-&amp;gt; S1[&quot;acceptEdits 設定&quot;]
+    W2 -.解決策.-&amp;gt; S2[&quot;事前に対話モードで&amp;lt;br/&amp;gt;一度開く&quot;]
+    W3 -.解決策.-&amp;gt; S3[&quot;事前 allowlist&quot;]
+    W4 -.解決策.-&amp;gt; S4[&quot;.env 等の deny を&amp;lt;br/&amp;gt;settings.json に&quot;]
+
+    style Run fill:#e8f5e9,stroke:#2e7d32
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;壁&lt;/th&gt;
+&lt;th&gt;内容&lt;/th&gt;
+&lt;th&gt;解決策&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;① Bypass permissions&lt;/td&gt;
+&lt;td&gt;権限プロンプトで止まる&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;--permission-mode acceptEdits&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;② Trust this folder&lt;/td&gt;
+&lt;td&gt;初回起動で信頼確認&lt;/td&gt;
+&lt;td&gt;対話モードで一度開く、もしくは &lt;code&gt;~/.claude.json&lt;/code&gt; の &lt;code&gt;hasTrustDialogAccepted: true&lt;/code&gt; を直書き&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;③ MCP の allow/deny&lt;/td&gt;
+&lt;td&gt;MCP ツールで止まる&lt;/td&gt;
+&lt;td&gt;事前に対話モードで一度許可&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;④ ファイル除外&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.env&lt;/code&gt; などへのアクセス&lt;/td&gt;
+&lt;td&gt;settings.json の deny に明記&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2&gt;推奨ディレクトリ構成&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;~/projects/myapp/
+├── CLAUDE.md                  # 200 行以下、行動原則だけ
+├── TODO.md                    # [ ] / [x] / ⚠️ Blocked
+├── .mcp.json                  # ルート直下が必須
+├── .claude/
+│   ├── settings.json          # 権限 + Hooks
+│   ├── skills/{commit,run-tests-and-fix,verify-in-browser}/SKILL.md
+│   ├── agents/{feature-implementer,test-writer,code-reviewer,debugger}.md
+│   └── hooks/block-dangerous.sh
+└── specs/&amp;lt;feature&amp;gt;/{requirements,design,tasks}.md   # SDD
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;全体の流れ:要件 1 行から PR まで&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    actor User as 👤 あなた
+    participant TODO as 📝 TODO.md
+    participant Loop as 🔁 claude-loop.sh
+    participant Claude as 🧠 Claude (Sonnet)
+    participant Sub as 👥 Subagents
+    participant GH as 🐙 GitHub
+
+    User-&amp;gt;&amp;gt;TODO: 機能要件を 1 行追記
+    User-&amp;gt;&amp;gt;Loop: launchd 22:00 起動
+    loop 各タスク (フレッシュコンテキスト)
+        Loop-&amp;gt;&amp;gt;Claude: TODO の [ ] タスクを渡す
+        Claude-&amp;gt;&amp;gt;Sub: feature-implementer に委譲
+        Sub-&amp;gt;&amp;gt;Sub: 実装 + test-writer + reviewer
+        Sub--&amp;gt;&amp;gt;Claude: 完了要約のみ返却
+        Claude-&amp;gt;&amp;gt;GH: gh pr create --fill
+        Claude-&amp;gt;&amp;gt;TODO: [x] に更新
+    end
+    Loop-&amp;gt;&amp;gt;User: 🎉 朝起きたら PR が並んでいる
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;チェックリスト:今日やること&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[ ] &lt;code&gt;/model sonnet&lt;/code&gt; を明示する習慣をつける&lt;/li&gt;
+&lt;li&gt;[ ] &lt;code&gt;ccusage statusline&lt;/code&gt; を &lt;code&gt;~/.claude/settings.json&lt;/code&gt; に登録する&lt;/li&gt;
+&lt;li&gt;[ ] &lt;code&gt;.claude/settings.json&lt;/code&gt; の deny に &lt;code&gt;.env&lt;/code&gt; / &lt;code&gt;rm -rf&lt;/code&gt; / &lt;code&gt;sudo&lt;/code&gt; を追加する&lt;/li&gt;
+&lt;li&gt;[ ] &lt;code&gt;.claude/hooks/block-dangerous.sh&lt;/code&gt; で deny を二重化する&lt;/li&gt;
+&lt;li&gt;[ ] &lt;code&gt;CLAUDE.md&lt;/code&gt; を 200 行以下に削り、3 原則を明記する&lt;/li&gt;
+&lt;li&gt;[ ] &lt;code&gt;.mcp.json&lt;/code&gt; をルート直下に置き、Playwright + GitHub + Context7 を登録する&lt;/li&gt;
+&lt;li&gt;[ ] Skills を &lt;code&gt;commit&lt;/code&gt; / &lt;code&gt;run-tests-and-fix&lt;/code&gt; / &lt;code&gt;verify-in-browser&lt;/code&gt; の 3 つだけ作る&lt;/li&gt;
+&lt;li&gt;[ ] Subagents を 4 つに絞る(&lt;code&gt;isolation: worktree&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;[ ] &lt;code&gt;claude-loop.sh&lt;/code&gt; + &lt;code&gt;caffeinate&lt;/code&gt; で tmux 起動を試す&lt;/li&gt;
+&lt;li&gt;[ ] 安定したら launchd plist で 22:00 起動に登録する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;Pro プランで 24 時間自律稼働させる肝は、派手な機能ではなく &lt;strong&gt;地味な 3 つの徹底&lt;/strong&gt; にあります。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;権限は三層で固める&lt;/strong&gt;(settings の allow/deny + PreToolUse Hook + DevContainer)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;行動原則は短く書く&lt;/strong&gt;(CLAUDE.md は 200 行、解決困難は次へ)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状態はファイルに書く&lt;/strong&gt;(TODO.md + Git で記憶を永続化、コンテキストはフレッシュ)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;これに &lt;code&gt;caffeinate&lt;/code&gt; + &lt;code&gt;launchd&lt;/code&gt; という 2 つの Mac 固有の小技を足せば、寝ている間に PR が積み上がる環境が完成します。残るボトルネックは Claude ではなく &lt;strong&gt;人間が書く要件の質&lt;/strong&gt; だけで、それを &lt;code&gt;requirements.md&lt;/code&gt; に EARS 記法で書ければ、あとは任せられます。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3&gt;関連&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;元の網羅版:[[2026-04-28_Claude Code を Pro プランで 24 時間自律稼働させる完全ガイド.md]]&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>ClaudeCodeで抑えておく機能</title><link>https://tutttuwi.github.io/posts/2026-04-28_claudecode%E3%81%A7%E6%8A%91%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8F%E6%A9%9F%E8%83%BD/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-28_claudecode%E3%81%A7%E6%8A%91%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8F%E6%A9%9F%E8%83%BD/</guid><pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;Claude Code は Anthropic が提供する CLI ベースの AI コーディングエージェントです。単なる「コード補完ツール」ではなく、&lt;strong&gt;ファイル操作・シェル実行・Web 検索・サブエージェント呼び出し&lt;/strong&gt;といった機能を組み合わせて、設計→実装→レビュー→コミットまで一連の開発ワークフローをこなせる点が特徴です。&lt;/p&gt;
+&lt;p&gt;ただし機能が豊富なため、「とりあえず使う」だけだと コンテキスト肥大・無限ループ・誤操作 などの落とし穴にハマりがちです。本記事では Claude Code を実務で使ううえで &lt;strong&gt;押さえておくべき主要機能&lt;/strong&gt; と、それぞれの&lt;strong&gt;ベストプラクティス／アンチパターン／活用事例&lt;/strong&gt;をまとめます。&lt;/p&gt;
+&lt;h2&gt;目次&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#claudemd%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E8%A8%98%E6%86%B6%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&quot;&gt;CLAUDE.md（プロジェクト記憶ファイル）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#skills%E5%86%8D%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA%E6%89%8B%E9%A0%86%E6%9B%B8&quot;&gt;Skills（再利用可能な手順書）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E8%87%AA%E5%8B%95%E6%89%BF%E8%AA%8D%E3%83%A2%E3%83%BC%E3%83%89permission-mode&quot;&gt;自動承認モード（permission mode）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%A8compact&quot;&gt;コンテキストサイズと /compact&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88sub-agents&quot;&gt;マルチエージェント（Sub-agents）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88clauderemote-agents--sandbox&quot;&gt;リモート Claude（Remote Agents / Sandbox）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#hooks%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%95%E3%83%83%E3%82%AF&quot;&gt;Hooks（イベントフック）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#plugins&quot;&gt;Plugins&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#chrome%E6%8B%A1%E5%BC%B5&quot;&gt;Chrome 拡張&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#github%E9%80%A3%E6%90%BA&quot;&gt;GitHub 連携&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%81%9D%E3%81%AE%E4%BB%96%E6%8A%BC%E3%81%95%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8D%E3%81%9F%E3%81%84%E6%A9%9F%E8%83%BD&quot;&gt;その他押さえておきたい機能&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E5%85%A8%E4%BD%93%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9%E3%81%BE%E3%81%A8%E3%82%81&quot;&gt;全体ベストプラクティスまとめ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;CLAUDE.md（プロジェクト記憶ファイル）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code は起動時にカレントディレクトリ及び親ディレクトリの &lt;code&gt;CLAUDE.md&lt;/code&gt; を&lt;strong&gt;自動的に読み込み&lt;/strong&gt;、システムプロンプトに追加します。プロジェクト固有のコーディング規約・ディレクトリ構造・ビルドコマンド・禁止事項などを記述することで、毎回指示し直す必要がなくなります。&lt;/p&gt;
+&lt;p&gt;階層は以下の優先順で読み込まれます：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;スコープ&lt;/th&gt;
+&lt;th&gt;パス&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ユーザー&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.claude/CLAUDE.md&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;個人の好み（言語、口調、共通ルール）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;プロジェクト&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/CLAUDE.md&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;チーム共有のルール（Git にコミット）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ローカル&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/CLAUDE.local.md&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;個人用の上書き（&lt;code&gt;.gitignore&lt;/code&gt; 推奨）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;サブディレクトリ&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/path/to/CLAUDE.md&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;特定モジュール固有のルール&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;/init&lt;/code&gt; コマンドを叩くと、Claude が&lt;strong&gt;リポジトリを走査して CLAUDE.md の雛形を自動生成&lt;/strong&gt;してくれます。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 起動して
+claude
+
+# プロジェクトのルートで
+/init
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;記載すべき主要項目：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Project Overview
+- 何のプロジェクトか / 主要技術スタック
+
+# Build &amp;amp; Test Commands
+- `pnpm install` / `pnpm test` / `pnpm lint` などよく使うコマンド
+
+# Code Style
+- 言語別のコーディング規約
+- コメントは日本語、識別子は英語、など
+
+# Architecture
+- 主要ディレクトリの責務
+- 依存関係の方向
+
+# Do / Don&apos;t
+- 直接編集禁止のファイル
+- 触ってはいけない設定
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;「コマンド一覧」を必ず書く&lt;/strong&gt;：Claude は知らないとビルドコマンドを推測しがち。明示すれば確実にそれを使う。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Don&apos;t（禁止事項）を明確に&lt;/strong&gt;：「&lt;code&gt;migrations/&lt;/code&gt; 配下のファイルは編集しない」など、人間が暗黙に守っているルールほど書く価値が高い。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;長くなりすぎない&lt;/strong&gt;：CLAUDE.md は毎ターンのコンテキストに乗る。500 行を超えたら &lt;strong&gt;Skills に切り出す&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ README をそのままコピー → 不要な情報でコンテキストを汚染&lt;/li&gt;
+&lt;li&gt;❌ 「丁寧に説明してください」など曖昧な指示 → 守られない&lt;/li&gt;
+&lt;li&gt;❌ 全社共通ルールをプロジェクト CLAUDE.md に書く → ユーザースコープに置くべき&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;モノレポで各パッケージの README 代わりに &lt;code&gt;packages/*/CLAUDE.md&lt;/code&gt; を配置し、Claude にそのパッケージ内の作業をさせる&lt;/li&gt;
+&lt;li&gt;DB スキーマ規約を &lt;code&gt;db/CLAUDE.md&lt;/code&gt; に書き、SQL マイグレーション生成を任せる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Skills（再利用可能な手順書）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Skills&lt;/strong&gt; は「特定タスクの手順書」をディレクトリ単位で定義し、必要な時だけロードできる仕組みです。CLAUDE.md と違って&lt;strong&gt;常時ロードされない&lt;/strong&gt;ため、コンテキストを節約しつつ、複雑な手順を再現性高く実行できます。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;~/.claude/skills/
+├── pr-review/
+│   ├── SKILL.md           # 説明（先頭の YAML フロントマターでトリガー定義）
+│   └── scripts/...        # 補助スクリプトも置ける
+└── deploy-staging/
+    └── SKILL.md
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;SKILL.md&lt;/code&gt; の冒頭に &lt;code&gt;description&lt;/code&gt; を書くと、Claude がユーザーの要求と照らし合わせて&lt;strong&gt;自動的に適切な Skill を起動&lt;/strong&gt;します。&lt;/p&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;---
+name: pr-review
+description: |
+  GitHub PR のレビューを実施する。差分取得・テスト確認・
+  コメント投稿までを行う。「PR レビューして」と言われたら起動。
+---
+
+# PR Review Skill
+1. `gh pr view` で対象 PR を取得
+2. `gh pr diff` で差分取得
+3. レビュー観点（セキュリティ、パフォーマンス、可読性）でチェック
+4. `gh pr review --comment` でコメント投稿
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;明示的に呼び出すこともできます：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/pr-review 1234
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;「定型作業」を Skill 化&lt;/strong&gt;：リリース、コードレビュー、調査レポート生成など、毎回似た手順を踏むものは Skill にすると再現性が上がる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;description はトリガー条件を具体的に&lt;/strong&gt;：「いつ起動すべきか／すべきでないか」を書くと誤起動が減る。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skill 内で別 Skill を呼ぶ&lt;/strong&gt;：合成して大きなワークフローを作れる。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 1 回しか使わない処理を Skill 化 → 普通に依頼すれば良い&lt;/li&gt;
+&lt;li&gt;❌ description が曖昧 → 起動されない or 誤起動&lt;/li&gt;
+&lt;li&gt;❌ 巨大スクリプトを SKILL.md に直書き → &lt;code&gt;scripts/&lt;/code&gt; に分割する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;security-review&lt;/code&gt;：差分に対してセキュリティ観点のレビューを実施&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;init&lt;/code&gt;：新規プロジェクトに &lt;code&gt;CLAUDE.md&lt;/code&gt; を生成&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;simplify&lt;/code&gt;：直近の差分をリファクタしてシンプル化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;自動承認モード（permission mode）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code は安全のため、ファイル書き込みやシェル実行のたびに&lt;strong&gt;確認プロンプト&lt;/strong&gt;を出します。これを制御するのが permission mode です。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;モード&lt;/th&gt;
+&lt;th&gt;挙動&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;default&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;危険な操作のみ確認&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;acceptEdits&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;ファイル編集のみ自動承認&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;plan&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;計画のみ立てて実行はしない（読み取り専用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bypassPermissions&lt;/code&gt;（俗称：YOLO モード）&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;すべて自動実行&lt;/strong&gt;（要注意）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;起動時オプションや実行中の &lt;code&gt;Shift+Tab&lt;/code&gt; で切り替え可能。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 起動時に指定
+claude --permission-mode acceptEdits
+
+# 完全自動（サンドボックス環境でのみ推奨）
+claude --dangerously-skip-permissions
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;通常作業は &lt;code&gt;acceptEdits&lt;/code&gt;&lt;/strong&gt;：編集の確認プロンプトが減るだけでも体感が大きく変わる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;読むだけなら &lt;code&gt;plan&lt;/code&gt; モード&lt;/strong&gt;：調査や設計レビューはこれで十分。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完全自動は隔離環境で&lt;/strong&gt;：Docker / Devcontainer / &lt;code&gt;git worktree&lt;/code&gt; 内で動かす。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; で &lt;strong&gt;特定コマンドのみ allowlist&lt;/strong&gt; にしておけば、permission prompt の発生回数を減らせる。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;permissions&quot;: {
+    &quot;allow&quot;: [
+      &quot;Bash(pnpm test*)&quot;,
+      &quot;Bash(pnpm lint*)&quot;,
+      &quot;Bash(git status)&quot;,
+      &quot;Bash(git diff*)&quot;
+    ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 本番リポジトリで最初から &lt;code&gt;--dangerously-skip-permissions&lt;/code&gt; → &lt;code&gt;rm -rf&lt;/code&gt; 系の事故が起きうる&lt;/li&gt;
+&lt;li&gt;❌ allowlist に &lt;code&gt;Bash(*)&lt;/code&gt; を入れる → 自動承認の意味がない&lt;/li&gt;
+&lt;li&gt;❌ &lt;code&gt;git push --force&lt;/code&gt; を allowlist に入れる → 取り返しがつかなくなる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;大量のリファクタを夜間に流すとき、サンドボックスで YOLO モード ＋ Hooks でテスト自動実行&lt;/li&gt;
+&lt;li&gt;レビュー専用エイリアス：&lt;code&gt;alias claude-review=&apos;claude --permission-mode plan&apos;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;コンテキストサイズと /compact&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;LLM には扱える&lt;strong&gt;コンテキストウィンドウ&lt;/strong&gt;（Claude Sonnet 4.5/4.6 系で 200K〜1M トークン）があり、会話が長引くと制限に達します。Claude Code はこれを軽減するため：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;/compact&lt;/code&gt;&lt;/strong&gt;：会話履歴を要約して圧縮（手動実行）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自動コンパクション&lt;/strong&gt;：上限近くで自動的に要約&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;/clear&lt;/code&gt;&lt;/strong&gt;：履歴を完全リセット&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 手動で要約
+/compact
+
+# 要約のヒントを指定
+/compact 「現在のリファクタリングの進捗とTODOを残して圧縮して」
+
+# 完全リセット（タスク切替時）
+/clear
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;タスクが切り替わったら &lt;code&gt;/clear&lt;/code&gt;&lt;/strong&gt;：前のタスクの記憶は新タスクのノイズになる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;長期タスクは &lt;code&gt;/compact&lt;/code&gt; を意識的に&lt;/strong&gt;：自動コンパクションは予測しにくい。区切りで明示的に呼ぶと精度が安定する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重要事項はファイルに書き出す&lt;/strong&gt;：TODO / 設計メモは &lt;code&gt;notes/&lt;/code&gt; などに残せば、&lt;code&gt;/clear&lt;/code&gt; してもファイル経由で復元可能。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;キャッシュを温存する操作を選ぶ&lt;/strong&gt;：プロンプトキャッシュは 5 分 TTL。&lt;code&gt;/compact&lt;/code&gt; 直後など、キャッシュが切れる操作の連発はコスト増につながる。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 1 セッションで何時間も同じスレッドを使い続ける → コストも品質も悪化&lt;/li&gt;
+&lt;li&gt;❌ &lt;code&gt;/compact&lt;/code&gt; を何度も連打 → 要約の要約で情報が劣化&lt;/li&gt;
+&lt;li&gt;❌ 大きなファイル全体を何度も Read → コンテキストを圧迫。Grep / 範囲指定 Read を使う&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;長時間の調査タスクで「中間レポートを &lt;code&gt;report.md&lt;/code&gt; に保存 → &lt;code&gt;/clear&lt;/code&gt; → 続き」というワークフロー&lt;/li&gt;
+&lt;li&gt;マルチタスクの並走時、&lt;code&gt;git worktree&lt;/code&gt; ＋ 別セッションで分離&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;マルチエージェント（Sub-agents）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code には &lt;strong&gt;Agent ツール&lt;/strong&gt;があり、メインのエージェントから&lt;strong&gt;サブエージェント&lt;/strong&gt;を起動して、独立したコンテキストで作業させられます。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;エージェント種別&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Explore&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;高速な調査専用（読み取りのみ）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;general-purpose&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;何でもこなす汎用エージェント&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Plan&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;設計・計画立案専用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;カスタム&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.claude/agents/*.md&lt;/code&gt; で独自定義可能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;p&gt;メインエージェントが「広範な調査」「独立検証」「設計レビュー」を必要とした際に内部的に呼び出します。ユーザーが明示的にお願いすることも可能：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;このコードベースで認証周りの実装をすべて洗い出して。Exploreエージェントを使って。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;カスタムエージェント定義例 &lt;code&gt;.claude/agents/sql-reviewer.md&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+name: sql-reviewer
+description: SQLマイグレーションをレビューし、ロック・性能観点で問題を指摘
+tools: [Read, Grep, Bash]
+---
+あなたはDB専門家です。以下を確認してください：
+- NOT NULL 追加時のロック影響
+- インデックスの妥当性
+- 後方互換性
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;コンテキスト分離が目的&lt;/strong&gt;：メインエージェントの履歴を汚さずに済む大量の調査・検証はサブに任せる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;独立した「セカンドオピニオン」に使う&lt;/strong&gt;：レビュアーや設計レビューには別エージェントが効く。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;並列実行できる場合は並列で&lt;/strong&gt;：複数の独立調査は 1 メッセージで並列スポーン。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 些細な質問でも毎回サブエージェント → 起動コストの無駄&lt;/li&gt;
+&lt;li&gt;❌ サブにあいまいな指示「いい感じにして」 → 独立コンテキストなので余計に迷子になる&lt;/li&gt;
+&lt;li&gt;❌ サブの結果を鵜呑み → 「やったつもり」の幻覚に注意。実ファイルを確認する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;大規模リファクタの「事前調査 → 計画 → 実装 → レビュー」を 4 つのサブで分業&lt;/li&gt;
+&lt;li&gt;セキュリティレビュー時に &lt;code&gt;general-purpose&lt;/code&gt; ＋ &lt;code&gt;security-review&lt;/code&gt; Skill を併用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;リモートClaude（Remote Agents / Sandbox）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;ローカルマシンを占有せずに、**Anthropic 側のサンドボックス（または GitHub Actions などのリモート実行環境）**で Claude Code を走らせる機能群です。代表的なものに：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Anthropic 公式の Cloud Agents / Routines&lt;/strong&gt;：cron スケジュールで自動実行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Actions 連携&lt;/strong&gt;：PR コメントで &lt;code&gt;@claude&lt;/code&gt; メンションするとサンドボックス内で実行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Devcontainer / Docker 内実行&lt;/strong&gt;：自前のサンドボックス&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;p&gt;cron 風のスケジュール実行（例）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/schedule &quot;毎日 9:00 に dependabot PR をレビューしてマージ可能なものは approve&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;GitHub PR でのメンション：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@claude このPRをレビューして、テストの不足を指摘してください
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;「夜間バッチ」用途に最適&lt;/strong&gt;：定期的な依存更新・脆弱性スキャン・ドキュメント整備など。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;権限を最小化&lt;/strong&gt;：リモート Claude が触れる範囲を GitHub App の権限で絞る（特定リポのみ、特定 Action のみ）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;シークレット管理&lt;/strong&gt;：API キーは Repo Secrets 経由。Claude のログに漏れないよう Hooks でマスク。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 本番デプロイ権限まで渡す → 想定外コミットでロールアウトされる事故&lt;/li&gt;
+&lt;li&gt;❌ ログ未確認で長期間放置 → 暴走に気付けない&lt;/li&gt;
+&lt;li&gt;❌ コスト管理なしで cron 連打 → API 費用が膨らむ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;毎日 9:00 に「昨日マージされた PR を要約して Slack へ投稿」&lt;/li&gt;
+&lt;li&gt;毎週月曜に「ライブラリ更新 PR を作成」&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Hooks（イベントフック）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code には &lt;strong&gt;ライフサイクルイベント&lt;/strong&gt;があり、各イベントで任意のシェルコマンドを実行できます。設定は &lt;code&gt;.claude/settings.json&lt;/code&gt; の &lt;code&gt;hooks&lt;/code&gt; フィールド。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;イベント&lt;/th&gt;
+&lt;th&gt;タイミング&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PreToolUse&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;ツール実行直前&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PostToolUse&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;ツール実行直後&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;UserPromptSubmit&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;ユーザー入力送信時&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Stop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;エージェント停止時&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SubagentStop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;サブエージェント停止時&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Notification&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;確認プロンプト発生時&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; 例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;hooks&quot;: {
+    &quot;PostToolUse&quot;: [
+      {
+        &quot;matcher&quot;: &quot;Edit|Write&quot;,
+        &quot;hooks&quot;: [
+          { &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;pnpm lint --fix&quot; }
+        ]
+      }
+    ],
+    &quot;Stop&quot;: [
+      {
+        &quot;hooks&quot;: [
+          { &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;osascript -e &apos;display notification \&quot;Claude finished\&quot;&apos;&quot; }
+        ]
+      }
+    ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;編集後は自動 lint / format&lt;/strong&gt;：人間がレビューするときに無駄な指摘が減る。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ガードレールに使う&lt;/strong&gt;：&lt;code&gt;PreToolUse&lt;/code&gt; で「特定ファイルへの編集を拒否」など。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完了通知&lt;/strong&gt;：長時間タスクの終了を macOS 通知 / Slack で受け取る。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ Hook で重い処理（フルテストなど）→ 体感が極端に遅くなる&lt;/li&gt;
+&lt;li&gt;❌ 失敗しても無視するスクリプト → 通った気になる落とし穴&lt;/li&gt;
+&lt;li&gt;❌ 無限ループを作るフック（編集→lint→ファイル書き換え→編集 …）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PostToolUse&lt;/code&gt; で &lt;code&gt;prettier --write&lt;/code&gt; → 常にフォーマット済み&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Stop&lt;/code&gt; フックで &lt;code&gt;notify-send&lt;/code&gt; ＋ ベル音&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PreToolUse&lt;/code&gt; で本番DBに接続しようとした場合に拒否&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Plugins&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Plugin&lt;/strong&gt; は Skills / Hooks / Agents / Commands をパッケージ化して&lt;strong&gt;配布可能にする仕組み&lt;/strong&gt;です。&lt;code&gt;marketplace&lt;/code&gt; から追加でき、社内独自の Plugin を Git リポジトリで公開することも可能です。&lt;/p&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Plugin 一覧
+/plugins
+
+# 追加（マーケットプレイス）
+/plugins install anthropic/code-review
+
+# 自社プラグインを Git から
+/plugins install git+ssh://git@github.com/myorg/claude-plugins.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plugin の中身（例）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;my-plugin/
+├── plugin.json          # メタデータ
+├── skills/
+│   └── deploy/SKILL.md
+├── agents/
+│   └── reviewer.md
+└── hooks/
+    └── post-edit.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;チーム共通の作法を Plugin 化&lt;/strong&gt;：CLAUDE.md だけでは表現しきれない複合的な機能（Skill ＋ Hook ＋ Agent）をひとまとめに配布。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;バージョニング&lt;/strong&gt;：Plugin の更新で挙動が変わると事故になるのでセマンティックバージョニングを徹底。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 信頼できないソースから入れる → Hook で任意コマンド実行されるリスクあり&lt;/li&gt;
+&lt;li&gt;❌ 1 機能だけの Plugin を乱立 → Skill 単体で十分&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;社内デプロイフローをまるごと Plugin 化（Skill: deploy-staging / Hook: 自動 changelog 更新 / Agent: deploy-reviewer）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Chrome拡張&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code 関連の Chrome 拡張は、&lt;strong&gt;ブラウザの内容（選択テキスト、PR、Issue、Stack Overflow など）を Claude にワンクリックで渡す&lt;/strong&gt;ためのものです。代表的には：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Claude for Chrome&lt;/strong&gt;：ページの選択範囲・URL を取得して Claude のコンテキストに送る&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Obsidian 連携拡張&lt;/strong&gt;：Web → Obsidian → Claude の動線&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;拡張をインストール&lt;/li&gt;
+&lt;li&gt;ページ上で対象テキストを選択&lt;/li&gt;
+&lt;li&gt;拡張のショートカットキーで Claude に送信&lt;/li&gt;
+&lt;li&gt;ローカルの Claude Code セッションがコンテキスト付きで起動&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;長文のドキュメントを丸ごと送らない&lt;/strong&gt;：必要部分のみ選択。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;機密ページでは無効化&lt;/strong&gt;：社内 Wiki などで送信先を誤らないよう、ドメイン制限を設定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 「全ページ送信」→ コンテキスト浪費 ＋ 情報漏洩リスク&lt;/li&gt;
+&lt;li&gt;❌ 拡張を経由してログを残さない → 何を送ったか後から確認できない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;LeetCode / AtCoder の問題ページから直接 Claude に解法を相談&lt;/li&gt;
+&lt;li&gt;GitHub Issue を選択 → 関連する自分のコードベースを Claude に調査させる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;GitHub連携&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code には &lt;strong&gt;GitHub 公式 App&lt;/strong&gt; があり、PR・Issue 上で &lt;code&gt;@claude&lt;/code&gt; メンションすると、リモート Claude が起動して以下を実行できます：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PR レビュー＋コメント投稿&lt;/li&gt;
+&lt;li&gt;Issue から PR 自動作成（実装 → ブランチ作成 → PR）&lt;/li&gt;
+&lt;li&gt;CI 失敗時の自動リトライ・修正提案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ローカル CLI からも &lt;code&gt;gh&lt;/code&gt; コマンド経由で密接に連携できます。&lt;/p&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Claude Code 内から
+gh pr create --title &quot;feat: add X&quot; --body &quot;...&quot;
+gh pr review 123 --approve
+gh issue list --label bug
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;PR コメントで：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@claude このコメントの指摘を反映してコミットしてください
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GitHub App の権限は最小化&lt;/strong&gt;：必要なリポのみ、必要なスコープのみ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;gh&lt;/code&gt; を活用&lt;/strong&gt;：ローカル Claude Code は &lt;code&gt;gh&lt;/code&gt; で十分強力。コードレビュー、PR 作成、リリースノート作成までこなせる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CI と組み合わせる&lt;/strong&gt;：CI 失敗 → Claude にスタックトレースを渡して修正案、というループ。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ &lt;code&gt;main&lt;/code&gt; への直接 push 権限を Claude に与える → ロールバック不能事故&lt;/li&gt;
+&lt;li&gt;❌ Issue の自動 PR 化を「全 Issue」に適用 → ノイズ PR が量産される&lt;/li&gt;
+&lt;li&gt;❌ レビュー結果を盲信して即マージ → 必ず人間のサインオフを残す&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Issue ラベル &lt;code&gt;claude-task&lt;/code&gt; が付いたものだけ自動で PR ドラフト化&lt;/li&gt;
+&lt;li&gt;リリース前に過去 1 週間の PR を Claude が要約してリリースノート生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;その他押さえておきたい機能&lt;/h2&gt;
+&lt;h3&gt;Worktree / Isolation&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;git worktree&lt;/code&gt; を使った&lt;strong&gt;分離実行&lt;/strong&gt;で、メインブランチに影響を与えずに並列タスクを走らせられる。エージェント呼び出し時に &lt;code&gt;isolation: &quot;worktree&quot;&lt;/code&gt; を指定可能。&lt;/p&gt;
+&lt;h3&gt;Background tasks&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;run_in_background&lt;/code&gt; 付きで Bash 実行すると、長時間タスクをバックグラウンド化できる。&lt;code&gt;Monitor&lt;/code&gt; でログのストリーミング監視。&lt;/p&gt;
+&lt;h3&gt;MCP（Model Context Protocol）&lt;/h3&gt;
+&lt;p&gt;外部のツールサーバー（DB、Slack、Figma など）を MCP サーバーとして接続でき、Claude が直接呼び出せる。&lt;code&gt;.mcp.json&lt;/code&gt; に定義。&lt;/p&gt;
+&lt;h3&gt;Slash Commands（カスタム）&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;.claude/commands/*.md&lt;/code&gt; でプロジェクト固有のコマンドを定義可能。Skill よりも軽量、テンプレート的な使い方に向く。&lt;/p&gt;
+&lt;h3&gt;Settings 階層&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.claude/settings.json&lt;/code&gt;（個人）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/.claude/settings.json&lt;/code&gt;（プロジェクト共通、コミット）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/.claude/settings.local.json&lt;/code&gt;（個人ローカル、&lt;code&gt;.gitignore&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;キャッシュ最適化&lt;/h3&gt;
+&lt;p&gt;プロンプトキャッシュは 5 分 TTL。短時間に繰り返し呼ぶワークロードは安く速くなる。逆に &lt;strong&gt;5 分超え&lt;/strong&gt; での待機はコストが膨らむので注意。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;全体ベストプラクティスまとめ&lt;/h2&gt;
+&lt;h3&gt;「効く順」で導入する&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;CLAUDE.md&lt;/strong&gt; を整備（最大の費用対効果）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; の allowlist&lt;/strong&gt; で permission prompt を減らす&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hooks&lt;/strong&gt; で lint / format / 完了通知を自動化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skills&lt;/strong&gt; で定型作業をパッケージ化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;マルチエージェント / Plugins / リモート&lt;/strong&gt; は必要になってから&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;安全運用の三原則&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;🔒 &lt;strong&gt;権限は最小・段階的に&lt;/strong&gt;：&lt;code&gt;plan&lt;/code&gt; → &lt;code&gt;default&lt;/code&gt; → &lt;code&gt;acceptEdits&lt;/code&gt; → &lt;code&gt;bypass&lt;/code&gt; の順に上げる&lt;/li&gt;
+&lt;li&gt;🔒 &lt;strong&gt;隔離環境で攻めた使い方&lt;/strong&gt;：Docker / worktree / リモートサンドボックス&lt;/li&gt;
+&lt;li&gt;🔒 &lt;strong&gt;コミットは人間が確認&lt;/strong&gt;：&lt;code&gt;git commit&lt;/code&gt; の自動化はしても、push 前のレビューは残す&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;コスト・速度の三原則&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;⚡ &lt;strong&gt;タスク切替で &lt;code&gt;/clear&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;⚡ &lt;strong&gt;大きなファイルは Grep / 範囲 Read&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;⚡ &lt;strong&gt;5 分以内ならキャッシュ温存、長く待つなら一気に&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;失敗パターンの早期発見&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;エージェントが&lt;strong&gt;同じツールを繰り返す&lt;/strong&gt;ようになったら無限ループの兆候 → 一度止める&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;「やりました」と言うが diff がない&lt;/strong&gt; → 必ず &lt;code&gt;git status&lt;/code&gt; / &lt;code&gt;git diff&lt;/code&gt; で確認&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;要約後に話が噛み合わない&lt;/strong&gt; → &lt;code&gt;/compact&lt;/code&gt; の劣化、&lt;code&gt;/clear&lt;/code&gt; ＋ 要点ファイル読み直しに切り替え&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;Claude Code はあくまで「優秀だが新人のチームメイト」です。&lt;strong&gt;CLAUDE.md で文化を共有し、Hooks でガードレールを敷き、Skills と Plugins で標準作業を整備する&lt;/strong&gt;ことで、長期的に安定したパフォーマンスを引き出せます。逆に何も整備せず権限だけ広げると、便利さと裏腹に事故率が上がるので、上記のベストプラクティスを段階的に取り入れていくのがおすすめです。&lt;/p&gt;
+</content:encoded></item><item><title>Macディスクスペース確保操作</title><link>https://tutttuwi.github.io/posts/2026-04-27_mac%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E7%A2%BA%E4%BF%9D%E6%93%8D%E4%BD%9C/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-27_mac%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E7%A2%BA%E4%BF%9D%E6%93%8D%E4%BD%9C/</guid><pubDate>Mon, 27 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;Macのストレージは新しいバージョンのmacOSやアプリケーション更新により、気づかないうちに容量が逼迫することがあります。本記事では、Macでディスクスペースを確保するための調査方法と削減テクニック、開発環境固有の容量問題、そしてよくあるトラブルシューティングをまとめています。&lt;/p&gt;
+&lt;h2&gt;目次&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E3%81%8C%E9%80%BC%E8%BF%AB%E3%81%99%E3%82%8B%E4%B8%BB%E3%81%AA%E5%8E%9F%E5%9B%A0&quot;&gt;ディスクスペースが逼迫する主な原因&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E5%AE%B9%E9%87%8F%E3%82%92%E8%AA%BF%E6%9F%BB%E3%81%99%E3%82%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89&quot;&gt;容量を調査するコマンド&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E9%96%A2%E9%80%A3%E3%81%AE%E5%AE%B9%E9%87%8F%E5%89%8A%E6%B8%9B&quot;&gt;開発環境関連の容量削減&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%A8%E3%83%AD%E3%82%B0%E3%81%AE%E5%89%8A%E6%B8%9B&quot;&gt;キャッシュとログの削減&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#mac%E3%81%82%E3%82%8B%E3%81%82%E3%82%8B%E3%81%AA%E5%AE%B9%E9%87%8F%E5%95%8F%E9%A1%8C&quot;&gt;Macあるあるな容量問題&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E4%BE%BF%E5%88%A9%E3%81%AA%E3%83%84%E3%83%BC%E3%83%AB&quot;&gt;便利なツール&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;ディスクスペースが逼迫する主な原因&lt;/h2&gt;
+&lt;h3&gt;1. &lt;strong&gt;開発環境関連&lt;/strong&gt;（最も容量消費しやすい）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Xcode キャッシュ&amp;amp;派生データ&lt;/strong&gt;：DerivedDataが数GB～十数GBになることも&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;iOS DeviceSupport&lt;/strong&gt;：複数バージョンのシミュレータサポートファイル&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gradle キャッシュ&lt;/strong&gt;（Android開発）：&lt;code&gt;.gradle/caches/&lt;/code&gt; が数GB&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Node.js（node_modules）&lt;/strong&gt;：プロジェクトごとに数百MB～GB単位&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;pnpm/npm/yarn キャッシュ&lt;/strong&gt;：パッケージマネージャの履歴&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Docker イメージ&amp;amp;コンテナ&lt;/strong&gt;：不要なイメージが蓄積&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Python 仮想環境&lt;/strong&gt;（venv, conda）：複数プロジェクトで重複&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2. &lt;strong&gt;キャッシュファイル&lt;/strong&gt;（見えにくい）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/Library/Caches/&lt;/code&gt;：アプリケーション各種のキャッシュ&lt;/li&gt;
+&lt;li&gt;ブラウザキャッシュ（Chrome、Safari等）&lt;/li&gt;
+&lt;li&gt;システムキャッシュ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;3. &lt;strong&gt;ログファイル&lt;/strong&gt;（蓄積型）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/Library/Logs/&lt;/code&gt;：アプリケーションログ&lt;/li&gt;
+&lt;li&gt;システムログ（&lt;code&gt;/var/log/&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;アプリケーション固有のログディレクトリ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;4. &lt;strong&gt;Macあるあるな容量消費&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Time Machine ローカルスナップショット&lt;/strong&gt;：バックアップ容量&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;言語データ&lt;/strong&gt;：Spotlightやシステムの多言語対応ファイル&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;システムキャッシュ&lt;/strong&gt;（.DS_Store等）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;一時ファイル&lt;/strong&gt;（&lt;code&gt;/tmp/&lt;/code&gt;, &lt;code&gt;/var/tmp/&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;古いバージョンのOSダウンロード&lt;/strong&gt;（&lt;code&gt;/Library/Updates/&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;5. &lt;strong&gt;メディアとバックアップ&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ダウンロードフォルダ&lt;/strong&gt;：使い終わったファイルが残存&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ゴミ箱&lt;/strong&gt;：未削除ファイル&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;クラウドストレージのローカルキャッシュ&lt;/strong&gt;（iCloud Drive等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;容量を調査するコマンド&lt;/h2&gt;
+&lt;h3&gt;ディスク全体の使用状況を確認&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 全体の概観を見る
+df -h
+
+# より詳細に見る
+diskutil info /
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;大容量フォルダを特定（推奨）&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 1GB以上のフォルダを容量順で表示（デスクトップに結果を出力）
+sudo du --si -xct 1000000000 /System/Volumes/Data | sort -nr | head -30
+
+# より詳細：結果をファイルに保存
+sudo du --si -xct 1000000000 /System/Volumes/Data | sort -nr &amp;gt; ~/Desktop/DiskSpace.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;特定ディレクトリの容量を確認&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# ホームディレクトリの直下のフォルダサイズ
+du -sh ~/*
+
+# Libraryディレクトリの直下
+du -sh ~/Library/*
+
+# より詳細（木構造で表示）
+tree -h -L 2 ~/Library 2&amp;gt;/dev/null || find ~/Library -maxdepth 2 -type d | xargs du -sh | sort -hr | head -20
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;ローカルスナップショットのサイズ確認（Time Machine）&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Time Machine ローカルバックアップのサイズ確認
+tmutil listlocalsnapshots /
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;開発環境関連の容量削減&lt;/h2&gt;
+&lt;h3&gt;&lt;strong&gt;1. Xcode キャッシュとシミュレータ&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4&gt;DerivedData の削除（数GB～20GB程度削減可能）&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# まず容量を確認
+du -sh ~/Library/Developer/Xcode/DerivedData
+
+# 削除
+rm -rf ~/Library/Developer/Xcode/DerivedData/*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;iOS DeviceSupport の不要バージョン削除&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# リスト表示
+ls -lh ~/Library/Developer/Xcode/iOS\ DeviceSupport/
+
+# 不要なバージョン（古いiOSバージョン）をフォルダごと削除
+rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport/16.* # 例：iOS 16系を削除
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;シミュレータの利用不可デバイスを削除&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# 利用可能なデバイスをリスト表示
+xcrun simctl list devices
+
+# 利用不可デバイスを自動削除（2～3GB削減可能）
+xcrun simctl delete unavailable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Xcodeキャッシュの強制リセット&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;xcrun --kill-cache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;2. Gradle キャッシュ&lt;/strong&gt;（Android開発）&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Gradleキャッシュディレクトリの容量確認
+du -sh ~/.gradle/caches/
+
+# 削除
+rm -rf ~/.gradle/caches/
+
+# または、gradle コマンドで実行
+cd /path/to/your/android/project
+./gradlew cleanBuildCache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;3. Node.js パッケージマネージャ&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4&gt;&lt;strong&gt;pnpm の不要キャッシュ削除&lt;/strong&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# ストア内の不要ファイル削除（推奨、安全）
+pnpm store prune
+
+# より詳細に確認
+pnpm store status
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&lt;strong&gt;npm キャッシュ削除&lt;/strong&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;npm cache clean --force
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&lt;strong&gt;yarn キャッシュ削除&lt;/strong&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;yarn cache clean
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&lt;strong&gt;node_modules の削除&lt;/strong&gt;（開発中は注意、再インストール必要）&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# 個別プロジェクト
+cd /path/to/project
+rm -rf node_modules/
+pnpm install # または npm install / yarn install
+
+# 複数プロジェクトを一括処理
+find ~ -maxdepth 4 -name node_modules -type d -exec du -sh {} \; | sort -rh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;4. Docker&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 使用していないイメージ、コンテナ、ネットワークを削除（推奨）
+docker system prune -a
+
+# より詳細な確認
+docker system df
+
+# 特定のイメージを削除
+docker rmi &amp;lt;image_id&amp;gt;
+
+# ダンgling imageだけ削除（安全）
+docker image prune -a --filter &quot;dangling=true&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;5. Ollama（LLMモデル）&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# ダウンロード済みモデルをリスト表示
+ollama list
+
+# 不要なモデルを削除（数GBまたは数十GB）
+ollama rm &amp;lt;model_name&amp;gt;
+
+# 例：Llama2 (7B) を削除
+ollama rm llama2:7b
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;6. Python 仮想環境&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# venv の容量確認
+du -sh ~/.venv/
+du -sh ./venv/
+
+# 不要な仮想環境をまとめて削除
+find ~ -maxdepth 3 -name &quot;venv&quot; -o -name &quot;.venv&quot; | xargs du -sh | sort -rh
+
+# 削除
+rm -rf ~/.venv/
+rm -rf ./venv/
+
+# conda の場合
+conda clean --all -y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;キャッシュとログの削減&lt;/h2&gt;
+&lt;h3&gt;&lt;strong&gt;Caches フォルダの削除&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 容量確認
+du -sh ~/Library/Caches/
+
+# 削除（注意：アプリの再ダウンロードが発生する可能性）
+rm -rf ~/Library/Caches/*
+
+# 安全な部分削除（Chromeキャッシュなど）
+rm -rf ~/Library/Caches/Google/Chrome/Default/Cache/
+rm -rf ~/Library/Caches/Firefox/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;ブラウザキャッシュの削除&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Chrome
+rm -rf ~/Library/Application\ Support/Google/Chrome/Default/Cache/
+rm -rf ~/Library/Application\ Support/Google/Chrome/Default/Code\ Cache/
+
+# Safari
+rm -rf ~/Library/Safari/History.db*
+rm -rf ~/Library/Caches/com.apple.Safari/
+
+# Firefox
+rm -rf ~/Library/Application\ Support/Firefox/Profiles/*/cache*/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;ログファイルの削除&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# ホームディレクトリ内のログ
+du -sh ~/Library/Logs/
+rm -rf ~/Library/Logs/*
+
+# システムログ（rootが必要）
+sudo du -sh /var/log/
+sudo rm -rf /var/log/*.log  # 注意：ログが消える
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;一時ファイルの削除&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# /tmp ディレクトリ
+du -sh /tmp
+rm -rf /tmp/*
+
+# /var/tmp ディレクトリ
+sudo du -sh /var/tmp
+sudo rm -rf /var/tmp/*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Macあるあるな容量問題&lt;/h2&gt;
+&lt;h3&gt;&lt;strong&gt;1. Time Machine ローカルスナップショット&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Macがバッテリー駆動で外付けドライブがない場合、自動的にローカルスナップショット（バックアップ）が作成されます。これが10GB～100GB近く占めることがあります。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# スナップショット確認
+tmutil listlocalsnapshots /
+
+# 最も古いスナップショットを削除
+tmutil deletelocalsnapshots $(tmutil listlocalsnapshots / | head -1 | tr -d &apos;.&apos; | awk &apos;{print $NF}&apos;)
+
+# より安全：全スナップショット削除（要確認）
+tmutil disablelocal  # ローカルスナップショット無効化
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;2. 言語データと絵文字&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Spotlightインデックス
+du -sh ~/Library/Metadata/CoreSpotlight/
+
+# システム言語ファイル
+du -sh /Library/Components/
+
+# 不要な言語リソースを削除する場合
+# /System/Library/English.lproj/ など（リスク高）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;3. .DS_Store ファイル&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;macOSが各フォルダに自動生成するメタデータ。単体は小さいが、蓄積するとGB単位に。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# すべての .DS_Store を検索・削除
+find ~ -name &quot;.DS_Store&quot; -type f -delete
+
+# または
+sudo find / -name &quot;.DS_Store&quot; -type f -delete
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;4. ダウンロードフォルダの未整理&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# ダウンロードフォルダの容量確認
+du -sh ~/Downloads
+
+# 30日以上前のファイルを確認
+find ~/Downloads -mtime +30 -type f
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;5. ゴミ箱の未削除&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# ゴミ箱の容量確認
+du -sh ~/.Trash/
+
+# 空にする
+rm -rf ~/.Trash/*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;6. iCloud Drive のローカルキャッシュ&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# iCloud Driveのキャッシュ
+du -sh ~/Library/Mobile\ Documents/
+
+# 保存容量を最適化
+# システム設定 &amp;gt; iCloud &amp;gt; iCloud Drive &amp;gt; オプション &amp;gt; 書類とデータ
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;7. アプリケーションの言語ファイル削除&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# アプリの多言語サポートを削除（日本語のみ残す等）
+# AppMaker等のツールを使用するか、手動で削除可能
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;便利なツール&lt;/h2&gt;
+&lt;h3&gt;&lt;strong&gt;GUI ツール&lt;/strong&gt;&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ツール&lt;/th&gt;
+&lt;th&gt;説明&lt;/th&gt;
+&lt;th&gt;価格&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Disk Diag&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;ディスク容量を視覚的に表示、大容量ファイルを検出&lt;/td&gt;
+&lt;td&gt;無料/有料&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;CleanMyMac X&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;キャッシュ、ログ、不要ファイルの一括削除&lt;/td&gt;
+&lt;td&gt;有料（サブスク）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;DaisyDisk&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;円形グラフでディスク使用状況を視覚化&lt;/td&gt;
+&lt;td&gt;有料&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;OmniDiskSweeper&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;シンプルで軽量、視覚的なディスク分析&lt;/td&gt;
+&lt;td&gt;無料&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Finder&lt;/strong&gt; の「ファイル情報」&lt;/td&gt;
+&lt;td&gt;標準機能でフォルダサイズを確認&lt;/td&gt;
+&lt;td&gt;無料&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;&lt;strong&gt;CLI ツール&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4&gt;&lt;strong&gt;ncdu（NCurses Disk Usage）&lt;/strong&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# インストール
+brew install ncdu
+
+# 使用例
+ncdu ~
+ncdu ~/Library
+
+# ナビゲーション
+# ↑↓：上下移動
+# →：フォルダを開く
+# ←：戻る
+# d：削除
+# q：終了
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&lt;strong&gt;dust（より modern な du）&lt;/strong&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# インストール
+brew install dust
+
+# 使用例
+dust ~/Library
+dust -r ~/  # 逆順でソート
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&lt;strong&gt;dirstat-rs（Rust 製）&lt;/strong&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# インストール
+brew install dirstat-rs
+
+# 使用例
+dirstat ~/Library
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&lt;strong&gt;duf（ディスク使用状況 CLI）&lt;/strong&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;# インストール
+brew install duf
+
+# 使用例
+duf        # マウント済みディスク全体
+duf ~/     # ホームディレクトリ
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;ワンコマンドで実行できるスクリプト&lt;/h2&gt;
+&lt;h3&gt;&lt;strong&gt;安全な削減スクリプト&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+
+echo &quot;🧹 Macディスク容量削減スクリプト&quot;
+echo &quot;================================&quot;
+
+# 現在の使用量
+echo &quot;&quot;
+echo &quot;📊 削減前の使用量：&quot;
+df -h | grep -E &quot;disk|Filesystem&quot;
+
+# キャッシュ削除
+echo &quot;&quot;
+echo &quot;🗑️  キャッシュを削除...&quot;
+rm -rf ~/Library/Caches/* 2&amp;gt;/dev/null
+pnpm store prune 2&amp;gt;/dev/null
+npm cache clean --force 2&amp;gt;/dev/null
+
+# Xcode 関連
+echo &quot;🗑️  Xcode キャッシュを削除...&quot;
+rm -rf ~/Library/Developer/Xcode/DerivedData/* 2&amp;gt;/dev/null
+xcrun simctl delete unavailable 2&amp;gt;/dev/null
+
+# Docker
+echo &quot;🗑️  Docker イメージを削除...&quot;
+docker system prune -a -f 2&amp;gt;/dev/null
+
+# ログ削除
+echo &quot;🗑️  ログファイルを削除...&quot;
+rm -rf ~/Library/Logs/* 2&amp;gt;/dev/null
+
+# 結果表示
+echo &quot;&quot;
+echo &quot;📊 削減後の使用量：&quot;
+df -h | grep -E &quot;disk|Filesystem&quot;
+echo &quot;&quot;
+echo &quot;✅ 完了！&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;strong&gt;より詳細に容量を確認するスクリプト&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+
+echo &quot;🔍 Macディスク容量分析&quot;
+echo &quot;====================&quot;
+
+DIRS=(
+  &quot;~/Library/Developer/Xcode/DerivedData&quot;
+  &quot;~/Library/Caches&quot;
+  &quot;~/Library/Logs&quot;
+  &quot;~/.gradle/caches&quot;
+  &quot;~/.docker&quot;
+  &quot;~/Library/Mobile Documents&quot;
+  &quot;~/.Trash&quot;
+  &quot;~/Downloads&quot;
+)
+
+for DIR in &quot;${DIRS[@]}&quot;; do
+  EXPANDED=$(eval echo &quot;$DIR&quot;)
+  if [ -d &quot;$EXPANDED&quot; ]; then
+    SIZE=$(du -sh &quot;$EXPANDED&quot; 2&amp;gt;/dev/null | awk &apos;{print $1}&apos;)
+    echo &quot;$DIR: $SIZE&quot;
+  fi
+done
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;削減時の注意点&lt;/h2&gt;
+&lt;h3&gt;&lt;strong&gt;削除しても安全なもの&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ DerivedData（再構築される）&lt;/li&gt;
+&lt;li&gt;✅ キャッシュ（再生成される）&lt;/li&gt;
+&lt;li&gt;✅ 不要なDockerイメージ&lt;/li&gt;
+&lt;li&gt;✅ .DS_Store&lt;/li&gt;
+&lt;li&gt;✅ ローカルスナップショット（バックアップ必須時のみ）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;strong&gt;削除に慎重なもの&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;⚠️ node_modules（再インストール必要）&lt;/li&gt;
+&lt;li&gt;⚠️ Python 仮想環境（再構築必要）&lt;/li&gt;
+&lt;li&gt;⚠️ システムログ（トラブル時に必要）&lt;/li&gt;
+&lt;li&gt;⚠️ iCloud Drive のキャッシュ（同期の遅延）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;strong&gt;絶対に削除してはいけないもの&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ /System（システムファイル）&lt;/li&gt;
+&lt;li&gt;❌ /Library/Fonts（フォント）&lt;/li&gt;
+&lt;li&gt;❌ 重要なプロジェクトファイル&lt;/li&gt;
+&lt;li&gt;❌ Time Machine の有効なバックアップ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;Macの容量逼迫は予防が重要です：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;定期的に大容量フォルダを確認&lt;/strong&gt;する習慣をつける&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;開発環境のキャッシュを定期的にクリア&lt;/strong&gt;する&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要なアプリ、言語ファイルを削除&lt;/strong&gt;する&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Time Machine の設定を確認&lt;/strong&gt;する&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;必要に応じて自動削減ツールを活用&lt;/strong&gt;する&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;スクリプトを cronjob で定期実行させることで、容量問題をプロアクティブに解決できます。&lt;/p&gt;
+</content:encoded></item><item><title>脆弱性診断関連ツール種別サマリ</title><link>https://tutttuwi.github.io/posts/2026-04-14_security-summary/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-14_security-summary/</guid><pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;脆弱性診断ツールは種類が多く、選定の時点で迷いやすいです。
 この記事では、まず全体像をつかみ、そのあとに実運用で使える比較と導入ステップまで一気に整理します。&lt;/p&gt;
 &lt;h2&gt;想定読者とこの記事のゴール&lt;/h2&gt;
@@ -1003,6 +2485,34 @@ gem &quot;sqlite3&quot;
 &lt;h3&gt;Gemfile管理のイメージ&lt;/h3&gt;
 &lt;p&gt;Gemfileは「注文書」、Gemfile.lockは「納品書（確定版）」のような関係です。&lt;/p&gt;
 &lt;hr /&gt;
+</content:encoded></item><item><title>Markdownファイルをリアルタイムで編集する方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;Markdown編集の管理方法について&lt;/p&gt;
+&lt;h2&gt;VSCode Extension&lt;/h2&gt;
+&lt;h3&gt;Markdown Editor&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&quot;&gt;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;拡張機能でWYSIWYGが実現できるエディタ&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tools&lt;/h2&gt;
+&lt;h3&gt;MarkText&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/marktext/marktext&quot;&gt;https://github.com/marktext/marktext&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;brew&lt;/code&gt;経由だとインストール後に起動できないことを確認しました。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;以下より直接インストールすることで動作確認ができました。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&quot;&gt;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>GoogleCalendarイベント追加リンク作成方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_add-google-calendar-event/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_add-google-calendar-event/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;GoogleCalendarイベントをリンクから作成する方法についてまとめます。&lt;/p&gt;
 &lt;h2&gt;作成方法参考&lt;/h2&gt;
@@ -1046,34 +2556,6 @@ location=North Pole
 &lt;h2&gt;サンプルURL&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://calendar.google.com/calendar/u/0/r/eventedit?text=Birthday&amp;amp;dates=20201231T193000Z/20201231T223000Z&amp;amp;details=With+clowns+and+stuff&amp;amp;location=North+Pole&quot;&gt;https://calendar.google.com/calendar/u/0/r/eventedit?text=Birthday&amp;amp;dates=20201231T193000Z/20201231T223000Z&amp;amp;details=With+clowns+and+stuff&amp;amp;location=North+Pole&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded></item><item><title>Markdownファイルをリアルタイムで編集する方法</title><link>https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-02-25_edit-markdown-efficiency/</guid><pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
-&lt;p&gt;Markdown編集の管理方法について&lt;/p&gt;
-&lt;h2&gt;VSCode Extension&lt;/h2&gt;
-&lt;h3&gt;Markdown Editor&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&quot;&gt;https://marketplace.cursorapi.com/items/?itemName=zaaack.markdown-editor&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;拡張機能でWYSIWYGが実現できるエディタ&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Tools&lt;/h2&gt;
-&lt;h3&gt;MarkText&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/marktext/marktext&quot;&gt;https://github.com/marktext/marktext&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;brew&lt;/code&gt;経由だとインストール後に起動できないことを確認しました。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;以下より直接インストールすることで動作確認ができました。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&quot;&gt;https://github.com/marktext/marktext?tab=readme-ov-file#download-and-installation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>ローカルLLM実践入門</title><link>https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2025-04_%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABllm%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80/</guid><pubDate>Thu, 17 Apr 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;基本情報&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;価格：2530円（本体2300円）　発行・発売日：2024年12月23日
@@ -29056,9 +30538,9 @@ https://aws.amazon.com/jp/ec2/purchasing-options/dedicated-instances/&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;ApacheSparkを使ってデータ予測ができる成果物を作成する機会があり、実際に開発/使用することになったが、前提知識がなかったため購入&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>応用情報技術者試験 問題集</title><link>https://tutttuwi.github.io/posts/2017_06_ap_%E5%95%8F%E9%A1%8C%E9%9B%86/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2017_06_ap_%E5%95%8F%E9%A1%8C%E9%9B%86/</guid><pubDate>Thu, 01 Jun 2017 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;応用情報技術者試験 教科書&lt;/h1&gt;
+</content:encoded></item><item><title>応用情報技術者試験 教科書</title><link>https://tutttuwi.github.io/posts/2017_06_ap/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2017_06_ap/</guid><pubDate>Thu, 01 Jun 2017 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;応用情報技術者試験 教科書&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2017_06_ap_exercise.JPG&quot; alt=&quot;2017_06_ap_exercise&quot; title=&quot;2017_06_ap_exercise&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2017_06_ap.jpg&quot; alt=&quot;2017_06_ap&quot; title=&quot;2017_06_ap&quot; style=&quot;width:980px&quot;&amp;gt;
 &amp;lt;/div&amp;gt;&lt;/p&gt;
 &lt;h2&gt;学んだこと&lt;/h2&gt;
 &lt;ul&gt;
@@ -29068,9 +30550,9 @@ https://aws.amazon.com/jp/ec2/purchasing-options/dedicated-instances/&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;応用情報技術者資格取得のため&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>応用情報技術者試験 教科書</title><link>https://tutttuwi.github.io/posts/2017_06_ap/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2017_06_ap/</guid><pubDate>Thu, 01 Jun 2017 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;応用情報技術者試験 教科書&lt;/h1&gt;
+</content:encoded></item><item><title>応用情報技術者試験 問題集</title><link>https://tutttuwi.github.io/posts/2017_06_ap_%E5%95%8F%E9%A1%8C%E9%9B%86/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2017_06_ap_%E5%95%8F%E9%A1%8C%E9%9B%86/</guid><pubDate>Thu, 01 Jun 2017 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;応用情報技術者試験 教科書&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2017_06_ap.jpg&quot; alt=&quot;2017_06_ap&quot; title=&quot;2017_06_ap&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2017_06_ap_exercise.JPG&quot; alt=&quot;2017_06_ap_exercise&quot; title=&quot;2017_06_ap_exercise&quot; style=&quot;width:980px&quot;&amp;gt;
 &amp;lt;/div&amp;gt;&lt;/p&gt;
 &lt;h2&gt;学んだこと&lt;/h2&gt;
 &lt;ul&gt;
@@ -32874,6 +34356,27 @@ public static long generateSerialNumber() {
 &lt;ul&gt;
 &lt;li&gt;Javaの基礎的なところ、概念的なところについて理解を深めたかった&lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>Windows7 上級マニュアル ネットワーク編</title><link>https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Windows7 上級マニュアル ネットワーク編&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2015_01_windows7_nw.JPG&quot; alt=&quot;2015_01_windows7_nw&quot; title=&quot;2015_01_windows7_nw&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Windowsのネットワーク設定周りの理解を深めることができた&lt;/li&gt;
+&lt;li&gt;DLNAについて&lt;/li&gt;
+&lt;li&gt;自宅でネットワーク周りを整理するための知識&lt;/li&gt;
+&lt;li&gt;ルーター設定&lt;/li&gt;
+&lt;li&gt;PCの共有サーバー化&lt;/li&gt;
+&lt;li&gt;リモートデスクトップについて&lt;/li&gt;
+&lt;li&gt;FTPデーモンについて&lt;/li&gt;
+&lt;li&gt;ローカルPCにデーモンを入れ、ドメインを取得しインターネット公開する方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;より、私生活により沿ったネットワーク関連の知識を深めたい&lt;/li&gt;
+&lt;li&gt;ネットワーク面でより効率的な自宅環境を構築したい&lt;/li&gt;
+&lt;li&gt;WindowsOSは業務で使っているのでなじみある&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>コンピュータはなぜ動くのか</title><link>https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;コンピュータはなぜ動くのか&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2015_01_why_pc.JPG&quot; alt=&quot;2015_01_why_pc&quot; title=&quot;2015_01_why_pc&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -32978,27 +34481,6 @@ public static long generateSerialNumber() {
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;JavaSilverレベルの知識が身についたところで、Javaを使用したWebアプリの開発方法について理解したかった&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded></item><item><title>Windows7 上級マニュアル ネットワーク編</title><link>https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Windows7 上級マニュアル ネットワーク編&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2015_01_windows7_nw.JPG&quot; alt=&quot;2015_01_windows7_nw&quot; title=&quot;2015_01_windows7_nw&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Windowsのネットワーク設定周りの理解を深めることができた&lt;/li&gt;
-&lt;li&gt;DLNAについて&lt;/li&gt;
-&lt;li&gt;自宅でネットワーク周りを整理するための知識&lt;/li&gt;
-&lt;li&gt;ルーター設定&lt;/li&gt;
-&lt;li&gt;PCの共有サーバー化&lt;/li&gt;
-&lt;li&gt;リモートデスクトップについて&lt;/li&gt;
-&lt;li&gt;FTPデーモンについて&lt;/li&gt;
-&lt;li&gt;ローカルPCにデーモンを入れ、ドメインを取得しインターネット公開する方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;より、私生活により沿ったネットワーク関連の知識を深めたい&lt;/li&gt;
-&lt;li&gt;ネットワーク面でより効率的な自宅環境を構築したい&lt;/li&gt;
-&lt;li&gt;WindowsOSは業務で使っているのでなじみある&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>Windowsはなぜ動くのか</title><link>https://tutttuwi.github.io/posts/2015_02_windows%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_02_windows%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Windowsはなぜ動くのか&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
