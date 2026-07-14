@@ -1,0 +1,1 @@
+import{s as n}from"./page-visibility.DeD7vJ7z.js";function i(t){const e=document.getElementById("navbar-search-wrapper");e&&e.classList.toggle("hidden",n(t))}const o=()=>{window.swup.hooks.on("visit:start",t=>{const e=new URL(t.to.url,window.location.origin);i(e.pathname)})};window?.swup?.hooks?o():document.addEventListener("swup:enable",o);
