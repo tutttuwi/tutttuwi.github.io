@@ -250,15 +250,38 @@ disable-model-invocation: true
 &lt;/blockquote&gt;
 &lt;h2&gt;目次&lt;/h2&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E6%A6%82%E8%A6%81&quot;&gt;概要&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E7%9B%AE%E6%AC%A1&quot;&gt;目次&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#%E5%89%8D%E6%8F%90%E8%A6%8B%E3%82%8B%E3%81%B9%E3%81%8D%E3%81%AF%E6%BC%94%E7%AE%97%E6%80%A7%E8%83%BD%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8Fvram&quot;&gt;前提：見るべきは演算性能ではなくVRAM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#gpu%E3%81%AA%E3%81%97%E6%A1%88&quot;&gt;GPUなし案&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#gpu%E5%A2%97%E8%A8%AD1%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA5090%C3%972--4gpu%E5%AF%BE%E5%BF%9C%E3%81%AE%E5%9C%9F%E5%8F%B0&quot;&gt;GPU増設1フェーズ（5090×2 + 4GPU対応の土台）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#gpu%E5%A2%97%E8%A8%AD1%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA50902--4gpu%E5%AF%BE%E5%BF%9C%E3%81%AE%E5%9C%9F%E5%8F%B0&quot;&gt;GPU増設1フェーズ（5090×2 + 4GPU対応の土台）&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#gpu&quot;&gt;GPU&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#cpu&quot;&gt;CPU&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%83%9E%E3%82%B6%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89&quot;&gt;マザーボード&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%83%A1%E3%83%A2%E3%83%AA&quot;&gt;メモリ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#ssd&quot;&gt;SSD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E9%9B%BB%E6%BA%90%E3%82%B1%E3%83%BC%E3%82%B9%E5%86%B7%E5%8D%B4&quot;&gt;電源・ケース・冷却&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%81%93%E3%81%AE%E6%AE%B5%E9%9A%8E%E3%81%A7%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%93%E3%81%A8&quot;&gt;この段階でできること&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#gpu%E5%A2%97%E8%A8%AD2%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA5090%E3%82%92%E3%81%82%E3%81%A82%E6%9E%9A&quot;&gt;GPU増設2フェーズ（5090をあと2枚）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#gpu%E5%A2%97%E8%A8%AD3%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA%E3%83%A1%E3%83%A2%E3%83%AA%E3%82%92512gb%E3%81%B8&quot;&gt;GPU増設3フェーズ（メモリを512GBへ）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#%E4%BA%88%E7%AE%97%E3%82%92%E6%8A%91%E3%81%88%E3%81%9F%E3%81%84%E5%88%86%E5%B2%90rtx-4090%E5%8D%98%E7%99%BA&quot;&gt;予算を抑えたい分岐（RTX 4090単発）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#0%E3%83%99%E3%83%BC%E3%82%B9%E9%83%A8%E5%93%81%E3%83%AA%E3%82%B9%E3%83%88%E5%A2%97%E8%A8%AD1%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA%E6%9C%AC%E5%91%BD&quot;&gt;0ベース部品リスト（増設1フェーズ本命）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#0%E3%83%99%E3%83%BC%E3%82%B9%E9%83%A8%E5%93%81%E3%83%AA%E3%82%B9%E3%83%88%E5%A2%97%E8%A8%AD1%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA%E6%9C%AC%E5%91%BD&quot;&gt;0ベース部品リスト（増設1フェーズ本命）&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#a-%E6%9C%AC%E4%BD%93%E3%82%B3%E3%82%A2&quot;&gt;A. 本体コア&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#b-%E9%9B%BB%E6%BA%90%E3%82%B1%E3%83%BC%E3%82%B9%E5%86%B7%E5%8D%B4&quot;&gt;B. 電源・ケース・冷却&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#c-%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E9%A1%9E%E8%A6%8B%E8%90%BD%E3%81%A8%E3%81%95%E3%82%8C%E3%81%8C%E3%81%A1&quot;&gt;C. ケーブル類（見落とされがち）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#d-%E9%9B%BB%E6%BA%90%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E9%83%A8%E5%B1%8B%E5%81%B4&quot;&gt;D. 電源インフラ（部屋側）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#e-%E7%B5%84%E3%81%BF%E7%AB%8B%E3%81%A6%E6%B6%88%E8%80%97%E5%93%81%E5%91%A8%E8%BE%BA&quot;&gt;E. 組み立て・消耗品・周辺&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#f-%E8%A6%8B%E7%A9%8D%E3%82%B5%E3%83%9E%E3%83%AA%E5%A2%97%E8%A8%AD1%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA0%E3%83%99%E3%83%BC%E3%82%B9&quot;&gt;F. 見積サマリ（増設1フェーズ・0ベース）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#g-%E5%B0%86%E6%9D%A5%E3%81%AE%E8%BF%BD%E5%8A%A0%E3%81%A0%E3%81%91%E5%85%88%E3%81%AB%E6%9B%B8%E3%81%84%E3%81%A6%E3%81%8A%E3%81%8F&quot;&gt;G. 将来の追加だけ先に書いておく&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#%E8%B3%BC%E5%85%A5%E3%81%AE%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D&quot;&gt;購入の優先順位&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#4gpu%E5%8C%96%E3%81%A7%E8%A9%B0%E3%81%BE%E3%82%8A%E3%82%84%E3%81%99%E3%81%84%E7%82%B9&quot;&gt;4GPU化で詰まりやすい点&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%81%BE%E3%81%A8%E3%82%81&quot;&gt;まとめ&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr /&gt;
 &lt;h2&gt;前提：見るべきは演算性能ではなくVRAM&lt;/h2&gt;
@@ -5644,6 +5667,194 @@ done
 &lt;li&gt;&lt;strong&gt;必要に応じて自動削減ツールを活用&lt;/strong&gt;する&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;スクリプトを cronjob で定期実行させることで、容量問題をプロアクティブに解決できます。&lt;/p&gt;
+</content:encoded></item><item><title>SSO連携について</title><link>https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</guid><pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;SSO（Single Sign-On）は、1回の認証で複数システムにアクセスできる仕組みです。&lt;br /&gt;
+「SSO連携」と一口に言っても、利用するプロトコルやトークンの扱いによって実装パターンが大きく変わります。&lt;/p&gt;
+&lt;p&gt;この記事では、実務でよく使われるSSO連携の実装種別を整理し、各方式の動きと実装観点を図付きでまとめます。&lt;/p&gt;
+&lt;h2&gt;SSO連携の実装種別&lt;/h2&gt;
+&lt;p&gt;代表的な実装種別は次の4つです。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;SAML 2.0ベースSSO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OpenID Connect（OIDC）ベースSSO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OAuth 2.0（認可委譲）を中心にした疑似SSO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ゲートウェイ／リバースプロキシ型SSO&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;補足: 近年の新規開発ではOIDCが中心ですが、企業システムではSAMLが現役のケースも多く、ハイブリッド運用も一般的です。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;各実装種別ごとの具体的な内容&lt;/h2&gt;
+&lt;h3&gt;1) SAML 2.0ベースSSO&lt;/h3&gt;
+&lt;h4&gt;SAMLの方式概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;ブラウザリダイレクトとXMLアサーションを使って認証結果を連携&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IdP（Identity Provider）&lt;/code&gt; が認証し、&lt;code&gt;SP（Service Provider）&lt;/code&gt; が受け入れる&lt;/li&gt;
+&lt;li&gt;企業内業務システムやSaaS連携で現在も広く利用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    participant U as User
+    participant SP as Service Provider
+    participant IdP as Identity Provider
+
+    U-&amp;gt;&amp;gt;SP: サービスへアクセス
+    SP--&amp;gt;&amp;gt;U: IdPへリダイレクト（AuthnRequest）
+    U-&amp;gt;&amp;gt;IdP: ログイン
+    IdP--&amp;gt;&amp;gt;U: SAMLResponse（署名付き）をPOST
+    U-&amp;gt;&amp;gt;SP: SAMLResponseを送信
+    SP-&amp;gt;&amp;gt;SP: 署名検証・属性マッピング
+    SP--&amp;gt;&amp;gt;U: セッション発行
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;SAML実装のポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;メタデータ交換&lt;/strong&gt;: IdP/SP間で証明書・エンドポイントを事前共有&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;署名検証&lt;/strong&gt;: SAMLResponseの署名検証は必須&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;属性マッピング&lt;/strong&gt;: &lt;code&gt;NameID&lt;/code&gt; や属性をアプリのユーザー情報へ対応付け&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;セッション管理&lt;/strong&gt;: SP側セッションの有効期限と再認証条件を設計&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;SAMLが向いているケース&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;既存の企業基盤（ADFS, Shibboleth など）との連携&lt;/li&gt;
+&lt;li&gt;既存SaaS連携がSAML中心の組織&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;2) OpenID Connect（OIDC）ベースSSO&lt;/h3&gt;
+&lt;h4&gt;OIDCの方式概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OAuth 2.0を拡張し、&lt;code&gt;IDトークン（JWT）&lt;/code&gt; で認証情報を表現&lt;/li&gt;
+&lt;li&gt;Web/SPA/モバイルなどモダンなアプリ実装と相性が良い&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Authorization Code Flow + PKCE&lt;/code&gt; が現在の推奨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    participant U as User
+    participant C as Client App
+    participant OP as OIDC Provider
+    participant API as Resource API
+
+    U-&amp;gt;&amp;gt;C: ログイン要求
+    C--&amp;gt;&amp;gt;U: OPへリダイレクト（認可要求）
+    U-&amp;gt;&amp;gt;OP: 認証
+    OP--&amp;gt;&amp;gt;C: 認可コード
+    C-&amp;gt;&amp;gt;OP: コード交換（+PKCE）
+    OP--&amp;gt;&amp;gt;C: IDトークン + Accessトークン
+    C-&amp;gt;&amp;gt;API: Accessトークン付きAPI呼び出し
+    API--&amp;gt;&amp;gt;C: レスポンス
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;OIDC実装のポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;フロー選定&lt;/strong&gt;: サーバーサイド/SPAで適切なフローを選ぶ&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;トークン検証&lt;/strong&gt;: 署名、&lt;code&gt;iss&lt;/code&gt;、&lt;code&gt;aud&lt;/code&gt;、&lt;code&gt;exp&lt;/code&gt; の検証を徹底&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PKCE対応&lt;/strong&gt;: 公開クライアント（SPA/モバイル）では必須&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;リフレッシュ戦略&lt;/strong&gt;: セキュアな保管と失効設計が重要&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;OIDCが向いているケース&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;新規開発のWebアプリ、モバイルアプリ、API中心アーキテクチャ&lt;/li&gt;
+&lt;li&gt;Keycloak、Auth0、Entra IDなどモダンIdP利用時&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;3) OAuth 2.0中心の疑似SSO&lt;/h3&gt;
+&lt;h4&gt;OAuth中心方式の概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OAuthは本来「認可」の仕様であり、認証そのものの標準はOIDCが担う&lt;/li&gt;
+&lt;li&gt;ただし実務では「同じ認可サーバーのトークンで複数APIを呼ぶ」ことで、体感的なSSOを実現するケースがある&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+    U[User] --&amp;gt; FE[Frontend]
+    FE --&amp;gt; AS[Authorization Server]
+    AS --&amp;gt;|Access Token| FE
+    FE --&amp;gt; API1[API A]
+    FE --&amp;gt; API2[API B]
+    FE --&amp;gt; API3[API C]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;OAuth中心方式の実装ポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;認証と認可の分離理解&lt;/strong&gt;: ログイン要件はOIDC併用で満たす&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;スコープ設計&lt;/strong&gt;: API単位の権限境界を明確化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;トークン寿命&lt;/strong&gt;: 短命化と更新制御で漏えいリスクを低減&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;OAuth中心方式の注意点&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OAuth単独では「ユーザーが誰か」を標準化して表現しづらい&lt;/li&gt;
+&lt;li&gt;「SSOを実装したつもり」になる落とし穴があるため、要件定義で認証責務を明確にする&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;4) ゲートウェイ／リバースプロキシ型SSO&lt;/h3&gt;
+&lt;h4&gt;ゲートウェイ型の方式概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;アプリの手前に認証ゲートウェイを置き、認証を共通化する方式&lt;/li&gt;
+&lt;li&gt;各アプリはゲートウェイから渡されるヘッダやクレームを信頼して利用&lt;/li&gt;
+&lt;li&gt;レガシーアプリを短期間でSSO配下に入れたい時に有効&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TB
+    U[User] --&amp;gt; GW[Auth Gateway / Reverse Proxy]
+    GW --&amp;gt; IdP[Identity Provider]
+    GW --&amp;gt; APP1[Legacy App]
+    GW --&amp;gt; APP2[Internal Tool]
+    GW --&amp;gt; APP3[Admin Console]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;ゲートウェイ型の実装ポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;信頼境界の明確化&lt;/strong&gt;: ヘッダ偽装防止（内部NW限定、mTLS等）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;アプリ改修最小化&lt;/strong&gt;: 既存アプリ側は最小限のユーザー受け渡し対応&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;監査ログ&lt;/strong&gt;: ゲートウェイで統一的に認証/アクセスログを取得&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;ゲートウェイ型が向いているケース&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;レガシー資産が多く、アプリ個別改修コストを抑えたい&lt;/li&gt;
+&lt;li&gt;認証統制を入口で一元管理したい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;実装選定の観点（簡易比較）&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;観点&lt;/th&gt;
+&lt;th&gt;SAML&lt;/th&gt;
+&lt;th&gt;OIDC&lt;/th&gt;
+&lt;th&gt;OAuth中心&lt;/th&gt;
+&lt;th&gt;ゲートウェイ型&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;主な用途&lt;/td&gt;
+&lt;td&gt;企業連携/既存SaaS&lt;/td&gt;
+&lt;td&gt;新規Web/SPA/モバイル&lt;/td&gt;
+&lt;td&gt;API認可中心&lt;/td&gt;
+&lt;td&gt;レガシー統合&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;実装難易度&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中〜高&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;モダン開発との相性&lt;/td&gt;
+&lt;td&gt;低〜中&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;認証標準としての明確さ&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;td&gt;低（単独では不足）&lt;/td&gt;
+&lt;td&gt;構成依存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;SSO連携は「どのプロトコルを使うか」だけでなく、&lt;strong&gt;認証責務をどこで担保するか&lt;/strong&gt;を決める設計です。&lt;br /&gt;
+新規開発ではOIDCが第一候補になりやすく、既存環境ではSAMLやゲートウェイ型との併用が現実的です。&lt;/p&gt;
+&lt;p&gt;最終的には、次の3点で選ぶと失敗しにくくなります。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用中のIdP・既存資産との親和性&lt;/li&gt;
+&lt;li&gt;対象アプリ（Web/SPA/モバイル/レガシー）の実装特性&lt;/li&gt;
+&lt;li&gt;監査・運用（失効、ログ、障害時切り戻し）まで含めた運用設計&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>脆弱性診断関連ツール種別サマリ</title><link>https://tutttuwi.github.io/posts/2026-04-14_security-summary/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-14_security-summary/</guid><pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;脆弱性診断ツールは種類が多く、選定の時点で迷いやすいです。
 この記事では、まず全体像をつかみ、そのあとに実運用で使える比較と導入ステップまで一気に整理します。&lt;/p&gt;
@@ -6140,194 +6351,6 @@ jobs:
 &lt;h2&gt;まとめ&lt;/h2&gt;
 &lt;p&gt;脆弱性診断ツールの導入は「どの製品を入れるか」だけでなく、「どの順で、誰が、どう回すか」で成果が大きく変わります。
 まずは小さく始めて、&lt;code&gt;SAST/SCA/Secrets/Container&lt;/code&gt; を確実に運用し、次に &lt;code&gt;DAST/OAST&lt;/code&gt; や &lt;code&gt;CSPM&lt;/code&gt; へ広げる進め方が現実的です。&lt;/p&gt;
-</content:encoded></item><item><title>SSO連携について</title><link>https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</guid><pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
-&lt;p&gt;SSO（Single Sign-On）は、1回の認証で複数システムにアクセスできる仕組みです。&lt;br /&gt;
-「SSO連携」と一口に言っても、利用するプロトコルやトークンの扱いによって実装パターンが大きく変わります。&lt;/p&gt;
-&lt;p&gt;この記事では、実務でよく使われるSSO連携の実装種別を整理し、各方式の動きと実装観点を図付きでまとめます。&lt;/p&gt;
-&lt;h2&gt;SSO連携の実装種別&lt;/h2&gt;
-&lt;p&gt;代表的な実装種別は次の4つです。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;SAML 2.0ベースSSO&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;OpenID Connect（OIDC）ベースSSO&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;OAuth 2.0（認可委譲）を中心にした疑似SSO&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ゲートウェイ／リバースプロキシ型SSO&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;補足: 近年の新規開発ではOIDCが中心ですが、企業システムではSAMLが現役のケースも多く、ハイブリッド運用も一般的です。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;h2&gt;各実装種別ごとの具体的な内容&lt;/h2&gt;
-&lt;h3&gt;1) SAML 2.0ベースSSO&lt;/h3&gt;
-&lt;h4&gt;SAMLの方式概要&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;ブラウザリダイレクトとXMLアサーションを使って認証結果を連携&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;IdP（Identity Provider）&lt;/code&gt; が認証し、&lt;code&gt;SP（Service Provider）&lt;/code&gt; が受け入れる&lt;/li&gt;
-&lt;li&gt;企業内業務システムやSaaS連携で現在も広く利用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;sequenceDiagram
-    participant U as User
-    participant SP as Service Provider
-    participant IdP as Identity Provider
-
-    U-&amp;gt;&amp;gt;SP: サービスへアクセス
-    SP--&amp;gt;&amp;gt;U: IdPへリダイレクト（AuthnRequest）
-    U-&amp;gt;&amp;gt;IdP: ログイン
-    IdP--&amp;gt;&amp;gt;U: SAMLResponse（署名付き）をPOST
-    U-&amp;gt;&amp;gt;SP: SAMLResponseを送信
-    SP-&amp;gt;&amp;gt;SP: 署名検証・属性マッピング
-    SP--&amp;gt;&amp;gt;U: セッション発行
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;SAML実装のポイント&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;メタデータ交換&lt;/strong&gt;: IdP/SP間で証明書・エンドポイントを事前共有&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;署名検証&lt;/strong&gt;: SAMLResponseの署名検証は必須&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;属性マッピング&lt;/strong&gt;: &lt;code&gt;NameID&lt;/code&gt; や属性をアプリのユーザー情報へ対応付け&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;セッション管理&lt;/strong&gt;: SP側セッションの有効期限と再認証条件を設計&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;SAMLが向いているケース&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;既存の企業基盤（ADFS, Shibboleth など）との連携&lt;/li&gt;
-&lt;li&gt;既存SaaS連携がSAML中心の組織&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h3&gt;2) OpenID Connect（OIDC）ベースSSO&lt;/h3&gt;
-&lt;h4&gt;OIDCの方式概要&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;OAuth 2.0を拡張し、&lt;code&gt;IDトークン（JWT）&lt;/code&gt; で認証情報を表現&lt;/li&gt;
-&lt;li&gt;Web/SPA/モバイルなどモダンなアプリ実装と相性が良い&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Authorization Code Flow + PKCE&lt;/code&gt; が現在の推奨&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;sequenceDiagram
-    participant U as User
-    participant C as Client App
-    participant OP as OIDC Provider
-    participant API as Resource API
-
-    U-&amp;gt;&amp;gt;C: ログイン要求
-    C--&amp;gt;&amp;gt;U: OPへリダイレクト（認可要求）
-    U-&amp;gt;&amp;gt;OP: 認証
-    OP--&amp;gt;&amp;gt;C: 認可コード
-    C-&amp;gt;&amp;gt;OP: コード交換（+PKCE）
-    OP--&amp;gt;&amp;gt;C: IDトークン + Accessトークン
-    C-&amp;gt;&amp;gt;API: Accessトークン付きAPI呼び出し
-    API--&amp;gt;&amp;gt;C: レスポンス
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;OIDC実装のポイント&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;フロー選定&lt;/strong&gt;: サーバーサイド/SPAで適切なフローを選ぶ&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;トークン検証&lt;/strong&gt;: 署名、&lt;code&gt;iss&lt;/code&gt;、&lt;code&gt;aud&lt;/code&gt;、&lt;code&gt;exp&lt;/code&gt; の検証を徹底&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;PKCE対応&lt;/strong&gt;: 公開クライアント（SPA/モバイル）では必須&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;リフレッシュ戦略&lt;/strong&gt;: セキュアな保管と失効設計が重要&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;OIDCが向いているケース&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;新規開発のWebアプリ、モバイルアプリ、API中心アーキテクチャ&lt;/li&gt;
-&lt;li&gt;Keycloak、Auth0、Entra IDなどモダンIdP利用時&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h3&gt;3) OAuth 2.0中心の疑似SSO&lt;/h3&gt;
-&lt;h4&gt;OAuth中心方式の概要&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;OAuthは本来「認可」の仕様であり、認証そのものの標準はOIDCが担う&lt;/li&gt;
-&lt;li&gt;ただし実務では「同じ認可サーバーのトークンで複数APIを呼ぶ」ことで、体感的なSSOを実現するケースがある&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;flowchart LR
-    U[User] --&amp;gt; FE[Frontend]
-    FE --&amp;gt; AS[Authorization Server]
-    AS --&amp;gt;|Access Token| FE
-    FE --&amp;gt; API1[API A]
-    FE --&amp;gt; API2[API B]
-    FE --&amp;gt; API3[API C]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;OAuth中心方式の実装ポイント&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;認証と認可の分離理解&lt;/strong&gt;: ログイン要件はOIDC併用で満たす&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;スコープ設計&lt;/strong&gt;: API単位の権限境界を明確化&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;トークン寿命&lt;/strong&gt;: 短命化と更新制御で漏えいリスクを低減&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;OAuth中心方式の注意点&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;OAuth単独では「ユーザーが誰か」を標準化して表現しづらい&lt;/li&gt;
-&lt;li&gt;「SSOを実装したつもり」になる落とし穴があるため、要件定義で認証責務を明確にする&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h3&gt;4) ゲートウェイ／リバースプロキシ型SSO&lt;/h3&gt;
-&lt;h4&gt;ゲートウェイ型の方式概要&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;アプリの手前に認証ゲートウェイを置き、認証を共通化する方式&lt;/li&gt;
-&lt;li&gt;各アプリはゲートウェイから渡されるヘッダやクレームを信頼して利用&lt;/li&gt;
-&lt;li&gt;レガシーアプリを短期間でSSO配下に入れたい時に有効&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;flowchart TB
-    U[User] --&amp;gt; GW[Auth Gateway / Reverse Proxy]
-    GW --&amp;gt; IdP[Identity Provider]
-    GW --&amp;gt; APP1[Legacy App]
-    GW --&amp;gt; APP2[Internal Tool]
-    GW --&amp;gt; APP3[Admin Console]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;ゲートウェイ型の実装ポイント&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;信頼境界の明確化&lt;/strong&gt;: ヘッダ偽装防止（内部NW限定、mTLS等）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;アプリ改修最小化&lt;/strong&gt;: 既存アプリ側は最小限のユーザー受け渡し対応&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;監査ログ&lt;/strong&gt;: ゲートウェイで統一的に認証/アクセスログを取得&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;ゲートウェイ型が向いているケース&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;レガシー資産が多く、アプリ個別改修コストを抑えたい&lt;/li&gt;
-&lt;li&gt;認証統制を入口で一元管理したい&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;実装選定の観点（簡易比較）&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;観点&lt;/th&gt;
-&lt;th&gt;SAML&lt;/th&gt;
-&lt;th&gt;OIDC&lt;/th&gt;
-&lt;th&gt;OAuth中心&lt;/th&gt;
-&lt;th&gt;ゲートウェイ型&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;主な用途&lt;/td&gt;
-&lt;td&gt;企業連携/既存SaaS&lt;/td&gt;
-&lt;td&gt;新規Web/SPA/モバイル&lt;/td&gt;
-&lt;td&gt;API認可中心&lt;/td&gt;
-&lt;td&gt;レガシー統合&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;実装難易度&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;td&gt;中〜高&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;モダン開発との相性&lt;/td&gt;
-&lt;td&gt;低〜中&lt;/td&gt;
-&lt;td&gt;高&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;認証標準としての明確さ&lt;/td&gt;
-&lt;td&gt;高&lt;/td&gt;
-&lt;td&gt;高&lt;/td&gt;
-&lt;td&gt;低（単独では不足）&lt;/td&gt;
-&lt;td&gt;構成依存&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2&gt;まとめ&lt;/h2&gt;
-&lt;p&gt;SSO連携は「どのプロトコルを使うか」だけでなく、&lt;strong&gt;認証責務をどこで担保するか&lt;/strong&gt;を決める設計です。&lt;br /&gt;
-新規開発ではOIDCが第一候補になりやすく、既存環境ではSAMLやゲートウェイ型との併用が現実的です。&lt;/p&gt;
-&lt;p&gt;最終的には、次の3点で選ぶと失敗しにくくなります。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;利用中のIdP・既存資産との親和性&lt;/li&gt;
-&lt;li&gt;対象アプリ（Web/SPA/モバイル/レガシー）の実装特性&lt;/li&gt;
-&lt;li&gt;監査・運用（失効、ログ、障害時切り戻し）まで含めた運用設計&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>flutter JIT エラーで実機デバッグができなくなったことについて</title><link>https://tutttuwi.github.io/posts/2026-03-16_flutter-hotreload-error/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-03-16_flutter-hotreload-error/</guid><pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;flutter開発をしていて、突然実機デバッグビルドができなくなったのでエラーを調査したことについて記載&lt;/p&gt;
 &lt;h2&gt;💻 環境&lt;/h2&gt;
@@ -32755,6 +32778,24 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;li&gt;Googleアシスタントアプリの運用/保守に携わっていく上で必要なスキルを習得するため&lt;/li&gt;
 &lt;li&gt;スピーカー開発関連の知識を増やすため&lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書</title><link>https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2019_01_aws_saa_black.JPG&quot; alt=&quot;2019_01_aws_saa_black&quot; title=&quot;2019_01_aws_saa_black&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AWS サービスについて、Well-architectedフレームワークに沿った５つの観点から説明されておりとても参考になった。（学習メモ参照）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;/pdf/%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8_marked.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AWSサービスについて、どんなサービスがあって、どんな使われ方をして、どのように便利なのかなど、基本的な知識を習得するため&lt;/li&gt;
+&lt;li&gt;AWS SAA資格取得のため&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>Javascript本格入門</title><link>https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Javascript本格入門&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2019_01_js_getting_started.jpg&quot; alt=&quot;2019_01_js_getting_started&quot; title=&quot;2019_01_js_getting_started&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -32774,24 +32815,6 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Nodejs環境でがっちりJavascriptを開発していくにあたり、現在の知識確認とより効率的な開発方法の知識を得るため&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded></item><item><title>徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書</title><link>https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2019_01_aws_saa_black.JPG&quot; alt=&quot;2019_01_aws_saa_black&quot; title=&quot;2019_01_aws_saa_black&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;AWS サービスについて、Well-architectedフレームワークに沿った５つの観点から説明されておりとても参考になった。（学習メモ参照）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;/pdf/%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8_marked.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;AWSサービスについて、どんなサービスがあって、どんな使われ方をして、どのように便利なのかなど、基本的な知識を習得するため&lt;/li&gt;
-&lt;li&gt;AWS SAA資格取得のため&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>AmazonAlexa開発ガイド</title><link>https://tutttuwi.github.io/posts/2019_01_amazonalexa%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_amazonalexa%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;AmazonAlexa開発ガイド&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
@@ -38699,6 +38722,34 @@ public static long generateSerialNumber() {
 &lt;li&gt;業務で、電話回線を使用したダイヤルアップ接続をしなければいけない場面があり、そもそもの電話回線の仕組みに興味を持った&lt;/li&gt;
 &lt;li&gt;これまで何本か本を読んできて、なぜ～シリーズの本が読みやすいと感じたので&lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>Javaでなぜつくるのか</title><link>https://tutttuwi.github.io/posts/2015_01_java%E3%81%A7%E3%81%AA%E3%81%9C%E3%81%A4%E3%81%8F%E3%82%8B%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_java%E3%81%A7%E3%81%AA%E3%81%9C%E3%81%A4%E3%81%8F%E3%82%8B%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Javaでなぜつくるのか&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2015_01_why_java.jpg&quot; alt=&quot;2015_01_why_java&quot; title=&quot;2015_01_why_java&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Javaとは
+&lt;ul&gt;
+&lt;li&gt;プログラミング言語、というくくりだけでなくもっと広い捉え方をした方がよい&lt;/li&gt;
+&lt;li&gt;「仮想コンピュータの仕様とそれをとりまく社会環境」らしい 反感買いそう..&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Javaの歴史的部分&lt;/li&gt;
+&lt;li&gt;Javaの長所短所&lt;/li&gt;
+&lt;li&gt;コンパイラ言語ということ&lt;/li&gt;
+&lt;li&gt;JVMで動作するということ
+&lt;ul&gt;
+&lt;li&gt;ヒープ領域などについて&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;オブジェクト指向について&lt;/li&gt;
+&lt;li&gt;基礎的な概念をまんべんなく学んだ印象&lt;/li&gt;
+&lt;li&gt;書籍は読みやすいので、遅くても2,3時間で読み切れると思う&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Javaの基礎的なところ、概念的なところについて理解を深めたかった&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>Windows7 上級マニュアル ネットワーク編</title><link>https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_windows7%E4%B8%8A%E7%B4%9A%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E7%B7%A8/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Windows7 上級マニュアル ネットワーク編&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2015_01_windows7_nw.JPG&quot; alt=&quot;2015_01_windows7_nw&quot; title=&quot;2015_01_windows7_nw&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -38733,34 +38784,6 @@ public static long generateSerialNumber() {
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;PCの動作する仕組みについて深く理解できていないと感じ購入&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded></item><item><title>Javaでなぜつくるのか</title><link>https://tutttuwi.github.io/posts/2015_01_java%E3%81%A7%E3%81%AA%E3%81%9C%E3%81%A4%E3%81%8F%E3%82%8B%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_java%E3%81%A7%E3%81%AA%E3%81%9C%E3%81%A4%E3%81%8F%E3%82%8B%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Javaでなぜつくるのか&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2015_01_why_java.jpg&quot; alt=&quot;2015_01_why_java&quot; title=&quot;2015_01_why_java&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Javaとは
-&lt;ul&gt;
-&lt;li&gt;プログラミング言語、というくくりだけでなくもっと広い捉え方をした方がよい&lt;/li&gt;
-&lt;li&gt;「仮想コンピュータの仕様とそれをとりまく社会環境」らしい 反感買いそう..&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Javaの歴史的部分&lt;/li&gt;
-&lt;li&gt;Javaの長所短所&lt;/li&gt;
-&lt;li&gt;コンパイラ言語ということ&lt;/li&gt;
-&lt;li&gt;JVMで動作するということ
-&lt;ul&gt;
-&lt;li&gt;ヒープ領域などについて&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;オブジェクト指向について&lt;/li&gt;
-&lt;li&gt;基礎的な概念をまんべんなく学んだ印象&lt;/li&gt;
-&lt;li&gt;書籍は読みやすいので、遅くても2,3時間で読み切れると思う&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Javaの基礎的なところ、概念的なところについて理解を深めたかった&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>基礎からのサーブレットJSP</title><link>https://tutttuwi.github.io/posts/2015_01_%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%96%E3%83%AC%E3%83%83%E3%83%88jsp/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%96%E3%83%AC%E3%83%83%E3%83%88jsp/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;基礎からのサーブレットJSP&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
