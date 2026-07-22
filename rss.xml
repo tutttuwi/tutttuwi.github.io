@@ -1,4 +1,124 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>NoccaLabs</title><description>暮らしを少し便利にするアプリを開発しています。</description><link>https://tutttuwi.github.io/</link><language>en</language><item><title>Cursor Tips — 実務で効いた設定と使い分け</title><link>https://tutttuwi.github.io/posts/2026-07-20_cursortips/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-07-20_cursortips/</guid><description>Cursor のモード切替、grill-me スキル、MCP、Docs、コミットメッセージ設定など、日常開発で効いた Tips をまとめる。</description><pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>NoccaLabs</title><description>暮らしを少し便利にするアプリを開発しています。</description><link>https://tutttuwi.github.io/</link><language>en</language><item><title>WSLアップデート後にDockerコンテナへLAN経由でアクセスできなくなった話（Windows 10 + WSL2）</title><link>https://tutttuwi.github.io/posts/2026-07-23_wsl%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABnw%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-07-23_wsl%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABnw%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9/</guid><description>WSL 2.7.10 更新後、localhost は通るのに LAN の 192.168.x.x から届かなくなった。原因は Docker ではなく portproxy の connectaddress だった。</description><pubDate>Thu, 23 Jul 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;Windows 10 の WSL2 上で Docker を動かしていて、LAN 内の別端末からコンテナにアクセスしていた。WSL を最新に上げた瞬間から、それが通らなくなった。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://localhost:28080   → 通る
+http://192.168.x.x:28080 → 不通
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Docker 自体は普通に動いている。&lt;code&gt;docker ps&lt;/code&gt; も &lt;code&gt;0.0.0.0:28080-&amp;gt;8080/tcp&lt;/code&gt;。最初は Docker の公開設定を疑ったが、違った。原因は &lt;code&gt;portproxy&lt;/code&gt; の転送先だった。かなり時間を食ったので、再現手順と直し方を残す。&lt;/p&gt;
+&lt;h2&gt;環境&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows 10 Pro（10.0.19045.6466）&lt;/li&gt;
+&lt;li&gt;WSL 2.7.10.0 / カーネル 6.18.33.2-2&lt;/li&gt;
+&lt;li&gt;Ubuntu（WSL2）&lt;/li&gt;
+&lt;li&gt;Docker Engine / Docker Compose&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;何が起きていたか&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;アクセス先&lt;/th&gt;
+&lt;th&gt;結果&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;localhost:28080&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;○&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;127.0.0.1:28080&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;○&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;192.168.x.x:28080&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;×&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;コンテナは生きている。ポート公開も全インターフェース。それでも LAN からは届かない。&lt;/p&gt;
+&lt;h2&gt;調査の流れ&lt;/h2&gt;
+&lt;h3&gt;Docker の公開状態&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;0.0.0.0:28080-&amp;gt;8080/tcp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ここは問題なし。Docker は 0.0.0.0 で待っている。&lt;/p&gt;
+&lt;h3&gt;Windows 側の待ち受け&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;netstat -ano | findstr :28080
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;最初はこうだった。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;127.0.0.1:28080 LISTENING
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;portproxy&lt;/code&gt; を足すと &lt;code&gt;0.0.0.0:28080 LISTENING&lt;/code&gt; にはなる。それでも LAN からは不通のまま。ここまで来て「待ってるのに届かない」状態で詰まった。&lt;/p&gt;
+&lt;h3&gt;WSL 更新との関係&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;wsl --version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;アップデート直後から壊れているので、Docker より WSL 側のネットワークを疑った方が早かった。&lt;/p&gt;
+&lt;h2&gt;原因：connectaddress が 127.0.0.1 だった&lt;/h2&gt;
+&lt;p&gt;最終的に引っかかっていたのは、これ。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;netsh interface portproxy add v4tov4 ^
+listenaddress=0.0.0.0 ^
+listenport=28080 ^
+connectaddress=127.0.0.1 ^
+connectport=28080
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;listenaddress=0.0.0.0&lt;/code&gt; で外から受けても、転送先が &lt;code&gt;127.0.0.1&lt;/code&gt; だと localhost 経由だけ通る。LAN の &lt;code&gt;192.168.x.x&lt;/code&gt; からは届かない。自分は最初ここを誤解していた。&lt;/p&gt;
+&lt;h2&gt;直し方：転送先を WSL の IP にする&lt;/h2&gt;
+&lt;h3&gt;WSL の IP を取る&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;wsl -u root
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;ip addr show dev eth0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;例:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;inet 172.20.148.206/20
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;このアドレスを &lt;code&gt;connectaddress&lt;/code&gt; に入れる。&lt;/p&gt;
+&lt;h3&gt;portproxy を張り直す&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;netsh interface portproxy add v4tov4 ^
+listenaddress=0.0.0.0 ^
+listenport=28080 ^
+connectaddress=172.20.148.206 ^
+connectport=28080
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;これで &lt;code&gt;http://192.168.x.x:28080&lt;/code&gt; が通った。&lt;/p&gt;
+&lt;h3&gt;Firewall も忘れずに&lt;/h3&gt;
+&lt;p&gt;portproxy だけだと足りない。Windows Defender Firewall の受信許可も必要。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;New-NetFirewallRule `
+  -DisplayName &quot;WSL PortProxy 28080&quot; `
+  -Direction Inbound `
+  -Protocol TCP `
+  -LocalPort 28080 `
+  -Action Allow `
+  -Profile Any
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;運用上の注意&lt;/h2&gt;
+&lt;p&gt;WSL2 の &lt;code&gt;172.x.x.x&lt;/code&gt; は再起動で変わることがある。&lt;code&gt;connectaddress&lt;/code&gt; を手で固定すると、次に WSL が立ち上がったときにまた不通になる。&lt;/p&gt;
+&lt;p&gt;なので自分は PowerShell で次をまとめて回すようにした。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;WSL の IP を取得&lt;/li&gt;
+&lt;li&gt;既存の portproxy を削除&lt;/li&gt;
+&lt;li&gt;新しい IP で portproxy を作り直す&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Windows 起動時に走らせておけば、IP が変わっても追従できる。ここまでやってようやく「また同じ調査をしなくていい」状態になった。&lt;/p&gt;
+&lt;h2&gt;調査で使ったコマンド&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;netstat -ano | findstr :28080
+wsl --version
+netsh interface portproxy show all
+Get-NetFirewallRule
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# WSL 内
+ip addr show dev eth0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;Docker は悪くなかった。WSL 更新後のネットワーク周りと、&lt;code&gt;portproxy&lt;/code&gt; の転送先指定が噛み合っていなかっただけ。&lt;/p&gt;
+&lt;p&gt;覚えておくならこの2点で足りる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;connectaddress&lt;/code&gt; は &lt;code&gt;127.0.0.1&lt;/code&gt; ではなく WSL の eth0 IP&lt;/li&gt;
+&lt;li&gt;Firewall の受信規則もセットで入れる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;同じ症状で半日溶かした人の、次の一手になれば十分。&lt;/p&gt;
+</content:encoded></item><item><title>Cursor Tips — 実務で効いた設定と使い分け</title><link>https://tutttuwi.github.io/posts/2026-07-20_cursortips/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-07-20_cursortips/</guid><description>Cursor のモード切替、grill-me スキル、MCP、Docs、コミットメッセージ設定など、日常開発で効いた Tips をまとめる。</description><pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;Cursor を使い始めてしばらくすると、「なんとなく Agent に任せる」だけでは足りなくなる。モードを間違えると勝手にコードを書き換えられるし、コンテキストが薄いと的外れな実装になる。逆に、設定と使い分けを少し整えるだけで、同じモデルでも出力の質がかなり変わる。&lt;/p&gt;
 &lt;p&gt;この記事は、自分が実際に入れて使っている設定と、迷いがちなモードの使い分けをメモしたもの。公式ドキュメントの用語に寄せつつ、現場でどう使うかに寄せて書く。&lt;/p&gt;
 &lt;h2&gt;目次&lt;/h2&gt;
@@ -3858,6 +3978,579 @@ tmux attach -t claude-loop   # 監視
 &lt;ul&gt;
 &lt;li&gt;元の網羅版:[[2026-04-28_Claude Code を Pro プランで 24 時間自律稼働させる完全ガイド.md]]&lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>ClaudeCodeで抑えておく機能</title><link>https://tutttuwi.github.io/posts/2026-04-28_claudecode%E3%81%A7%E6%8A%91%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8F%E6%A9%9F%E8%83%BD/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-28_claudecode%E3%81%A7%E6%8A%91%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8F%E6%A9%9F%E8%83%BD/</guid><pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;Claude Code は Anthropic が提供する CLI ベースの AI コーディングエージェントです。単なる「コード補完ツール」ではなく、&lt;strong&gt;ファイル操作・シェル実行・Web 検索・サブエージェント呼び出し&lt;/strong&gt;といった機能を組み合わせて、設計→実装→レビュー→コミットまで一連の開発ワークフローをこなせる点が特徴です。&lt;/p&gt;
+&lt;p&gt;ただし機能が豊富なため、「とりあえず使う」だけだと コンテキスト肥大・無限ループ・誤操作 などの落とし穴にハマりがちです。本記事では Claude Code を実務で使ううえで &lt;strong&gt;押さえておくべき主要機能&lt;/strong&gt; と、それぞれの&lt;strong&gt;ベストプラクティス／アンチパターン／活用事例&lt;/strong&gt;をまとめます。&lt;/p&gt;
+&lt;h2&gt;目次&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#claudemd%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E8%A8%98%E6%86%B6%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&quot;&gt;CLAUDE.md（プロジェクト記憶ファイル）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#skills%E5%86%8D%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA%E6%89%8B%E9%A0%86%E6%9B%B8&quot;&gt;Skills（再利用可能な手順書）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E8%87%AA%E5%8B%95%E6%89%BF%E8%AA%8D%E3%83%A2%E3%83%BC%E3%83%89permission-mode&quot;&gt;自動承認モード（permission mode）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%A8compact&quot;&gt;コンテキストサイズと /compact&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88sub-agents&quot;&gt;マルチエージェント（Sub-agents）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88clauderemote-agents--sandbox&quot;&gt;リモート Claude（Remote Agents / Sandbox）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#hooks%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%95%E3%83%83%E3%82%AF&quot;&gt;Hooks（イベントフック）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#plugins&quot;&gt;Plugins&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#chrome%E6%8B%A1%E5%BC%B5&quot;&gt;Chrome 拡張&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#github%E9%80%A3%E6%90%BA&quot;&gt;GitHub 連携&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E3%81%9D%E3%81%AE%E4%BB%96%E6%8A%BC%E3%81%95%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8D%E3%81%9F%E3%81%84%E6%A9%9F%E8%83%BD&quot;&gt;その他押さえておきたい機能&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E5%85%A8%E4%BD%93%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9%E3%81%BE%E3%81%A8%E3%82%81&quot;&gt;全体ベストプラクティスまとめ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;CLAUDE.md（プロジェクト記憶ファイル）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code は起動時にカレントディレクトリ及び親ディレクトリの &lt;code&gt;CLAUDE.md&lt;/code&gt; を&lt;strong&gt;自動的に読み込み&lt;/strong&gt;、システムプロンプトに追加します。プロジェクト固有のコーディング規約・ディレクトリ構造・ビルドコマンド・禁止事項などを記述することで、毎回指示し直す必要がなくなります。&lt;/p&gt;
+&lt;p&gt;階層は以下の優先順で読み込まれます：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;スコープ&lt;/th&gt;
+&lt;th&gt;パス&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ユーザー&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.claude/CLAUDE.md&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;個人の好み（言語、口調、共通ルール）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;プロジェクト&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/CLAUDE.md&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;チーム共有のルール（Git にコミット）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ローカル&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/CLAUDE.local.md&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;個人用の上書き（&lt;code&gt;.gitignore&lt;/code&gt; 推奨）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;サブディレクトリ&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/path/to/CLAUDE.md&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;特定モジュール固有のルール&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;/init&lt;/code&gt; コマンドを叩くと、Claude が&lt;strong&gt;リポジトリを走査して CLAUDE.md の雛形を自動生成&lt;/strong&gt;してくれます。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 起動して
+claude
+
+# プロジェクトのルートで
+/init
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;記載すべき主要項目：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Project Overview
+- 何のプロジェクトか / 主要技術スタック
+
+# Build &amp;amp; Test Commands
+- `pnpm install` / `pnpm test` / `pnpm lint` などよく使うコマンド
+
+# Code Style
+- 言語別のコーディング規約
+- コメントは日本語、識別子は英語、など
+
+# Architecture
+- 主要ディレクトリの責務
+- 依存関係の方向
+
+# Do / Don&apos;t
+- 直接編集禁止のファイル
+- 触ってはいけない設定
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;「コマンド一覧」を必ず書く&lt;/strong&gt;：Claude は知らないとビルドコマンドを推測しがち。明示すれば確実にそれを使う。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Don&apos;t（禁止事項）を明確に&lt;/strong&gt;：「&lt;code&gt;migrations/&lt;/code&gt; 配下のファイルは編集しない」など、人間が暗黙に守っているルールほど書く価値が高い。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;長くなりすぎない&lt;/strong&gt;：CLAUDE.md は毎ターンのコンテキストに乗る。500 行を超えたら &lt;strong&gt;Skills に切り出す&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ README をそのままコピー → 不要な情報でコンテキストを汚染&lt;/li&gt;
+&lt;li&gt;❌ 「丁寧に説明してください」など曖昧な指示 → 守られない&lt;/li&gt;
+&lt;li&gt;❌ 全社共通ルールをプロジェクト CLAUDE.md に書く → ユーザースコープに置くべき&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;モノレポで各パッケージの README 代わりに &lt;code&gt;packages/*/CLAUDE.md&lt;/code&gt; を配置し、Claude にそのパッケージ内の作業をさせる&lt;/li&gt;
+&lt;li&gt;DB スキーマ規約を &lt;code&gt;db/CLAUDE.md&lt;/code&gt; に書き、SQL マイグレーション生成を任せる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Skills（再利用可能な手順書）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Skills&lt;/strong&gt; は「特定タスクの手順書」をディレクトリ単位で定義し、必要な時だけロードできる仕組みです。CLAUDE.md と違って&lt;strong&gt;常時ロードされない&lt;/strong&gt;ため、コンテキストを節約しつつ、複雑な手順を再現性高く実行できます。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;~/.claude/skills/
+├── pr-review/
+│   ├── SKILL.md           # 説明（先頭の YAML フロントマターでトリガー定義）
+│   └── scripts/...        # 補助スクリプトも置ける
+└── deploy-staging/
+    └── SKILL.md
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;SKILL.md&lt;/code&gt; の冒頭に &lt;code&gt;description&lt;/code&gt; を書くと、Claude がユーザーの要求と照らし合わせて&lt;strong&gt;自動的に適切な Skill を起動&lt;/strong&gt;します。&lt;/p&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;---
+name: pr-review
+description: |
+  GitHub PR のレビューを実施する。差分取得・テスト確認・
+  コメント投稿までを行う。「PR レビューして」と言われたら起動。
+---
+
+# PR Review Skill
+1. `gh pr view` で対象 PR を取得
+2. `gh pr diff` で差分取得
+3. レビュー観点（セキュリティ、パフォーマンス、可読性）でチェック
+4. `gh pr review --comment` でコメント投稿
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;明示的に呼び出すこともできます：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/pr-review 1234
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;「定型作業」を Skill 化&lt;/strong&gt;：リリース、コードレビュー、調査レポート生成など、毎回似た手順を踏むものは Skill にすると再現性が上がる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;description はトリガー条件を具体的に&lt;/strong&gt;：「いつ起動すべきか／すべきでないか」を書くと誤起動が減る。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skill 内で別 Skill を呼ぶ&lt;/strong&gt;：合成して大きなワークフローを作れる。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 1 回しか使わない処理を Skill 化 → 普通に依頼すれば良い&lt;/li&gt;
+&lt;li&gt;❌ description が曖昧 → 起動されない or 誤起動&lt;/li&gt;
+&lt;li&gt;❌ 巨大スクリプトを SKILL.md に直書き → &lt;code&gt;scripts/&lt;/code&gt; に分割する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;security-review&lt;/code&gt;：差分に対してセキュリティ観点のレビューを実施&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;init&lt;/code&gt;：新規プロジェクトに &lt;code&gt;CLAUDE.md&lt;/code&gt; を生成&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;simplify&lt;/code&gt;：直近の差分をリファクタしてシンプル化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;自動承認モード（permission mode）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code は安全のため、ファイル書き込みやシェル実行のたびに&lt;strong&gt;確認プロンプト&lt;/strong&gt;を出します。これを制御するのが permission mode です。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;モード&lt;/th&gt;
+&lt;th&gt;挙動&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;default&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;危険な操作のみ確認&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;acceptEdits&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;ファイル編集のみ自動承認&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;plan&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;計画のみ立てて実行はしない（読み取り専用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bypassPermissions&lt;/code&gt;（俗称：YOLO モード）&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;すべて自動実行&lt;/strong&gt;（要注意）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;起動時オプションや実行中の &lt;code&gt;Shift+Tab&lt;/code&gt; で切り替え可能。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 起動時に指定
+claude --permission-mode acceptEdits
+
+# 完全自動（サンドボックス環境でのみ推奨）
+claude --dangerously-skip-permissions
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;通常作業は &lt;code&gt;acceptEdits&lt;/code&gt;&lt;/strong&gt;：編集の確認プロンプトが減るだけでも体感が大きく変わる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;読むだけなら &lt;code&gt;plan&lt;/code&gt; モード&lt;/strong&gt;：調査や設計レビューはこれで十分。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完全自動は隔離環境で&lt;/strong&gt;：Docker / Devcontainer / &lt;code&gt;git worktree&lt;/code&gt; 内で動かす。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; で &lt;strong&gt;特定コマンドのみ allowlist&lt;/strong&gt; にしておけば、permission prompt の発生回数を減らせる。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;permissions&quot;: {
+    &quot;allow&quot;: [
+      &quot;Bash(pnpm test*)&quot;,
+      &quot;Bash(pnpm lint*)&quot;,
+      &quot;Bash(git status)&quot;,
+      &quot;Bash(git diff*)&quot;
+    ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 本番リポジトリで最初から &lt;code&gt;--dangerously-skip-permissions&lt;/code&gt; → &lt;code&gt;rm -rf&lt;/code&gt; 系の事故が起きうる&lt;/li&gt;
+&lt;li&gt;❌ allowlist に &lt;code&gt;Bash(*)&lt;/code&gt; を入れる → 自動承認の意味がない&lt;/li&gt;
+&lt;li&gt;❌ &lt;code&gt;git push --force&lt;/code&gt; を allowlist に入れる → 取り返しがつかなくなる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;大量のリファクタを夜間に流すとき、サンドボックスで YOLO モード ＋ Hooks でテスト自動実行&lt;/li&gt;
+&lt;li&gt;レビュー専用エイリアス：&lt;code&gt;alias claude-review=&apos;claude --permission-mode plan&apos;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;コンテキストサイズと /compact&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;LLM には扱える&lt;strong&gt;コンテキストウィンドウ&lt;/strong&gt;（Claude Sonnet 4.5/4.6 系で 200K〜1M トークン）があり、会話が長引くと制限に達します。Claude Code はこれを軽減するため：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;/compact&lt;/code&gt;&lt;/strong&gt;：会話履歴を要約して圧縮（手動実行）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自動コンパクション&lt;/strong&gt;：上限近くで自動的に要約&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;/clear&lt;/code&gt;&lt;/strong&gt;：履歴を完全リセット&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 手動で要約
+/compact
+
+# 要約のヒントを指定
+/compact 「現在のリファクタリングの進捗とTODOを残して圧縮して」
+
+# 完全リセット（タスク切替時）
+/clear
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;タスクが切り替わったら &lt;code&gt;/clear&lt;/code&gt;&lt;/strong&gt;：前のタスクの記憶は新タスクのノイズになる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;長期タスクは &lt;code&gt;/compact&lt;/code&gt; を意識的に&lt;/strong&gt;：自動コンパクションは予測しにくい。区切りで明示的に呼ぶと精度が安定する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重要事項はファイルに書き出す&lt;/strong&gt;：TODO / 設計メモは &lt;code&gt;notes/&lt;/code&gt; などに残せば、&lt;code&gt;/clear&lt;/code&gt; してもファイル経由で復元可能。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;キャッシュを温存する操作を選ぶ&lt;/strong&gt;：プロンプトキャッシュは 5 分 TTL。&lt;code&gt;/compact&lt;/code&gt; 直後など、キャッシュが切れる操作の連発はコスト増につながる。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 1 セッションで何時間も同じスレッドを使い続ける → コストも品質も悪化&lt;/li&gt;
+&lt;li&gt;❌ &lt;code&gt;/compact&lt;/code&gt; を何度も連打 → 要約の要約で情報が劣化&lt;/li&gt;
+&lt;li&gt;❌ 大きなファイル全体を何度も Read → コンテキストを圧迫。Grep / 範囲指定 Read を使う&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;長時間の調査タスクで「中間レポートを &lt;code&gt;report.md&lt;/code&gt; に保存 → &lt;code&gt;/clear&lt;/code&gt; → 続き」というワークフロー&lt;/li&gt;
+&lt;li&gt;マルチタスクの並走時、&lt;code&gt;git worktree&lt;/code&gt; ＋ 別セッションで分離&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;マルチエージェント（Sub-agents）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code には &lt;strong&gt;Agent ツール&lt;/strong&gt;があり、メインのエージェントから&lt;strong&gt;サブエージェント&lt;/strong&gt;を起動して、独立したコンテキストで作業させられます。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;エージェント種別&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Explore&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;高速な調査専用（読み取りのみ）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;general-purpose&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;何でもこなす汎用エージェント&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Plan&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;設計・計画立案専用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;カスタム&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.claude/agents/*.md&lt;/code&gt; で独自定義可能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;p&gt;メインエージェントが「広範な調査」「独立検証」「設計レビュー」を必要とした際に内部的に呼び出します。ユーザーが明示的にお願いすることも可能：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;このコードベースで認証周りの実装をすべて洗い出して。Exploreエージェントを使って。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;カスタムエージェント定義例 &lt;code&gt;.claude/agents/sql-reviewer.md&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+name: sql-reviewer
+description: SQLマイグレーションをレビューし、ロック・性能観点で問題を指摘
+tools: [Read, Grep, Bash]
+---
+あなたはDB専門家です。以下を確認してください：
+- NOT NULL 追加時のロック影響
+- インデックスの妥当性
+- 後方互換性
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;コンテキスト分離が目的&lt;/strong&gt;：メインエージェントの履歴を汚さずに済む大量の調査・検証はサブに任せる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;独立した「セカンドオピニオン」に使う&lt;/strong&gt;：レビュアーや設計レビューには別エージェントが効く。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;並列実行できる場合は並列で&lt;/strong&gt;：複数の独立調査は 1 メッセージで並列スポーン。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 些細な質問でも毎回サブエージェント → 起動コストの無駄&lt;/li&gt;
+&lt;li&gt;❌ サブにあいまいな指示「いい感じにして」 → 独立コンテキストなので余計に迷子になる&lt;/li&gt;
+&lt;li&gt;❌ サブの結果を鵜呑み → 「やったつもり」の幻覚に注意。実ファイルを確認する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;大規模リファクタの「事前調査 → 計画 → 実装 → レビュー」を 4 つのサブで分業&lt;/li&gt;
+&lt;li&gt;セキュリティレビュー時に &lt;code&gt;general-purpose&lt;/code&gt; ＋ &lt;code&gt;security-review&lt;/code&gt; Skill を併用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;リモートClaude（Remote Agents / Sandbox）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;ローカルマシンを占有せずに、**Anthropic 側のサンドボックス（または GitHub Actions などのリモート実行環境）**で Claude Code を走らせる機能群です。代表的なものに：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Anthropic 公式の Cloud Agents / Routines&lt;/strong&gt;：cron スケジュールで自動実行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Actions 連携&lt;/strong&gt;：PR コメントで &lt;code&gt;@claude&lt;/code&gt; メンションするとサンドボックス内で実行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Devcontainer / Docker 内実行&lt;/strong&gt;：自前のサンドボックス&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;p&gt;cron 風のスケジュール実行（例）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/schedule &quot;毎日 9:00 に dependabot PR をレビューしてマージ可能なものは approve&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;GitHub PR でのメンション：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@claude このPRをレビューして、テストの不足を指摘してください
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;「夜間バッチ」用途に最適&lt;/strong&gt;：定期的な依存更新・脆弱性スキャン・ドキュメント整備など。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;権限を最小化&lt;/strong&gt;：リモート Claude が触れる範囲を GitHub App の権限で絞る（特定リポのみ、特定 Action のみ）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;シークレット管理&lt;/strong&gt;：API キーは Repo Secrets 経由。Claude のログに漏れないよう Hooks でマスク。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 本番デプロイ権限まで渡す → 想定外コミットでロールアウトされる事故&lt;/li&gt;
+&lt;li&gt;❌ ログ未確認で長期間放置 → 暴走に気付けない&lt;/li&gt;
+&lt;li&gt;❌ コスト管理なしで cron 連打 → API 費用が膨らむ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;毎日 9:00 に「昨日マージされた PR を要約して Slack へ投稿」&lt;/li&gt;
+&lt;li&gt;毎週月曜に「ライブラリ更新 PR を作成」&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Hooks（イベントフック）&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code には &lt;strong&gt;ライフサイクルイベント&lt;/strong&gt;があり、各イベントで任意のシェルコマンドを実行できます。設定は &lt;code&gt;.claude/settings.json&lt;/code&gt; の &lt;code&gt;hooks&lt;/code&gt; フィールド。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;イベント&lt;/th&gt;
+&lt;th&gt;タイミング&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PreToolUse&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;ツール実行直前&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PostToolUse&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;ツール実行直後&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;UserPromptSubmit&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;ユーザー入力送信時&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Stop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;エージェント停止時&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SubagentStop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;サブエージェント停止時&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Notification&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;確認プロンプト発生時&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; 例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;hooks&quot;: {
+    &quot;PostToolUse&quot;: [
+      {
+        &quot;matcher&quot;: &quot;Edit|Write&quot;,
+        &quot;hooks&quot;: [
+          { &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;pnpm lint --fix&quot; }
+        ]
+      }
+    ],
+    &quot;Stop&quot;: [
+      {
+        &quot;hooks&quot;: [
+          { &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;osascript -e &apos;display notification \&quot;Claude finished\&quot;&apos;&quot; }
+        ]
+      }
+    ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;編集後は自動 lint / format&lt;/strong&gt;：人間がレビューするときに無駄な指摘が減る。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ガードレールに使う&lt;/strong&gt;：&lt;code&gt;PreToolUse&lt;/code&gt; で「特定ファイルへの編集を拒否」など。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完了通知&lt;/strong&gt;：長時間タスクの終了を macOS 通知 / Slack で受け取る。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ Hook で重い処理（フルテストなど）→ 体感が極端に遅くなる&lt;/li&gt;
+&lt;li&gt;❌ 失敗しても無視するスクリプト → 通った気になる落とし穴&lt;/li&gt;
+&lt;li&gt;❌ 無限ループを作るフック（編集→lint→ファイル書き換え→編集 …）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PostToolUse&lt;/code&gt; で &lt;code&gt;prettier --write&lt;/code&gt; → 常にフォーマット済み&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Stop&lt;/code&gt; フックで &lt;code&gt;notify-send&lt;/code&gt; ＋ ベル音&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PreToolUse&lt;/code&gt; で本番DBに接続しようとした場合に拒否&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Plugins&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Plugin&lt;/strong&gt; は Skills / Hooks / Agents / Commands をパッケージ化して&lt;strong&gt;配布可能にする仕組み&lt;/strong&gt;です。&lt;code&gt;marketplace&lt;/code&gt; から追加でき、社内独自の Plugin を Git リポジトリで公開することも可能です。&lt;/p&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Plugin 一覧
+/plugins
+
+# 追加（マーケットプレイス）
+/plugins install anthropic/code-review
+
+# 自社プラグインを Git から
+/plugins install git+ssh://git@github.com/myorg/claude-plugins.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plugin の中身（例）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;my-plugin/
+├── plugin.json          # メタデータ
+├── skills/
+│   └── deploy/SKILL.md
+├── agents/
+│   └── reviewer.md
+└── hooks/
+    └── post-edit.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;チーム共通の作法を Plugin 化&lt;/strong&gt;：CLAUDE.md だけでは表現しきれない複合的な機能（Skill ＋ Hook ＋ Agent）をひとまとめに配布。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;バージョニング&lt;/strong&gt;：Plugin の更新で挙動が変わると事故になるのでセマンティックバージョニングを徹底。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 信頼できないソースから入れる → Hook で任意コマンド実行されるリスクあり&lt;/li&gt;
+&lt;li&gt;❌ 1 機能だけの Plugin を乱立 → Skill 単体で十分&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;社内デプロイフローをまるごと Plugin 化（Skill: deploy-staging / Hook: 自動 changelog 更新 / Agent: deploy-reviewer）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Chrome拡張&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code 関連の Chrome 拡張は、&lt;strong&gt;ブラウザの内容（選択テキスト、PR、Issue、Stack Overflow など）を Claude にワンクリックで渡す&lt;/strong&gt;ためのものです。代表的には：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Claude for Chrome&lt;/strong&gt;：ページの選択範囲・URL を取得して Claude のコンテキストに送る&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Obsidian 連携拡張&lt;/strong&gt;：Web → Obsidian → Claude の動線&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;拡張をインストール&lt;/li&gt;
+&lt;li&gt;ページ上で対象テキストを選択&lt;/li&gt;
+&lt;li&gt;拡張のショートカットキーで Claude に送信&lt;/li&gt;
+&lt;li&gt;ローカルの Claude Code セッションがコンテキスト付きで起動&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;長文のドキュメントを丸ごと送らない&lt;/strong&gt;：必要部分のみ選択。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;機密ページでは無効化&lt;/strong&gt;：社内 Wiki などで送信先を誤らないよう、ドメイン制限を設定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ 「全ページ送信」→ コンテキスト浪費 ＋ 情報漏洩リスク&lt;/li&gt;
+&lt;li&gt;❌ 拡張を経由してログを残さない → 何を送ったか後から確認できない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;LeetCode / AtCoder の問題ページから直接 Claude に解法を相談&lt;/li&gt;
+&lt;li&gt;GitHub Issue を選択 → 関連する自分のコードベースを Claude に調査させる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;GitHub連携&lt;/h2&gt;
+&lt;h3&gt;機能概要&lt;/h3&gt;
+&lt;p&gt;Claude Code には &lt;strong&gt;GitHub 公式 App&lt;/strong&gt; があり、PR・Issue 上で &lt;code&gt;@claude&lt;/code&gt; メンションすると、リモート Claude が起動して以下を実行できます：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PR レビュー＋コメント投稿&lt;/li&gt;
+&lt;li&gt;Issue から PR 自動作成（実装 → ブランチ作成 → PR）&lt;/li&gt;
+&lt;li&gt;CI 失敗時の自動リトライ・修正提案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ローカル CLI からも &lt;code&gt;gh&lt;/code&gt; コマンド経由で密接に連携できます。&lt;/p&gt;
+&lt;h3&gt;使い方&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Claude Code 内から
+gh pr create --title &quot;feat: add X&quot; --body &quot;...&quot;
+gh pr review 123 --approve
+gh issue list --label bug
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;PR コメントで：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@claude このコメントの指摘を反映してコミットしてください
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GitHub App の権限は最小化&lt;/strong&gt;：必要なリポのみ、必要なスコープのみ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;gh&lt;/code&gt; を活用&lt;/strong&gt;：ローカル Claude Code は &lt;code&gt;gh&lt;/code&gt; で十分強力。コードレビュー、PR 作成、リリースノート作成までこなせる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CI と組み合わせる&lt;/strong&gt;：CI 失敗 → Claude にスタックトレースを渡して修正案、というループ。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;アンチパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ &lt;code&gt;main&lt;/code&gt; への直接 push 権限を Claude に与える → ロールバック不能事故&lt;/li&gt;
+&lt;li&gt;❌ Issue の自動 PR 化を「全 Issue」に適用 → ノイズ PR が量産される&lt;/li&gt;
+&lt;li&gt;❌ レビュー結果を盲信して即マージ → 必ず人間のサインオフを残す&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;活用事例&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Issue ラベル &lt;code&gt;claude-task&lt;/code&gt; が付いたものだけ自動で PR ドラフト化&lt;/li&gt;
+&lt;li&gt;リリース前に過去 1 週間の PR を Claude が要約してリリースノート生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;その他押さえておきたい機能&lt;/h2&gt;
+&lt;h3&gt;Worktree / Isolation&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;git worktree&lt;/code&gt; を使った&lt;strong&gt;分離実行&lt;/strong&gt;で、メインブランチに影響を与えずに並列タスクを走らせられる。エージェント呼び出し時に &lt;code&gt;isolation: &quot;worktree&quot;&lt;/code&gt; を指定可能。&lt;/p&gt;
+&lt;h3&gt;Background tasks&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;run_in_background&lt;/code&gt; 付きで Bash 実行すると、長時間タスクをバックグラウンド化できる。&lt;code&gt;Monitor&lt;/code&gt; でログのストリーミング監視。&lt;/p&gt;
+&lt;h3&gt;MCP（Model Context Protocol）&lt;/h3&gt;
+&lt;p&gt;外部のツールサーバー（DB、Slack、Figma など）を MCP サーバーとして接続でき、Claude が直接呼び出せる。&lt;code&gt;.mcp.json&lt;/code&gt; に定義。&lt;/p&gt;
+&lt;h3&gt;Slash Commands（カスタム）&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;.claude/commands/*.md&lt;/code&gt; でプロジェクト固有のコマンドを定義可能。Skill よりも軽量、テンプレート的な使い方に向く。&lt;/p&gt;
+&lt;h3&gt;Settings 階層&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.claude/settings.json&lt;/code&gt;（個人）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/.claude/settings.json&lt;/code&gt;（プロジェクト共通、コミット）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/.claude/settings.local.json&lt;/code&gt;（個人ローカル、&lt;code&gt;.gitignore&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;キャッシュ最適化&lt;/h3&gt;
+&lt;p&gt;プロンプトキャッシュは 5 分 TTL。短時間に繰り返し呼ぶワークロードは安く速くなる。逆に &lt;strong&gt;5 分超え&lt;/strong&gt; での待機はコストが膨らむので注意。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;全体ベストプラクティスまとめ&lt;/h2&gt;
+&lt;h3&gt;「効く順」で導入する&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;CLAUDE.md&lt;/strong&gt; を整備（最大の費用対効果）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; の allowlist&lt;/strong&gt; で permission prompt を減らす&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hooks&lt;/strong&gt; で lint / format / 完了通知を自動化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skills&lt;/strong&gt; で定型作業をパッケージ化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;マルチエージェント / Plugins / リモート&lt;/strong&gt; は必要になってから&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;安全運用の三原則&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;🔒 &lt;strong&gt;権限は最小・段階的に&lt;/strong&gt;：&lt;code&gt;plan&lt;/code&gt; → &lt;code&gt;default&lt;/code&gt; → &lt;code&gt;acceptEdits&lt;/code&gt; → &lt;code&gt;bypass&lt;/code&gt; の順に上げる&lt;/li&gt;
+&lt;li&gt;🔒 &lt;strong&gt;隔離環境で攻めた使い方&lt;/strong&gt;：Docker / worktree / リモートサンドボックス&lt;/li&gt;
+&lt;li&gt;🔒 &lt;strong&gt;コミットは人間が確認&lt;/strong&gt;：&lt;code&gt;git commit&lt;/code&gt; の自動化はしても、push 前のレビューは残す&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;コスト・速度の三原則&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;⚡ &lt;strong&gt;タスク切替で &lt;code&gt;/clear&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;⚡ &lt;strong&gt;大きなファイルは Grep / 範囲 Read&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;⚡ &lt;strong&gt;5 分以内ならキャッシュ温存、長く待つなら一気に&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;失敗パターンの早期発見&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;エージェントが&lt;strong&gt;同じツールを繰り返す&lt;/strong&gt;ようになったら無限ループの兆候 → 一度止める&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;「やりました」と言うが diff がない&lt;/strong&gt; → 必ず &lt;code&gt;git status&lt;/code&gt; / &lt;code&gt;git diff&lt;/code&gt; で確認&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;要約後に話が噛み合わない&lt;/strong&gt; → &lt;code&gt;/compact&lt;/code&gt; の劣化、&lt;code&gt;/clear&lt;/code&gt; ＋ 要点ファイル読み直しに切り替え&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;Claude Code はあくまで「優秀だが新人のチームメイト」です。&lt;strong&gt;CLAUDE.md で文化を共有し、Hooks でガードレールを敷き、Skills と Plugins で標準作業を整備する&lt;/strong&gt;ことで、長期的に安定したパフォーマンスを引き出せます。逆に何も整備せず権限だけ広げると、便利さと裏腹に事故率が上がるので、上記のベストプラクティスを段階的に取り入れていくのがおすすめです。&lt;/p&gt;
 </content:encoded></item><item><title>Claude Code を Pro プランで 24 時間自律稼働させる完全ガイド</title><link>https://tutttuwi.github.io/posts/2026-04-28_claude-code-%E3%82%92-pro-%E3%83%97%E3%83%A9%E3%83%B3%E3%81%A7-24-%E6%99%82%E9%96%93%E8%87%AA%E5%BE%8B%E7%A8%BC%E5%83%8D%E3%81%95%E3%81%9B%E3%82%8B%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-28_claude-code-%E3%82%92-pro-%E3%83%97%E3%83%A9%E3%83%B3%E3%81%A7-24-%E6%99%82%E9%96%93%E8%87%AA%E5%BE%8B%E7%A8%BC%E5%83%8D%E3%81%95%E3%81%9B%E3%82%8B%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89/</guid><pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;機能要件さえ書けば無人で開発が進む究極のセットアップは、5 つの層を組み合わせれば 2026 年 5 月時点で実現可能&lt;/strong&gt; です。&lt;code&gt;--permission-mode acceptEdits&lt;/code&gt;、&lt;code&gt;.claude/settings.json&lt;/code&gt; の hooks、Subagents と Skills、&lt;code&gt;.mcp.json&lt;/code&gt; での Playwright/GitHub MCP、そして Mac の &lt;code&gt;launchd&lt;/code&gt; + &lt;code&gt;caffeinate&lt;/code&gt; + &lt;code&gt;tmux&lt;/code&gt; でラップする &lt;strong&gt;Ralph Loop&lt;/strong&gt;──これだけで「PROMPT.md / fix_plan.md 駆動の自律実装ループ」が成立します。&lt;/p&gt;
 &lt;p&gt;Anthropic は 2025 年 7 月発表 / 8 月施行でユーザーの &lt;strong&gt;5% 未満&lt;/strong&gt; しか引っかからない週次リミットを導入し、&lt;strong&gt;2025 年 9 月の Claude Code 2.0 で Checkpointing と VS Code 拡張&lt;/strong&gt;(Plan Mode 自体は Shift+Tab で 2.0 以前から存在)、&lt;strong&gt;2025 年 10 月で Skills&lt;/strong&gt;、&lt;strong&gt;2026 年 2 月で Agent Teams (実験的)&lt;/strong&gt;、&lt;strong&gt;2026 年 3 月で &lt;code&gt;--permission-mode auto&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;2026 年 4 月で Routines(クラウド定期実行)&lt;/strong&gt; と Opus 4.7 を順次解放しました。&lt;strong&gt;Pro プランは Sonnet 4.6 中心&lt;/strong&gt;(Opus 4.7 は Max プラン以上が前提)で「機能要件 1 行 → spec 生成 → 自律実装 → 自動検証 → PR 作成」までほぼ無人で回すことができ、リミット到達時は Claude が返すリセット時刻を bash でパースして &lt;code&gt;caffeinate -i sleep&lt;/code&gt; で待機させればよいのです。&lt;/p&gt;
@@ -4639,579 +5332,6 @@ gh pr list --author @me
 &lt;ul&gt;
 &lt;li&gt;実行可能ベストプラクティス版:[[2026-04-28_Claude Code Pro 自律稼働 実行可能ベストプラクティス.md]]&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>ClaudeCodeで抑えておく機能</title><link>https://tutttuwi.github.io/posts/2026-04-28_claudecode%E3%81%A7%E6%8A%91%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8F%E6%A9%9F%E8%83%BD/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-28_claudecode%E3%81%A7%E6%8A%91%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8F%E6%A9%9F%E8%83%BD/</guid><pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
-&lt;p&gt;Claude Code は Anthropic が提供する CLI ベースの AI コーディングエージェントです。単なる「コード補完ツール」ではなく、&lt;strong&gt;ファイル操作・シェル実行・Web 検索・サブエージェント呼び出し&lt;/strong&gt;といった機能を組み合わせて、設計→実装→レビュー→コミットまで一連の開発ワークフローをこなせる点が特徴です。&lt;/p&gt;
-&lt;p&gt;ただし機能が豊富なため、「とりあえず使う」だけだと コンテキスト肥大・無限ループ・誤操作 などの落とし穴にハマりがちです。本記事では Claude Code を実務で使ううえで &lt;strong&gt;押さえておくべき主要機能&lt;/strong&gt; と、それぞれの&lt;strong&gt;ベストプラクティス／アンチパターン／活用事例&lt;/strong&gt;をまとめます。&lt;/p&gt;
-&lt;h2&gt;目次&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#claudemd%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E8%A8%98%E6%86%B6%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&quot;&gt;CLAUDE.md（プロジェクト記憶ファイル）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#skills%E5%86%8D%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA%E6%89%8B%E9%A0%86%E6%9B%B8&quot;&gt;Skills（再利用可能な手順書）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#%E8%87%AA%E5%8B%95%E6%89%BF%E8%AA%8D%E3%83%A2%E3%83%BC%E3%83%89permission-mode&quot;&gt;自動承認モード（permission mode）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%A8compact&quot;&gt;コンテキストサイズと /compact&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88sub-agents&quot;&gt;マルチエージェント（Sub-agents）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88clauderemote-agents--sandbox&quot;&gt;リモート Claude（Remote Agents / Sandbox）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#hooks%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%95%E3%83%83%E3%82%AF&quot;&gt;Hooks（イベントフック）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#plugins&quot;&gt;Plugins&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#chrome%E6%8B%A1%E5%BC%B5&quot;&gt;Chrome 拡張&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#github%E9%80%A3%E6%90%BA&quot;&gt;GitHub 連携&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#%E3%81%9D%E3%81%AE%E4%BB%96%E6%8A%BC%E3%81%95%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8D%E3%81%9F%E3%81%84%E6%A9%9F%E8%83%BD&quot;&gt;その他押さえておきたい機能&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#%E5%85%A8%E4%BD%93%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9%E3%81%BE%E3%81%A8%E3%82%81&quot;&gt;全体ベストプラクティスまとめ&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;CLAUDE.md（プロジェクト記憶ファイル）&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;Claude Code は起動時にカレントディレクトリ及び親ディレクトリの &lt;code&gt;CLAUDE.md&lt;/code&gt; を&lt;strong&gt;自動的に読み込み&lt;/strong&gt;、システムプロンプトに追加します。プロジェクト固有のコーディング規約・ディレクトリ構造・ビルドコマンド・禁止事項などを記述することで、毎回指示し直す必要がなくなります。&lt;/p&gt;
-&lt;p&gt;階層は以下の優先順で読み込まれます：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;スコープ&lt;/th&gt;
-&lt;th&gt;パス&lt;/th&gt;
-&lt;th&gt;用途&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;ユーザー&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;~/.claude/CLAUDE.md&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;個人の好み（言語、口調、共通ルール）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;プロジェクト&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/CLAUDE.md&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;チーム共有のルール（Git にコミット）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;ローカル&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/CLAUDE.local.md&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;個人用の上書き（&lt;code&gt;.gitignore&lt;/code&gt; 推奨）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;サブディレクトリ&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/path/to/CLAUDE.md&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;特定モジュール固有のルール&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3&gt;使い方&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;/init&lt;/code&gt; コマンドを叩くと、Claude が&lt;strong&gt;リポジトリを走査して CLAUDE.md の雛形を自動生成&lt;/strong&gt;してくれます。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# 起動して
-claude
-
-# プロジェクトのルートで
-/init
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;記載すべき主要項目：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# Project Overview
-- 何のプロジェクトか / 主要技術スタック
-
-# Build &amp;amp; Test Commands
-- `pnpm install` / `pnpm test` / `pnpm lint` などよく使うコマンド
-
-# Code Style
-- 言語別のコーディング規約
-- コメントは日本語、識別子は英語、など
-
-# Architecture
-- 主要ディレクトリの責務
-- 依存関係の方向
-
-# Do / Don&apos;t
-- 直接編集禁止のファイル
-- 触ってはいけない設定
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;「コマンド一覧」を必ず書く&lt;/strong&gt;：Claude は知らないとビルドコマンドを推測しがち。明示すれば確実にそれを使う。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Don&apos;t（禁止事項）を明確に&lt;/strong&gt;：「&lt;code&gt;migrations/&lt;/code&gt; 配下のファイルは編集しない」など、人間が暗黙に守っているルールほど書く価値が高い。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;長くなりすぎない&lt;/strong&gt;：CLAUDE.md は毎ターンのコンテキストに乗る。500 行を超えたら &lt;strong&gt;Skills に切り出す&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ README をそのままコピー → 不要な情報でコンテキストを汚染&lt;/li&gt;
-&lt;li&gt;❌ 「丁寧に説明してください」など曖昧な指示 → 守られない&lt;/li&gt;
-&lt;li&gt;❌ 全社共通ルールをプロジェクト CLAUDE.md に書く → ユーザースコープに置くべき&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;モノレポで各パッケージの README 代わりに &lt;code&gt;packages/*/CLAUDE.md&lt;/code&gt; を配置し、Claude にそのパッケージ内の作業をさせる&lt;/li&gt;
-&lt;li&gt;DB スキーマ規約を &lt;code&gt;db/CLAUDE.md&lt;/code&gt; に書き、SQL マイグレーション生成を任せる&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;Skills（再利用可能な手順書）&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Skills&lt;/strong&gt; は「特定タスクの手順書」をディレクトリ単位で定義し、必要な時だけロードできる仕組みです。CLAUDE.md と違って&lt;strong&gt;常時ロードされない&lt;/strong&gt;ため、コンテキストを節約しつつ、複雑な手順を再現性高く実行できます。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;~/.claude/skills/
-├── pr-review/
-│   ├── SKILL.md           # 説明（先頭の YAML フロントマターでトリガー定義）
-│   └── scripts/...        # 補助スクリプトも置ける
-└── deploy-staging/
-    └── SKILL.md
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;SKILL.md&lt;/code&gt; の冒頭に &lt;code&gt;description&lt;/code&gt; を書くと、Claude がユーザーの要求と照らし合わせて&lt;strong&gt;自動的に適切な Skill を起動&lt;/strong&gt;します。&lt;/p&gt;
-&lt;h3&gt;使い方&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;---
-name: pr-review
-description: |
-  GitHub PR のレビューを実施する。差分取得・テスト確認・
-  コメント投稿までを行う。「PR レビューして」と言われたら起動。
----
-
-# PR Review Skill
-1. `gh pr view` で対象 PR を取得
-2. `gh pr diff` で差分取得
-3. レビュー観点（セキュリティ、パフォーマンス、可読性）でチェック
-4. `gh pr review --comment` でコメント投稿
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;明示的に呼び出すこともできます：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;/pr-review 1234
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;「定型作業」を Skill 化&lt;/strong&gt;：リリース、コードレビュー、調査レポート生成など、毎回似た手順を踏むものは Skill にすると再現性が上がる。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;description はトリガー条件を具体的に&lt;/strong&gt;：「いつ起動すべきか／すべきでないか」を書くと誤起動が減る。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Skill 内で別 Skill を呼ぶ&lt;/strong&gt;：合成して大きなワークフローを作れる。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ 1 回しか使わない処理を Skill 化 → 普通に依頼すれば良い&lt;/li&gt;
-&lt;li&gt;❌ description が曖昧 → 起動されない or 誤起動&lt;/li&gt;
-&lt;li&gt;❌ 巨大スクリプトを SKILL.md に直書き → &lt;code&gt;scripts/&lt;/code&gt; に分割する&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;security-review&lt;/code&gt;：差分に対してセキュリティ観点のレビューを実施&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;init&lt;/code&gt;：新規プロジェクトに &lt;code&gt;CLAUDE.md&lt;/code&gt; を生成&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;simplify&lt;/code&gt;：直近の差分をリファクタしてシンプル化&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;自動承認モード（permission mode）&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;Claude Code は安全のため、ファイル書き込みやシェル実行のたびに&lt;strong&gt;確認プロンプト&lt;/strong&gt;を出します。これを制御するのが permission mode です。&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;モード&lt;/th&gt;
-&lt;th&gt;挙動&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;default&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;危険な操作のみ確認&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;acceptEdits&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;ファイル編集のみ自動承認&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;plan&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;計画のみ立てて実行はしない（読み取り専用）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;bypassPermissions&lt;/code&gt;（俗称：YOLO モード）&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;すべて自動実行&lt;/strong&gt;（要注意）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;起動時オプションや実行中の &lt;code&gt;Shift+Tab&lt;/code&gt; で切り替え可能。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# 起動時に指定
-claude --permission-mode acceptEdits
-
-# 完全自動（サンドボックス環境でのみ推奨）
-claude --dangerously-skip-permissions
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;通常作業は &lt;code&gt;acceptEdits&lt;/code&gt;&lt;/strong&gt;：編集の確認プロンプトが減るだけでも体感が大きく変わる。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;読むだけなら &lt;code&gt;plan&lt;/code&gt; モード&lt;/strong&gt;：調査や設計レビューはこれで十分。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;完全自動は隔離環境で&lt;/strong&gt;：Docker / Devcontainer / &lt;code&gt;git worktree&lt;/code&gt; 内で動かす。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; で &lt;strong&gt;特定コマンドのみ allowlist&lt;/strong&gt; にしておけば、permission prompt の発生回数を減らせる。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;{
-  &quot;permissions&quot;: {
-    &quot;allow&quot;: [
-      &quot;Bash(pnpm test*)&quot;,
-      &quot;Bash(pnpm lint*)&quot;,
-      &quot;Bash(git status)&quot;,
-      &quot;Bash(git diff*)&quot;
-    ]
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ 本番リポジトリで最初から &lt;code&gt;--dangerously-skip-permissions&lt;/code&gt; → &lt;code&gt;rm -rf&lt;/code&gt; 系の事故が起きうる&lt;/li&gt;
-&lt;li&gt;❌ allowlist に &lt;code&gt;Bash(*)&lt;/code&gt; を入れる → 自動承認の意味がない&lt;/li&gt;
-&lt;li&gt;❌ &lt;code&gt;git push --force&lt;/code&gt; を allowlist に入れる → 取り返しがつかなくなる&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;大量のリファクタを夜間に流すとき、サンドボックスで YOLO モード ＋ Hooks でテスト自動実行&lt;/li&gt;
-&lt;li&gt;レビュー専用エイリアス：&lt;code&gt;alias claude-review=&apos;claude --permission-mode plan&apos;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;コンテキストサイズと /compact&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;LLM には扱える&lt;strong&gt;コンテキストウィンドウ&lt;/strong&gt;（Claude Sonnet 4.5/4.6 系で 200K〜1M トークン）があり、会話が長引くと制限に達します。Claude Code はこれを軽減するため：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;/compact&lt;/code&gt;&lt;/strong&gt;：会話履歴を要約して圧縮（手動実行）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;自動コンパクション&lt;/strong&gt;：上限近くで自動的に要約&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;/clear&lt;/code&gt;&lt;/strong&gt;：履歴を完全リセット&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;使い方&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;# 手動で要約
-/compact
-
-# 要約のヒントを指定
-/compact 「現在のリファクタリングの進捗とTODOを残して圧縮して」
-
-# 完全リセット（タスク切替時）
-/clear
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;タスクが切り替わったら &lt;code&gt;/clear&lt;/code&gt;&lt;/strong&gt;：前のタスクの記憶は新タスクのノイズになる。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;長期タスクは &lt;code&gt;/compact&lt;/code&gt; を意識的に&lt;/strong&gt;：自動コンパクションは予測しにくい。区切りで明示的に呼ぶと精度が安定する。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;重要事項はファイルに書き出す&lt;/strong&gt;：TODO / 設計メモは &lt;code&gt;notes/&lt;/code&gt; などに残せば、&lt;code&gt;/clear&lt;/code&gt; してもファイル経由で復元可能。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;キャッシュを温存する操作を選ぶ&lt;/strong&gt;：プロンプトキャッシュは 5 分 TTL。&lt;code&gt;/compact&lt;/code&gt; 直後など、キャッシュが切れる操作の連発はコスト増につながる。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ 1 セッションで何時間も同じスレッドを使い続ける → コストも品質も悪化&lt;/li&gt;
-&lt;li&gt;❌ &lt;code&gt;/compact&lt;/code&gt; を何度も連打 → 要約の要約で情報が劣化&lt;/li&gt;
-&lt;li&gt;❌ 大きなファイル全体を何度も Read → コンテキストを圧迫。Grep / 範囲指定 Read を使う&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;長時間の調査タスクで「中間レポートを &lt;code&gt;report.md&lt;/code&gt; に保存 → &lt;code&gt;/clear&lt;/code&gt; → 続き」というワークフロー&lt;/li&gt;
-&lt;li&gt;マルチタスクの並走時、&lt;code&gt;git worktree&lt;/code&gt; ＋ 別セッションで分離&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;マルチエージェント（Sub-agents）&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;Claude Code には &lt;strong&gt;Agent ツール&lt;/strong&gt;があり、メインのエージェントから&lt;strong&gt;サブエージェント&lt;/strong&gt;を起動して、独立したコンテキストで作業させられます。&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;エージェント種別&lt;/th&gt;
-&lt;th&gt;用途&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;Explore&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;高速な調査専用（読み取りのみ）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;general-purpose&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;何でもこなす汎用エージェント&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;Plan&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;設計・計画立案専用&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;カスタム&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;.claude/agents/*.md&lt;/code&gt; で独自定義可能&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3&gt;使い方&lt;/h3&gt;
-&lt;p&gt;メインエージェントが「広範な調査」「独立検証」「設計レビュー」を必要とした際に内部的に呼び出します。ユーザーが明示的にお願いすることも可能：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;このコードベースで認証周りの実装をすべて洗い出して。Exploreエージェントを使って。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;カスタムエージェント定義例 &lt;code&gt;.claude/agents/sql-reviewer.md&lt;/code&gt;：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;---
-name: sql-reviewer
-description: SQLマイグレーションをレビューし、ロック・性能観点で問題を指摘
-tools: [Read, Grep, Bash]
----
-あなたはDB専門家です。以下を確認してください：
-- NOT NULL 追加時のロック影響
-- インデックスの妥当性
-- 後方互換性
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;コンテキスト分離が目的&lt;/strong&gt;：メインエージェントの履歴を汚さずに済む大量の調査・検証はサブに任せる。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;独立した「セカンドオピニオン」に使う&lt;/strong&gt;：レビュアーや設計レビューには別エージェントが効く。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;並列実行できる場合は並列で&lt;/strong&gt;：複数の独立調査は 1 メッセージで並列スポーン。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ 些細な質問でも毎回サブエージェント → 起動コストの無駄&lt;/li&gt;
-&lt;li&gt;❌ サブにあいまいな指示「いい感じにして」 → 独立コンテキストなので余計に迷子になる&lt;/li&gt;
-&lt;li&gt;❌ サブの結果を鵜呑み → 「やったつもり」の幻覚に注意。実ファイルを確認する&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;大規模リファクタの「事前調査 → 計画 → 実装 → レビュー」を 4 つのサブで分業&lt;/li&gt;
-&lt;li&gt;セキュリティレビュー時に &lt;code&gt;general-purpose&lt;/code&gt; ＋ &lt;code&gt;security-review&lt;/code&gt; Skill を併用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;リモートClaude（Remote Agents / Sandbox）&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;ローカルマシンを占有せずに、**Anthropic 側のサンドボックス（または GitHub Actions などのリモート実行環境）**で Claude Code を走らせる機能群です。代表的なものに：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Anthropic 公式の Cloud Agents / Routines&lt;/strong&gt;：cron スケジュールで自動実行&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GitHub Actions 連携&lt;/strong&gt;：PR コメントで &lt;code&gt;@claude&lt;/code&gt; メンションするとサンドボックス内で実行&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Devcontainer / Docker 内実行&lt;/strong&gt;：自前のサンドボックス&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;使い方&lt;/h3&gt;
-&lt;p&gt;cron 風のスケジュール実行（例）：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;/schedule &quot;毎日 9:00 に dependabot PR をレビューしてマージ可能なものは approve&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;GitHub PR でのメンション：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;@claude このPRをレビューして、テストの不足を指摘してください
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;「夜間バッチ」用途に最適&lt;/strong&gt;：定期的な依存更新・脆弱性スキャン・ドキュメント整備など。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;権限を最小化&lt;/strong&gt;：リモート Claude が触れる範囲を GitHub App の権限で絞る（特定リポのみ、特定 Action のみ）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;シークレット管理&lt;/strong&gt;：API キーは Repo Secrets 経由。Claude のログに漏れないよう Hooks でマスク。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ 本番デプロイ権限まで渡す → 想定外コミットでロールアウトされる事故&lt;/li&gt;
-&lt;li&gt;❌ ログ未確認で長期間放置 → 暴走に気付けない&lt;/li&gt;
-&lt;li&gt;❌ コスト管理なしで cron 連打 → API 費用が膨らむ&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;毎日 9:00 に「昨日マージされた PR を要約して Slack へ投稿」&lt;/li&gt;
-&lt;li&gt;毎週月曜に「ライブラリ更新 PR を作成」&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;Hooks（イベントフック）&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;Claude Code には &lt;strong&gt;ライフサイクルイベント&lt;/strong&gt;があり、各イベントで任意のシェルコマンドを実行できます。設定は &lt;code&gt;.claude/settings.json&lt;/code&gt; の &lt;code&gt;hooks&lt;/code&gt; フィールド。&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;イベント&lt;/th&gt;
-&lt;th&gt;タイミング&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;PreToolUse&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;ツール実行直前&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;PostToolUse&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;ツール実行直後&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;UserPromptSubmit&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;ユーザー入力送信時&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;Stop&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;エージェント停止時&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;SubagentStop&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;サブエージェント停止時&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;Notification&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;確認プロンプト発生時&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3&gt;使い方&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; 例：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-  &quot;hooks&quot;: {
-    &quot;PostToolUse&quot;: [
-      {
-        &quot;matcher&quot;: &quot;Edit|Write&quot;,
-        &quot;hooks&quot;: [
-          { &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;pnpm lint --fix&quot; }
-        ]
-      }
-    ],
-    &quot;Stop&quot;: [
-      {
-        &quot;hooks&quot;: [
-          { &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;osascript -e &apos;display notification \&quot;Claude finished\&quot;&apos;&quot; }
-        ]
-      }
-    ]
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;編集後は自動 lint / format&lt;/strong&gt;：人間がレビューするときに無駄な指摘が減る。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ガードレールに使う&lt;/strong&gt;：&lt;code&gt;PreToolUse&lt;/code&gt; で「特定ファイルへの編集を拒否」など。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;完了通知&lt;/strong&gt;：長時間タスクの終了を macOS 通知 / Slack で受け取る。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ Hook で重い処理（フルテストなど）→ 体感が極端に遅くなる&lt;/li&gt;
-&lt;li&gt;❌ 失敗しても無視するスクリプト → 通った気になる落とし穴&lt;/li&gt;
-&lt;li&gt;❌ 無限ループを作るフック（編集→lint→ファイル書き換え→編集 …）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;PostToolUse&lt;/code&gt; で &lt;code&gt;prettier --write&lt;/code&gt; → 常にフォーマット済み&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Stop&lt;/code&gt; フックで &lt;code&gt;notify-send&lt;/code&gt; ＋ ベル音&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;PreToolUse&lt;/code&gt; で本番DBに接続しようとした場合に拒否&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;Plugins&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Plugin&lt;/strong&gt; は Skills / Hooks / Agents / Commands をパッケージ化して&lt;strong&gt;配布可能にする仕組み&lt;/strong&gt;です。&lt;code&gt;marketplace&lt;/code&gt; から追加でき、社内独自の Plugin を Git リポジトリで公開することも可能です。&lt;/p&gt;
-&lt;h3&gt;使い方&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;# Plugin 一覧
-/plugins
-
-# 追加（マーケットプレイス）
-/plugins install anthropic/code-review
-
-# 自社プラグインを Git から
-/plugins install git+ssh://git@github.com/myorg/claude-plugins.git
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Plugin の中身（例）：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;my-plugin/
-├── plugin.json          # メタデータ
-├── skills/
-│   └── deploy/SKILL.md
-├── agents/
-│   └── reviewer.md
-└── hooks/
-    └── post-edit.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;チーム共通の作法を Plugin 化&lt;/strong&gt;：CLAUDE.md だけでは表現しきれない複合的な機能（Skill ＋ Hook ＋ Agent）をひとまとめに配布。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;バージョニング&lt;/strong&gt;：Plugin の更新で挙動が変わると事故になるのでセマンティックバージョニングを徹底。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ 信頼できないソースから入れる → Hook で任意コマンド実行されるリスクあり&lt;/li&gt;
-&lt;li&gt;❌ 1 機能だけの Plugin を乱立 → Skill 単体で十分&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;社内デプロイフローをまるごと Plugin 化（Skill: deploy-staging / Hook: 自動 changelog 更新 / Agent: deploy-reviewer）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;Chrome拡張&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;Claude Code 関連の Chrome 拡張は、&lt;strong&gt;ブラウザの内容（選択テキスト、PR、Issue、Stack Overflow など）を Claude にワンクリックで渡す&lt;/strong&gt;ためのものです。代表的には：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Claude for Chrome&lt;/strong&gt;：ページの選択範囲・URL を取得して Claude のコンテキストに送る&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Obsidian 連携拡張&lt;/strong&gt;：Web → Obsidian → Claude の動線&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;使い方&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;拡張をインストール&lt;/li&gt;
-&lt;li&gt;ページ上で対象テキストを選択&lt;/li&gt;
-&lt;li&gt;拡張のショートカットキーで Claude に送信&lt;/li&gt;
-&lt;li&gt;ローカルの Claude Code セッションがコンテキスト付きで起動&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;長文のドキュメントを丸ごと送らない&lt;/strong&gt;：必要部分のみ選択。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;機密ページでは無効化&lt;/strong&gt;：社内 Wiki などで送信先を誤らないよう、ドメイン制限を設定。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ 「全ページ送信」→ コンテキスト浪費 ＋ 情報漏洩リスク&lt;/li&gt;
-&lt;li&gt;❌ 拡張を経由してログを残さない → 何を送ったか後から確認できない&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;LeetCode / AtCoder の問題ページから直接 Claude に解法を相談&lt;/li&gt;
-&lt;li&gt;GitHub Issue を選択 → 関連する自分のコードベースを Claude に調査させる&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;GitHub連携&lt;/h2&gt;
-&lt;h3&gt;機能概要&lt;/h3&gt;
-&lt;p&gt;Claude Code には &lt;strong&gt;GitHub 公式 App&lt;/strong&gt; があり、PR・Issue 上で &lt;code&gt;@claude&lt;/code&gt; メンションすると、リモート Claude が起動して以下を実行できます：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;PR レビュー＋コメント投稿&lt;/li&gt;
-&lt;li&gt;Issue から PR 自動作成（実装 → ブランチ作成 → PR）&lt;/li&gt;
-&lt;li&gt;CI 失敗時の自動リトライ・修正提案&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;ローカル CLI からも &lt;code&gt;gh&lt;/code&gt; コマンド経由で密接に連携できます。&lt;/p&gt;
-&lt;h3&gt;使い方&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;# Claude Code 内から
-gh pr create --title &quot;feat: add X&quot; --body &quot;...&quot;
-gh pr review 123 --approve
-gh issue list --label bug
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;PR コメントで：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;@claude このコメントの指摘を反映してコミットしてください
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;ベストプラクティス&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;GitHub App の権限は最小化&lt;/strong&gt;：必要なリポのみ、必要なスコープのみ。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;gh&lt;/code&gt; を活用&lt;/strong&gt;：ローカル Claude Code は &lt;code&gt;gh&lt;/code&gt; で十分強力。コードレビュー、PR 作成、リリースノート作成までこなせる。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;CI と組み合わせる&lt;/strong&gt;：CI 失敗 → Claude にスタックトレースを渡して修正案、というループ。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;アンチパターン&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;❌ &lt;code&gt;main&lt;/code&gt; への直接 push 権限を Claude に与える → ロールバック不能事故&lt;/li&gt;
-&lt;li&gt;❌ Issue の自動 PR 化を「全 Issue」に適用 → ノイズ PR が量産される&lt;/li&gt;
-&lt;li&gt;❌ レビュー結果を盲信して即マージ → 必ず人間のサインオフを残す&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;活用事例&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Issue ラベル &lt;code&gt;claude-task&lt;/code&gt; が付いたものだけ自動で PR ドラフト化&lt;/li&gt;
-&lt;li&gt;リリース前に過去 1 週間の PR を Claude が要約してリリースノート生成&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;その他押さえておきたい機能&lt;/h2&gt;
-&lt;h3&gt;Worktree / Isolation&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;git worktree&lt;/code&gt; を使った&lt;strong&gt;分離実行&lt;/strong&gt;で、メインブランチに影響を与えずに並列タスクを走らせられる。エージェント呼び出し時に &lt;code&gt;isolation: &quot;worktree&quot;&lt;/code&gt; を指定可能。&lt;/p&gt;
-&lt;h3&gt;Background tasks&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;run_in_background&lt;/code&gt; 付きで Bash 実行すると、長時間タスクをバックグラウンド化できる。&lt;code&gt;Monitor&lt;/code&gt; でログのストリーミング監視。&lt;/p&gt;
-&lt;h3&gt;MCP（Model Context Protocol）&lt;/h3&gt;
-&lt;p&gt;外部のツールサーバー（DB、Slack、Figma など）を MCP サーバーとして接続でき、Claude が直接呼び出せる。&lt;code&gt;.mcp.json&lt;/code&gt; に定義。&lt;/p&gt;
-&lt;h3&gt;Slash Commands（カスタム）&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;.claude/commands/*.md&lt;/code&gt; でプロジェクト固有のコマンドを定義可能。Skill よりも軽量、テンプレート的な使い方に向く。&lt;/p&gt;
-&lt;h3&gt;Settings 階層&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/.claude/settings.json&lt;/code&gt;（個人）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/.claude/settings.json&lt;/code&gt;（プロジェクト共通、コミット）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;repo&amp;gt;/.claude/settings.local.json&lt;/code&gt;（個人ローカル、&lt;code&gt;.gitignore&lt;/code&gt;）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;キャッシュ最適化&lt;/h3&gt;
-&lt;p&gt;プロンプトキャッシュは 5 分 TTL。短時間に繰り返し呼ぶワークロードは安く速くなる。逆に &lt;strong&gt;5 分超え&lt;/strong&gt; での待機はコストが膨らむので注意。&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;全体ベストプラクティスまとめ&lt;/h2&gt;
-&lt;h3&gt;「効く順」で導入する&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;CLAUDE.md&lt;/strong&gt; を整備（最大の費用対効果）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;.claude/settings.json&lt;/code&gt; の allowlist&lt;/strong&gt; で permission prompt を減らす&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Hooks&lt;/strong&gt; で lint / format / 完了通知を自動化&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Skills&lt;/strong&gt; で定型作業をパッケージ化&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;マルチエージェント / Plugins / リモート&lt;/strong&gt; は必要になってから&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;安全運用の三原則&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;🔒 &lt;strong&gt;権限は最小・段階的に&lt;/strong&gt;：&lt;code&gt;plan&lt;/code&gt; → &lt;code&gt;default&lt;/code&gt; → &lt;code&gt;acceptEdits&lt;/code&gt; → &lt;code&gt;bypass&lt;/code&gt; の順に上げる&lt;/li&gt;
-&lt;li&gt;🔒 &lt;strong&gt;隔離環境で攻めた使い方&lt;/strong&gt;：Docker / worktree / リモートサンドボックス&lt;/li&gt;
-&lt;li&gt;🔒 &lt;strong&gt;コミットは人間が確認&lt;/strong&gt;：&lt;code&gt;git commit&lt;/code&gt; の自動化はしても、push 前のレビューは残す&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;コスト・速度の三原則&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;⚡ &lt;strong&gt;タスク切替で &lt;code&gt;/clear&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;⚡ &lt;strong&gt;大きなファイルは Grep / 範囲 Read&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;⚡ &lt;strong&gt;5 分以内ならキャッシュ温存、長く待つなら一気に&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;失敗パターンの早期発見&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;エージェントが&lt;strong&gt;同じツールを繰り返す&lt;/strong&gt;ようになったら無限ループの兆候 → 一度止める&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;「やりました」と言うが diff がない&lt;/strong&gt; → 必ず &lt;code&gt;git status&lt;/code&gt; / &lt;code&gt;git diff&lt;/code&gt; で確認&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;要約後に話が噛み合わない&lt;/strong&gt; → &lt;code&gt;/compact&lt;/code&gt; の劣化、&lt;code&gt;/clear&lt;/code&gt; ＋ 要点ファイル読み直しに切り替え&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;p&gt;Claude Code はあくまで「優秀だが新人のチームメイト」です。&lt;strong&gt;CLAUDE.md で文化を共有し、Hooks でガードレールを敷き、Skills と Plugins で標準作業を整備する&lt;/strong&gt;ことで、長期的に安定したパフォーマンスを引き出せます。逆に何も整備せず権限だけ広げると、便利さと裏腹に事故率が上がるので、上記のベストプラクティスを段階的に取り入れていくのがおすすめです。&lt;/p&gt;
 </content:encoded></item><item><title>Macディスクスペース確保操作</title><link>https://tutttuwi.github.io/posts/2026-04-27_mac%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E7%A2%BA%E4%BF%9D%E6%93%8D%E4%BD%9C/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-27_mac%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E7%A2%BA%E4%BF%9D%E6%93%8D%E4%BD%9C/</guid><pubDate>Mon, 27 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;Macのストレージは新しいバージョンのmacOSやアプリケーション更新により、気づかないうちに容量が逼迫することがあります。本記事では、Macでディスクスペースを確保するための調査方法と削減テクニック、開発環境固有の容量問題、そしてよくあるトラブルシューティングをまとめています。&lt;/p&gt;
 &lt;h2&gt;目次&lt;/h2&gt;
@@ -5667,194 +5787,6 @@ done
 &lt;li&gt;&lt;strong&gt;必要に応じて自動削減ツールを活用&lt;/strong&gt;する&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;スクリプトを cronjob で定期実行させることで、容量問題をプロアクティブに解決できます。&lt;/p&gt;
-</content:encoded></item><item><title>SSO連携について</title><link>https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</guid><pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
-&lt;p&gt;SSO（Single Sign-On）は、1回の認証で複数システムにアクセスできる仕組みです。&lt;br /&gt;
-「SSO連携」と一口に言っても、利用するプロトコルやトークンの扱いによって実装パターンが大きく変わります。&lt;/p&gt;
-&lt;p&gt;この記事では、実務でよく使われるSSO連携の実装種別を整理し、各方式の動きと実装観点を図付きでまとめます。&lt;/p&gt;
-&lt;h2&gt;SSO連携の実装種別&lt;/h2&gt;
-&lt;p&gt;代表的な実装種別は次の4つです。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;SAML 2.0ベースSSO&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;OpenID Connect（OIDC）ベースSSO&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;OAuth 2.0（認可委譲）を中心にした疑似SSO&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ゲートウェイ／リバースプロキシ型SSO&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;補足: 近年の新規開発ではOIDCが中心ですが、企業システムではSAMLが現役のケースも多く、ハイブリッド運用も一般的です。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;h2&gt;各実装種別ごとの具体的な内容&lt;/h2&gt;
-&lt;h3&gt;1) SAML 2.0ベースSSO&lt;/h3&gt;
-&lt;h4&gt;SAMLの方式概要&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;ブラウザリダイレクトとXMLアサーションを使って認証結果を連携&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;IdP（Identity Provider）&lt;/code&gt; が認証し、&lt;code&gt;SP（Service Provider）&lt;/code&gt; が受け入れる&lt;/li&gt;
-&lt;li&gt;企業内業務システムやSaaS連携で現在も広く利用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;sequenceDiagram
-    participant U as User
-    participant SP as Service Provider
-    participant IdP as Identity Provider
-
-    U-&amp;gt;&amp;gt;SP: サービスへアクセス
-    SP--&amp;gt;&amp;gt;U: IdPへリダイレクト（AuthnRequest）
-    U-&amp;gt;&amp;gt;IdP: ログイン
-    IdP--&amp;gt;&amp;gt;U: SAMLResponse（署名付き）をPOST
-    U-&amp;gt;&amp;gt;SP: SAMLResponseを送信
-    SP-&amp;gt;&amp;gt;SP: 署名検証・属性マッピング
-    SP--&amp;gt;&amp;gt;U: セッション発行
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;SAML実装のポイント&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;メタデータ交換&lt;/strong&gt;: IdP/SP間で証明書・エンドポイントを事前共有&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;署名検証&lt;/strong&gt;: SAMLResponseの署名検証は必須&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;属性マッピング&lt;/strong&gt;: &lt;code&gt;NameID&lt;/code&gt; や属性をアプリのユーザー情報へ対応付け&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;セッション管理&lt;/strong&gt;: SP側セッションの有効期限と再認証条件を設計&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;SAMLが向いているケース&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;既存の企業基盤（ADFS, Shibboleth など）との連携&lt;/li&gt;
-&lt;li&gt;既存SaaS連携がSAML中心の組織&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h3&gt;2) OpenID Connect（OIDC）ベースSSO&lt;/h3&gt;
-&lt;h4&gt;OIDCの方式概要&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;OAuth 2.0を拡張し、&lt;code&gt;IDトークン（JWT）&lt;/code&gt; で認証情報を表現&lt;/li&gt;
-&lt;li&gt;Web/SPA/モバイルなどモダンなアプリ実装と相性が良い&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Authorization Code Flow + PKCE&lt;/code&gt; が現在の推奨&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;sequenceDiagram
-    participant U as User
-    participant C as Client App
-    participant OP as OIDC Provider
-    participant API as Resource API
-
-    U-&amp;gt;&amp;gt;C: ログイン要求
-    C--&amp;gt;&amp;gt;U: OPへリダイレクト（認可要求）
-    U-&amp;gt;&amp;gt;OP: 認証
-    OP--&amp;gt;&amp;gt;C: 認可コード
-    C-&amp;gt;&amp;gt;OP: コード交換（+PKCE）
-    OP--&amp;gt;&amp;gt;C: IDトークン + Accessトークン
-    C-&amp;gt;&amp;gt;API: Accessトークン付きAPI呼び出し
-    API--&amp;gt;&amp;gt;C: レスポンス
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;OIDC実装のポイント&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;フロー選定&lt;/strong&gt;: サーバーサイド/SPAで適切なフローを選ぶ&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;トークン検証&lt;/strong&gt;: 署名、&lt;code&gt;iss&lt;/code&gt;、&lt;code&gt;aud&lt;/code&gt;、&lt;code&gt;exp&lt;/code&gt; の検証を徹底&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;PKCE対応&lt;/strong&gt;: 公開クライアント（SPA/モバイル）では必須&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;リフレッシュ戦略&lt;/strong&gt;: セキュアな保管と失効設計が重要&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;OIDCが向いているケース&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;新規開発のWebアプリ、モバイルアプリ、API中心アーキテクチャ&lt;/li&gt;
-&lt;li&gt;Keycloak、Auth0、Entra IDなどモダンIdP利用時&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h3&gt;3) OAuth 2.0中心の疑似SSO&lt;/h3&gt;
-&lt;h4&gt;OAuth中心方式の概要&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;OAuthは本来「認可」の仕様であり、認証そのものの標準はOIDCが担う&lt;/li&gt;
-&lt;li&gt;ただし実務では「同じ認可サーバーのトークンで複数APIを呼ぶ」ことで、体感的なSSOを実現するケースがある&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;flowchart LR
-    U[User] --&amp;gt; FE[Frontend]
-    FE --&amp;gt; AS[Authorization Server]
-    AS --&amp;gt;|Access Token| FE
-    FE --&amp;gt; API1[API A]
-    FE --&amp;gt; API2[API B]
-    FE --&amp;gt; API3[API C]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;OAuth中心方式の実装ポイント&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;認証と認可の分離理解&lt;/strong&gt;: ログイン要件はOIDC併用で満たす&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;スコープ設計&lt;/strong&gt;: API単位の権限境界を明確化&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;トークン寿命&lt;/strong&gt;: 短命化と更新制御で漏えいリスクを低減&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;OAuth中心方式の注意点&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;OAuth単独では「ユーザーが誰か」を標準化して表現しづらい&lt;/li&gt;
-&lt;li&gt;「SSOを実装したつもり」になる落とし穴があるため、要件定義で認証責務を明確にする&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h3&gt;4) ゲートウェイ／リバースプロキシ型SSO&lt;/h3&gt;
-&lt;h4&gt;ゲートウェイ型の方式概要&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;アプリの手前に認証ゲートウェイを置き、認証を共通化する方式&lt;/li&gt;
-&lt;li&gt;各アプリはゲートウェイから渡されるヘッダやクレームを信頼して利用&lt;/li&gt;
-&lt;li&gt;レガシーアプリを短期間でSSO配下に入れたい時に有効&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;flowchart TB
-    U[User] --&amp;gt; GW[Auth Gateway / Reverse Proxy]
-    GW --&amp;gt; IdP[Identity Provider]
-    GW --&amp;gt; APP1[Legacy App]
-    GW --&amp;gt; APP2[Internal Tool]
-    GW --&amp;gt; APP3[Admin Console]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;ゲートウェイ型の実装ポイント&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;信頼境界の明確化&lt;/strong&gt;: ヘッダ偽装防止（内部NW限定、mTLS等）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;アプリ改修最小化&lt;/strong&gt;: 既存アプリ側は最小限のユーザー受け渡し対応&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;監査ログ&lt;/strong&gt;: ゲートウェイで統一的に認証/アクセスログを取得&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;ゲートウェイ型が向いているケース&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;レガシー資産が多く、アプリ個別改修コストを抑えたい&lt;/li&gt;
-&lt;li&gt;認証統制を入口で一元管理したい&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;実装選定の観点（簡易比較）&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;観点&lt;/th&gt;
-&lt;th&gt;SAML&lt;/th&gt;
-&lt;th&gt;OIDC&lt;/th&gt;
-&lt;th&gt;OAuth中心&lt;/th&gt;
-&lt;th&gt;ゲートウェイ型&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;主な用途&lt;/td&gt;
-&lt;td&gt;企業連携/既存SaaS&lt;/td&gt;
-&lt;td&gt;新規Web/SPA/モバイル&lt;/td&gt;
-&lt;td&gt;API認可中心&lt;/td&gt;
-&lt;td&gt;レガシー統合&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;実装難易度&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;td&gt;中〜高&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;モダン開発との相性&lt;/td&gt;
-&lt;td&gt;低〜中&lt;/td&gt;
-&lt;td&gt;高&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;td&gt;中&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;認証標準としての明確さ&lt;/td&gt;
-&lt;td&gt;高&lt;/td&gt;
-&lt;td&gt;高&lt;/td&gt;
-&lt;td&gt;低（単独では不足）&lt;/td&gt;
-&lt;td&gt;構成依存&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2&gt;まとめ&lt;/h2&gt;
-&lt;p&gt;SSO連携は「どのプロトコルを使うか」だけでなく、&lt;strong&gt;認証責務をどこで担保するか&lt;/strong&gt;を決める設計です。&lt;br /&gt;
-新規開発ではOIDCが第一候補になりやすく、既存環境ではSAMLやゲートウェイ型との併用が現実的です。&lt;/p&gt;
-&lt;p&gt;最終的には、次の3点で選ぶと失敗しにくくなります。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;利用中のIdP・既存資産との親和性&lt;/li&gt;
-&lt;li&gt;対象アプリ（Web/SPA/モバイル/レガシー）の実装特性&lt;/li&gt;
-&lt;li&gt;監査・運用（失効、ログ、障害時切り戻し）まで含めた運用設計&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>脆弱性診断関連ツール種別サマリ</title><link>https://tutttuwi.github.io/posts/2026-04-14_security-summary/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-14_security-summary/</guid><pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;脆弱性診断ツールは種類が多く、選定の時点で迷いやすいです。
 この記事では、まず全体像をつかみ、そのあとに実運用で使える比較と導入ステップまで一気に整理します。&lt;/p&gt;
@@ -6351,6 +6283,194 @@ jobs:
 &lt;h2&gt;まとめ&lt;/h2&gt;
 &lt;p&gt;脆弱性診断ツールの導入は「どの製品を入れるか」だけでなく、「どの順で、誰が、どう回すか」で成果が大きく変わります。
 まずは小さく始めて、&lt;code&gt;SAST/SCA/Secrets/Container&lt;/code&gt; を確実に運用し、次に &lt;code&gt;DAST/OAST&lt;/code&gt; や &lt;code&gt;CSPM&lt;/code&gt; へ広げる進め方が現実的です。&lt;/p&gt;
+</content:encoded></item><item><title>SSO連携について</title><link>https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-04-14_sso%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</guid><pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
+&lt;p&gt;SSO（Single Sign-On）は、1回の認証で複数システムにアクセスできる仕組みです。&lt;br /&gt;
+「SSO連携」と一口に言っても、利用するプロトコルやトークンの扱いによって実装パターンが大きく変わります。&lt;/p&gt;
+&lt;p&gt;この記事では、実務でよく使われるSSO連携の実装種別を整理し、各方式の動きと実装観点を図付きでまとめます。&lt;/p&gt;
+&lt;h2&gt;SSO連携の実装種別&lt;/h2&gt;
+&lt;p&gt;代表的な実装種別は次の4つです。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;SAML 2.0ベースSSO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OpenID Connect（OIDC）ベースSSO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OAuth 2.0（認可委譲）を中心にした疑似SSO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ゲートウェイ／リバースプロキシ型SSO&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;補足: 近年の新規開発ではOIDCが中心ですが、企業システムではSAMLが現役のケースも多く、ハイブリッド運用も一般的です。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;各実装種別ごとの具体的な内容&lt;/h2&gt;
+&lt;h3&gt;1) SAML 2.0ベースSSO&lt;/h3&gt;
+&lt;h4&gt;SAMLの方式概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;ブラウザリダイレクトとXMLアサーションを使って認証結果を連携&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IdP（Identity Provider）&lt;/code&gt; が認証し、&lt;code&gt;SP（Service Provider）&lt;/code&gt; が受け入れる&lt;/li&gt;
+&lt;li&gt;企業内業務システムやSaaS連携で現在も広く利用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    participant U as User
+    participant SP as Service Provider
+    participant IdP as Identity Provider
+
+    U-&amp;gt;&amp;gt;SP: サービスへアクセス
+    SP--&amp;gt;&amp;gt;U: IdPへリダイレクト（AuthnRequest）
+    U-&amp;gt;&amp;gt;IdP: ログイン
+    IdP--&amp;gt;&amp;gt;U: SAMLResponse（署名付き）をPOST
+    U-&amp;gt;&amp;gt;SP: SAMLResponseを送信
+    SP-&amp;gt;&amp;gt;SP: 署名検証・属性マッピング
+    SP--&amp;gt;&amp;gt;U: セッション発行
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;SAML実装のポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;メタデータ交換&lt;/strong&gt;: IdP/SP間で証明書・エンドポイントを事前共有&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;署名検証&lt;/strong&gt;: SAMLResponseの署名検証は必須&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;属性マッピング&lt;/strong&gt;: &lt;code&gt;NameID&lt;/code&gt; や属性をアプリのユーザー情報へ対応付け&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;セッション管理&lt;/strong&gt;: SP側セッションの有効期限と再認証条件を設計&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;SAMLが向いているケース&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;既存の企業基盤（ADFS, Shibboleth など）との連携&lt;/li&gt;
+&lt;li&gt;既存SaaS連携がSAML中心の組織&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;2) OpenID Connect（OIDC）ベースSSO&lt;/h3&gt;
+&lt;h4&gt;OIDCの方式概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OAuth 2.0を拡張し、&lt;code&gt;IDトークン（JWT）&lt;/code&gt; で認証情報を表現&lt;/li&gt;
+&lt;li&gt;Web/SPA/モバイルなどモダンなアプリ実装と相性が良い&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Authorization Code Flow + PKCE&lt;/code&gt; が現在の推奨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    participant U as User
+    participant C as Client App
+    participant OP as OIDC Provider
+    participant API as Resource API
+
+    U-&amp;gt;&amp;gt;C: ログイン要求
+    C--&amp;gt;&amp;gt;U: OPへリダイレクト（認可要求）
+    U-&amp;gt;&amp;gt;OP: 認証
+    OP--&amp;gt;&amp;gt;C: 認可コード
+    C-&amp;gt;&amp;gt;OP: コード交換（+PKCE）
+    OP--&amp;gt;&amp;gt;C: IDトークン + Accessトークン
+    C-&amp;gt;&amp;gt;API: Accessトークン付きAPI呼び出し
+    API--&amp;gt;&amp;gt;C: レスポンス
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;OIDC実装のポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;フロー選定&lt;/strong&gt;: サーバーサイド/SPAで適切なフローを選ぶ&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;トークン検証&lt;/strong&gt;: 署名、&lt;code&gt;iss&lt;/code&gt;、&lt;code&gt;aud&lt;/code&gt;、&lt;code&gt;exp&lt;/code&gt; の検証を徹底&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PKCE対応&lt;/strong&gt;: 公開クライアント（SPA/モバイル）では必須&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;リフレッシュ戦略&lt;/strong&gt;: セキュアな保管と失効設計が重要&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;OIDCが向いているケース&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;新規開発のWebアプリ、モバイルアプリ、API中心アーキテクチャ&lt;/li&gt;
+&lt;li&gt;Keycloak、Auth0、Entra IDなどモダンIdP利用時&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;3) OAuth 2.0中心の疑似SSO&lt;/h3&gt;
+&lt;h4&gt;OAuth中心方式の概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OAuthは本来「認可」の仕様であり、認証そのものの標準はOIDCが担う&lt;/li&gt;
+&lt;li&gt;ただし実務では「同じ認可サーバーのトークンで複数APIを呼ぶ」ことで、体感的なSSOを実現するケースがある&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;flowchart LR
+    U[User] --&amp;gt; FE[Frontend]
+    FE --&amp;gt; AS[Authorization Server]
+    AS --&amp;gt;|Access Token| FE
+    FE --&amp;gt; API1[API A]
+    FE --&amp;gt; API2[API B]
+    FE --&amp;gt; API3[API C]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;OAuth中心方式の実装ポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;認証と認可の分離理解&lt;/strong&gt;: ログイン要件はOIDC併用で満たす&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;スコープ設計&lt;/strong&gt;: API単位の権限境界を明確化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;トークン寿命&lt;/strong&gt;: 短命化と更新制御で漏えいリスクを低減&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;OAuth中心方式の注意点&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;OAuth単独では「ユーザーが誰か」を標準化して表現しづらい&lt;/li&gt;
+&lt;li&gt;「SSOを実装したつもり」になる落とし穴があるため、要件定義で認証責務を明確にする&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;4) ゲートウェイ／リバースプロキシ型SSO&lt;/h3&gt;
+&lt;h4&gt;ゲートウェイ型の方式概要&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;アプリの手前に認証ゲートウェイを置き、認証を共通化する方式&lt;/li&gt;
+&lt;li&gt;各アプリはゲートウェイから渡されるヘッダやクレームを信頼して利用&lt;/li&gt;
+&lt;li&gt;レガシーアプリを短期間でSSO配下に入れたい時に有効&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;flowchart TB
+    U[User] --&amp;gt; GW[Auth Gateway / Reverse Proxy]
+    GW --&amp;gt; IdP[Identity Provider]
+    GW --&amp;gt; APP1[Legacy App]
+    GW --&amp;gt; APP2[Internal Tool]
+    GW --&amp;gt; APP3[Admin Console]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;ゲートウェイ型の実装ポイント&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;信頼境界の明確化&lt;/strong&gt;: ヘッダ偽装防止（内部NW限定、mTLS等）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;アプリ改修最小化&lt;/strong&gt;: 既存アプリ側は最小限のユーザー受け渡し対応&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;監査ログ&lt;/strong&gt;: ゲートウェイで統一的に認証/アクセスログを取得&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;ゲートウェイ型が向いているケース&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;レガシー資産が多く、アプリ個別改修コストを抑えたい&lt;/li&gt;
+&lt;li&gt;認証統制を入口で一元管理したい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;実装選定の観点（簡易比較）&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;観点&lt;/th&gt;
+&lt;th&gt;SAML&lt;/th&gt;
+&lt;th&gt;OIDC&lt;/th&gt;
+&lt;th&gt;OAuth中心&lt;/th&gt;
+&lt;th&gt;ゲートウェイ型&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;主な用途&lt;/td&gt;
+&lt;td&gt;企業連携/既存SaaS&lt;/td&gt;
+&lt;td&gt;新規Web/SPA/モバイル&lt;/td&gt;
+&lt;td&gt;API認可中心&lt;/td&gt;
+&lt;td&gt;レガシー統合&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;実装難易度&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中〜高&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;モダン開発との相性&lt;/td&gt;
+&lt;td&gt;低〜中&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;td&gt;中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;認証標準としての明確さ&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;td&gt;低（単独では不足）&lt;/td&gt;
+&lt;td&gt;構成依存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;SSO連携は「どのプロトコルを使うか」だけでなく、&lt;strong&gt;認証責務をどこで担保するか&lt;/strong&gt;を決める設計です。&lt;br /&gt;
+新規開発ではOIDCが第一候補になりやすく、既存環境ではSAMLやゲートウェイ型との併用が現実的です。&lt;/p&gt;
+&lt;p&gt;最終的には、次の3点で選ぶと失敗しにくくなります。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用中のIdP・既存資産との親和性&lt;/li&gt;
+&lt;li&gt;対象アプリ（Web/SPA/モバイル/レガシー）の実装特性&lt;/li&gt;
+&lt;li&gt;監査・運用（失効、ログ、障害時切り戻し）まで含めた運用設計&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>flutter JIT エラーで実機デバッグができなくなったことについて</title><link>https://tutttuwi.github.io/posts/2026-03-16_flutter-hotreload-error/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2026-03-16_flutter-hotreload-error/</guid><pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;概要&lt;/h2&gt;
 &lt;p&gt;flutter開発をしていて、突然実機デバッグビルドができなくなったのでエラーを調査したことについて記載&lt;/p&gt;
 &lt;h2&gt;💻 環境&lt;/h2&gt;
@@ -32778,24 +32898,6 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;li&gt;Googleアシスタントアプリの運用/保守に携わっていく上で必要なスキルを習得するため&lt;/li&gt;
 &lt;li&gt;スピーカー開発関連の知識を増やすため&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書</title><link>https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2019_01_aws_saa_black.JPG&quot; alt=&quot;2019_01_aws_saa_black&quot; title=&quot;2019_01_aws_saa_black&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;AWS サービスについて、Well-architectedフレームワークに沿った５つの観点から説明されておりとても参考になった。（学習メモ参照）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;/pdf/%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8_marked.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;AWSサービスについて、どんなサービスがあって、どんな使われ方をして、どのように便利なのかなど、基本的な知識を習得するため&lt;/li&gt;
-&lt;li&gt;AWS SAA資格取得のため&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>Javascript本格入門</title><link>https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_javascript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Javascript本格入門&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2019_01_js_getting_started.jpg&quot; alt=&quot;2019_01_js_getting_started&quot; title=&quot;2019_01_js_getting_started&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -32815,6 +32917,24 @@ Amazon 売れ筋ランキング: Kindleストア 有料タイトル - 21,411位 
 &lt;h2&gt;手に取った理由&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Nodejs環境でがっちりJavascriptを開発していくにあたり、現在の知識確認とより効率的な開発方法の知識を得るため&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書</title><link>https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5aws%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;徹底攻略AWS認定ソリューションアーキテクト-アソシエイト教科書&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2019_01_aws_saa_black.JPG&quot; alt=&quot;2019_01_aws_saa_black&quot; title=&quot;2019_01_aws_saa_black&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AWS サービスについて、Well-architectedフレームワークに沿った５つの観点から説明されておりとても参考になった。（学習メモ参照）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;/pdf/%E5%BE%B9%E5%BA%95%E6%94%BB%E7%95%A5AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%82%A2%E3%82%BD%E3%82%B7%E3%82%A8%E3%82%A4%E3%83%88%E6%95%99%E7%A7%91%E6%9B%B8_marked.pdf&quot;&gt;学習メモ&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AWSサービスについて、どんなサービスがあって、どんな使われ方をして、どのように便利なのかなど、基本的な知識を習得するため&lt;/li&gt;
+&lt;li&gt;AWS SAA資格取得のため&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded></item><item><title>AmazonAlexa開発ガイド</title><link>https://tutttuwi.github.io/posts/2019_01_amazonalexa%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2019_01_amazonalexa%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/</guid><pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;AmazonAlexa開発ガイド&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
@@ -38771,20 +38891,6 @@ public static long generateSerialNumber() {
 &lt;li&gt;ネットワーク面でより効率的な自宅環境を構築したい&lt;/li&gt;
 &lt;li&gt;WindowsOSは業務で使っているのでなじみある&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>コンピュータはなぜ動くのか</title><link>https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;コンピュータはなぜ動くのか&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2015_01_why_pc.JPG&quot; alt=&quot;2015_01_why_pc&quot; title=&quot;2015_01_why_pc&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;PCが動作する仕組みをハード面からソフト面まで説明&lt;/li&gt;
-&lt;li&gt;UML、DB操作、TCP/IP、暗号化技術、XMLなどについて説明&lt;/li&gt;
-&lt;li&gt;まんべんなく、浅く広くという印象&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;PCの動作する仕組みについて深く理解できていないと感じ購入&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded></item><item><title>基礎からのサーブレットJSP</title><link>https://tutttuwi.github.io/posts/2015_01_%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%96%E3%83%AC%E3%83%83%E3%83%88jsp/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%96%E3%83%AC%E3%83%83%E3%83%88jsp/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;基礎からのサーブレットJSP&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2015_01_basic_servlet.jpg&quot; alt=&quot;2015_01_basic_servlet&quot; title=&quot;2015_01_basic_servlet&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -38876,6 +38982,20 @@ public static long generateSerialNumber() {
 &lt;ul&gt;
 &lt;li&gt;JavaSilverレベルの知識が身についたところで、Javaを使用したWebアプリの開発方法について理解したかった&lt;/li&gt;
 &lt;/ul&gt;
+</content:encoded></item><item><title>コンピュータはなぜ動くのか</title><link>https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_01_%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;コンピュータはなぜ動くのか&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2015_01_why_pc.JPG&quot; alt=&quot;2015_01_why_pc&quot; title=&quot;2015_01_why_pc&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;PCが動作する仕組みをハード面からソフト面まで説明&lt;/li&gt;
+&lt;li&gt;UML、DB操作、TCP/IP、暗号化技術、XMLなどについて説明&lt;/li&gt;
+&lt;li&gt;まんべんなく、浅く広くという印象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;PCの動作する仕組みについて深く理解できていないと感じ購入&lt;/li&gt;
+&lt;/ul&gt;
 </content:encoded></item><item><title>Windowsはなぜ動くのか</title><link>https://tutttuwi.github.io/posts/2015_02_windows%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2015_02_windows%E3%81%AF%E3%81%AA%E3%81%9C%E5%8B%95%E3%81%8F%E3%81%AE%E3%81%8B/</guid><pubDate>Thu, 01 Jan 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Windowsはなぜ動くのか&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2015_02_why_win.jpg&quot; alt=&quot;2015_02_why_win&quot; title=&quot;2015_02_why_win&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -38938,43 +39058,6 @@ public static long generateSerialNumber() {
 &lt;ul&gt;
 &lt;li&gt;業務でTCP/IP関連の知識を必要とした&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded></item><item><title>オラクル認定資格教科書JavaプログラマSilverSE7</title><link>https://tutttuwi.github.io/posts/2014_07_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Esilverse7/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2014_07_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Esilverse7/</guid><pubDate>Tue, 01 Jul 2014 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;オラクル認定資格教科書 Javaプログラマ Silver SE 7&lt;/h1&gt;
-&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
-&amp;lt;img src=&quot;/img/cover/2014_07_java_silver.JPG&quot; alt=&quot;2014_07_java_silver&quot; title=&quot;2014_07_java_silver&quot; style=&quot;width:980px&quot;&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;目次
-&lt;ul&gt;
-&lt;li&gt;第1章　Javaプログラミング基礎&lt;/li&gt;
-&lt;li&gt;第2章　配列&lt;/li&gt;
-&lt;li&gt;第3章　演算子と分岐文&lt;/li&gt;
-&lt;li&gt;第4章　繰り返し文と繰り返し制御文&lt;/li&gt;
-&lt;li&gt;第5章　クラス定義とオブジェクトの生成・使用&lt;/li&gt;
-&lt;li&gt;第6章　継承とポリモフィズム&lt;/li&gt;
-&lt;li&gt;第7章　例外処理&lt;/li&gt;
-&lt;li&gt;模擬試験&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;学んだこと&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Bronze本に引き続いて、Javaプログラミングの基礎知識を固めることができた&lt;/li&gt;
-&lt;li&gt;例外クラスの種別について意識しながら学ぶことができた&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;手に取った理由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;JavaBronze本からのステップアップ&lt;/li&gt;
-&lt;li&gt;Javaプログラミングのスキルアップ&lt;/li&gt;
-&lt;li&gt;Silver資格取得&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;第1章　Javaプログラミング基礎&lt;/h2&gt;
-&lt;h2&gt;第2章　配列&lt;/h2&gt;
-&lt;h2&gt;第3章　演算子と分岐文&lt;/h2&gt;
-&lt;h2&gt;第4章　繰り返し文と繰り返し制御文&lt;/h2&gt;
-&lt;h2&gt;第5章　クラス定義とオブジェクトの生成・使用&lt;/h2&gt;
-&lt;h2&gt;第6章　継承とポリモフィズム&lt;/h2&gt;
-&lt;h2&gt;第7章　例外処理&lt;/h2&gt;
-&lt;h2&gt;模擬試験&lt;/h2&gt;
 </content:encoded></item><item><title>オラクル認定資格教科書JavaプログラマSilverSE7スピードマスター問題集</title><link>https://tutttuwi.github.io/posts/2014_07_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Esilverse7%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E5%95%8F%E9%A1%8C%E9%9B%86/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2014_07_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Esilverse7%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E5%95%8F%E9%A1%8C%E9%9B%86/</guid><pubDate>Tue, 01 Jul 2014 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;オラクル認定資格教科書 Javaプログラマ Silver SE 7 スピードマスター問題集&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
 &amp;lt;img src=&quot;/img/cover/2014_07_java_silver_exercise.jpg&quot; alt=&quot;2014_07_java_silver_exercise&quot; title=&quot;2014_07_java_silver_exercise&quot; style=&quot;width:980px&quot;&amp;gt;
@@ -39011,6 +39094,43 @@ public static long generateSerialNumber() {
 &lt;h2&gt;6章 メソッドとカプセル化を操作する&lt;/h2&gt;
 &lt;h2&gt;7章 継承の操作&lt;/h2&gt;
 &lt;h2&gt;8章 例外の処理&lt;/h2&gt;
+&lt;h2&gt;模擬試験&lt;/h2&gt;
+</content:encoded></item><item><title>オラクル認定資格教科書JavaプログラマSilverSE7</title><link>https://tutttuwi.github.io/posts/2014_07_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Esilverse7/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2014_07_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Esilverse7/</guid><pubDate>Tue, 01 Jul 2014 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;オラクル認定資格教科書 Javaプログラマ Silver SE 7&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div style=&quot;text-align:center; margin-bottom: 40px&quot;&amp;gt;
+&amp;lt;img src=&quot;/img/cover/2014_07_java_silver.JPG&quot; alt=&quot;2014_07_java_silver&quot; title=&quot;2014_07_java_silver&quot; style=&quot;width:980px&quot;&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目次
+&lt;ul&gt;
+&lt;li&gt;第1章　Javaプログラミング基礎&lt;/li&gt;
+&lt;li&gt;第2章　配列&lt;/li&gt;
+&lt;li&gt;第3章　演算子と分岐文&lt;/li&gt;
+&lt;li&gt;第4章　繰り返し文と繰り返し制御文&lt;/li&gt;
+&lt;li&gt;第5章　クラス定義とオブジェクトの生成・使用&lt;/li&gt;
+&lt;li&gt;第6章　継承とポリモフィズム&lt;/li&gt;
+&lt;li&gt;第7章　例外処理&lt;/li&gt;
+&lt;li&gt;模擬試験&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;学んだこと&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bronze本に引き続いて、Javaプログラミングの基礎知識を固めることができた&lt;/li&gt;
+&lt;li&gt;例外クラスの種別について意識しながら学ぶことができた&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;手に取った理由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;JavaBronze本からのステップアップ&lt;/li&gt;
+&lt;li&gt;Javaプログラミングのスキルアップ&lt;/li&gt;
+&lt;li&gt;Silver資格取得&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;第1章　Javaプログラミング基礎&lt;/h2&gt;
+&lt;h2&gt;第2章　配列&lt;/h2&gt;
+&lt;h2&gt;第3章　演算子と分岐文&lt;/h2&gt;
+&lt;h2&gt;第4章　繰り返し文と繰り返し制御文&lt;/h2&gt;
+&lt;h2&gt;第5章　クラス定義とオブジェクトの生成・使用&lt;/h2&gt;
+&lt;h2&gt;第6章　継承とポリモフィズム&lt;/h2&gt;
+&lt;h2&gt;第7章　例外処理&lt;/h2&gt;
 &lt;h2&gt;模擬試験&lt;/h2&gt;
 </content:encoded></item><item><title>オラクル認定資格教科書JavaプログラマBronzeSE7</title><link>https://tutttuwi.github.io/posts/2014_06_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Ebronzese7/</link><guid isPermaLink="true">https://tutttuwi.github.io/posts/2014_06_%E3%82%AA%E3%83%A9%E3%82%AF%E3%83%AB%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E6%95%99%E7%A7%91%E6%9B%B8java%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9Ebronzese7/</guid><pubDate>Sun, 01 Jun 2014 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;オラクル認定資格教科書 Javaプログラマ Bronze SE7&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/img/cover/2014_06_java_bronze.jpg&quot; alt=&quot;2014_06_java_bronze&quot; /&gt;&lt;/p&gt;
